@@ -1,0 +1,113 @@
+﻿<UserControl x:Class="ClientCenter.AgentSettingItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" d:DesignHeight="260" d:DesignWidth="545" xmlns:sr="http://schemas.divelements.co.uk/wpf/sandribbon" xmlns:my="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon">
+       
+    <Grid>
+        <StackPanel Name="AgentSettings" HorizontalAlignment="Stretch" IsEnabled="false">
+            <StackPanel Height="32" HorizontalAlignment="Left" Name="stackPanel1" VerticalAlignment="Top" Orientation="Horizontal">  
+            <Label Content="Site Code:" Height="28" Name="lSiteCode" Width="200" Margin="2,0,10,0" HorizontalAlignment="Stretch" FlowDirection="LeftToRight" HorizontalContentAlignment="Right" />
+            <TextBox Height="23" Name="tbSiteCode" Width="250" Margin="0,0,10,0" MaxLines="1" MaxLength="3" />
+                <ToolBarPanel Height="24" Name="toolBarPanel1" >
+                     <ToolBar Name="toolBar1">
+                        <Image Name="imgSiteCode" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" MouseLeftButtonDown="imgSiteCode_MouseLeftButtonDown">
+                            <Image.ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold">Agent Settings</TextBlock>
+                                    <TextBlock>Get the assigned Site Code.</TextBlock>
+                                </StackPanel>
+                            </Image.ToolTip>
+                        </Image>
+                    </ToolBar>
+            </ToolBarPanel>
+        </StackPanel>
+            <StackPanel Height="32" HorizontalAlignment="Left" Name="stackPanel2" VerticalAlignment="Top" Orientation="Horizontal">
+                <Label Content="Agent Version:" Height="28" Name="lAgentVersion" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
+                <TextBox Height="23" Name="tbAgentVersion" Width="250" Margin="0,0,10,0" IsReadOnly="True" IsReadOnlyCaretVisible="True" IsEnabled="False" />
+                <ToolBarPanel Height="24" Name="toolBarPanel2">
+                    <ToolBar Name="toolBar2" >
+                        <Image Name="imgAgentVersion" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" MouseLeftButtonDown="imgAgentVersion_MouseLeftButtonDown">
+                            <Image.ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold">Agent Settings</TextBlock>
+                                    <TextBlock>Get the ConfigMgr Agent Version.</TextBlock>
+                                </StackPanel>
+                            </Image.ToolTip>
+                        </Image>
+                    </ToolBar>
+
+                </ToolBarPanel>
+            </StackPanel>
+            <StackPanel Height="32" HorizontalAlignment="Left" Name="stackPanel3" VerticalAlignment="Top" Orientation="Horizontal">
+                <Label Content="Management Point:" Height="28" Name="lMP" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
+                <TextBox Height="23" Name="tbMP" Width="250" Margin="0,0,10,0" IsReadOnly="True" IsReadOnlyCaretVisible="True" IsEnabled="False" />
+                <ToolBarPanel Height="24" Name="toolBarPanel3">
+                    <ToolBar Name="toolBar3" >
+                        <Image Name="imgMP"  Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" MouseLeftButtonDown="imgMP_MouseLeftButtonDown">
+                            <Image.ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold">Agent Settings</TextBlock>
+                                    <TextBlock>Get the assigned Management Point.</TextBlock>
+                                </StackPanel>
+                            </Image.ToolTip>
+                        </Image>
+                    </ToolBar>
+
+                </ToolBarPanel>
+            </StackPanel>
+            <StackPanel Height="32" HorizontalAlignment="Left" Name="stackPanel4" VerticalAlignment="Top" Orientation="Horizontal">
+                <Label Content="Internet Management Point:" Height="28" Name="lInetMP" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
+                <TextBox Height="23" Name="tbInetMP" Width="250" Margin="0,0,10,0" IsReadOnly="True" IsReadOnlyCaretVisible="True" IsEnabled="False" />
+                <ToolBarPanel Height="24" Name="toolBarPanel4">
+                    <ToolBar Name="toolBar4" >
+                        <Image Name="imgINetMP" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" MouseLeftButtonDown="imgINetMP_MouseLeftButtonDown">
+                            <Image.ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold">Agent Settings</TextBlock>
+                                    <TextBlock>Get the assigned Internet Management Point.</TextBlock>
+                                </StackPanel>
+                            </Image.ToolTip>
+                        </Image>
+                    </ToolBar>
+                    
+                </ToolBarPanel>
+            </StackPanel>
+            <StackPanel Height="32" HorizontalAlignment="Left" Name="stackPanel5" VerticalAlignment="Top" Orientation="Horizontal">
+                <Label Content="Proxy Management Point:" Height="28" Name="lProxyMP" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
+                <TextBox Height="23" Name="tbProxyMP" Width="250" Margin="0,0,10,0" IsReadOnly="True" IsReadOnlyCaretVisible="True" IsEnabled="False" />
+                <ToolBarPanel Height="24" Name="toolBarPanel5">
+                    <ToolBar Name="toolBar5" >
+                        <Image Name="imgProxyMP" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible">
+                            <Image.ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold">Agent Settings</TextBlock>
+                                    <TextBlock>Get the assigned Proxy Management Point.</TextBlock>
+                                </StackPanel>
+                            </Image.ToolTip>
+                        </Image>
+                    </ToolBar>
+
+                </ToolBarPanel>
+            </StackPanel>
+            <StackPanel Height="32" HorizontalAlignment="Left" Name="stackPanel6" VerticalAlignment="Top" Orientation="Horizontal">
+                <Label Content="DNS Suffix:" Height="28" Name="lDNSSuffix" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
+                <TextBox Height="23" Name="tbDNSSuffix" Width="250" Margin="0,0,10,0" IsReadOnly="True" IsReadOnlyCaretVisible="True" IsEnabled="False" />
+                <ToolBarPanel Height="24" Name="toolBarPanel6">
+                    <ToolBar Name="toolBar6" >
+                        <Image Name="imgDNSSuffix" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible">
+                            <Image.ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold">Agent Settings</TextBlock>
+                                    <TextBlock>Get the DNS Suffix to locate a Management Point.</TextBlock>
+                                </StackPanel>
+                            </Image.ToolTip>
+                        </Image>
+                    </ToolBar>
+
+                </ToolBarPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
