@@ -93,10 +93,10 @@
             </StackPanel>
             <StackPanel Height="32" HorizontalAlignment="Left" Name="stackPanel6" VerticalAlignment="Top" Orientation="Horizontal">
                 <Label Content="DNS Suffix:" Height="28" Name="lDNSSuffix" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
-                <TextBox Height="23" Name="tbDNSSuffix" Width="250" Margin="0,0,10,0" IsReadOnly="True" IsReadOnlyCaretVisible="True" IsEnabled="False" />
+                <TextBox Height="23" Name="tbDNSSuffix" Width="250" Margin="0,0,10,0" />
                 <ToolBarPanel Height="24" Name="toolBarPanel6">
                     <ToolBar Name="toolBar6" >
-                        <Image Name="imgDNSSuffix" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible">
+                        <Image Name="imgDNSSuffix" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible" MouseLeftButtonDown="imgDNSSuffix_MouseLeftButtonDown">
                             <Image.ToolTip>
                                 <StackPanel>
                                     <TextBlock FontWeight="Bold">Agent Settings</TextBlock>

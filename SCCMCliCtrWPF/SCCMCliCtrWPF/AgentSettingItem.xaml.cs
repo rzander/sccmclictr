@@ -79,5 +79,12 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
+        private void imgDNSSuffix_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            tbDNSSuffix.Text = oAgent.Client.AgentProperties.DNSSuffix;
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
     }
 }
