@@ -63,14 +63,81 @@ namespace ClientCenter
                 
                 foreach (TabItem iTab in tabNavigationPanels.Items)
                 {
-                    if (iTab.Tag.ToString() == ((System.Windows.Controls.HeaderedItemsControl)(e.Source)).Tag.ToString())
+                    try
                     {
-                        iTab.IsSelected = true;
+                        if (iTab.Tag.ToString() == ((System.Windows.Controls.HeaderedItemsControl)(e.Source)).Tag.ToString())
+                        {
+                            iTab.IsSelected = true;
 
-                        break;
+                            break;
+                        }
                     }
+                    catch { }
                 }
             }
+        }
+
+        private void ButtonHWInvSplit_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.HardwareInventory(false);
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void ButtonHWInvFull_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.HardwareInventory(true);
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void ButtonSWInvSplit_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.SoftwareInventory(false);
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void ButtonSWInvFull_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.SoftwareInventory(true);
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void ButtonDDR_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.DataDiscovery(true);
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void ButtonMachinePolicy_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.RequestMachinePolicyAssignments();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void ButtonUserPolicy_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.RequestMachinePolicyAssignments(); 
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void ButtonEvaluateUpdates_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.SoftwareUpdatesAgentAssignmentEvaluationCycle();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void ButtonDCMEval_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.DCMPolicyEnforcement();
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
     }

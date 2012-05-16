@@ -42,28 +42,25 @@
                     </rib:Ribbon.QuickAccessToolBar>
                     <rib:RibbonTab Header="Agent Actions">
                         <rib:RibbonGroup Header="Inventory">
-                            <rib:RibbonSplitButton Label="HW Inv" ToolTipTitle="Hardware Inventory">
-                                <rib:RibbonButton Label="Full HW Inv" ToolTip="Full Hardware Inventory" />
-                            </rib:RibbonSplitButton>
-                            <rib:RibbonSplitButton  Label="SW Inv" ToolTip="Software Inventory">
-                                <rib:RibbonButton  Label="Full SW Inv" ToolTip="Full Software Inventory" />
-                            </rib:RibbonSplitButton>
-                            <rib:RibbonButton  Label="DDR" ToolTip="Heartbeat" />
+                                <rib:RibbonSplitButton Name="ButtonHWInvSplit" Label="HW Inv" ToolTip="Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvSplit_Click">
+                                    <rib:RibbonButton Name="ButtonHWInvFull" Label="Full HW Inv" ToolTip="Full Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvFull_Click" />
+                                    <rib:RibbonButton Name="ButtonHWInvDleta" Label="Delta HW Inv" ToolTip="Delta Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvSplit_Click" />
+                                </rib:RibbonSplitButton>
+                                <rib:RibbonSplitButton Name="ButtonSWInvSplit" Label="SW Inv" ToolTip="Software Inventory" LargeImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvSplit_Click">
+                                    <rib:RibbonButton Name="ButtonSWInvFull" Label="Full SW Inv" ToolTip="Full Software Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvFull_Click" />
+                                    <rib:RibbonButton Name="ButtonSWInvDelta"  Label="Delta SW Inv" ToolTip="Delta Software Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvSplit_Click" />
+                                </rib:RibbonSplitButton>
+                                <rib:RibbonButton Name="ButtonDDR"  Label="DDR" ToolTip="Heartbeat" LargeImageSource="/SCCMCliCtrWPF;component/Images/Send%20Receive.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Send%20Receive.ico" Click="ButtonDDR_Click" />
                         </rib:RibbonGroup>
                         <rib:RibbonGroup Header="Policy">
-                            <rib:RibbonButton  Label="Machine Policy" ToolTip="Download Machine Policy" />
-                            <rib:RibbonButton Label="User Policy" ToolTip="Download User Policy" />
-
+                                <rib:RibbonButton Name="ButtonMachinePolicy"  Label="Machine Policy" ToolTip="Download Machine Policy" LargeImageSource="/SCCMCliCtrWPF;component/Images/ComputerPolicy.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Server%20upgrade.ico" Click="ButtonMachinePolicy_Click" />
+                                <rib:RibbonButton Name="ButtonUserPolicy" Label="User Policy" ToolTip="Download User Policy" LargeImageSource="/SCCMCliCtrWPF;component/Images/UserPolicy.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/User%20Upgrade.ico" Click="ButtonUserPolicy_Click" />
                         </rib:RibbonGroup>
                         <rib:RibbonGroup Header="DCM">
-                            <rib:RibbonControlGroup>
-
-                            </rib:RibbonControlGroup>
+                            <rib:RibbonButton Name="ButtonDCMEval" Label="DCM Check" ToolTip="Software Upda Assignment and Evaluation cycle" LargeImageSource="/SCCMCliCtrWPF;component/Images/Search%20File.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Search%20File.ico" Click="ButtonDCMEval_Click" />
                         </rib:RibbonGroup>
                         <rib:RibbonGroup Header="Updates">
-                            <rib:RibbonControlGroup>
-
-                            </rib:RibbonControlGroup>
+                                <rib:RibbonButton Name="ButtonEvaluateUpdates" Label="Update Check" ToolTip="Software Upda Assignment and Evaluation cycle"  Click="ButtonEvaluateUpdates_Click" LargeImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png" SmallImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png"  />
                         </rib:RibbonGroup>
                     </rib:RibbonTab>
                 </rib:Ribbon>
@@ -74,46 +71,67 @@
                 </DockPanel>
                 <DockPanel Name="MainFunctionsDock" DockPanel.Dock="Bottom" VerticalAlignment="Stretch">
                     <s:NavigationPane Name="navigationPane1" HorizontalAlignment="Stretch" DockPanel.Dock="Bottom" LargeItems="4" IsSmallItemsVisible="False" IsMinimizeButtonVisible="False" HasSplitter="True" HasResizeThumb="False" IsEnabled="False">
-                        <s:NavigationPaneItem Name="MonitoringPane" Header="Monitoring">
+                        <s:NavigationPaneItem Name="MonitoringPane" Header="Monitoring" Image="/SCCMCliCtrWPF;component/Images/Stocks.ico" IsEnabled="False">
                             <StackPanel VerticalAlignment="Stretch">
                                 <Button Content="Create New Item" Margin="8,0" />
                             </StackPanel>
                         </s:NavigationPaneItem>
-                        <s:NavigationPaneItem Name="InventoryPane" Header="Inventory">
+                        <s:NavigationPaneItem Name="InventoryPane" Header="Inventory" Image="/SCCMCliCtrWPF;component/Images/Searching%20Disc.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Searching%20Disc.ico" IsEnabled="False">
                             <StackPanel>
                                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="10.667"><Run Language="it-it" Text="This ."/><LineBreak/><Run Language="it-it" Text="Hit the Button"/></TextBlock>
                                 <Button Content="Create New Item" Margin="8,0" />
                             </StackPanel>
                         </s:NavigationPaneItem>
-                        <s:NavigationPaneItem Name="SWDistPane" Header="Software Distribution" >
+                        <s:NavigationPaneItem Name="SWDistPane" Header="Software Distribution" Image="/SCCMCliCtrWPF;component/Images/Import%20File.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Import%20File.ico" IsEnabled="False">
                             <StackPanel VerticalAlignment="Stretch">
                                 <Button Content="Create New Item" Margin="8,0" />
                             </StackPanel>
                         </s:NavigationPaneItem>
-                        <s:NavigationPaneItem Name="AgentSettingsPane" Header="Agent Settings" IsSelected="True" ToolTip="ConfigMgr Agent Settings">
+                        <s:NavigationPaneItem Name="AgentSettingsPane" Header="Agent Settings" IsSelected="True" ToolTip="ConfigMgr Agent Settings" Image="/SCCMCliCtrWPF;component/Images/Setting.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Setting.ico">
                             <StackPanel VerticalAlignment="Stretch">
                                 <!--<Button Content="Create New Item" Margin="8,0" />-->
-                                <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="100" Name="treeView1" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000">
+                                <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200" Name="treeView1" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000">
                                     <TreeViewItem Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="True" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
                                         <TreeViewItem IsExpanded="True" IsSelected="True" Tag="AgentSettings">
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
-                                                    <Image Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20"/>
+                                                    <Image Source="/SCCMCliCtrWPF;component/Images/Setting.ico" Stretch="Uniform" Width="20" Height="20"/>
                                                     <TextBlock Text="Agent Settings" Margin="3,0,0,0"></TextBlock>
                                                 </StackPanel>
                                             </TreeViewItem.Header>
                                         </TreeViewItem>
-                                        <TreeViewItem Tag="Components">
+                                        <TreeViewItem Tag="Components" IsEnabled="False">
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
-                                                    <Image Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20"/>
+                                                    <Image Source="/SCCMCliCtrWPF;component/Images/Add-ons%20setup.ico" Stretch="Uniform" Width="20" Height="20"/>
                                                     <TextBlock Text="Components" Margin="3,0,0,0"></TextBlock>
                                                 </StackPanel>
                                             </TreeViewItem.Header>
                                         </TreeViewItem>
-                                        <TreeViewItem Header="Cache" />
-                                        <TreeViewItem Header="Install / Repair" />
-                                        <TreeViewItem Header="Client Health" />
+                                        <TreeViewItem Tag="Cache" IsEnabled="False">
+                                            <TreeViewItem.Header>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Image Source="/SCCMCliCtrWPF;component/Images/Shopping.ico" Stretch="Uniform" Width="20" Height="20"/>
+                                                    <TextBlock Text="Cache" Margin="3,0,0,0"></TextBlock>
+                                                </StackPanel>
+                                            </TreeViewItem.Header>
+                                        </TreeViewItem>
+                                        <TreeViewItem Tag="InstallRepair" IsEnabled="False">
+                                            <TreeViewItem.Header>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Image Source="/SCCMCliCtrWPF;component/Images/Repair.ico" Stretch="Uniform" Width="20" Height="20"/>
+                                                    <TextBlock Text="Install / Repair" Margin="3,0,0,0"></TextBlock>
+                                                </StackPanel>
+                                            </TreeViewItem.Header>
+                                        </TreeViewItem>
+                                        <TreeViewItem Tag="ClientHealth" IsEnabled="False">
+                                            <TreeViewItem.Header>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Image Source="/SCCMCliCtrWPF;component/Images/Heartbeat.ico" Stretch="Uniform" Width="20" Height="20"/>
+                                                    <TextBlock Text="Client Health" Margin="3,0,0,0"></TextBlock>
+                                                </StackPanel>
+                                            </TreeViewItem.Header>
+                                        </TreeViewItem>
                                     </TreeViewItem>
                                 </TreeView>
                             </StackPanel>
@@ -143,7 +161,7 @@
                         </TabItem>
                         <TabItem Header="Components" Tag="Components" />
                         <TabItem Header="Software Distribution" Name="SWDistPanel">
-                            <Grid />
+                            <Grid></Grid>
                         </TabItem>
                     </TabControl>
                 </DockPanel>
