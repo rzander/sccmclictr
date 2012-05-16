@@ -21,23 +21,30 @@
     <TargetZone>Internet</TargetZone>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>True</SignManifests>
-    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <PublishUrl>http://sccmclictr.codeplex.com/releases/clickonce/</PublishUrl>
+    <PublishUrl>publish\</PublishUrl>
     <Install>false</Install>
-    <InstallFrom>Web</InstallFrom>
+    <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
+    <MapFileExtensions>false</MapFileExtensions>
+    <SupportUrl>https://sccmclictr.codeplex.com</SupportUrl>
+    <ErrorReportUrl>https://sccmclictr.codeplex.com/releases</ErrorReportUrl>
+    <ProductName>Client Center for Configuration Manager 2012</ProductName>
+    <PublisherName>Roger Zander</PublisherName>
+    <SuiteName>SCCM Tools</SuiteName>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <TrustUrlParameters>true</TrustUrlParameters>
     <ApplicationRevision>2</ApplicationRevision>
-    <ApplicationVersion>0.0.0.%2a</ApplicationVersion>
+    <ApplicationVersion>0.0.0.2</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -50,7 +57,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -69,12 +76,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\RibbonControlsLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="sccmclictr.automation">
-      <HintPath>..\..\sccmclictrlib\sccmclictr.automation\bin\Release\sccmclictr.automation.dll</HintPath>
+    <Reference Include="sccmclictr.automation, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\sccmclictrlib\sccmclictr.automation\bin\Debug\sccmclictr.automation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -178,7 +186,39 @@
   <ItemGroup>
     <Resource Include="Images\shell32.dll_I0017_0409.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Add-ons setup.ico" />
+    <Resource Include="Images\Heartbeat.ico" />
+    <Resource Include="Images\Icon065.ico" />
+    <Resource Include="Images\Import File.ico" />
+    <Resource Include="Images\Memory.ico" />
+    <Resource Include="Images\Repair.ico" />
+    <Resource Include="Images\Searching Disc.ico" />
+    <Resource Include="Images\Send Receive.ico" />
+    <Resource Include="Images\Server upgrade.ico" />
+    <Resource Include="Images\Setting.ico" />
+    <Resource Include="Images\Shopping.ico" />
+    <Resource Include="Images\Stocks.ico" />
+    <Resource Include="Images\User Upgrade.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ComputerPolicy.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\UserPolicy.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SWUpdate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Search File.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Save.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\syliance_smal.png" />
+  </ItemGroup>
   <PropertyGroup>
     <StartArguments />
   </PropertyGroup>

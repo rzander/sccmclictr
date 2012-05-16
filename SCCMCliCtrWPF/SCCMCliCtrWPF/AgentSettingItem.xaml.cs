@@ -86,5 +86,24 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
+        private void imgSaveDNSSuffix_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentProperties.DNSSuffix = tbDNSSuffix.Text;
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void imgSaveSiteCode_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            if (tbSiteCode.Text.Length == 3)
+                oAgent.Client.AgentProperties.AssignedSite = tbSiteCode.Text;
+            else
+            {
+                MessageBox.Show("Site Code must have 3 characters!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
     }
 }

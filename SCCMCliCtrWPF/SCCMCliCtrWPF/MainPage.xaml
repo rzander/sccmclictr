@@ -42,32 +42,36 @@
                     </rib:Ribbon.QuickAccessToolBar>
                     <rib:RibbonTab Header="Agent Actions">
                         <rib:RibbonGroup Header="Inventory">
-                                <rib:RibbonSplitButton Name="ButtonHWInvSplit" Label="HW Inv" ToolTip="Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvSplit_Click">
-                                    <rib:RibbonButton Name="ButtonHWInvFull" Label="Full HW Inv" ToolTip="Full Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvFull_Click" />
-                                    <rib:RibbonButton Name="ButtonHWInvDleta" Label="Delta HW Inv" ToolTip="Delta Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvSplit_Click" />
+                                <rib:RibbonSplitButton Name="ButtonHWInvSplit" Label="HW Inv" ToolTip="Run Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvSplit_Click">
+                                    <rib:RibbonButton Name="ButtonHWInvFull" Label="Full HW Inv" ToolTip="Run a full Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvFull_Click" />
+                                    <rib:RibbonButton Name="ButtonHWInvDleta" Label="Delta HW Inv" ToolTip="Run a delta Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvSplit_Click" />
                                 </rib:RibbonSplitButton>
-                                <rib:RibbonSplitButton Name="ButtonSWInvSplit" Label="SW Inv" ToolTip="Software Inventory" LargeImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvSplit_Click">
-                                    <rib:RibbonButton Name="ButtonSWInvFull" Label="Full SW Inv" ToolTip="Full Software Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvFull_Click" />
-                                    <rib:RibbonButton Name="ButtonSWInvDelta"  Label="Delta SW Inv" ToolTip="Delta Software Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvSplit_Click" />
+                                <rib:RibbonSplitButton Name="ButtonSWInvSplit" Label="SW Inv" ToolTip="Run Software Inventory" LargeImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvSplit_Click">
+                                    <rib:RibbonButton Name="ButtonSWInvFull" Label="Full SW Inv" ToolTip="Run a full Software Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvFull_Click" />
+                                    <rib:RibbonButton Name="ButtonSWInvDelta"  Label="Delta SW Inv" ToolTip="Run a delta Software Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvSplit_Click" />
                                 </rib:RibbonSplitButton>
-                                <rib:RibbonButton Name="ButtonDDR"  Label="DDR" ToolTip="Heartbeat" LargeImageSource="/SCCMCliCtrWPF;component/Images/Send%20Receive.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Send%20Receive.ico" Click="ButtonDDR_Click" />
+                                <rib:RibbonButton Name="ButtonDDR"  Label="DDR" ToolTip="Send a Heartbeat back to the server." LargeImageSource="/SCCMCliCtrWPF;component/Images/Send%20Receive.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Send%20Receive.ico" Click="ButtonDDR_Click" />
                         </rib:RibbonGroup>
                         <rib:RibbonGroup Header="Policy">
                                 <rib:RibbonButton Name="ButtonMachinePolicy"  Label="Machine Policy" ToolTip="Download Machine Policy" LargeImageSource="/SCCMCliCtrWPF;component/Images/ComputerPolicy.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Server%20upgrade.ico" Click="ButtonMachinePolicy_Click" />
                                 <rib:RibbonButton Name="ButtonUserPolicy" Label="User Policy" ToolTip="Download User Policy" LargeImageSource="/SCCMCliCtrWPF;component/Images/UserPolicy.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/User%20Upgrade.ico" Click="ButtonUserPolicy_Click" />
                         </rib:RibbonGroup>
                         <rib:RibbonGroup Header="DCM">
-                            <rib:RibbonButton Name="ButtonDCMEval" Label="DCM Check" ToolTip="Software Upda Assignment and Evaluation cycle" LargeImageSource="/SCCMCliCtrWPF;component/Images/Search%20File.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Search%20File.ico" Click="ButtonDCMEval_Click" />
+                            <rib:RibbonButton Name="ButtonDCMEval" Label="DCM Check" ToolTip="Desired Configuration Monitoring (DCM) Evaluation cycle." LargeImageSource="/SCCMCliCtrWPF;component/Images/Search%20File.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Search%20File.ico" Click="ButtonDCMEval_Click" />
                         </rib:RibbonGroup>
                         <rib:RibbonGroup Header="Updates">
-                                <rib:RibbonButton Name="ButtonEvaluateUpdates" Label="Update Check" ToolTip="Software Upda Assignment and Evaluation cycle"  Click="ButtonEvaluateUpdates_Click" LargeImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png" SmallImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png"  />
+                                <rib:RibbonButton Name="ButtonEvaluateUpdates" Label="Update Check" ToolTip="Software Update Assignment and Evaluation cycle."  Click="ButtonEvaluateUpdates_Click" LargeImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png" SmallImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png"  />
                         </rib:RibbonGroup>
                     </rib:RibbonTab>
                 </rib:Ribbon>
             </DockPanel>
             <DockPanel Name="NavigationDock" Width="200" MinWidth="150">
-                <DockPanel Name="FunctionDock" DockPanel.Dock="Top" Height="50">
+                <DockPanel Name="FunctionDock" DockPanel.Dock="Top" Height="80">
                     <Border BorderBrush="Silver" BorderThickness="2" />
+                    <StackPanel>
+                        <Label>Sponsored by:</Label>
+                        <Image Name="Sponsor" Source="/SCCMCliCtrWPF;component/Images/syliance_smal.png" />
+                    </StackPanel>
                 </DockPanel>
                 <DockPanel Name="MainFunctionsDock" DockPanel.Dock="Bottom" VerticalAlignment="Stretch">
                     <s:NavigationPane Name="navigationPane1" HorizontalAlignment="Stretch" DockPanel.Dock="Bottom" LargeItems="4" IsSmallItemsVisible="False" IsMinimizeButtonVisible="False" HasSplitter="True" HasResizeThumb="False" IsEnabled="False">

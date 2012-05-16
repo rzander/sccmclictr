@@ -12,13 +12,9 @@
             <TextBox Height="23" Name="tbSiteCode" Width="250" Margin="0,0,10,0" MaxLines="1" MaxLength="3" />
                 <ToolBarPanel Height="24" Name="toolBarPanel1" >
                      <ToolBar Name="toolBar1">
-                        <Image Name="imgSiteCode" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" MouseLeftButtonDown="imgSiteCode_MouseLeftButtonDown">
-                            <Image.ToolTip>
-                                <StackPanel>
-                                    <TextBlock FontWeight="Bold">Agent Settings</TextBlock>
-                                    <TextBlock>Get the assigned Site Code.</TextBlock>
-                                </StackPanel>
-                            </Image.ToolTip>
+                        <Image Name="imgSiteCode" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" MouseLeftButtonDown="imgSiteCode_MouseLeftButtonDown" ToolTip="Get the assigned Site Code.">
+                        </Image>
+                        <Image Name="imgSaveSiteCode" Source="/SCCMCliCtrWPF;component/Images/Save.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible" Margin="2,0,0,0" MouseLeftButtonDown="imgSaveSiteCode_MouseLeftButtonDown" ToolTip="Save the Site Code.">
                         </Image>
                     </ToolBar>
             </ToolBarPanel>
@@ -96,13 +92,9 @@
                 <TextBox Height="23" Name="tbDNSSuffix" Width="250" Margin="0,0,10,0" />
                 <ToolBarPanel Height="24" Name="toolBarPanel6">
                     <ToolBar Name="toolBar6" >
-                        <Image Name="imgDNSSuffix" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible" MouseLeftButtonDown="imgDNSSuffix_MouseLeftButtonDown">
-                            <Image.ToolTip>
-                                <StackPanel>
-                                    <TextBlock FontWeight="Bold">Agent Settings</TextBlock>
-                                    <TextBlock>Get the DNS Suffix to locate a Management Point.</TextBlock>
-                                </StackPanel>
-                            </Image.ToolTip>
+                        <Image Name="imgDNSSuffix" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible" MouseLeftButtonDown="imgDNSSuffix_MouseLeftButtonDown" ToolTip="Get the DNS Suffix to locate a Management Point.">
+                        </Image>
+                        <Image Name="imgSaveDNSSuffix" Source="/SCCMCliCtrWPF;component/Images/Save.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible" MouseLeftButtonDown="imgSaveDNSSuffix_MouseLeftButtonDown" Margin="2,0,0,0" ToolTip="Save the DNS Suffix.">
                         </Image>
                     </ToolBar>
 

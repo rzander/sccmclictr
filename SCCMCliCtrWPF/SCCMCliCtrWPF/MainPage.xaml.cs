@@ -34,6 +34,14 @@ namespace ClientCenter
             Style s = new Style();
             s.Setters.Add(new Setter(UIElement.VisibilityProperty, Visibility.Collapsed));
             tabNavigationPanels.ItemContainerStyle = s;
+
+            /*
+            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            {
+                Uri launchUri = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.ActivationUri;
+                tb_TargetComputer.Text = launchUri.Query.ToString();
+            }
+            */
         }
 
         private void bt_Connect2_Click(object sender, RoutedEventArgs e)
