@@ -21,14 +21,14 @@
     <TargetZone>Internet</TargetZone>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>True</SignManifests>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <PublishUrl>publish\</PublishUrl>
     <Install>false</Install>
-    <InstallFrom>Disk</InstallFrom>
+    <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
@@ -36,6 +36,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
+    <InstallUrl>https://sccmclictr.codeplex.com/releases/clickonce/</InstallUrl>
     <SupportUrl>https://sccmclictr.codeplex.com</SupportUrl>
     <ErrorReportUrl>https://sccmclictr.codeplex.com/releases</ErrorReportUrl>
     <ProductName>Client Center for Configuration Manager 2012</ProductName>
@@ -195,11 +196,9 @@
     <Resource Include="Images\Repair.ico" />
     <Resource Include="Images\Searching Disc.ico" />
     <Resource Include="Images\Send Receive.ico" />
-    <Resource Include="Images\Server upgrade.ico" />
     <Resource Include="Images\Setting.ico" />
     <Resource Include="Images\Shopping.ico" />
     <Resource Include="Images\Stocks.ico" />
-    <Resource Include="Images\User Upgrade.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\ComputerPolicy.ico" />

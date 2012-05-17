@@ -35,13 +35,16 @@ namespace ClientCenter
             s.Setters.Add(new Setter(UIElement.VisibilityProperty, Visibility.Collapsed));
             tabNavigationPanels.ItemContainerStyle = s;
 
-            /*
+
             if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
             {
+                //Pass ClickOnce Parameter like: http://sccmclictr.codeplex.com/releases/clickonce/SCCMCliCtrWPF.application?Computer2
                 Uri launchUri = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.ActivationUri;
-                tb_TargetComputer.Text = launchUri.Query.ToString();
+                tb_TargetComputer.Text = launchUri.Query.Replace("?", "");
+                tb_TargetComputer.Text = launchUri.Query.Replace("&ProjectName=sccmclictr", "");
+
+                tb_TargetComputer2.Text = tb_TargetComputer.Text;
             }
-            */
         }
 
         private void bt_Connect2_Click(object sender, RoutedEventArgs e)
