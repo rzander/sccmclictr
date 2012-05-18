@@ -7,7 +7,7 @@
       xmlns:rib="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="800"
-      Title="Page1" xmlns:my="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" xmlns:my1="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:my2="clr-namespace:System.Windows.Controls.Primitives;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:my3="http://schemas.microsoft.com/wpf/2008/toolkit" xmlns:my4="clr-namespace:ClientCenter">
+      Title="Client Center for Configuration Manager" xmlns:my="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" xmlns:my1="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:my2="clr-namespace:System.Windows.Controls.Primitives;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:my3="http://schemas.microsoft.com/wpf/2008/toolkit" xmlns:my4="clr-namespace:ClientCenter">
     <Grid>
         <DockPanel Name="AppDock">
             <DockPanel Name="ConnectionDock" DockPanel.Dock="Top" Height="40" UseLayoutRounding="False">
@@ -23,7 +23,7 @@
             </DockPanel>
             <DockPanel Name="RibbonDock" DockPanel.Dock="Top" Height="120">
                 <Border BorderBrush="Silver" BorderThickness="1" />
-                <rib:Ribbon HorizontalAlignment="Stretch" Name="ribbon1" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" ToolTip="Tip" ShowQuickAccessToolBarOnTop="False" Height="153" Grid.ColumnSpan="4">
+                <rib:Ribbon HorizontalAlignment="Stretch" Name="ribbon1" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" ToolTip="Tip" ShowQuickAccessToolBarOnTop="False" Height="153" Grid.ColumnSpan="4" IsEnabled="False">
                     <rib:Ribbon.ApplicationMenu>
                         <rib:RibbonApplicationMenu Name="AppMenu" Label="Connection">
                             <rib:RibbonApplicationMenu.QuickAccessToolBarControlSizeDefinition>
@@ -32,7 +32,7 @@
                             <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Center">
                                 <TextBlock Text="Target Computer: " VerticalAlignment="Center"></TextBlock>
                                 <TextBox Name="tb_TargetComputer" Text="127.0.0.1" Width="150" Height="25" />
-                                <rib:RibbonButton Name="bt_Connect" VerticalAlignment="Center" Label="Connect" Height="32" />
+                                <rib:RibbonButton Name="bt_Connect" VerticalAlignment="Center" Label="Connect" Height="32" Click="bt_Connect_Click" />
                             </StackPanel>
                         </rib:RibbonApplicationMenu>
                     </rib:Ribbon.ApplicationMenu>
@@ -43,8 +43,8 @@
                     <rib:RibbonTab Header="Agent Actions">
                         <rib:RibbonGroup Header="Inventory">
                                 <rib:RibbonSplitButton Name="ButtonHWInvSplit" Label="HW Inv" ToolTip="Run Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvSplit_Click">
-                                    <rib:RibbonButton Name="ButtonHWInvFull" Label="Full HW Inv" ToolTip="Run a full Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvFull_Click" />
-                                    <rib:RibbonButton Name="ButtonHWInvDleta" Label="Delta HW Inv" ToolTip="Run a delta Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvSplit_Click" />
+                                    <rib:RibbonButton Name="ButtonHWInvFull" Label="Full HW Inv" ToolTip="Run a full Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvFull_Click" />
+                                    <rib:RibbonButton Name="ButtonHWInvDleta" Label="Delta HW Inv" ToolTip="Run a delta Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvSplit_Click" />
                                 </rib:RibbonSplitButton>
                                 <rib:RibbonSplitButton Name="ButtonSWInvSplit" Label="SW Inv" ToolTip="Run Software Inventory" LargeImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvSplit_Click">
                                     <rib:RibbonButton Name="ButtonSWInvFull" Label="Full SW Inv" ToolTip="Run a full Software Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvFull_Click" />
@@ -53,8 +53,8 @@
                                 <rib:RibbonButton Name="ButtonDDR"  Label="DDR" ToolTip="Send a Heartbeat back to the server." LargeImageSource="/SCCMCliCtrWPF;component/Images/Send%20Receive.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Send%20Receive.ico" Click="ButtonDDR_Click" />
                         </rib:RibbonGroup>
                         <rib:RibbonGroup Header="Policy">
-                                <rib:RibbonButton Name="ButtonMachinePolicy"  Label="Machine Policy" ToolTip="Download Machine Policy" LargeImageSource="/SCCMCliCtrWPF;component/Images/ComputerPolicy.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Server%20upgrade.ico" Click="ButtonMachinePolicy_Click" />
-                                <rib:RibbonButton Name="ButtonUserPolicy" Label="User Policy" ToolTip="Download User Policy" LargeImageSource="/SCCMCliCtrWPF;component/Images/UserPolicy.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/User%20Upgrade.ico" Click="ButtonUserPolicy_Click" />
+                                <rib:RibbonButton Name="ButtonMachinePolicy"  Label="Machine Policy" ToolTip="Download Machine Policy" LargeImageSource="/SCCMCliCtrWPF;component/Images/ComputerPolicy.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/ComputerPolicy.ico" Click="ButtonMachinePolicy_Click" />
+                                <rib:RibbonButton Name="ButtonUserPolicy" Label="User Policy" ToolTip="Download User Policy" LargeImageSource="/SCCMCliCtrWPF;component/Images/UserPolicy.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/UserPolicy.ico" Click="ButtonUserPolicy_Click" />
                         </rib:RibbonGroup>
                         <rib:RibbonGroup Header="DCM">
                             <rib:RibbonButton Name="ButtonDCMEval" Label="DCM Check" ToolTip="Desired Configuration Monitoring (DCM) Evaluation cycle." LargeImageSource="/SCCMCliCtrWPF;component/Images/Search%20File.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Search%20File.ico" Click="ButtonDCMEval_Click" />
@@ -160,7 +160,7 @@
                     <TabControl Name="tabNavigationPanels">
                         <TabItem Header="Agent Settings" Name="AgentSettingsPanel" Tag="AgentSettings">
                             <Grid>
-                                <my4:AgentSettingItem HorizontalAlignment="Left" Margin="67,143,0,0" x:Name="agentSettingItem1" VerticalAlignment="Top" />
+                                <my4:AgentSettingItem HorizontalAlignment="Left" Margin="67,143,0,0" x:Name="agentSettingItem1" VerticalAlignment="Top" IsEnabled="False" />
                             </Grid>
                         </TabItem>
                         <TabItem Header="Components" Tag="Components" />

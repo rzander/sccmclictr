@@ -16,6 +16,7 @@ using Stema.Controls;
 using sccmclictr.automation;
 using System.Diagnostics;
 using System.ComponentModel;
+using System.Deployment.Application;
 
 namespace ClientCenter
 {
@@ -36,35 +37,82 @@ namespace ClientCenter
             tabNavigationPanels.ItemContainerStyle = s;
 
 
-            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            try
             {
-                //Pass ClickOnce Parameter like: http://sccmclictr.codeplex.com/releases/clickonce/SCCMCliCtrWPF.application?Computer2
-                Uri launchUri = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.ActivationUri;
-                tb_TargetComputer.Text = launchUri.Query.Replace("?", "");
-                tb_TargetComputer.Text = launchUri.Query.Replace("&ProjectName=sccmclictr", "");
+                if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+                {
+                    //Pass Parameter like: http://sccmclictr.codeplex.com/releases/clickonce/SCCMCliCtrWPF.application?Computer2
+                    Uri launchUri = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.ActivationUri;
+                    tb_TargetComputer.Text = launchUri.Query.Replace("?", "");
+                    tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("&ProjectName=sccmclictr", "");
 
-                tb_TargetComputer2.Text = tb_TargetComputer.Text;
+                    tb_TargetComputer2.Text = tb_TargetComputer.Text;
+                }
             }
+            catch { }
         }
 
         private void bt_Connect2_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
 
-            ConnectionDock.Visibility = System.Windows.Visibility.Collapsed;
+            try
+            {
+                oAgent = new SCCMAgent(tb_TargetComputer2.Text, null, null);
+                oAgent.connect();
+                MyTraceListener myTrace = new MyTraceListener(ref tStatus);
+                myTrace.TraceOutputOptions = TraceOptions.None;
+                oAgent.PSCode.Listeners.Add(myTrace);
 
-            oAgent = new SCCMAgent(tb_TargetComputer2.Text, null, null);
-            oAgent.connect();
-            MyTraceListener myTrace = new MyTraceListener(ref tStatus);
-            myTrace.TraceOutputOptions = TraceOptions.None;
-            oAgent.PSCode.Listeners.Add(myTrace);
+                agentSettingItem1.SCCMAgentConnection = oAgent;
 
-            agentSettingItem1.SCCMAgentConnection = oAgent;
-            
-            navigationPane1.IsEnabled = true;
+                navigationPane1.IsEnabled = true;
+
+                ConnectionDock.Visibility = System.Windows.Visibility.Collapsed;
+                ribbon1.IsEnabled = true;
+                agentSettingItem1.IsEnabled = true;
+            }
+            catch(Exception ex)
+            {
+                ribbon1.IsEnabled = false;
+                navigationPane1.IsEnabled = false;
+                agentSettingItem1.IsEnabled = false;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
             Mouse.OverrideCursor = Cursors.Arrow;
            
+        }
+
+        private void bt_Connect_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+
+            try
+            {
+                oAgent = new SCCMAgent(tb_TargetComputer.Text, null, null);
+                oAgent.connect();
+                MyTraceListener myTrace = new MyTraceListener(ref tStatus);
+                myTrace.TraceOutputOptions = TraceOptions.None;
+                oAgent.PSCode.Listeners.Add(myTrace);
+
+                agentSettingItem1.SCCMAgentConnection = oAgent;
+
+                navigationPane1.IsEnabled = true;
+
+                ConnectionDock.Visibility = System.Windows.Visibility.Collapsed;
+                ribbon1.IsEnabled = true;
+                agentSettingItem1.IsEnabled = true;
+            }
+            catch (Exception ex)
+            {
+                ribbon1.IsEnabled = false;
+                navigationPane1.IsEnabled = false;
+                agentSettingItem1.IsEnabled = false;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void TreeViewItem_Selected(object sender, RoutedEventArgs e)
@@ -150,6 +198,8 @@ namespace ClientCenter
             oAgent.Client.AgentActions.DCMPolicyEnforcement();
             Mouse.OverrideCursor = Cursors.Arrow;
         }
+
+
 
     }
 

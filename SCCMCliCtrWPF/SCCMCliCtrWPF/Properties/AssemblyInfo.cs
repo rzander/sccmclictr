@@ -8,7 +8,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SCCMCliCtrWPF")]
-[assembly: AssemblyDescription("CM12 Client Center")]
+[assembly: AssemblyDescription("Client Center for CM12")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SCCM Tools")]
 [assembly: AssemblyProduct("SCCMCliCtrWPF")]
