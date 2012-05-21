@@ -19,7 +19,7 @@
                 </DockPanel.Background>
                 <TextBlock Text="Target Computer: " VerticalAlignment="Center" Margin="15,0,0,0"></TextBlock>
                 <TextBox Name="tb_TargetComputer2" Text="127.0.0.1" Width="150" Height="25" />
-                <Button Name="bt_Connect2"  Content="Connect" VerticalAlignment="Center" Height="25" Width="60" Margin="20,0,0,0" HorizontalAlignment="Left" Click="bt_Connect2_Click" />
+                <Button Name="bt_Connect2"  Content="Connect" VerticalAlignment="Center" Height="25" Width="60" Margin="20,0,0,0" HorizontalAlignment="Left" Click="bt_Connect_Click" />
             </DockPanel>
             <DockPanel Name="RibbonDock" DockPanel.Dock="Top" Height="120">
                 <Border BorderBrush="Silver" BorderThickness="1" />
@@ -47,8 +47,8 @@
                                     <rib:RibbonButton Name="ButtonHWInvDleta" Label="Delta HW Inv" ToolTip="Run a delta Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvSplit_Click" />
                                 </rib:RibbonSplitButton>
                                 <rib:RibbonSplitButton Name="ButtonSWInvSplit" Label="SW Inv" ToolTip="Run Software Inventory" LargeImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvSplit_Click">
-                                    <rib:RibbonButton Name="ButtonSWInvFull" Label="Full SW Inv" ToolTip="Run a full Software Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvFull_Click" />
-                                    <rib:RibbonButton Name="ButtonSWInvDelta"  Label="Delta SW Inv" ToolTip="Run a delta Software Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvSplit_Click" />
+                                    <rib:RibbonButton Name="ButtonSWInvFull" Label="Full SW Inv" ToolTip="Run a full Software Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvFull_Click" />
+                                    <rib:RibbonButton Name="ButtonSWInvDelta"  Label="Delta SW Inv" ToolTip="Run a delta Software Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvSplit_Click" />
                                 </rib:RibbonSplitButton>
                                 <rib:RibbonButton Name="ButtonDDR"  Label="DDR" ToolTip="Send a Heartbeat back to the server." LargeImageSource="/SCCMCliCtrWPF;component/Images/Send%20Receive.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Send%20Receive.ico" Click="ButtonDDR_Click" />
                         </rib:RibbonGroup>
@@ -145,22 +145,27 @@
                 </DockPanel>
             </DockPanel>
             <DockPanel Name="DetailDock" DockPanel.Dock="Right">
-                <DockPanel Name="StatusDock" DockPanel.Dock="Bottom" Height="80" VerticalAlignment="Bottom">
-                    <Border BorderBrush="Silver" BorderThickness="1"/>
-                    <TextBox Name="tStatus" TextWrapping="Wrap" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="Courier New" Foreground="Black" VerticalScrollBarVisibility="Auto">
-                        <TextBox.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FFC4C4C4" Offset="1" />
-                                <GradientStop Color="White" Offset="0.424" />
-                            </LinearGradientBrush>
-                        </TextBox.Background>
-                    </TextBox>
+                <DockPanel Name="StatusDock" DockPanel.Dock="Bottom" Height="100" VerticalAlignment="Bottom">
+                    <ResizeGrip Name="PSGrip" HorizontalAlignment="Right" VerticalAlignment="Bottom" DockPanel.Dock="Top" MouseLeftButtonDown="PSGrip_MouseLeftButtonDown" MouseLeftButtonUp="PSGrip_MouseLeftButtonUp" />
+                        <RichTextBox Name="rStatus" FontFamily="Courier New" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" TextChanged="rStatus_TextChanged" AcceptsTab="True" FontSize="12">
+                            <RichTextBox.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFC4C4C4" Offset="1" />
+                                    <GradientStop Color="White" Offset="0.424" />
+                                </LinearGradientBrush>
+                            </RichTextBox.Background>
+                            <RichTextBox.Resources>
+                                <Style TargetType="{x:Type Paragraph}">
+                                    <Setter Property="Margin" Value="0"/>
+                                </Style>
+                            </RichTextBox.Resources>
+                        </RichTextBox>
                 </DockPanel>
                 <DockPanel Name="MainDock" DockPanel.Dock="Top" VerticalAlignment="Stretch">
                     <TabControl Name="tabNavigationPanels">
                         <TabItem Header="Agent Settings" Name="AgentSettingsPanel" Tag="AgentSettings">
                             <Grid>
-                                <my4:AgentSettingItem HorizontalAlignment="Left" Margin="67,143,0,0" x:Name="agentSettingItem1" VerticalAlignment="Top" IsEnabled="False" />
+                                <my4:AgentSettingItem HorizontalAlignment="Center" x:Name="agentSettingItem1" VerticalAlignment="Center" IsEnabled="False" />
                             </Grid>
                         </TabItem>
                         <TabItem Header="Components" Tag="Components" />
