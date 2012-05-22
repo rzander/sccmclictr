@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="545" xmlns:sr="http://schemas.divelements.co.uk/wpf/sandribbon" xmlns:my="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon">
+             mc:Ignorable="d" d:DesignHeight="390" d:DesignWidth="545" xmlns:sr="http://schemas.divelements.co.uk/wpf/sandribbon" xmlns:my="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon">
        
     <Grid>
         <StackPanel Name="spAgentSettings" HorizontalAlignment="Stretch" IsEnabled="false">
@@ -45,7 +45,7 @@
             </StackPanel>
             <StackPanel Height="32" HorizontalAlignment="Left" Name="stackPanel2" VerticalAlignment="Top" Orientation="Horizontal">
                 <Label Content="Agent Version:" Height="28" Name="lAgentVersion" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
-                <TextBox Height="23" Name="tbAgentVersion" Width="250" Margin="0,0,10,0" IsReadOnly="True" IsReadOnlyCaretVisible="True" IsEnabled="False" />
+                <TextBox Height="23" Name="tbAgentVersion" Width="250" Margin="0,0,10,0" IsReadOnly="True" IsReadOnlyCaretVisible="True" Background="#FFF4F4F4" />
                 <ToolBarPanel Height="24" Name="toolBarPanel2">
                     <ToolBar Name="toolBar2" >
                         <Image Name="imgAgentVersion" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" MouseLeftButtonDown="imgAgentVersion_MouseLeftButtonDown">
@@ -62,7 +62,7 @@
             </StackPanel>
             <StackPanel Height="32" HorizontalAlignment="Left" Name="stackPanel3" VerticalAlignment="Top" Orientation="Horizontal">
                 <Label Content="Management Point:" Height="28" Name="lMP" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
-                <TextBox Height="23" Name="tbMP" Width="250" Margin="0,0,10,0" IsReadOnly="True" IsReadOnlyCaretVisible="True" IsEnabled="False" />
+                <TextBox Height="23" Name="tbMP" Width="250" Margin="0,0,10,0" IsReadOnly="True" IsReadOnlyCaretVisible="True" Background="#FFF4F4F4" />
                 <ToolBarPanel Height="24" Name="toolBarPanel3">
                     <ToolBar Name="toolBar3" >
                         <Image Name="imgMP"  Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" MouseLeftButtonDown="imgMP_MouseLeftButtonDown">
@@ -79,7 +79,7 @@
             </StackPanel>
             <StackPanel Height="32" HorizontalAlignment="Left" Name="stackPanel4" VerticalAlignment="Top" Orientation="Horizontal">
                 <Label Content="Internet Management Point:" Height="28" Name="lInetMP" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
-                <TextBox Height="23" Name="tbInetMP" Width="250" Margin="0,0,10,0" IsReadOnly="True" IsReadOnlyCaretVisible="True" IsEnabled="False" />
+                <TextBox Height="23" Name="tbInetMP" Width="250" Margin="0,0,10,0" IsReadOnly="True" IsReadOnlyCaretVisible="True" Background="#FFF4F4F4" />
                 <ToolBarPanel Height="24" Name="toolBarPanel4">
                     <ToolBar Name="toolBar4" >
                         <Image Name="imgINetMP" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" MouseLeftButtonDown="imgINetMP_MouseLeftButtonDown">
@@ -96,7 +96,7 @@
             </StackPanel>
             <StackPanel Height="32" HorizontalAlignment="Left" Name="spProxyMP" VerticalAlignment="Top" Orientation="Horizontal">
                 <Label Content="Proxy Management Point:" Height="28" Name="lProxyMP" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
-                <TextBox Height="23" Name="tbProxyMP" Width="250" Margin="0,0,10,0" IsReadOnly="True" IsReadOnlyCaretVisible="True" IsEnabled="False" />
+                <TextBox Height="23" Name="tbProxyMP" Width="250" Margin="0,0,10,0" IsReadOnly="True" IsReadOnlyCaretVisible="True" Background="#FFF4F4F4" />
                 <ToolBarPanel Height="24" Name="toolBarPanel5">
                     <ToolBar Name="toolBar5" >
                         <Image Name="imgProxyMP" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible" MouseLeftButtonDown="imgProxyMP_MouseLeftButtonDown">
@@ -132,6 +132,38 @@
                         <Image Name="imgGetSLP" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible"  ToolTip="Get the assigned Server Locator Point" MouseLeftButtonDown="imgGetSLP_MouseLeftButtonDown">
                         </Image>
                         <Image Name="imgSaveSLP" Source="/SCCMCliCtrWPF;component/Images/Save.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible"  Margin="2,0,0,0" ToolTip="Save the Server Locator Point." MouseLeftButtonDown="imgSaveSLP_MouseLeftButtonDown">
+                        </Image>
+                    </ToolBar>
+                </ToolBarPanel>
+            </StackPanel>
+            <StackPanel Height="32" HorizontalAlignment="Left" Name="spGUID" VerticalAlignment="Top" Orientation="Horizontal">
+                <Label Content="Unique Identifier (GUID):" Height="28" Name="lGUID" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
+                <TextBox Height="23" Name="tbGUID" Width="250" Margin="0,0,10,0" ToolTip="Unique Identifier (GUID)" IsReadOnly="True" Background="#FFF4F4F4" />
+                <ToolBarPanel Height="24" Name="tbpGUID">
+                    <ToolBar Name="toolBGUID" >
+                        <Image Name="imgGetGUID" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible"  ToolTip="Get the Agent GUID." MouseLeftButtonDown="imgGetGUID_MouseLeftButtonDown">
+                        </Image>
+                    </ToolBar>
+                </ToolBarPanel>
+            </StackPanel>
+            <StackPanel Height="32" HorizontalAlignment="Left" Name="spLogPath" VerticalAlignment="Top" Orientation="Horizontal">
+                <Label Content="Agent Log Path:" Height="28" Name="lLogPath" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
+                <TextBox Height="23" Name="tbLogPath" Width="250" Margin="0,0,10,0" ToolTip="Agent log path." IsReadOnly="True" IsReadOnlyCaretVisible="True" Background="#FFF4F4F4" />
+                <ToolBarPanel Height="24" Name="tbpLogPath">
+                    <ToolBar Name="toolBLogPath" >
+                        <Image Name="imgGetLogPath" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible"  ToolTip="Get the Agent Log path." MouseLeftButtonDown="imgGetLogPath_MouseLeftButtonDown">
+                        </Image>
+                        <Image Name="imgOpenLogPath" Source="/SCCMCliCtrWPF;component/Images/Browse.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible"  ToolTip="Open the Agent Log path." MouseLeftButtonDown="imgOpenLogPath_MouseLeftButtonDown" Margin="2,0,0,0">
+                        </Image>
+                    </ToolBar>
+                </ToolBarPanel>
+            </StackPanel>
+            <StackPanel Height="32" HorizontalAlignment="Left" Name="spSetupPath" VerticalAlignment="Top" Orientation="Horizontal">
+                <Label Content="CCMSetup Path:" Height="28" Name="lSetupPath" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
+                <TextBox Height="23" Name="tbSetupPath" Width="250" Margin="0,0,10,0" ToolTip="CCMSetup path." IsReadOnly="True" IsReadOnlyCaretVisible="True" Background="#FFF4F4F4" />
+                <ToolBarPanel Height="24" Name="tbpSetupPath">
+                    <ToolBar Name="toolBSetupPath" >
+                        <Image Name="imgOpenSetupPath" Source="/SCCMCliCtrWPF;component/Images/Browse.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible"  ToolTip="Open the CCMSetup path." Margin="2,0,0,0" MouseLeftButtonDown="imgOpenSetupPath_MouseLeftButtonDown">
                         </Image>
                     </ToolBar>
                 </ToolBarPanel>

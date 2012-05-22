@@ -104,7 +104,7 @@
                                                 </StackPanel>
                                             </TreeViewItem.Header>
                                         </TreeViewItem>
-                                        <TreeViewItem Tag="Components" IsEnabled="False">
+                                        <TreeViewItem Tag="Components">
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
                                                     <Image Source="/SCCMCliCtrWPF;component/Images/Add-ons%20setup.ico" Stretch="Uniform" Width="20" Height="20"/>
@@ -168,7 +168,9 @@
                                 <my4:AgentSettingItem HorizontalAlignment="Center" x:Name="agentSettingItem1" VerticalAlignment="Center" IsEnabled="False" />
                             </Grid>
                         </TabItem>
-                        <TabItem Header="Components" Tag="Components" />
+                        <TabItem Header="Components" Tag="Components">
+                            <my4:AgentComponents x:Name="agentComponents1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </TabItem>
                         <TabItem Header="Software Distribution" Name="SWDistPanel">
                             <Grid></Grid>
                         </TabItem>

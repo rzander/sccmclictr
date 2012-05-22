@@ -17,6 +17,7 @@ using sccmclictr.automation;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Deployment.Application;
+using System.Management;
 
 namespace ClientCenter
 {
@@ -68,7 +69,6 @@ namespace ClientCenter
 
                 oAgent = new SCCMAgent(sTarget, null, null);
                 oAgent.connect();
-
                 oAgent.PSCode.Listeners.Add(myTrace);
 
                 agentSettingItem1.SCCMAgentConnection = oAgent;
@@ -106,7 +106,12 @@ namespace ClientCenter
                         if (iTab.Tag.ToString() == ((System.Windows.Controls.HeaderedItemsControl)(e.Source)).Tag.ToString())
                         {
                             iTab.IsSelected = true;
-
+                            switch(iTab.Tag.ToString())
+                            {
+                                case "Components":
+                                    agentComponents1.SCCMAgentConnection = oAgent;
+                                    break;
+                            }
                             break;
                         }
                     }

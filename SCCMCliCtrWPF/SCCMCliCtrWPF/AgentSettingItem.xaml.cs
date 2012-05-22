@@ -81,7 +81,7 @@ namespace ClientCenter
         private void imgProxyMP_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            tbMP.Text = oAgent.Client.AgentProperties.ManagementPointProxy;
+            tbProxyMP.Text = oAgent.Client.AgentProperties.ManagementPointProxy;
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
@@ -213,7 +213,92 @@ namespace ClientCenter
             }
         }
 
+        private void imgGetGUID_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                tbGUID.Text = oAgent.Client.AgentProperties.ClientId;
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
 
+        private void imgGetLogPath_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                tbLogPath.Text = oAgent.Client.AgentProperties.LocalSCCMAgentLogPath;
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void imgOpenLogPath_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                Process Explorer = new Process();
+                Explorer.StartInfo.FileName = "Explorer.exe";
+                string sCachePath = "";
+                try
+                {
+                    sCachePath = oAgent.Client.AgentProperties.LocalSCCMAgentLogPath.Replace(':', '$');
+                }
+                catch { }
+                if (!string.IsNullOrEmpty(sCachePath))
+                {
+                    Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + @"\" + sCachePath;
+                }
+                else
+                {
+                    Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + @"\admin$\CCM\Logs";
+                }
+
+                Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
+                Explorer.Start();
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void imgOpenSetupPath_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                Process Explorer = new Process();
+                Explorer.StartInfo.FileName = "Explorer.exe";
+
+                if (oAgent.Client.AgentProperties.isSCCM2012)
+                {
+                    Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + @"\admin$\ccmsetup";
+                }
+                else
+                {
+                    Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + @"\admin$\system32\ccmsetup";
+                }
+
+                Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
+                Explorer.Start();
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
 
     }
 }
