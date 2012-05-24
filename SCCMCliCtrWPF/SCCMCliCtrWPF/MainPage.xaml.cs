@@ -73,12 +73,16 @@ namespace ClientCenter
 
                 agentSettingItem1.SCCMAgentConnection = oAgent;
                 agentSettingItem1.Listener = myTrace;
+                cacheGrid1.Listener = myTrace;
 
                 navigationPane1.IsEnabled = true;
 
                 ConnectionDock.Visibility = System.Windows.Visibility.Collapsed;
                 ribbon1.IsEnabled = true;
                 agentSettingItem1.IsEnabled = true;
+
+                this.WindowTitle = sTarget;
+                
             }
             catch(Exception ex)
             {
@@ -86,7 +90,7 @@ namespace ClientCenter
                 navigationPane1.IsEnabled = false;
                 agentSettingItem1.IsEnabled = false;
                 myTrace.WriteError("Unable to connect: " + sTarget);
-                myTrace.WriteError(ex.Message);
+                myTrace.WriteError("Error: "+ ex.Message);
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
@@ -110,6 +114,9 @@ namespace ClientCenter
                             {
                                 case "Components":
                                     agentComponents1.SCCMAgentConnection = oAgent;
+                                    break;
+                                case "Cache":
+                                    cacheGrid1.SCCMAgentConnection = oAgent;
                                     break;
                             }
                             break;
@@ -207,6 +214,24 @@ namespace ClientCenter
                 this.PSGrip.ReleaseMouseCapture();
             }
         }
+
+        private void btOpenPSConsole_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                Process Explorer = new Process();
+                Explorer.StartInfo.FileName = "powershell.exe";
+                Explorer.StartInfo.Arguments = @"-NoExit -Command Enter-PSSession " + oAgent.TargetHostname;
+                Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
+                Explorer.Start();
+            }
+            catch (Exception ex)
+            {
+                myTrace.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
     }
 
     public class MyTraceListener : TraceListener, INotifyPropertyChanged
@@ -238,7 +263,7 @@ namespace ClientCenter
 
         public override void WriteLine(string message)
         {
-            this.builder.AppendLine(message.Replace("PSCode Information: 0 :", ""));
+            this.builder.AppendLine(message.Replace("PSCode Information: 0 :", "") + "\r\n");
 
             TextRange tr = new TextRange(oROutTB.Document.ContentEnd, oROutTB.Document.ContentEnd);
             tr.Text = message.Replace("PSCode Information: 0 :", "") + "\r\n";
@@ -250,7 +275,8 @@ namespace ClientCenter
 
         public void WriteError(string message)
         {
-            this.builder.AppendLine(message.Replace("PSCode Information: 0 :", ""));
+            message = message + "\r\n";
+            this.builder.AppendLine(message.Replace("PSCode Information: 0 :", "") + "\r\n");
 
             TextRange tr = new TextRange(oROutTB.Document.ContentEnd, oROutTB.Document.ContentEnd);
             tr.Text = message.Replace("PSCode Information: 0 :", "") + "\r\n";

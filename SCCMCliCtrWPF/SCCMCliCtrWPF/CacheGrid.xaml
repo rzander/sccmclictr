@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="ClientCenter.CacheGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600">
+    <Grid>
+        <DockPanel LastChildFill="True">
+            <DockPanel DockPanel.Dock="Top" LastChildFill="True">
+                <GroupBox Height="100" Header="Cache Settings">
+                    <StackPanel>
+                        <StackPanel Height="32" HorizontalAlignment="Left" Name="spCachePath2" VerticalAlignment="Top" Orientation="Horizontal">
+                            <Label Content="Cache Path:" Height="28" Name="lCachePath2" Width="200" Margin="2,0,10,0" HorizontalAlignment="Stretch" FlowDirection="LeftToRight" HorizontalContentAlignment="Right" />
+                            <TextBox Height="23" Name="tbCachePath2" Width="250" Margin="0,0,10,0" MaxLines="1" ToolTip="3Digit Site Code" IsManipulationEnabled="True" />
+                            <ToolBarPanel Height="24" Name="tbpCachePath2" >
+                                <ToolBar Name="toolBCachePath2">
+                                    <Image Name="imgGetCachePath2" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible"  ToolTip="Get the Agent Cache path." MouseLeftButtonDown="imgGetCachePath2_MouseLeftButtonDown">
+                                    </Image>
+                                    <Image Name="imgOpenCachePath2" Source="/SCCMCliCtrWPF;component/Images/Browse.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible"  ToolTip="Open the Cache path." Margin="2,0,0,0" MouseLeftButtonDown="imgOpenCachePath2_MouseLeftButtonDown">
+                                    </Image>
+                                    <Image Name="imgSaveCachepath2" Source="/SCCMCliCtrWPF;component/Images/Save.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible"  Margin="2,0,0,0" ToolTip="Save the new Cache Path." MouseLeftButtonDown="imgSaveCachepath2_MouseLeftButtonDown">
+                                    </Image>
+                                </ToolBar>
+                            </ToolBarPanel>
+                        </StackPanel>
+                        <StackPanel Height="32" HorizontalAlignment="Left" Name="spCacheSize" VerticalAlignment="Top" Orientation="Horizontal">
+                            <Label Content="Cache Size (MB):" Height="28" Name="lCacheSize" Width="200" Margin="2,0,10,0" HorizontalAlignment="Stretch" FlowDirection="LeftToRight" HorizontalContentAlignment="Right" />
+                            <TextBox Height="23" Name="tbCacheSize" Width="250" Margin="0,0,10,0" MaxLines="1" MaxLength="9" ToolTip="Size in MegaBytes (MB)" IsManipulationEnabled="True" />
+                            <ToolBarPanel Height="24" Name="tbpCacheSize" >
+                                <ToolBar Name="toolBCacheSize">
+                                    <Image Name="imgGetCacheSize" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible"  ToolTip="Get the Agent Cache size." MouseLeftButtonDown="imgGetCacheSize_MouseLeftButtonDown">
+                                    </Image>
+                                    <Image Name="imgSaveCacheSize" Source="/SCCMCliCtrWPF;component/Images/Save.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible"  Margin="2,0,0,0" ToolTip="Save the new Cache size." MouseLeftButtonDown="imgSaveCacheSize_MouseLeftButtonDown">
+                                    </Image>
+                                </ToolBar>
+                            </ToolBarPanel>
+                        </StackPanel>
+
+                    </StackPanel>
+                </GroupBox>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top"  Height="26">
+                <ToolBar Height="26" Name="toolBar1" />
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Bottom" Height="25">
+                <StatusBar>
+                    <StatusBarItem Content="Content Size:" />
+                    <StatusBarItem Name="sbiContentSize" Content="xxx" />
+                </StatusBar>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" EnableColumnVirtualization="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Content ID" Binding="{Binding Path=ContentId}" SortDirection="Ascending" />
+                        <DataGridTextColumn Header="Size" Binding="{Binding Path=ContentSize}" />
+                        <DataGridTextColumn Header="Version" Binding="{Binding Path=ContentVer}" />
+                        <DataGridTextColumn Header="Last used" Binding="{Binding Path=LastReferenced}" />
+                        <DataGridTextColumn Header="Location" Binding="{Binding Path=Location}" />
+                        <DataGridTextColumn Header="Cache ID" Binding="{Binding Path=CacheId}" />
+                        <DataGridTextColumn Header="Type" Binding="{Binding Path=ContentType}" />
+                        <DataGridTextColumn Header="Persistent" Binding="{Binding Path=PersistInCache}" />
+                        <DataGridTextColumn Header="Reference count" Binding="{Binding Path=ReferenceCount}" />
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Name="miOpenFolder" Header="Open Folder" Click="miOpenFolder_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="/SCCMCliCtrWPF;component/Images/Browse.ico" Height="24" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="miDeleteItems" Header="Delete" Click="miDeleteItems_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="/SCCMCliCtrWPF;component/Images/Delete.ico" Height="24" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

@@ -3,22 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" d:DesignHeight="390" d:DesignWidth="545" xmlns:sr="http://schemas.divelements.co.uk/wpf/sandribbon" xmlns:my="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon">
+             mc:Ignorable="d" d:DesignHeight="520" d:DesignWidth="560" xmlns:sr="http://schemas.divelements.co.uk/wpf/sandribbon" xmlns:my="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon">
        
     <Grid>
         <StackPanel Name="spAgentSettings" HorizontalAlignment="Stretch" IsEnabled="false">
-            <StackPanel Height="32" HorizontalAlignment="Left" Name="stackPanel1" VerticalAlignment="Top" Orientation="Horizontal">  
-            <Label Content="Site Code:" Height="28" Name="lSiteCode" Width="200" Margin="2,0,10,0" HorizontalAlignment="Stretch" FlowDirection="LeftToRight" HorizontalContentAlignment="Right" />
-            <TextBox Height="23" Name="tbSiteCode" Width="250" Margin="0,0,10,0" MaxLines="1" MaxLength="3" ToolTip="3Digit Site Code" />
+            <StackPanel Height="32" HorizontalAlignment="Left" Name="stackPanel1" VerticalAlignment="Top" Orientation="Horizontal">
+                <Label Content="Site Code:" Height="28" Name="lSiteCode" Width="200" Margin="2,0,10,0" HorizontalAlignment="Stretch" FlowDirection="LeftToRight" HorizontalContentAlignment="Right" />
+                <TextBox Height="23" Name="tbSiteCode" Width="250" Margin="0,0,10,0" MaxLines="1" MaxLength="3" ToolTip="3Digit Site Code" />
                 <ToolBarPanel Height="24" Name="toolBarPanel1" >
-                     <ToolBar Name="toolBar1">
+                    <ToolBar Name="toolBar1">
                         <Image Name="imgSiteCode" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" MouseLeftButtonDown="imgSiteCode_MouseLeftButtonDown" ToolTip="Get the assigned Site Code.">
                         </Image>
                         <Image Name="imgSaveSiteCode" Source="/SCCMCliCtrWPF;component/Images/Save.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible" Margin="2,0,0,0" MouseLeftButtonDown="imgSaveSiteCode_MouseLeftButtonDown" ToolTip="Save the Site Code.">
                         </Image>
                     </ToolBar>
-            </ToolBarPanel>
-        </StackPanel>
+                </ToolBarPanel>
+            </StackPanel>
             <StackPanel Height="32" HorizontalAlignment="Left" Name="spHTTPPort" VerticalAlignment="Top" Orientation="Horizontal" IsEnabled="false">
                 <Label Content="HTTP Port:" Height="28" Name="lHTTPPort" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
                 <TextBox Height="23" Name="tbHTTPPort" Width="250" Margin="0,0,10,0" MaxLines="1" MaxLength="6" ToolTip="HTTP Port Number" />
@@ -164,6 +164,33 @@
                 <ToolBarPanel Height="24" Name="tbpSetupPath">
                     <ToolBar Name="toolBSetupPath" >
                         <Image Name="imgOpenSetupPath" Source="/SCCMCliCtrWPF;component/Images/Browse.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible"  ToolTip="Open the CCMSetup path." Margin="2,0,0,0" MouseLeftButtonDown="imgOpenSetupPath_MouseLeftButtonDown">
+                        </Image>
+                    </ToolBar>
+                </ToolBarPanel>
+            </StackPanel>
+            <StackPanel Height="32" HorizontalAlignment="Left" Name="spCachePath" VerticalAlignment="Top" Orientation="Horizontal">
+                <Label Content="Cache Path:" Height="28" Name="lCachePath" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
+                <TextBox Height="23" Name="tbCachePath" Width="250" Margin="0,0,10,0" ToolTip="Package Cache path." />
+                <ToolBarPanel Height="24" Name="tbpCachePath">
+                    <ToolBar Name="toolBCachePath" >
+                        <Image Name="imgGetCachePath" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible"  ToolTip="Get the Agent Cache path." MouseLeftButtonDown="imgGetCachePath_MouseLeftButtonDown">
+                        </Image>
+                        <Image Name="imgOpenCachePath" Source="/SCCMCliCtrWPF;component/Images/Browse.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible"  ToolTip="Open the Cache path." Margin="2,0,0,0" MouseLeftButtonDown="imgOpenCachePath_MouseLeftButtonDown">
+                        </Image>
+                        <Image Name="imgSaveCachepath" Source="/SCCMCliCtrWPF;component/Images/Save.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible"  Margin="2,0,0,0" ToolTip="Save the new Cache Path." MouseLeftButtonDown="imgSaveCachepath_MouseLeftButtonDown">
+                        </Image>
+                    </ToolBar>
+                </ToolBarPanel>
+            </StackPanel>
+            <StackPanel Height="32" HorizontalAlignment="Left" Name="spAutoSite" VerticalAlignment="Top" Orientation="Horizontal">
+                <Label Content="Auto Site Assignment:" Height="28" Name="lAutoSite" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
+                <CheckBox Name="cbAutoSite" Margin="0,10,2,0" ToolTip="Automatically assign a Site code on next agent restart." />
+                <Label Content="(Auto Site Dicovery)" Height="28" Margin="2,0,128,0"/>
+                <ToolBarPanel Height="24" Name="tbpAutoSite">
+                    <ToolBar Name="toolBAutoSite" >
+                        <Image Name="imgGetAutoSite" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible"  ToolTip="Get the Agent Cache path." MouseLeftButtonDown="imgGetAutoSite_MouseLeftButtonDown">
+                        </Image>
+                        <Image Name="imgSaveAutoSite" Source="/SCCMCliCtrWPF;component/Images/Save.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible"  Margin="2,0,0,0" ToolTip="Save the new Cache Path." MouseLeftButtonDown="imgSaveAutoSite_MouseLeftButtonDown">
                         </Image>
                     </ToolBar>
                 </ToolBarPanel>

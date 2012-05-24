@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:s="http://www.stemasoft.com/xaml" DataContext="{Binding}"  
       xmlns:rib="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon"
-      mc:Ignorable="d" 
-      d:DesignHeight="500" d:DesignWidth="800"
+      mc:Ignorable="d"
+      d:DesignHeight="500" d:DesignWidth="800" WindowTitle="Client Center for CM12"
       Title="Client Center for Configuration Manager" xmlns:my="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" xmlns:my1="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:my2="clr-namespace:System.Windows.Controls.Primitives;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:my3="http://schemas.microsoft.com/wpf/2008/toolkit" xmlns:my4="clr-namespace:ClientCenter">
     <Grid>
         <DockPanel Name="AppDock">
@@ -62,6 +62,9 @@
                         <rib:RibbonGroup Header="Updates">
                                 <rib:RibbonButton Name="ButtonEvaluateUpdates" Label="Update Check" ToolTip="Software Update Assignment and Evaluation cycle."  Click="ButtonEvaluateUpdates_Click" LargeImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png" SmallImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png"  />
                         </rib:RibbonGroup>
+                        <rib:RibbonGroup Header="Powershell">
+                            <rib:RibbonButton Name="btOpenPSConsole" Label="Open Console" ToolTip="Open a Powershell Console from the Target System (remoting)"  LargeImageSource="/SCCMCliCtrWPF;component/Images/Windows_PowerShell_icon.png" SmallImageSource="/SCCMCliCtrWPF;component/Images/Windows_PowerShell_icon.png" Click="btOpenPSConsole_Click" />
+                        </rib:RibbonGroup>
                     </rib:RibbonTab>
                 </rib:Ribbon>
             </DockPanel>
@@ -112,7 +115,7 @@
                                                 </StackPanel>
                                             </TreeViewItem.Header>
                                         </TreeViewItem>
-                                        <TreeViewItem Tag="Cache" IsEnabled="False">
+                                        <TreeViewItem Tag="Cache">
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
                                                     <Image Source="/SCCMCliCtrWPF;component/Images/Shopping.ico" Stretch="Uniform" Width="20" Height="20"/>
@@ -168,7 +171,10 @@
                                 <my4:AgentSettingItem HorizontalAlignment="Center" x:Name="agentSettingItem1" VerticalAlignment="Center" IsEnabled="False" />
                             </Grid>
                         </TabItem>
-                        <TabItem Header="Components" Tag="Components">
+                        <TabItem Header="Cache" Name="CachePanel" Tag="Cache">
+                            <my4:CacheGrid x:Name="cacheGrid1" />
+                        </TabItem>
+                        <TabItem Header="Components" Name="ComponentsPanel" Tag="Components">
                             <my4:AgentComponents x:Name="agentComponents1" HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </TabItem>
                         <TabItem Header="Software Distribution" Name="SWDistPanel">

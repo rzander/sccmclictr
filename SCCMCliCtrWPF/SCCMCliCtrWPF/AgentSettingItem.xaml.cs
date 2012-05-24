@@ -248,15 +248,15 @@ namespace ClientCenter
             {
                 Process Explorer = new Process();
                 Explorer.StartInfo.FileName = "Explorer.exe";
-                string sCachePath = "";
+                string sLogPath = "";
                 try
                 {
-                    sCachePath = oAgent.Client.AgentProperties.LocalSCCMAgentLogPath.Replace(':', '$');
+                    sLogPath = oAgent.Client.AgentProperties.LocalSCCMAgentLogPath.Replace(':', '$');
                 }
                 catch { }
-                if (!string.IsNullOrEmpty(sCachePath))
+                if (!string.IsNullOrEmpty(sLogPath))
                 {
-                    Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + @"\" + sCachePath;
+                    Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + @"\" + sLogPath;
                 }
                 else
                 {
@@ -287,7 +287,7 @@ namespace ClientCenter
                 }
                 else
                 {
-                    Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + @"\admin$\system32\ccmsetup";
+                    Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + @"\admin$\ccmsetup";
                 }
 
                 Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
@@ -298,6 +298,90 @@ namespace ClientCenter
                 Listener.WriteError(ex.Message);
             }
             Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void imgGetCachePath_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                tbCachePath.Text = oAgent.Client.SWCache.CachePath;
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void imgSaveCachepath_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                oAgent.Client.SWCache.CachePath = tbCachePath.Text;
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+        }
+
+        private void imgOpenCachePath_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                Process Explorer = new Process();
+                Explorer.StartInfo.FileName = "Explorer.exe";
+                string sCachePath = "";
+                try
+                {
+                    sCachePath = oAgent.Client.SWCache.CachePath.Replace(':', '$');
+                }
+                catch { }
+                if (!string.IsNullOrEmpty(sCachePath))
+                {
+                    Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + @"\" + sCachePath;
+                }
+                else
+                {
+                    Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + @"\admin$\CCM\Cache";
+                }
+
+                Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
+                Explorer.Start();
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void imgGetAutoSite_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                cbAutoSite.IsChecked = oAgent.Client.AgentProperties.EnableAutoAssignment;
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void imgSaveAutoSite_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                oAgent.Client.AgentProperties.EnableAutoAssignment = ((bool)cbAutoSite.IsChecked);
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
         }
 
     }
