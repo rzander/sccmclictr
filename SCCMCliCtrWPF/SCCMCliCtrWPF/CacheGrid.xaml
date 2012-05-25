@@ -50,7 +50,7 @@
                 </StatusBar>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top">
-                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" EnableColumnVirtualization="True">
+                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" EnableColumnVirtualization="True" MouseDoubleClick="dataGrid1_MouseDoubleClick">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Content ID" Binding="{Binding Path=ContentId}" SortDirection="Ascending" />
                         <DataGridTextColumn Header="Size" Binding="{Binding Path=ContentSize}" />

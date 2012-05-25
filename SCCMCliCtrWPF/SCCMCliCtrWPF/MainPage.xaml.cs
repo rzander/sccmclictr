@@ -74,6 +74,8 @@ namespace ClientCenter
                 agentSettingItem1.SCCMAgentConnection = oAgent;
                 agentSettingItem1.Listener = myTrace;
                 cacheGrid1.Listener = myTrace;
+                servicesGrid1.Listener = myTrace;
+
 
                 navigationPane1.IsEnabled = true;
 
@@ -117,6 +119,9 @@ namespace ClientCenter
                                     break;
                                 case "Cache":
                                     cacheGrid1.SCCMAgentConnection = oAgent;
+                                    break;
+                                case "Services":
+                                    servicesGrid1.SCCMAgentConnection = oAgent;
                                     break;
                             }
                             break;

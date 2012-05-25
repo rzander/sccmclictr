@@ -24,7 +24,7 @@ namespace ClientCenter
     {
         private SCCMAgent oAgent;
         public MyTraceListener Listener;
-
+        internal List<sccmclictr.automation.functions.swcache.CacheInfoEx> iCache;
         public CacheGrid()
         {
             InitializeComponent();
@@ -44,12 +44,13 @@ namespace ClientCenter
                     try
                     {
                         oAgent = value;
+                        iCache = oAgent.Client.SWCache.CachedContent.OrderBy(t => t.ReferenceCount).ToList();
                         dataGrid1.BeginInit();
-                        dataGrid1.ItemsSource = oAgent.Client.SWCache.CachedContent;
+                        dataGrid1.ItemsSource = iCache;
                         dataGrid1.EndInit();
 
                         uint? iTotalSize = 0;
-                        foreach (sccmclictr.automation.functions.swcache.CacheInfoEx CacheItem in dataGrid1.Items)
+                        foreach (sccmclictr.automation.functions.swcache.CacheInfoEx CacheItem in iCache)
                         {
                             if (CacheItem.ContentSize != null)
                             {
@@ -113,6 +114,7 @@ namespace ClientCenter
 
         private void imgSaveCachepath2_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             try
             {
                 oAgent.Client.SWCache.CachePath = tbCachePath2.Text;
@@ -121,26 +123,29 @@ namespace ClientCenter
             {
                 Listener.WriteError(ex.Message);
             }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void miDeleteItems_Click(object sender, RoutedEventArgs e)
         {
-            foreach (sccmclictr.automation.functions.swcache.CacheInfoEx CacheItem in dataGrid1.SelectedItems)
+            Mouse.OverrideCursor = Cursors.Wait;
+            foreach (sccmclictr.automation.functions.swcache.CacheInfoEx CacheItem in iCache)
             {
                 try
                 {
                     CacheItem.Delete();
+                    dataGrid1.Items.Refresh();
                 }
                 catch (Exception ex)
                 {
                     Listener.WriteError(ex.Message);
                 }
             }
-
+            dataGrid1.ItemsSource = iCache;
             try
             {
                 uint? iTotalSize = 0;
-                foreach (sccmclictr.automation.functions.swcache.CacheInfoEx CacheItem in dataGrid1.Items)
+                foreach (sccmclictr.automation.functions.swcache.CacheInfoEx CacheItem in iCache)
                 {
                     if (CacheItem.ContentSize != null)
                     {
@@ -150,6 +155,7 @@ namespace ClientCenter
                 sbiContentSize.Content = ((iTotalSize) / 1024).ToString() + " (MB)";
             }
             catch { }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void miOpenFolder_Click(object sender, RoutedEventArgs e)
@@ -203,6 +209,14 @@ namespace ClientCenter
             {
                 Listener.WriteError(ex.Message);
             }
+        }
+
+        private void dataGrid1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            iCache = oAgent.Client.SWCache.CachedContent.OrderBy(t => t.ReferenceCount).ToList();
+            dataGrid1.BeginInit();
+            dataGrid1.ItemsSource = iCache;
+            dataGrid1.EndInit();
         }
     }
 }

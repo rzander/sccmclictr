@@ -78,9 +78,20 @@
                 </DockPanel>
                 <DockPanel Name="MainFunctionsDock" DockPanel.Dock="Bottom" VerticalAlignment="Stretch">
                     <s:NavigationPane Name="navigationPane1" HorizontalAlignment="Stretch" DockPanel.Dock="Bottom" LargeItems="4" IsSmallItemsVisible="False" IsMinimizeButtonVisible="False" HasSplitter="True" HasResizeThumb="False" IsEnabled="False">
-                        <s:NavigationPaneItem Name="MonitoringPane" Header="Monitoring" Image="/SCCMCliCtrWPF;component/Images/Stocks.ico" IsEnabled="False">
+                        <s:NavigationPaneItem Name="MonitoringPane" Header="Monitoring" Image="/SCCMCliCtrWPF;component/Images/Stocks.ico">
                             <StackPanel VerticalAlignment="Stretch">
-                                <Button Content="Create New Item" Margin="8,0" />
+                                <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200" Name="tvMonitoring" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000">
+                                    <TreeViewItem Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="True" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
+                                        <TreeViewItem IsExpanded="True" Tag="Services">
+                                            <TreeViewItem.Header>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Image Source="/SCCMCliCtrWPF;component/Images/ServDeps_103.ico" Stretch="Uniform" Width="20" Height="20"/>
+                                                    <TextBlock Text="Services" Margin="3,0,0,0"></TextBlock>
+                                                </StackPanel>
+                                            </TreeViewItem.Header>
+                                        </TreeViewItem>
+                                    </TreeViewItem>
+                                </TreeView>
                             </StackPanel>
                         </s:NavigationPaneItem>
                         <s:NavigationPaneItem Name="InventoryPane" Header="Inventory" Image="/SCCMCliCtrWPF;component/Images/Searching%20Disc.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Searching%20Disc.ico" IsEnabled="False">
@@ -94,9 +105,8 @@
                                 <Button Content="Create New Item" Margin="8,0" />
                             </StackPanel>
                         </s:NavigationPaneItem>
-                        <s:NavigationPaneItem Name="AgentSettingsPane" Header="Agent Settings" IsSelected="True" ToolTip="ConfigMgr Agent Settings" Image="/SCCMCliCtrWPF;component/Images/Setting.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Setting.ico">
+                        <s:NavigationPaneItem Name="AgentSettingsPane" IsSelected="True" Header="Agent Settings" ToolTip="ConfigMgr Agent Settings" Image="/SCCMCliCtrWPF;component/Images/Setting.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Setting.ico">
                             <StackPanel VerticalAlignment="Stretch">
-                                <!--<Button Content="Create New Item" Margin="8,0" />-->
                                 <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200" Name="treeView1" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000">
                                     <TreeViewItem Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="True" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
                                         <TreeViewItem IsExpanded="True" IsSelected="True" Tag="AgentSettings">
@@ -179,6 +189,9 @@
                         </TabItem>
                         <TabItem Header="Software Distribution" Name="SWDistPanel">
                             <Grid></Grid>
+                        </TabItem>
+                        <TabItem Header="Services" Tag="Services" Name="ServicesPanel">
+                            <my4:ServicesGrid x:Name="servicesGrid1"  />
                         </TabItem>
                     </TabControl>
                 </DockPanel>
