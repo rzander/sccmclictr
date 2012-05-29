@@ -185,7 +185,7 @@
             <StackPanel Height="32" HorizontalAlignment="Left" Name="spAutoSite" VerticalAlignment="Top" Orientation="Horizontal">
                 <Label Content="Auto Site Assignment:" Height="28" Name="lAutoSite" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
                 <CheckBox Name="cbAutoSite" Margin="0,10,2,0" ToolTip="Automatically assign a Site code on next agent restart." />
-                <Label Content="(Auto Site Dicovery)" Height="28" Margin="2,0,128,0"/>
+                <Label Content="(Auto Site Discovery)" Height="28" Margin="2,0,128,0" ClipToBounds="True" />
                 <ToolBarPanel Height="24" Name="tbpAutoSite">
                     <ToolBar Name="toolBAutoSite" >
                         <Image Name="imgGetAutoSite" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible"  ToolTip="Get the Agent Cache path." MouseLeftButtonDown="imgGetAutoSite_MouseLeftButtonDown">

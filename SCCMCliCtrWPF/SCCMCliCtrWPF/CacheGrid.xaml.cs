@@ -129,19 +129,29 @@ namespace ClientCenter
         private void miDeleteItems_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            foreach (sccmclictr.automation.functions.swcache.CacheInfoEx CacheItem in iCache)
+            sccmclictr.automation.functions.swcache.CacheInfoEx[] deletedItems = new sccmclictr.automation.functions.swcache.CacheInfoEx[dataGrid1.SelectedItems.Count];
+            dataGrid1.SelectedItems.CopyTo(deletedItems, 0);
+            foreach (sccmclictr.automation.functions.swcache.CacheInfoEx CacheItem in deletedItems)
             {
                 try
                 {
                     CacheItem.Delete();
-                    dataGrid1.Items.Refresh();
+                    iCache.Remove(CacheItem);
                 }
                 catch (Exception ex)
                 {
                     Listener.WriteError(ex.Message);
                 }
             }
+
+            dataGrid1.BeginInit();
+            dataGrid1.ItemsSource = null;
+            dataGrid1.EndInit();
+
+            dataGrid1.BeginInit();
             dataGrid1.ItemsSource = iCache;
+            dataGrid1.EndInit();
+
             try
             {
                 uint? iTotalSize = 0;
@@ -213,10 +223,6 @@ namespace ClientCenter
 
         private void dataGrid1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            iCache = oAgent.Client.SWCache.CachedContent.OrderBy(t => t.ReferenceCount).ToList();
-            dataGrid1.BeginInit();
-            dataGrid1.ItemsSource = iCache;
-            dataGrid1.EndInit();
         }
     }
 }
