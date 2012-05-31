@@ -10,6 +10,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" SortDirection="Ascending"  />
                 <DataGridTextColumn Header="Process Id" Binding="{Binding Path=ProcessId}" />
+                <DataGridTextColumn Header="Owner" Binding="{Binding Path=Owner}" />
                 <DataGridTextColumn Header="Threads" Binding="{Binding Path=ThreadCount}" />
                 <DataGridTextColumn Header="CreationDate" Binding="{Binding Path=CreationDate}" />
                 <DataGridTextColumn Header="Parent Id" Binding="{Binding Path=ParentProcessId}" />

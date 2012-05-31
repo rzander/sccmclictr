@@ -31,7 +31,7 @@ namespace ClientCenter
             InitializeComponent();
         }
 
-        internal List<sccmclictr.automation.functions.Win32_Process> iProcesses;
+        internal List<sccmclictr.automation.functions.ExtProcess> iProcesses;
         public SCCMAgent SCCMAgentConnection
         {
             get
@@ -46,7 +46,9 @@ namespace ClientCenter
                     try
                     {
                         oAgent = value;
-                        iProcesses = oAgent.Client.Process.Win32_Processes.Where(t=>t.ProcessId > 0).OrderBy(t => t.Name).ToList();
+                        
+                        iProcesses = oAgent.Client.Process.ExtProcesses(false).Where(t=>t.ProcessId > 4).OrderBy(t => t.Name).ToList();
+                        //iProcesses = oAgent.Client.Process.Win32_Processes.Where(t=>t.ProcessId > 0).OrderBy(t => t.Name).ToList();
                         dataGrid1.BeginInit();
                         dataGrid1.ItemsSource = iProcesses;
                         dataGrid1.EndInit();
