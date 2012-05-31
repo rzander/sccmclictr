@@ -123,6 +123,9 @@ namespace ClientCenter
                                 case "Services":
                                     servicesGrid1.SCCMAgentConnection = oAgent;
                                     break;
+                                case "Process":
+                                    processGrid1.SCCMAgentConnection = oAgent;
+                                    break;
                             }
                             break;
                         }

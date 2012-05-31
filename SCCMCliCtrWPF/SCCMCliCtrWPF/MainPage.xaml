@@ -90,6 +90,14 @@
                                                 </StackPanel>
                                             </TreeViewItem.Header>
                                         </TreeViewItem>
+                                        <TreeViewItem IsExpanded="True" Tag="Process">
+                                            <TreeViewItem.Header>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Image Source="/SCCMCliCtrWPF;component/Images/Process.ico" Stretch="Uniform" Width="20" Height="20"/>
+                                                    <TextBlock Text="Processes" Margin="3,0,0,0"></TextBlock>
+                                                </StackPanel>
+                                            </TreeViewItem.Header>
+                                        </TreeViewItem>
                                     </TreeViewItem>
                                 </TreeView>
                             </StackPanel>
@@ -192,6 +200,9 @@
                         </TabItem>
                         <TabItem Header="Services" Tag="Services" Name="ServicesPanel">
                             <my4:ServicesGrid x:Name="servicesGrid1"  />
+                        </TabItem>
+                        <TabItem Header="Process" Name="Process" Tag="Process">
+                            <my4:ProcessGrid x:Name="processGrid1" />
                         </TabItem>
                     </TabControl>
                 </DockPanel>
