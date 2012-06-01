@@ -48,7 +48,6 @@ namespace ClientCenter
                         oAgent = value;
                         
                         iProcesses = oAgent.Client.Process.ExtProcesses(false).Where(t=>t.ProcessId > 4).OrderBy(t => t.Name).ToList();
-                        //iProcesses = oAgent.Client.Process.Win32_Processes.Where(t=>t.ProcessId > 0).OrderBy(t => t.Name).ToList();
                         dataGrid1.BeginInit();
                         dataGrid1.ItemsSource = iProcesses;
                         dataGrid1.EndInit();
@@ -57,6 +56,65 @@ namespace ClientCenter
                     Mouse.OverrideCursor = Cursors.Arrow;
                 }
             }
+        }
+
+        private void miStartService_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (ExtProcess oProc in dataGrid1.SelectedItems)
+            {
+                oProc.Terminate();
+                ((DataGridRow)dataGrid1.ItemContainerGenerator.ContainerFromItem(oProc)).Background = new SolidColorBrush(Colors.BlanchedAlmond);
+                ((DataGridRow)dataGrid1.ItemContainerGenerator.ContainerFromItem(oProc)).FontStyle = FontStyles.Italic;
+                ((DataGridRow)dataGrid1.ItemContainerGenerator.ContainerFromItem(oProc)).Foreground = new SolidColorBrush(Colors.LightGray);
+
+            }
+        }
+
+        private void bt_RunCommand_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                UInt32? oResult = oAgent.Client.Process.CreateProcess(tb_Command.Text);
+                if (oResult == null)
+                    Listener.WriteError("Unable to create process.");
+                else
+                {
+                    Listener.WriteLine("Process started with Id:" + oResult.ToString());
+                    sccmclictr.automation.functions.ExtProcess oNewProc = oAgent.Client.Process.GetExtProcess(oResult.ToString());
+                    iProcesses.Add(oNewProc);
+                    iProcesses.GroupBy(t => t.Name);
+
+                    dataGrid1.Items.Refresh(); 
+                }
+            }
+            catch(Exception ex)
+            {
+                ex.Message.ToString();
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void dataGrid1_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            sccmclictr.automation.functions.ExtProcess item = e.Row.Item as sccmclictr.automation.functions.ExtProcess;
+            if (item != null)
+            {
+                if (DateTime.Now - item.CreationDate < new TimeSpan(0,0,10))
+                {
+                    e.Row.Background = new SolidColorBrush(Colors.LightGreen);
+                }
+            }
+        }
+
+        private void bt_Reload_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            iProcesses = oAgent.Client.Process.ExtProcesses(true).Where(t => t.ProcessId > 4).OrderBy(t => t.Name).ToList();
+            dataGrid1.BeginInit();
+            dataGrid1.ItemsSource = iProcesses;
+            dataGrid1.EndInit();
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
     }
 }

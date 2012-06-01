@@ -4,40 +4,54 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="400">
     <Grid>
-        <DataGrid AutoGenerateColumns="False" Name="dataGrid1" IsReadOnly="True" IsTextSearchEnabled="True" EnableColumnVirtualization="True" EnableRowVirtualization="False" HorizontalContentAlignment="Stretch">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" SortDirection="Ascending"  />
-                <DataGridTextColumn Header="Process Id" Binding="{Binding Path=ProcessId}" />
-                <DataGridTextColumn Header="Owner" Binding="{Binding Path=Owner}" />
-                <DataGridTextColumn Header="Threads" Binding="{Binding Path=ThreadCount}" />
-                <DataGridTextColumn Header="CreationDate" Binding="{Binding Path=CreationDate}" />
-                <DataGridTextColumn Header="Parent Id" Binding="{Binding Path=ParentProcessId}" />
-                <DataGridTextColumn Header="ExecutablePath" Binding="{Binding Path=ExecutablePath}" Width="200"/>
-                <DataGridTextColumn Header="CommandLine" Binding="{Binding Path=CommandLine}" Width="350" />
-                <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="/SCCMCliCtrWPF;component/Images/Process.ico" Height="16"></Image>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-            <DataGrid.ContextMenu>
-                <ContextMenu>
-                    <!--<MenuItem Name="miStartService" Header="Start Service" Click="miStartService_Click">
-                        <MenuItem.Icon>
-                            <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Name="miStopService" Header="Stop Service" Click="miStopService_Click">
-                        <MenuItem.Icon>
-                            <Image Source="/SCCMCliCtrWPF;component/Images/Stop.ico" Height="24" />
-                        </MenuItem.Icon>
-                    </MenuItem>-->
-                </ContextMenu>
-            </DataGrid.ContextMenu>
-        </DataGrid>
+        <DockPanel>
+        <DockPanel DockPanel.Dock="Top"  Height="32">
+                <ToolBar Name="toolBar1">
+                    <Button Click="bt_Reload_Click" ToolTip="Reload all running processes" Name="bt_Reload">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico"/>
+                            <TextBlock Margin="2,0,0,0">Show Processes</TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                    <Separator />
+                    <Label Content="Run Command:" Height="28" Name="label1" />
+                    <TextBox Height="23" Name="tb_Command" Width="220" ToolTip="Command to execute." />
+                </ToolBar>
+                <Button Content="Start" Height="23" Name="bt_RunCommand" Width="75" Click="bt_RunCommand_Click" ToolTip="Start a remote process." HorizontalAlignment="Left" Margin="2,0,0,0"></Button>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Bottom">
+                <DataGrid AutoGenerateColumns="False" Name="dataGrid1" IsReadOnly="True" IsTextSearchEnabled="True" TextSearch.TextPath="Value.Name" EnableColumnVirtualization="false" EnableRowVirtualization="False" HorizontalContentAlignment="Stretch" LoadingRow="dataGrid1_LoadingRow">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" SortDirection="Ascending"  />
+                        <DataGridTextColumn Header="Process Id" Binding="{Binding Path=ProcessId}" />
+                        <DataGridTextColumn Header="Owner" Binding="{Binding Path=Owner}" />
+                        <DataGridTextColumn Header="Threads" Binding="{Binding Path=ThreadCount}" />
+                        <DataGridTextColumn Header="CreationDate" Binding="{Binding Path=CreationDate}" />
+                        <DataGridTextColumn Header="Parent Id" Binding="{Binding Path=ParentProcessId}" />
+                        <DataGridTextColumn Header="ExecutablePath" Binding="{Binding Path=ExecutablePath}" Width="200"/>
+                        <DataGridTextColumn Header="CommandLine" Binding="{Binding Path=CommandLine}" Width="350" />
+                        <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="/SCCMCliCtrWPF;component/Images/Process.ico" Height="16"></Image>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Name="miStartService" Header="Kill Process" Click="miStartService_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="/SCCMCliCtrWPF;component/Images/Delete.ico" Height="24" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+            </DockPanel>
+        </DockPanel>
     </Grid>
 </UserControl>

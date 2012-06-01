@@ -75,6 +75,7 @@ namespace ClientCenter
                 agentSettingItem1.Listener = myTrace;
                 cacheGrid1.Listener = myTrace;
                 servicesGrid1.Listener = myTrace;
+                processGrid1.Listener = myTrace;
 
 
                 navigationPane1.IsEnabled = true;
@@ -239,6 +240,24 @@ namespace ClientCenter
                 myTrace.WriteError(ex.Message);
             }
             Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void treeView1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            TreeViewItem_Selected(sender, e);
+        }
+
+        private void tvMonitoring_Loaded(object sender, RoutedEventArgs e)
+        {
+            tviMonitorOverview.IsSelected = true;
+        }
+
+        private void treeView1_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (oAgent.isConnected)
+            {
+                tviOverview.IsSelected = true;
+            }
         }
     }
 
