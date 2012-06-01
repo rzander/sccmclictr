@@ -102,10 +102,20 @@
                                 </TreeView>
                             </StackPanel>
                         </s:NavigationPaneItem>
-                        <s:NavigationPaneItem Name="InventoryPane" Header="Inventory" Image="/SCCMCliCtrWPF;component/Images/Searching%20Disc.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Searching%20Disc.ico" IsEnabled="False">
-                            <StackPanel>
-                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="10.667"><Run Language="it-it" Text="This ."/><LineBreak/><Run Language="it-it" Text="Hit the Button"/></TextBlock>
-                                <Button Content="Create New Item" Margin="8,0" />
+                        <s:NavigationPaneItem Name="InventoryPane" Header="Inventory" Image="/SCCMCliCtrWPF;component/Images/Searching%20Disc.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Searching%20Disc.ico">
+                            <StackPanel VerticalAlignment="Stretch">
+                                <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200" Name="tvInventory" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000" MouseLeftButtonDown="treeView1_MouseLeftButtonDown" Loaded="tvInventory_Loaded">
+                                    <TreeViewItem Name="tviInvOverview"  Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="True" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
+                                        <TreeViewItem IsExpanded="True" IsSelected="True" Tag="SWUpdates" Name="tviInvUpdates">
+                                            <TreeViewItem.Header>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Image Source="/SCCMCliCtrWPF;component/Images/Computer_protection.ico" Stretch="Uniform" Width="20" Height="20"/>
+                                                    <TextBlock Text="Missing Updates" Margin="3,0,0,0"></TextBlock>
+                                                </StackPanel>
+                                            </TreeViewItem.Header>
+                                        </TreeViewItem>
+                                    </TreeViewItem>
+                                </TreeView>
                             </StackPanel>
                         </s:NavigationPaneItem>
                         <s:NavigationPaneItem Name="SWDistPane" Header="Software Distribution" Image="/SCCMCliCtrWPF;component/Images/Import%20File.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Import%20File.ico" IsEnabled="False">
@@ -203,6 +213,9 @@
                         </TabItem>
                         <TabItem Header="Process" Name="Process" Tag="Process">
                             <my4:ProcessGrid x:Name="processGrid1" />
+                        </TabItem>
+                        <TabItem Header="SWUpdates" Name="SWUpdates" Tag="SWUpdates">
+                            <my4:SWUpdatesGrid x:Name="sWUpdatesGrid1" />
                         </TabItem>
                     </TabControl>
                 </DockPanel>

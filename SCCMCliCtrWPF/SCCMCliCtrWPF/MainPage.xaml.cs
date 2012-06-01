@@ -76,6 +76,7 @@ namespace ClientCenter
                 cacheGrid1.Listener = myTrace;
                 servicesGrid1.Listener = myTrace;
                 processGrid1.Listener = myTrace;
+                sWUpdatesGrid1.Listener = myTrace;
 
 
                 navigationPane1.IsEnabled = true;
@@ -126,6 +127,9 @@ namespace ClientCenter
                                     break;
                                 case "Process":
                                     processGrid1.SCCMAgentConnection = oAgent;
+                                    break;
+                                case "SWUpdates":
+                                    sWUpdatesGrid1.SCCMAgentConnection = oAgent;
                                     break;
                             }
                             break;
@@ -257,6 +261,14 @@ namespace ClientCenter
             if (oAgent.isConnected)
             {
                 tviOverview.IsSelected = true;
+            }
+        }
+
+        private void tvInventory_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (oAgent.isConnected)
+            {
+                tviInvOverview.IsSelected = true;
             }
         }
     }

@@ -117,6 +117,9 @@
     <Compile Include="ServicesGrid.xaml.cs">
       <DependentUpon>ServicesGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SWUpdatesGrid.xaml.cs">
+      <DependentUpon>SWUpdatesGrid.xaml</DependentUpon>
+    </Compile>
     <Page Include="AgentComponents.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -155,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ServicesGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SWUpdatesGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -269,6 +276,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Process.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Computer_protection.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Software update.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Invalid software update.gif" />
   </ItemGroup>
   <PropertyGroup>
     <StartArguments />
