@@ -258,18 +258,12 @@ namespace ClientCenter
 
         private void treeView1_Loaded(object sender, RoutedEventArgs e)
         {
-            if (oAgent.isConnected)
-            {
-                tviOverview.IsSelected = true;
-            }
+            tviOverview.IsSelected = true;
         }
 
         private void tvInventory_Loaded(object sender, RoutedEventArgs e)
         {
-            if (oAgent.isConnected)
-            {
-                tviInvOverview.IsSelected = true;
-            }
+            tviInvOverview.IsSelected = true;
         }
     }
 
