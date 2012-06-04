@@ -77,7 +77,7 @@ namespace ClientCenter
                 servicesGrid1.Listener = myTrace;
                 processGrid1.Listener = myTrace;
                 sWUpdatesGrid1.Listener = myTrace;
-
+                execHistoryGrid1.Listener = myTrace;
 
                 navigationPane1.IsEnabled = true;
 
@@ -131,6 +131,10 @@ namespace ClientCenter
                                 case "SWUpdates":
                                     sWUpdatesGrid1.SCCMAgentConnection = oAgent;
                                     break;
+                                case "ExecHistory":
+                                    execHistoryGrid1.SCCMAgentConnection= oAgent;
+                                    break;
+
                             }
                             break;
                         }
@@ -264,6 +268,11 @@ namespace ClientCenter
         private void tvInventory_Loaded(object sender, RoutedEventArgs e)
         {
             tviInvOverview.IsSelected = true;
+        }
+
+        private void tvSWDist_Loaded(object sender, RoutedEventArgs e)
+        {
+            tviSWDistOverview.IsSelected = true;
         }
     }
 

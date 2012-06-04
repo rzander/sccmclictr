@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="ClientCenter.ExecHistoryGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="State" Binding="{Binding Path=_State}" />
+                <DataGridTextColumn Header="User" Binding="{Binding Path=UserID}" SortDirection="Ascending"  />
+                <DataGridTextColumn Header="Package-ID" Binding="{Binding Path=PackageID}" SortDirection="Ascending" />
+                <DataGridTextColumn Header="Program Name" Binding="{Binding Path=_ProgramID}" />
+                <DataGridTextColumn Header="Last Start-Time" Binding="{Binding Path=_RunStartTime}" />
+                <DataGridTextColumn Header="Error Code" Binding="{Binding Path=SuccessOrFailureCode}" />
+                <DataGridTextColumn Header="Reason" Binding="{Binding Path=SuccessOrFailureReason}" />
+                <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Name="img" Source="/SCCMCliCtrWPF;component/Images/Flag%204.ico" Height="16"></Image>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding _State}" Value="Failure">
+                                    <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Flag.ico"/>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Name="miDeleteItems" Header="Delete" Click="miDeleteItems_Click" IsEnabled="False">
+                        <MenuItem.Icon>
+                            <Image Source="/SCCMCliCtrWPF;component/Images/Delete.ico" Height="24" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+    </Grid>
+</UserControl>

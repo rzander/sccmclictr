@@ -118,12 +118,23 @@
                                 </TreeView>
                             </StackPanel>
                         </s:NavigationPaneItem>
-                        <s:NavigationPaneItem Name="SWDistPane" Header="Software Distribution" Image="/SCCMCliCtrWPF;component/Images/Import%20File.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Import%20File.ico" IsEnabled="False">
+                        <s:NavigationPaneItem Name="SWDistPane" Header="Software Distribution" Image="/SCCMCliCtrWPF;component/Images/Import%20File.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Import%20File.ico">
                             <StackPanel VerticalAlignment="Stretch">
-                                <Button Content="Create New Item" Margin="8,0" />
+                                <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200" Name="tvSWDist" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000" MouseLeftButtonDown="treeView1_MouseLeftButtonDown" Loaded="tvSWDist_Loaded">
+                                    <TreeViewItem Name="tviSWDistOverview"  Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="True" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
+                                        <TreeViewItem IsExpanded="True" IsSelected="False" Tag="ExecHistory" Name="tviSWDistExecHist">
+                                            <TreeViewItem.Header>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Image Source="/SCCMCliCtrWPF;component/Images/Icon140.ico" Stretch="Uniform" Width="20" Height="20"/>
+                                                    <TextBlock Text="Execution History" Margin="3,0,0,0"></TextBlock>
+                                                </StackPanel>
+                                            </TreeViewItem.Header>
+                                        </TreeViewItem>
+                                    </TreeViewItem>
+                                </TreeView>
                             </StackPanel>
                         </s:NavigationPaneItem>
-                        <s:NavigationPaneItem Name="AgentSettingsPane" IsSelected="True" Header="Agent Settings" ToolTip="ConfigMgr Agent Settings" Image="/SCCMCliCtrWPF;component/Images/Setting.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Setting.ico">
+                        <s:NavigationPaneItem Name="AgentSettingsPane" Header="Agent Settings" ToolTip="ConfigMgr Agent Settings" Image="/SCCMCliCtrWPF;component/Images/Setting.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Setting.ico" IsSelected="True">
                             <StackPanel VerticalAlignment="Stretch">
                                 <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200" Name="treeView1" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000" MouseLeftButtonDown="treeView1_MouseLeftButtonDown" Loaded="treeView1_Loaded">
                                     <TreeViewItem Name="tviOverview"  Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="True" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
@@ -194,7 +205,7 @@
                 </DockPanel>
                 <DockPanel Name="MainDock" DockPanel.Dock="Top" VerticalAlignment="Stretch">
                     <TabControl Name="tabNavigationPanels">
-                        <TabItem Header="Agent Settings" Name="AgentSettingsPanel" Tag="AgentSettings">
+                        <TabItem Header="Agent Settings" Name="AgentSettingsPanel" Tag="AgentSettings" IsSelected="True">
                             <Grid>
                                 <my4:AgentSettingItem HorizontalAlignment="Center" x:Name="agentSettingItem1" VerticalAlignment="Center" IsEnabled="False" />
                             </Grid>
@@ -216,6 +227,9 @@
                         </TabItem>
                         <TabItem Header="SWUpdates" Name="SWUpdates" Tag="SWUpdates">
                             <my4:SWUpdatesGrid x:Name="sWUpdatesGrid1" />
+                        </TabItem>
+                        <TabItem Header="Execution History" Name="ExecHistory" Tag="ExecHistory">
+                            <my4:ExecHistoryGrid x:Name="execHistoryGrid1" />
                         </TabItem>
                     </TabControl>
                 </DockPanel>
