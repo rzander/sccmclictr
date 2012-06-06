@@ -30,7 +30,7 @@
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Name="miDeleteItems" Header="Delete" Click="miDeleteItems_Click" IsEnabled="False">
+                    <MenuItem Name="miDeleteItems" Header="Delete" Click="miDeleteItems_Click">
                         <MenuItem.Icon>
                             <Image Source="/SCCMCliCtrWPF;component/Images/Delete.ico" Height="24" />
                         </MenuItem.Icon>

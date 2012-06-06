@@ -104,44 +104,47 @@ namespace ClientCenter
 
         private void TreeViewItem_Selected(object sender, RoutedEventArgs e)
         {
-            if (((System.Windows.Controls.HeaderedItemsControl)(e.Source)).Tag != null)
+            try
             {
-                
-                foreach (TabItem iTab in tabNavigationPanels.Items)
+                if (((System.Windows.Controls.HeaderedItemsControl)(e.Source)).Tag != null)
                 {
-                    try
+                    foreach (TabItem iTab in tabNavigationPanels.Items)
                     {
-                        if (iTab.Tag.ToString() == ((System.Windows.Controls.HeaderedItemsControl)(e.Source)).Tag.ToString())
+                        try
                         {
-                            iTab.IsSelected = true;
-                            switch(iTab.Tag.ToString())
+                            if (iTab.Tag.ToString() == ((System.Windows.Controls.HeaderedItemsControl)(e.Source)).Tag.ToString())
                             {
-                                case "Components":
-                                    agentComponents1.SCCMAgentConnection = oAgent;
-                                    break;
-                                case "Cache":
-                                    cacheGrid1.SCCMAgentConnection = oAgent;
-                                    break;
-                                case "Services":
-                                    servicesGrid1.SCCMAgentConnection = oAgent;
-                                    break;
-                                case "Process":
-                                    processGrid1.SCCMAgentConnection = oAgent;
-                                    break;
-                                case "SWUpdates":
-                                    sWUpdatesGrid1.SCCMAgentConnection = oAgent;
-                                    break;
-                                case "ExecHistory":
-                                    execHistoryGrid1.SCCMAgentConnection= oAgent;
-                                    break;
+                                iTab.IsSelected = true;
+                                switch (iTab.Tag.ToString())
+                                {
+                                    case "Components":
+                                        agentComponents1.SCCMAgentConnection = oAgent;
+                                        break;
+                                    case "Cache":
+                                        cacheGrid1.SCCMAgentConnection = oAgent;
+                                        break;
+                                    case "Services":
+                                        servicesGrid1.SCCMAgentConnection = oAgent;
+                                        break;
+                                    case "Process":
+                                        processGrid1.SCCMAgentConnection = oAgent;
+                                        break;
+                                    case "SWUpdates":
+                                        sWUpdatesGrid1.SCCMAgentConnection = oAgent;
+                                        break;
+                                    case "ExecHistory":
+                                        execHistoryGrid1.SCCMAgentConnection = oAgent;
+                                        break;
 
+                                }
+                                break;
                             }
-                            break;
                         }
+                        catch { }
                     }
-                    catch { }
                 }
             }
+            catch { }
         }
 
         private void ButtonHWInvSplit_Click(object sender, RoutedEventArgs e)

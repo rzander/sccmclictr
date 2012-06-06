@@ -60,7 +60,23 @@ namespace ClientCenter
 
         private void miDeleteItems_Click(object sender, RoutedEventArgs e)
         {
-            //Delete Exec History.
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                foreach (softwaredistribution.REG_ExecutionHistory oReg in dataGrid1.SelectedItems)
+                {
+                    oReg.Delete();
+                    iHistory.Remove(oReg);
+                }
+
+                //iHistory = oAgent.Client.SoftwareDistribution.ExecutionHistory.OrderBy(t => t._RunStartTime).ToList();
+                dataGrid1.BeginInit();
+                dataGrid1.ItemsSource = null;
+                dataGrid1.ItemsSource = iHistory;
+                dataGrid1.EndInit();
+            }
+            catch { }
+            Mouse.OverrideCursor = Cursors.Arrow; 
         }
     }
 }
