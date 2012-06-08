@@ -21,17 +21,16 @@ namespace ClientCenter
     /// <summary>
     /// Interaction logic for SWUpdatesGrid.xaml
     /// </summary>
-    public partial class SWUpdatesGrid : UserControl
+    public partial class SWAllUpdatesGrid : UserControl
     {
         private SCCMAgent oAgent;
         public MyTraceListener Listener;
-        internal List<sccmclictr.automation.functions.softwareupdates.CCM_SoftwareUpdate> iUpdates;
+        internal List<sccmclictr.automation.functions.softwareupdates.CCM_UpdateStatus> iUpdates;
 
-        public SWUpdatesGrid()
+        public SWAllUpdatesGrid()
         {
             InitializeComponent();
         }
-
 
 
         public SCCMAgent SCCMAgentConnection
@@ -48,8 +47,10 @@ namespace ClientCenter
                     try
                     {
                         oAgent = value;
+                       
+                        //Remove duplicates
+                        iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.GroupBy(a => new { a.Article, a.Bulletin, a.ProductID }).Select(y => y.First()).OrderBy(t => t.Article).ToList(); 
 
-                        iUpdates = oAgent.Client.SoftwareUpdates.SoftwareUpdate.OrderBy(t => t.ArticleID).ToList();
                         dataGrid1.BeginInit();
                         dataGrid1.ItemsSource = iUpdates;
                         dataGrid1.EndInit();
@@ -90,7 +91,7 @@ namespace ClientCenter
         {
             try
             {
-                oAgent.Client.SoftwareUpdates.InstallAllRequiredUpdates();
+                //oAgent.Client.SoftwareUpdates.InstallAllRequiredUpdates();
             }
             catch (Exception ex)
             {
@@ -103,7 +104,9 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Wait;
             try
             {
-                this.iUpdates = oAgent.Client.SoftwareUpdates.SoftwareUpdateReload.OrderBy(t => t.ArticleID).ToList();
+                //iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.GroupBy(a => new { a.ProductID }).Where(grp => grp.Count() > 1).SelectMany(grp => grp.Select(r => r)).ToList();
+                iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.GroupBy(a => new { a.Article, a.Bulletin, a.ProductID }).Select(y => y.First()).OrderBy(t=>t.Article).ToList(); 
+                //iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.OrderBy(t => t.Article).ToList();
                 dataGrid1.BeginInit();
                 dataGrid1.ItemsSource = iUpdates;
                 dataGrid1.EndInit();

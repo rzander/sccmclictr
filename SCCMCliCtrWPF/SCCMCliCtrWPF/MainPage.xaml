@@ -114,6 +114,14 @@
                                                 </StackPanel>
                                             </TreeViewItem.Header>
                                         </TreeViewItem>
+                                        <TreeViewItem IsExpanded="True" IsSelected="True" Tag="SWAllUpdates" Name="tviInvAllUpdates">
+                                            <TreeViewItem.Header>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Image Source="/SCCMCliCtrWPF;component/Images/Computer_protection.ico" Stretch="Uniform" Width="20" Height="20"/>
+                                                    <TextBlock Text="All Updates" Margin="3,0,0,0"></TextBlock>
+                                                </StackPanel>
+                                            </TreeViewItem.Header>
+                                        </TreeViewItem>
                                     </TreeViewItem>
                                 </TreeView>
                             </StackPanel>
@@ -227,6 +235,9 @@
                         </TabItem>
                         <TabItem Header="SWUpdates" Name="SWUpdates" Tag="SWUpdates">
                             <my4:SWUpdatesGrid x:Name="sWUpdatesGrid1" />
+                        </TabItem>
+                        <TabItem Name="SWAllUpdates" Header="All Updates" Tag="SWAllUpdates">
+                            <my4:SWAllUpdatesGrid x:Name="sWAllUpdatesGrid1" />
                         </TabItem>
                         <TabItem Header="Execution History" Name="ExecHistory" Tag="ExecHistory">
                             <my4:ExecHistoryGrid x:Name="execHistoryGrid1" />

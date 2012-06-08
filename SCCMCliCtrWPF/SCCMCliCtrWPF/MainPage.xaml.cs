@@ -78,6 +78,7 @@ namespace ClientCenter
                 processGrid1.Listener = myTrace;
                 sWUpdatesGrid1.Listener = myTrace;
                 execHistoryGrid1.Listener = myTrace;
+                sWAllUpdatesGrid1.Listener = myTrace;
 
                 navigationPane1.IsEnabled = true;
 
@@ -131,6 +132,9 @@ namespace ClientCenter
                                         break;
                                     case "SWUpdates":
                                         sWUpdatesGrid1.SCCMAgentConnection = oAgent;
+                                        break;
+                                    case "SWAllUpdates":
+                                        sWAllUpdatesGrid1.SCCMAgentConnection = oAgent;
                                         break;
                                     case "ExecHistory":
                                         execHistoryGrid1.SCCMAgentConnection = oAgent;

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ClientCenter.SWUpdatesGrid"
+﻿<UserControl x:Class="ClientCenter.SWAllUpdatesGrid"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -25,30 +25,30 @@
                 </ToolBar>
              </DockPanel>
             <DockPanel DockPanel.Dock="Top">
-                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" LoadingRow="dataGrid1_LoadingRow">
+                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" LoadingRow="dataGrid1_LoadingRow" IsReadOnly="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Publisher" Binding="{Binding Path=Publisher}" SortDirection="Ascending"  />
-                        <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
-                        <DataGridTextColumn Header="ArticleID" Binding="{Binding Path=ArticleID}" SortDirection="Ascending"  />
-                        <DataGridTextColumn Header="BulletinID" Binding="{Binding Path=BulletinID}" />
-                        <DataGridTextColumn Header="Deadline" Binding="{Binding Path=Deadline}"/>
-                        <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}"/>
-                        <DataGridTextColumn Header="PercentComplete" Binding="{Binding Path=PercentComplete}"/>
-                        <!--<DataGridTextColumn Header="EvaluationState" Binding="{Binding Path=EvaluationState}"/>-->
+                        <DataGridTextColumn Header="Article" Binding="{Binding Path=Article}" SortDirection="Ascending"  />
+                        <DataGridTextColumn Header="Bulletin" Binding="{Binding Path=Bulletin}" />
+                        <DataGridTextColumn Header="Language" Binding="{Binding Path=Language}"  />
+                        <DataGridTextColumn Header="RevisionNumber" Binding="{Binding Path=RevisionNumber}" />
+                        <DataGridTextColumn Header="ScanTime" Binding="{Binding Path=ScanTime}"/>
+                        <DataGridTextColumn Header="SourceVersion" Binding="{Binding Path=SourceVersion}"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}"/>
+                        <DataGridTextColumn Header="Title" Binding="{Binding Path=Title}"/>
                         <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Name="img" Source="/SCCMCliCtrWPF;component/Images/Invalid%20software%20update.gif" Height="16"></Image>
+                                    <Image Name="img" Source="/SCCMCliCtrWPF;component/Images/Software%20update.gif" Height="16"></Image>
                                     <DataTemplate.Triggers>
-                                        <DataTrigger Binding="{Binding EvaluationState}" Value="1">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Software%20update.gif"/>
+                                        <DataTrigger Binding="{Binding Status}" Value="Missing">
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Invalid%20software%20update.gif"/>
                                         </DataTrigger>
                                     </DataTemplate.Triggers>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
-                    <DataGrid.ContextMenu>
+                    <!--<DataGrid.ContextMenu>
                         <ContextMenu>
                             <MenuItem Name="miInstallUpdate" Header="Install" Click="miInstallUpdate_Click">
                                 <MenuItem.Icon>
@@ -56,7 +56,7 @@
                                 </MenuItem.Icon>
                             </MenuItem>
                         </ContextMenu>
-                    </DataGrid.ContextMenu>
+                    </DataGrid.ContextMenu>-->
                 </DataGrid>
             </DockPanel>
         </DockPanel>
