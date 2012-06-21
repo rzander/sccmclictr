@@ -37,7 +37,6 @@ namespace ClientCenter
             s.Setters.Add(new Setter(UIElement.VisibilityProperty, Visibility.Collapsed));
             tabNavigationPanels.ItemContainerStyle = s;
 
-
             try
             {
                 if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
@@ -49,13 +48,19 @@ namespace ClientCenter
 
                     tb_TargetComputer2.Text = tb_TargetComputer.Text;
                 }
+
+                pb_Password.Password = Properties.Settings.Default.Password;
             }
             catch { }
+
         }
 
         private void bt_Connect_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
+            Properties.Settings.Default.Password = pb_Password.Password;
+            Properties.Settings.Default.Save();
+
             string sTarget = tb_TargetComputer.Text;
             try
             {
@@ -67,7 +72,14 @@ namespace ClientCenter
                 myTrace = new MyTraceListener(ref rStatus);
                 myTrace.TraceOutputOptions = TraceOptions.None;
 
-                oAgent = new SCCMAgent(sTarget, null, null);
+                if (string.IsNullOrEmpty(tb_Username.Text))
+                {
+                    oAgent = new SCCMAgent(sTarget, null, null);
+                }
+                else
+                {
+                    oAgent = new SCCMAgent(sTarget, tb_Username.Text, pb_Password.Password);
+                }
                 oAgent.connect();
                 oAgent.PSCode.Listeners.Add(myTrace);
 
@@ -79,8 +91,10 @@ namespace ClientCenter
                 sWUpdatesGrid1.Listener = myTrace;
                 execHistoryGrid1.Listener = myTrace;
                 sWAllUpdatesGrid1.Listener = myTrace;
+                installRepair1.Listener = myTrace;
 
                 navigationPane1.IsEnabled = true;
+                ribAgenTActions.IsEnabled = true;
 
                 ConnectionDock.Visibility = System.Windows.Visibility.Collapsed;
                 ribbon1.IsEnabled = true;
@@ -138,6 +152,9 @@ namespace ClientCenter
                                         break;
                                     case "ExecHistory":
                                         execHistoryGrid1.SCCMAgentConnection = oAgent;
+                                        break;
+                                    case "InstallRepair":
+                                        installRepair1.SCCMAgentConnection = oAgent;
                                         break;
 
                                 }

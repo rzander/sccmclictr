@@ -1,7 +1,8 @@
 ﻿<Application x:Class="ClientCenter.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainPage.xaml">
+             StartupUri="MainPage.xaml" 
+             Exit="Application_Exit">
     <Application.Resources>
         
     </Application.Resources>
