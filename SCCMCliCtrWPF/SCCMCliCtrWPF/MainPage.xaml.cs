@@ -28,6 +28,7 @@ namespace ClientCenter
     {
         public SCCMAgent oAgent;
         public MyTraceListener myTrace;
+        private bool bPasswordChanged = false;
 
         public MainPage()
         {
@@ -48,7 +49,7 @@ namespace ClientCenter
 
                     tb_TargetComputer2.Text = tb_TargetComputer.Text;
                 }
-
+                //sccmclictr.automation.common.Decrypt(Properties.Settings.Default.Password, Application.ResourceAssembly.ManifestModule.Name);
                 pb_Password.Password = Properties.Settings.Default.Password;
             }
             catch { }
@@ -58,8 +59,13 @@ namespace ClientCenter
         private void bt_Connect_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            Properties.Settings.Default.Password = pb_Password.Password;
-            Properties.Settings.Default.Save();
+            if (bPasswordChanged)
+            {
+                Properties.Settings.Default.Password = common.Encrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
+                Properties.Settings.Default.Save();
+                pb_Password.Password = Properties.Settings.Default.Password;
+                bPasswordChanged = false;
+            }
 
             string sTarget = tb_TargetComputer.Text;
             try
@@ -78,7 +84,7 @@ namespace ClientCenter
                 }
                 else
                 {
-                    oAgent = new SCCMAgent(sTarget, tb_Username.Text, pb_Password.Password);
+                    oAgent = new SCCMAgent(sTarget, tb_Username.Text, common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name));
                 }
                 oAgent.connect();
                 oAgent.PSCode.Listeners.Add(myTrace);
@@ -298,6 +304,12 @@ namespace ClientCenter
         {
             tviSWDistOverview.IsSelected = true;
         }
+
+        private void pb_Password_KeyDown(object sender, KeyEventArgs e)
+        {
+            bPasswordChanged = true;
+        }
+
     }
 
     public class MyTraceListener : TraceListener, INotifyPropertyChanged
