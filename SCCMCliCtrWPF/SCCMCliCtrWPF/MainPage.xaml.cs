@@ -89,6 +89,7 @@ namespace ClientCenter
                 oAgent.connect();
                 oAgent.PSCode.Listeners.Add(myTrace);
 
+
                 agentSettingItem1.SCCMAgentConnection = oAgent;
                 agentSettingItem1.Listener = myTrace;
                 cacheGrid1.Listener = myTrace;
@@ -98,6 +99,7 @@ namespace ClientCenter
                 execHistoryGrid1.Listener = myTrace;
                 sWAllUpdatesGrid1.Listener = myTrace;
                 installRepair1.Listener = myTrace;
+                applicationGrid1.Listener = myTrace;
 
                 navigationPane1.IsEnabled = true;
                 ribAgenTActions.IsEnabled = true;
@@ -162,7 +164,9 @@ namespace ClientCenter
                                     case "InstallRepair":
                                         installRepair1.SCCMAgentConnection = oAgent;
                                         break;
-
+                                    case "SWDistApps":
+                                        applicationGrid1.SCCMAgentConnection = oAgent;
+                                        break;
                                 }
                                 break;
                             }

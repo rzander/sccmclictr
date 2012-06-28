@@ -8,7 +8,7 @@
       mc:Ignorable="d"
       xmlns:p="clr-namespace:ClientCenter.Properties" 
       d:DesignHeight="500" d:DesignWidth="800" WindowTitle="Client Center for CM12"
-      Title="Client Center for Configuration Manager" xmlns:my="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" xmlns:my1="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:my2="clr-namespace:System.Windows.Controls.Primitives;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:my3="http://schemas.microsoft.com/wpf/2008/toolkit" xmlns:my4="clr-namespace:ClientCenter">
+      Title="Client Center for Configuration Manager" xmlns:my="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" xmlns:my1="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:my2="clr-namespace:System.Windows.Controls.Primitives;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:my3="http://schemas.microsoft.com/wpf/2008/toolkit" xmlns:my4="clr-namespace:ClientCenter" xmlns:my6="clr-namespace:ClientCenter.Controls">
     <Grid>
         <DockPanel Name="AppDock">
             <DockPanel Name="ConnectionDock" DockPanel.Dock="Top" Height="40" UseLayoutRounding="False">
@@ -144,6 +144,14 @@
                             <StackPanel VerticalAlignment="Stretch">
                                 <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200" Name="tvSWDist" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000" MouseLeftButtonDown="treeView1_MouseLeftButtonDown" Loaded="tvSWDist_Loaded">
                                     <TreeViewItem Name="tviSWDistOverview"  Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="True" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
+                                        <TreeViewItem IsExpanded="True" IsSelected="False" Tag="SWDistApps" Name="tviSWDistApps">
+                                            <TreeViewItem.Header>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Image Source="/SCCMCliCtrWPF;component/Images/Icon140.ico" Stretch="Uniform" Width="20" Height="20"/>
+                                                    <TextBlock Text="Applications" Margin="3,0,0,0"></TextBlock>
+                                                </StackPanel>
+                                            </TreeViewItem.Header>
+                                        </TreeViewItem>
                                         <TreeViewItem IsExpanded="True" IsSelected="False" Tag="ExecHistory" Name="tviSWDistExecHist">
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
@@ -231,6 +239,9 @@
                             <Grid>
                                 <my4:AgentSettingItem HorizontalAlignment="Center" x:Name="agentSettingItem1" VerticalAlignment="Center" IsEnabled="False" />
                             </Grid>
+                        </TabItem>
+                        <TabItem Header="SWDistApps" Name="SWDistApps" Tag="SWDistApps">
+                            <my6:ApplicationGrid x:Name="applicationGrid1" />
                         </TabItem>
                         <TabItem Header="Cache" Name="CachePanel" Tag="Cache">
                             <my4:CacheGrid x:Name="cacheGrid1" />

@@ -20,7 +20,7 @@
     <HostInBrowser>true</HostInBrowser>
     <TargetZone>Internet</TargetZone>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -43,8 +43,8 @@
     <SuiteName>SCCM Tools</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>24</ApplicationRevision>
-    <ApplicationVersion>0.0.0.24</ApplicationVersion>
+    <ApplicationRevision>25</ApplicationRevision>
+    <ApplicationVersion>0.0.0.25</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -87,6 +87,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -111,45 +112,52 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="InstallRepair.xaml.cs">
+    <Compile Include="Controls\ApplicationGrid.xaml.cs">
+      <DependentUpon>ApplicationGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InstallRepair.xaml.cs">
       <DependentUpon>InstallRepair.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SWAllUpdatesGrid.xaml.cs">
+    <Compile Include="Controls\SWAllUpdatesGrid.xaml.cs">
       <DependentUpon>SWAllUpdatesGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ExecHistoryGrid.xaml.cs">
+    <Compile Include="Controls\ExecHistoryGrid.xaml.cs">
       <DependentUpon>ExecHistoryGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProcessGrid.xaml.cs">
+    <Compile Include="Controls\ProcessGrid.xaml.cs">
       <DependentUpon>ProcessGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ServicesGrid.xaml.cs">
+    <Compile Include="Controls\ServicesGrid.xaml.cs">
       <DependentUpon>ServicesGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SWUpdatesGrid.xaml.cs">
+    <Compile Include="Controls\SWUpdatesGrid.xaml.cs">
       <DependentUpon>SWUpdatesGrid.xaml</DependentUpon>
     </Compile>
-    <Page Include="AgentComponents.xaml">
+    <Page Include="Controls\AgentComponents.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AgentSettingItem.xaml">
+    <Page Include="Controls\AgentSettingItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CacheGrid.xaml">
+    <Page Include="Controls\ApplicationGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="InstallRepair.xaml">
+    <Page Include="Controls\CacheGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SWAllUpdatesGrid.xaml">
+    <Page Include="Controls\InstallRepair.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SWAllUpdatesGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ExecHistoryGrid.xaml">
+    <Page Include="Controls\ExecHistoryGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -157,32 +165,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AgentComponents.xaml.cs">
+    <Compile Include="Controls\AgentComponents.xaml.cs">
       <DependentUpon>AgentComponents.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AgentSettingItem.xaml.cs">
+    <Compile Include="Controls\AgentSettingItem.xaml.cs">
       <DependentUpon>AgentSettingItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CacheGrid.xaml.cs">
+    <Compile Include="Controls\CacheGrid.xaml.cs">
       <DependentUpon>CacheGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ProcessGrid.xaml">
+    <Page Include="Controls\ProcessGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ServicesGrid.xaml">
+    <Page Include="Controls\ServicesGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SWUpdatesGrid.xaml">
+    <Page Include="Controls\SWUpdatesGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

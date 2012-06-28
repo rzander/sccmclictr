@@ -47,7 +47,7 @@ namespace ClientCenter
                     try
                     {
                         oAgent = value;
-                       
+
                         //Remove duplicates
                         iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.GroupBy(a => new { a.Article, a.Bulletin, a.ProductID }).Select(y => y.First()).OrderBy(t => t.Article).ToList(); 
 
@@ -91,7 +91,7 @@ namespace ClientCenter
         {
             try
             {
-                //oAgent.Client.SoftwareUpdates.InstallAllRequiredUpdates();
+                oAgent.Client.SoftwareUpdates.InstallAllRequiredUpdates();
             }
             catch (Exception ex)
             {
