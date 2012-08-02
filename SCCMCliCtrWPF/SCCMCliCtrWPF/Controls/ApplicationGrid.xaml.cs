@@ -74,6 +74,53 @@ namespace ClientCenter.Controls
         {
         }
 
+        private void bt_Reload_Click(object sender, RoutedEventArgs e)
+        {
+            iApplications = oAgent.Client.SoftwareDistribution.Applications.OrderBy(t => t.FullName).ToList();
+
+            dataGrid1.BeginInit();
+            dataGrid1.ItemsSource = iApplications;
+            dataGrid1.EndInit();
+        }
+
+        private void miInstallApp_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //Install all selected Updates;
+                List<softwaredistribution.CCM_Application> lApps = new List<softwaredistribution.CCM_Application>();
+                foreach (softwaredistribution.CCM_Application cApp in dataGrid1.SelectedItems)
+                {
+                    lApps.Add(cApp);
+                    cApp.Install(softwaredistribution.AppPriority.Normal, false);
+                }
+                //oAgent.Client.SoftwareUpdates.InstallUpdates(lUpdates);
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+        }
+
+        private void miUnInstallApp_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //Install all selected Updates;
+                List<softwaredistribution.CCM_Application> lApps = new List<softwaredistribution.CCM_Application>();
+                foreach (softwaredistribution.CCM_Application cApp in dataGrid1.SelectedItems)
+                {
+                    lApps.Add(cApp);
+                    cApp.Uninstall(softwaredistribution.AppPriority.Normal, false);
+                }
+                //oAgent.Client.SoftwareUpdates.InstallUpdates(lUpdates);
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+        }
+
 
 
 

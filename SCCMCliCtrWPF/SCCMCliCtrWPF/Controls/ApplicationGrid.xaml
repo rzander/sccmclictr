@@ -10,7 +10,18 @@
         <custom:ImageConverter x:Key="ImageConverter" />
     </UserControl.Resources>
     <Grid>
-        <StackPanel>
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Top"  Height="32">
+                <ToolBar Name="toolBar1">
+                    <Button ToolTip="Reload assigned Applications" Name="bt_Reload" Click="bt_Reload_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico"/>
+                            <TextBlock Margin="2,0,0,0">Reload Applications</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Separator />
+                </ToolBar>
+            </DockPanel>
             <StackPanel>
                 <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" LoadingRow="dataGrid1_LoadingRow" IsReadOnly="True">
                     <DataGrid.Columns>
@@ -26,8 +37,22 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Name="miInstallApp" Header="Install" Click="miInstallApp_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        <MenuItem Name="miUnInstallApp" Header="Uninstall" Click="miUnInstallApp_Click">
+                            <MenuItem.Icon>
+                                <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
                 </DataGrid>
             </StackPanel>
-        </StackPanel>
+        </DockPanel>
     </Grid>
 </UserControl>
