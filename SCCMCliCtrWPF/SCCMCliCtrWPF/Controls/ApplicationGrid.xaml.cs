@@ -144,13 +144,19 @@ namespace ClientCenter.Controls
     {
         public static BitmapImage ToBitmapImage(this System.Drawing.Image image)
         {
-            MemoryStream ms = new MemoryStream();
-            image.Save(ms, image.RawFormat);
-            BitmapImage bi = new BitmapImage();
-            bi.BeginInit();
-            bi.StreamSource = ms;
-            bi.EndInit();
-            return bi;
+            try
+            {
+                MemoryStream ms = new MemoryStream();
+                image.Save(ms, image.RawFormat);
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                bi.StreamSource = ms;
+                bi.EndInit();
+                return bi;
+            }
+            catch { }
+
+            return null;
         }
     }
 
