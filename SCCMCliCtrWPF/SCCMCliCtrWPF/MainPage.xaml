@@ -81,6 +81,14 @@
                         <rib:RibbonGroup Header="Powershell">
                             <rib:RibbonButton Name="btOpenPSConsole" Label="Open Console" ToolTip="Open a Powershell Console from the Target System (remoting)"  LargeImageSource="/SCCMCliCtrWPF;component/Images/Windows_PowerShell_icon.png" SmallImageSource="/SCCMCliCtrWPF;component/Images/Windows_PowerShell_icon.png" Click="btOpenPSConsole_Click" />
                         </rib:RibbonGroup>
+                        <rib:RibbonGroup Header="Maintenance">
+                            <rib:RibbonSplitButton Name="btMaintenance" ToolTip="Maintenance Tasks" LargeImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico">
+                                <rib:RibbonButton Name="btResetPolicy" Label="Reset Policy" ToolTip="Reset all local policies" SmallImageSource="/SCCMCliCtrWPF;component/Images/Delete.ico" Click="btResetPolicy_Click"></rib:RibbonButton>
+                                <rib:RibbonButton Name="btCertifacteCleanup" Label="Cert Cleanup" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btCertifacteCleanup_Click" />
+                                <rib:RibbonButton Name="btLocationCleanup" Label="Location Cleanup" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btLocationCleanup_Click" />
+                                <rib:RibbonButton Name="btSendUnsedt" Label="Send unsendt messages" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btSendUnsedt_Click" />
+                            </rib:RibbonSplitButton>
+                        </rib:RibbonGroup>
                     </rib:RibbonTab>
                 </rib:Ribbon>
             </DockPanel>
@@ -117,7 +125,7 @@
                                         <TreeViewItem IsExpanded="True" Tag="EventMonitoring">
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
-                                                    <Image Source="/SCCMCliCtrWPF;component/Images/Heartbeat.ico" Stretch="Uniform" Width="20" Height="20"/>
+                                                    <Image Source="/SCCMCliCtrWPF;component/Images/Important%20Email.ico" Stretch="Uniform" Width="20" Height="20"/>
                                                     <TextBlock Text="Event Monitoring" Margin="3,0,0,0"></TextBlock>
                                                 </StackPanel>
                                             </TreeViewItem.Header>

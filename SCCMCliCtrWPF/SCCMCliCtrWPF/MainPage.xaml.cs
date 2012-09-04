@@ -267,6 +267,36 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
+        private void btResetPolicy_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.ResetPolicy(true);
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btCertifacteCleanup_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.CertificateMaintenanceCycle();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btLocationCleanup_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.LocationServicesCleanupTask();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btSendUnsedt_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.SendUnsentStatusMessages_Prio1();
+            oAgent.Client.AgentActions.SendUnsentStatusMessages_Prio5();
+            oAgent.Client.AgentActions.SendUnsentStatusMessages_Prio10();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
         private void rStatus_TextChanged(object sender, TextChangedEventArgs e)
         {
             rStatus.ScrollToEnd();
@@ -339,6 +369,14 @@ namespace ClientCenter
         {
             bPasswordChanged = true;
         }
+
+
+
+
+
+
+
+
 
 
 
