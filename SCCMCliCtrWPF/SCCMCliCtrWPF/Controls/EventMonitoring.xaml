@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="ClientCenter.EventMonitoring"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Top"  Height="32">
+                <ToolBar Name="toolBar1">
+                    <Button ToolTip="Start monitoring events..." Name="bt_StartMonitoring" Click="bt_StartMonitoring_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico"/>
+                            <TextBlock Margin="2,0,0,0">Start Monitoring</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button ToolTip="Stop monitoring events" Name="bt_StopMonitoring" Click="bt_StopMonitoring_Click" IsEnabled="False">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/Stop.ico"/>
+                            <TextBlock Margin="2,0,0,0">Stop Monitoring</TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                    <Separator />
+                    <TextBox Height="23" Name="tb_Command" Width="220" ToolTip="Command to execute." />
+                </ToolBar>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Bottom" >
+                <RichTextBox Name="richTextBox1" FontFamily="Courier New" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
+            </DockPanel>
+        </DockPanel>
+        
+    </Grid>
+</UserControl>

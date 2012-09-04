@@ -33,6 +33,7 @@ namespace ClientCenter
         public MainPage()
         {
             InitializeComponent();
+            Application.Current.Exit += new ExitEventHandler(Current_Exit);
             ThemeManager.SetActiveTheme(NavigationPaneTheme.WindowsLive);
             Style s = new Style();
             s.Setters.Add(new Setter(UIElement.VisibilityProperty, Visibility.Collapsed));
@@ -54,6 +55,20 @@ namespace ClientCenter
             }
             catch { }
 
+        }
+
+        void Current_Exit(object sender, ExitEventArgs e)
+        {
+            try
+            {
+                oAgent.Client.Monitoring.AsynchronousScript.Close();
+            }
+            catch { }
+            try
+            {
+                oAgent.diconnect();
+            }
+            catch { }
         }
 
         private void bt_Connect_Click(object sender, RoutedEventArgs e)
@@ -100,6 +115,7 @@ namespace ClientCenter
                 sWAllUpdatesGrid1.Listener = myTrace;
                 installRepair1.Listener = myTrace;
                 applicationGrid1.Listener = myTrace;
+                eventMonitoring1.Listener = myTrace;
 
                 navigationPane1.IsEnabled = true;
                 ribAgenTActions.IsEnabled = true;
@@ -167,6 +183,9 @@ namespace ClientCenter
                                     case "SWDistApps":
                                         applicationGrid1.SCCMAgentConnection = oAgent;
                                         break;
+                                    case "EventMonitoring":
+                                        eventMonitoring1.SCCMAgentConnection = oAgent;
+                                        break;
                                 }
                                 break;
                             }
@@ -231,6 +250,13 @@ namespace ClientCenter
         {
             Mouse.OverrideCursor = Cursors.Wait;
             oAgent.Client.AgentActions.SoftwareUpdatesAgentAssignmentEvaluationCycle();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void ButtonScanUpdates_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.ForceUpdateScan();
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
@@ -313,6 +339,8 @@ namespace ClientCenter
         {
             bPasswordChanged = true;
         }
+
+
 
     }
 

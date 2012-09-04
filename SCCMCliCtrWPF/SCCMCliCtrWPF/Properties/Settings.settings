@@ -26,5 +26,18 @@
     <Setting Name="DefaultHostName" Type="System.String" Scope="User">
       <Value Profile="(Default)">127.0.0.1</Value>
     </Setting>
+    <Setting Name="PSEventQuery" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">$a = 0
+$timespan = New-Object System.TimeSpan(0, 0, 1)
+$scope = New-Object System.Management.ManagementScope("\\.\root\ccm\Events")
+$query = New-Object System.Management.WQLEventQuery("CCM_Event", $timespan)
+$watcher = New-Object System.Management.ManagementEventWatcher($scope,$query)
+do 
+    {
+        $b = $watcher.WaitForNextEvent()
+        $b
+    } 
+while ($a -ne 1)</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -74,7 +74,9 @@
                             <rib:RibbonButton Name="ButtonDCMEval" Label="DCM Check" ToolTip="Desired Configuration Monitoring (DCM) Evaluation cycle." LargeImageSource="/SCCMCliCtrWPF;component/Images/Search%20File.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Search%20File.ico" Click="ButtonDCMEval_Click" />
                         </rib:RibbonGroup>
                         <rib:RibbonGroup Header="Updates">
-                                <rib:RibbonButton Name="ButtonEvaluateUpdates" Label="Update Check" ToolTip="Software Update Assignment and Evaluation cycle."  Click="ButtonEvaluateUpdates_Click" LargeImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png" SmallImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png"  />
+                            <rib:RibbonSplitButton Name="ButtonEvaluateUpdates1" Label="Update Evaluation" ToolTip="Software Update Assignment and Evaluation cycle." LargeImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png" SmallImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png" Click="ButtonEvaluateUpdates_Click">
+                                <rib:RibbonButton Name="ButtonScanUpdates" Label="Update Scan" ToolTip="Force a Software Update Scan cycle."  SmallImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png" Click="ButtonScanUpdates_Click" />
+                            </rib:RibbonSplitButton>
                         </rib:RibbonGroup>
                         <rib:RibbonGroup Header="Powershell">
                             <rib:RibbonButton Name="btOpenPSConsole" Label="Open Console" ToolTip="Open a Powershell Console from the Target System (remoting)"  LargeImageSource="/SCCMCliCtrWPF;component/Images/Windows_PowerShell_icon.png" SmallImageSource="/SCCMCliCtrWPF;component/Images/Windows_PowerShell_icon.png" Click="btOpenPSConsole_Click" />
@@ -92,7 +94,7 @@
                 </DockPanel>
                 <DockPanel Name="MainFunctionsDock" DockPanel.Dock="Bottom" VerticalAlignment="Stretch">
                     <s:NavigationPane Name="navigationPane1" HorizontalAlignment="Stretch" DockPanel.Dock="Bottom" LargeItems="4" IsSmallItemsVisible="False" IsMinimizeButtonVisible="False" HasSplitter="True" HasResizeThumb="False" IsEnabled="False">
-                        <s:NavigationPaneItem Name="MonitoringPane" Header="Monitoring" Image="/SCCMCliCtrWPF;component/Images/Stocks.ico">
+                        <s:NavigationPaneItem Name="MonitoringPane" Header="Monitoring" Image="/SCCMCliCtrWPF;component/Images/Stocks.ico" IsEnabled="True">
                             <StackPanel VerticalAlignment="Stretch">
                                 <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200" Name="tvMonitoring" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000" Loaded="tvMonitoring_Loaded">
                                     <TreeViewItem Name="tviMonitorOverview" Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="True" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
@@ -109,6 +111,14 @@
                                                 <StackPanel Orientation="Horizontal" >
                                                     <Image Source="/SCCMCliCtrWPF;component/Images/Process.ico" Stretch="Uniform" Width="20" Height="20"/>
                                                     <TextBlock Text="Processes" Margin="3,0,0,0"></TextBlock>
+                                                </StackPanel>
+                                            </TreeViewItem.Header>
+                                        </TreeViewItem>
+                                        <TreeViewItem IsExpanded="True" Tag="EventMonitoring">
+                                            <TreeViewItem.Header>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Image Source="/SCCMCliCtrWPF;component/Images/Heartbeat.ico" Stretch="Uniform" Width="20" Height="20"/>
+                                                    <TextBlock Text="Event Monitoring" Margin="3,0,0,0"></TextBlock>
                                                 </StackPanel>
                                             </TreeViewItem.Header>
                                         </TreeViewItem>
@@ -238,6 +248,11 @@
                         <TabItem Header="Agent Settings" Name="AgentSettingsPanel" Tag="AgentSettings" IsSelected="True">
                             <Grid>
                                 <my4:AgentSettingItem HorizontalAlignment="Center" x:Name="agentSettingItem1" VerticalAlignment="Center" IsEnabled="False" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="EventMonitoring" Tag="EventMonitoring">
+                            <Grid>
+                                <my4:EventMonitoring HorizontalAlignment="Left" x:Name="eventMonitoring1" VerticalAlignment="Top" />
                             </Grid>
                         </TabItem>
                         <TabItem Header="SWDistApps" Name="SWDistApps" Tag="SWDistApps">

@@ -7,7 +7,7 @@
              d:DesignHeight="300" d:DesignWidth="400">
     <Grid>
         <DockPanel>
-        <DockPanel DockPanel.Dock="Top"  Height="32">
+            <DockPanel DockPanel.Dock="Top"  Height="32">
                 <ToolBar Name="toolBar1">
                     <Button Click="bt_Reload_Click" ToolTip="Reload all running processes" Name="bt_Reload">
                         <StackPanel Orientation="Horizontal">

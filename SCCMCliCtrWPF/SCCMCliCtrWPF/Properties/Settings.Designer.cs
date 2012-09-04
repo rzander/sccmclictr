@@ -79,5 +79,24 @@ namespace ClientCenter.Properties {
                 this["DefaultHostName"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"$a = 0
+$timespan = New-Object System.TimeSpan(0, 0, 1)
+$scope = New-Object System.Management.ManagementScope(""\\.\root\ccm\Events"")
+$query = New-Object System.Management.WQLEventQuery(""CCM_Event"", $timespan)
+$watcher = New-Object System.Management.ManagementEventWatcher($scope,$query)
+do 
+    {
+        $b = $watcher.WaitForNextEvent()
+        $b
+    } 
+while ($a -ne 1)")]
+        public string PSEventQuery {
+            get {
+                return ((string)(this["PSEventQuery"]));
+            }
+        }
     }
 }

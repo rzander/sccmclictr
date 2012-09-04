@@ -115,6 +115,9 @@
     <Compile Include="Controls\ApplicationGrid.xaml.cs">
       <DependentUpon>ApplicationGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\EventMonitoring.xaml.cs">
+      <DependentUpon>EventMonitoring.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\InstallRepair.xaml.cs">
       <DependentUpon>InstallRepair.xaml</DependentUpon>
     </Compile>
@@ -146,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CacheGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EventMonitoring.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
