@@ -12,18 +12,16 @@
                     <Button ToolTip="Start monitoring events..." Name="bt_StartMonitoring" Click="bt_StartMonitoring_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico"/>
-                            <TextBlock Margin="2,0,0,0">Start Monitoring</TextBlock>
+                            <TextBlock Margin="2,0,0,0" FontWeight="Bold">Start Monitoring</TextBlock>
                         </StackPanel>
                     </Button>
+                    <Separator />
                     <Button ToolTip="Stop monitoring events" Name="bt_StopMonitoring" Click="bt_StopMonitoring_Click" IsEnabled="False">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/SCCMCliCtrWPF;component/Images/Stop.ico"/>
-                            <TextBlock Margin="2,0,0,0">Stop Monitoring</TextBlock>
+                            <TextBlock Margin="2,0,0,0" FontWeight="Bold">Stop Monitoring</TextBlock>
                         </StackPanel>
                     </Button>
-
-                    <Separator />
-                    <TextBox Height="23" Name="tb_Command" Width="220" ToolTip="Command to execute." />
                 </ToolBar>
             </DockPanel>
             <DockPanel DockPanel.Dock="Bottom" >

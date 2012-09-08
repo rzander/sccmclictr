@@ -6,13 +6,28 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <GroupBox Header="SCCM Agent" Height="100" HorizontalAlignment="Stretch" Name="groupBox1" VerticalAlignment="Top" >
-            <Grid>
-                <StackPanel>
-                    <Button Content="Cleanup Message Queue" Height="23" HorizontalAlignment="Center" Name="bt_CleanupMessageQueue" VerticalAlignment="Top" Width="175" Margin="0,5,0,0" Click="bt_CleanupMessageQueue_Click" ToolTip="Cleanup Agent Message Queue and restart the Agent Service." />
-                    <Button Content="Delete Agent Certificate" Height="23" HorizontalAlignment="Center" Name="bt_DeleteAgentCertificates" VerticalAlignment="Top" Width="175" Margin="0,5,0,0" IsEnabled="False" />
-                </StackPanel>
-            </Grid>
-        </GroupBox>
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <GroupBox Header="SCCM Agent" Height="100" HorizontalAlignment="Stretch" Name="gbSCCMAgent" VerticalAlignment="Top" >
+                    <Grid>
+                        <StackPanel Margin="0,5,0,0">
+                            <Button Content="Cleanup Message Queue" Height="23" HorizontalAlignment="Center" Name="bt_CleanupMessageQueue" VerticalAlignment="Top" Width="175" Margin="0,5,0,0" Click="bt_CleanupMessageQueue_Click" ToolTip="Cleanup Agent Message Queue and restart the Agent Service." />
+                            <Button Content="Delete Agent Certificate" Height="23" HorizontalAlignment="Center" Name="bt_DeleteAgentCertificates" VerticalAlignment="Top" Width="175" Margin="0,5,0,0" IsEnabled="False" />
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <GroupBox Header="Windows Management Instrumentation (WMI)" HorizontalAlignment="Stretch" Name="gbWMI" VerticalAlignment="Top" >
+                    <Grid>
+                        <StackPanel Margin="0,5,0,0">
+                            <Button Content="Verify WMI Repository" Height="23" HorizontalAlignment="Center" Name="bt_WMICheck" VerticalAlignment="Top" Width="175" ToolTip="winmgmt /verifyrepository" Click="bt_WMICheck_Click" />
+                            <Button Content="Performs a consistency check " Height="23" HorizontalAlignment="Center" Name="bt_WMISalvage" VerticalAlignment="Top" Width="175" ToolTip="winmgmt /salvagerepository" Margin="0,5,0,0" Click="bt_WMISalvage_Click" />
+                            <Button Content="Reset WMI Repository " Height="23" HorizontalAlignment="Center" Name="bt_WMIReset" VerticalAlignment="Top" Width="175" ToolTip="winmgmt /resetrepository" Margin="0,5,0,0" Click="bt_WMIReset_Click" />
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+            </DockPanel>
+        </DockPanel>
     </Grid>
 </UserControl>

@@ -43,8 +43,8 @@
     <SuiteName>SCCM Tools</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>25</ApplicationRevision>
-    <ApplicationVersion>0.0.0.25</ApplicationVersion>
+    <ApplicationRevision>26</ApplicationRevision>
+    <ApplicationVersion>0.0.0.26</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -330,6 +330,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Flag.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Important Email.ico" />
   </ItemGroup>
   <PropertyGroup>
     <StartArguments />
