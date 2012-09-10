@@ -120,10 +120,6 @@ namespace ClientCenter.Controls
                 Listener.WriteError(ex.Message);
             }
         }
-
-
-
-
     }
 
     //[ValueConversion(typeof(Image), typeof(BitmapImage))]
@@ -131,7 +127,13 @@ namespace ClientCenter.Controls
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return BitMapConvert.ToBitmapImage(common.Base64ToImage(value as string) as System.Drawing.Image) as BitmapImage;
+            try
+            {
+                return BitMapConvert.ToBitmapImage(common.Base64ToImage(value as string) as System.Drawing.Image) as BitmapImage;
+            }
+            catch { }
+
+            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -26,9 +26,9 @@
                 <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" LoadingRow="dataGrid1_LoadingRow" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" SortDirection="Ascending"/>
-                        <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" CanUserResize="True" />
                         <DataGridTextColumn Header="InstallState" Binding="{Binding Path=InstallState}"/>
                         <DataGridTextColumn Header="InstallTime" Binding="{Binding Path=LastInstallTime}"/>
+                        <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" CanUserResize="True" />
                         <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

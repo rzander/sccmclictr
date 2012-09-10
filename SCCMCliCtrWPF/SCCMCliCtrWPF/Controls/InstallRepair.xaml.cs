@@ -107,5 +107,114 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
+        private void bt_RegDLL_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                foreach(string sFile in Properties.Settings.Default.RegisterDLLs)
+                {
+                    oAgent.Client.Health.RegsiertDLL(sFile);
+                }
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void bt_DCOMGetDefaultLaunchPermission_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                Listener.WriteLine("DefaultLaunchPermission: " + oAgent.Client.Health.GetDCOMPerm(@"SOFTWARE\Microsoft\Ole", "DefaultLaunchPermission"));
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void bt_DCOMSetDefaultLaunchPermission_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                string sDefaultACL = Properties.Settings.Default.DefaultLaunchPermission;
+                oAgent.Client.Health.SetDCOMPerm(@"SOFTWARE\Microsoft\Ole", "DefaultLaunchPermission", sDefaultACL);
+                Listener.WriteLine("DefaultLaunchPermission set to:" + sDefaultACL);
+                
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void bt_DCOMGetMachineAccessRestriction_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                Listener.WriteLine("MachineAccessRestriction: " + oAgent.Client.Health.GetDCOMPerm(@"SOFTWARE\Microsoft\Ole", "MachineAccessRestriction"));
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void bt_DCOMSetMachineAccessRestriction_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                string sDefaultACL = Properties.Settings.Default.MachineAccessRestriction;
+                oAgent.Client.Health.SetDCOMPerm(@"SOFTWARE\Microsoft\Ole", "MachineAccessRestriction", sDefaultACL);
+                Listener.WriteLine("MachineAccessRestriction set to:" + sDefaultACL);
+
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void bt_DCOMGetMachineLaunchRestriction_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                Listener.WriteLine("MachineLaunchRestriction: " + oAgent.Client.Health.GetDCOMPerm(@"SOFTWARE\Microsoft\Ole", "MachineLaunchRestriction"));
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void bt_DCOMSetMachineLaunchRestriction_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                string sDefaultACL = Properties.Settings.Default.MachineLaunchRestriction;
+                oAgent.Client.Health.SetDCOMPerm(@"SOFTWARE\Microsoft\Ole", "MachineLaunchRestriction", sDefaultACL);
+                Listener.WriteLine("MachineLaunchRestriction set to:" + sDefaultACL);
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
     }
 }

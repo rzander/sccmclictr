@@ -39,5 +39,69 @@ do
     } 
 while ($a -ne 1)</Value>
     </Setting>
+    <Setting Name="RegisterDLLs" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;%systemroot%\system32\actxprxy.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\atl.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\Bitsprx2.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\Bitsprx3.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\browseui.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\cryptdlg.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\dssenh.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\gpkcsp.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\initpki.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\jscript.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\mshtml.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\msi.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\mssip32.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\msxml.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\msxml3.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\msxml3a.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\msxml3r.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\msxml4.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\msxml4a.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\msxml4r.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\msxml6.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\msxml6r.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\muweb.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\ole32.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\oleaut32.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\Qmgr.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\Qmgrprxy.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\rsaenh.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\sccbase.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\scrrun.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\shdocvw.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\shell32.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\slbcsp.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\softpub.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\urlmon.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\userenv.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\vbscript.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\Winhttp.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\wintrust.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\wuapi.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\wuaueng.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\wuaueng1.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\wucltui.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\wucltux.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\wups.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\wups2.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\wuweb.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\wuwebv.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\wbem\wmisvc.dll&lt;/string&gt;
+  &lt;string&gt;%systemroot%\system32\Xpob2res.dll&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="MachineLaunchRestriction" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">O:BAG:BAD:(A;;CCDCSW;;;WD)(A;;CCDCLCSWRP;;;BA)(A;;CCDCLCSWRP;;;LU)(A;;CCDCLCSWRP;;;S-1-5-32-562)</Value>
+    </Setting>
+    <Setting Name="MachineAccessRestriction" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">O:BAG:BAD:(A;;CCDCLC;;;WD)(A;;CCDCLC;;;LU)(A;;CCDCLC;;;S-1-5-32-562)(A;;CCDCLC;;;AN)</Value>
+    </Setting>
+    <Setting Name="DefaultLaunchPermission" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">O:BAG:BAD:(A;;CCDCLCSWRP;;;SY)(A;;CCDCLCSWRP;;;BA)(A;;CCDCLCSWRP;;;IU)</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
