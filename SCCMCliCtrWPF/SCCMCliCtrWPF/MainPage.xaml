@@ -84,9 +84,20 @@
                         <rib:RibbonGroup Header="Maintenance">
                             <rib:RibbonSplitButton Name="btMaintenance" ToolTip="Maintenance Tasks" LargeImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico">
                                 <rib:RibbonButton Name="btResetPolicy" Label="Reset Policy" ToolTip="Reset all local policies" SmallImageSource="/SCCMCliCtrWPF;component/Images/Delete.ico" Click="btResetPolicy_Click"></rib:RibbonButton>
-                                <rib:RibbonButton Name="btCertifacteCleanup" Label="Cert Cleanup" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btCertifacteCleanup_Click" />
-                                <rib:RibbonButton Name="btLocationCleanup" Label="Location Cleanup" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btLocationCleanup_Click" />
-                                <rib:RibbonButton Name="btSendUnsedt" Label="Send unsendt messages" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btSendUnsedt_Click" />
+                                <rib:RibbonButton Name="btClientMachineAuthentication" Label="Client Machine Authentication" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btClientMachineAuthentication_Click" />
+                                <rib:RibbonButton Name="btClearingproxysettingscache" Label="Clearing proxy settings cache" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btClearingproxysettingscache_Click" />
+                                <rib:RibbonButton Name="btLSRefreshLocationsTask" Label="Location Service Refresh Locations Task" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btLSRefreshLocationsTask_Click" />
+                                <rib:RibbonButton Name="btLSTimeoutRefreshTask" Label="Location Service Timeout Refresh Task" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btLSTimeoutRefreshTask_Click" />
+                                <rib:RibbonButton Name="btNAPaction" Label="NAP evaluation" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btNAPaction_Click" />
+                                <rib:RibbonButton Name="btPeerDPStatusreporting" Label="Peer DP Status reporting" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btPeerDPStatusreporting_Click" />
+                                <rib:RibbonButton Name="btPeerDPPendingpackagecheckschedule" Label="Peer DP Pending package check schedule" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btPeerDPPendingpackagecheckschedule_Click" />
+                                <rib:RibbonButton Name="btRefreshDefaultMPTask" Label="Refresh Default MP Task" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btRefreshDefaultMPTask_Click" />
+                                <rib:RibbonButton Name="btRefreshingcertificatesinADonMP" Label="Retrying/Refreshing certificates in AD on MP" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btRefreshingcertificatesinADonMP_Click" />
+                                <rib:RibbonButton Name="btStateSystempolicycachecleanout" Label="State System policy cache cleanout" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btStateSystempolicycachecleanout_Click" />
+                                <rib:RibbonButton Name="btStatesystempolicybulksendhigh" Label="State system policy bulk send high" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btStatesystempolicybulksendhigh_Click" />
+                                <rib:RibbonButton Name="btStatesystempolicybulksendlow" Label="State system policy bulk send low" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btStatesystempolicybulksendlow_Click" />
+                                <rib:RibbonButton Name="btSendUnsentStateMessage" Label="Send Unsent State Message" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btSendUnsentStateMessage_Click" />
+                                <rib:RibbonButton Name="btExternaleventdetection" Label="External event detection" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btExternaleventdetection_Click" />
                             </rib:RibbonSplitButton>
                         </rib:RibbonGroup>
                     </rib:RibbonTab>

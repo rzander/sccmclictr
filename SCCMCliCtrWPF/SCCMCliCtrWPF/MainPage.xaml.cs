@@ -263,7 +263,7 @@ namespace ClientCenter
         private void ButtonDCMEval_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            oAgent.Client.AgentActions.DCMPolicyEnforcement();
+            oAgent.Client.AgentActions.DCMPolicy();
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
@@ -274,28 +274,9 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
-        private void btCertifacteCleanup_Click(object sender, RoutedEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            oAgent.Client.AgentActions.CertificateMaintenanceCycle();
-            Mouse.OverrideCursor = Cursors.Arrow;
-        }
 
-        private void btLocationCleanup_Click(object sender, RoutedEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            oAgent.Client.AgentActions.LocationServicesCleanupTask();
-            Mouse.OverrideCursor = Cursors.Arrow;
-        }
 
-        private void btSendUnsedt_Click(object sender, RoutedEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            oAgent.Client.AgentActions.SendUnsentStatusMessages_Prio1();
-            oAgent.Client.AgentActions.SendUnsentStatusMessages_Prio5();
-            oAgent.Client.AgentActions.SendUnsentStatusMessages_Prio10();
-            Mouse.OverrideCursor = Cursors.Arrow;
-        }
+
 
         private void rStatus_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -370,16 +351,103 @@ namespace ClientCenter
             bPasswordChanged = true;
         }
 
+        private void btClientMachineAuthentication_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.ClientMachineAuthentication(false);
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
 
+        private void btClearingproxysettingscache_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.ClearingProxySettingsCache();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
 
+        private void btLSRefreshLocationsTask_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.RefreshLocationServicesTask();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
 
+        private void btLSTimeoutRefreshTask_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.TimeoutLocationServicesTask();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
 
+        private void btNAPaction_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.NAPIntervalEnforcement();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
 
+        private void btPeerDPStatusreporting_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.PeerDistributionPointStatusTask();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
 
+        private void btPeerDPPendingpackagecheckschedule_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.PeerDPPackageCheck();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
 
+        private void btRefreshDefaultMPTask_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.RefreshDefaultMPTask();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
 
+        private void btRefreshingcertificatesinADonMP_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.CertificateMaintenanceCycle();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
 
+        private void btStateSystempolicycachecleanout_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.StateMessageManagerTask();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
 
+        private void btStatesystempolicybulksendhigh_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.StateSystemPolicyBulksendHigh();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btStatesystempolicybulksendlow_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.StateSystemPolicyBulksendLow();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btSendUnsentStateMessage_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.SendUnsentStatusMessages();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btExternaleventdetection_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.ExternalEventDetectionMessage();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
     }
 
     public class MyTraceListener : TraceListener, INotifyPropertyChanged
