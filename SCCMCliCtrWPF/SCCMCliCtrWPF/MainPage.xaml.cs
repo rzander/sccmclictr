@@ -448,6 +448,62 @@ namespace ClientCenter
             oAgent.Client.AgentActions.ExternalEventDetectionMessage();
             Mouse.OverrideCursor = Cursors.Arrow;
         }
+
+        private void btRequestMachineAssignments_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.RequestMachinePolicyAssignments();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btEvaluateMachinePolicies_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.EvaluateMachinePolicyAssignments();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btMachinePolicyAgentCleanup_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.MachinePolicyAgentCleanupCycle();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btPolicyAgentValidateMachinePolicy_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.ValidateMachineAssignments();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btRequestUserAssignment_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.RequestUserAssignments();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btEvaluateUserAssignment_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.EvaluateUserPolicies();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btUserPolicyAgentCleanup_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.UserPolicyAgentCleanupCycle();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btPolicyAgentValidateUserPolicy_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.UserPolicyAgentCleanupCycle();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
     }
 
     public class MyTraceListener : TraceListener, INotifyPropertyChanged
