@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="ClientCenter.Controls.InstalledSoftwareGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             xmlns:local="clr-namespace:ClientCenter.Controls">
+    <UserControl.Resources>
+        <local:SWListConverter x:Key="SWListConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Top"  Height="32">
+                <ToolBar Name="toolBar1">
+                    <Button ToolTip="Reload assigned Applications" Name="bt_Reload" Click="bt_Reload_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico"/>
+                            <TextBlock Margin="2,0,0,0">Reload Installed SW</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Separator />
+                </ToolBar>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top" >
+                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Product Name" Binding="{Binding Path=ProductName}" SortDirection="Ascending"/>
+                        <DataGridTextColumn Header="Publisher" Binding="{Binding Path=Publisher}"/>
+                        <DataGridTextColumn Header="Product Version" Binding="{Binding Path=ProductVersion}"/>
+                        <DataGridTextColumn Header="Install Date" Binding="{Binding Path=InstallDate}" />
+                        <DataGridTextColumn Header="Installed Location" Binding="{Binding Path=InstalledLocation}" />
+                        <DataGridTextColumn Header="InstallSource" Binding="{Binding Path=InstallSource}" />
+                        <DataGridTextColumn Header="Product Code" Binding="{Binding Path=SoftwareCode}" CanUserResize="True" />
+                        <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Path=SoftwareCode, Converter={StaticResource SWListConverter}}" Height="16" Width="16"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu Name="cmSWInstall" Opened="ContextMenu_Opened">
+                            <MenuItem Name="miInstallApp" Header="Install" Click="miInstallApp_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        <MenuItem Name="miUnInstallApp" Header="Uninstall" Click="miUnInstallApp_Click">
+                            <MenuItem.Icon>
+                                <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

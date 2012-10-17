@@ -116,6 +116,7 @@ namespace ClientCenter
                 installRepair1.Listener = myTrace;
                 applicationGrid1.Listener = myTrace;
                 eventMonitoring1.Listener = myTrace;
+                invInstalledSWGrid.Listener = myTrace;
 
                 navigationPane1.IsEnabled = true;
                 ribAgenTActions.IsEnabled = true;
@@ -186,6 +187,9 @@ namespace ClientCenter
                                     case "EventMonitoring":
                                         eventMonitoring1.SCCMAgentConnection = oAgent;
                                         break;
+                                    case "InvInstalledSW":
+                                        invInstalledSWGrid.SCCMAgentConnection = oAgent;
+                                        break;
                                 }
                                 break;
                             }
@@ -242,7 +246,7 @@ namespace ClientCenter
         private void ButtonUserPolicy_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            oAgent.Client.AgentActions.RequestMachinePolicyAssignments(); 
+            oAgent.Client.AgentActions.RequestUserAssignments();
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 

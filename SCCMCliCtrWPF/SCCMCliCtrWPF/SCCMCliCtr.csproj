@@ -43,8 +43,8 @@
     <SuiteName>SCCM Tools</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>29</ApplicationRevision>
-    <ApplicationVersion>0.0.0.29</ApplicationVersion>
+    <ApplicationRevision>30</ApplicationRevision>
+    <ApplicationVersion>0.0.0.30</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -88,6 +88,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -114,6 +115,9 @@
     </ApplicationDefinition>
     <Compile Include="Controls\ApplicationGrid.xaml.cs">
       <DependentUpon>ApplicationGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InstalledSoftwareGrid.xaml.cs">
+      <DependentUpon>InstalledSoftwareGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\EventMonitoring.xaml.cs">
       <DependentUpon>EventMonitoring.xaml</DependentUpon>
@@ -151,6 +155,10 @@
     <Page Include="Controls\CacheGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\InstalledSoftwareGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\EventMonitoring.xaml">
       <SubType>Designer</SubType>
@@ -333,6 +341,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Important Email.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\msi.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\setupold.ico" />
   </ItemGroup>
   <PropertyGroup>
     <StartArguments />

@@ -94,8 +94,35 @@ namespace ClientCenter
                         {
                             if (!string.IsNullOrEmpty(sClass))
                             {
-                                richTextBox1.AppendText(DateTime.Now.ToString() + " " + sClass + "\r");
-                                richTextBox1.ScrollToEnd();
+                                //richTextBox1.AppendText(DateTime.Now.ToString() + " " + sClass + "\r");
+                                //richTextBox1.ScrollToEnd();
+                                TreeViewItem tvRoot = new TreeViewItem();
+                                tvRoot.Name = sClass;
+                                tvRoot.Tag = HT;
+                                tvRoot.Header = DateTime.Now.ToString() + " " + sClass;
+
+                                foreach (System.Collections.DictionaryEntry oPair in HT)
+                                {
+                                    if (!oPair.Key.ToString().StartsWith("__"))
+                                    {
+                                        switch(oPair.Key.ToString())
+                                        {
+                                            case "DateTime":
+                                                tvRoot.Items.Add(oPair.Key + " : " + System.Management.ManagementDateTimeConverter.ToDateTime(oPair.Value.ToString()).ToString());
+                                                break;
+                                            case "TIME_CREATED":
+                                                tvRoot.Items.Add(oPair.Key + " : " + new DateTime(long.Parse(oPair.Value.ToString())).ToString());
+                                                break;
+                                            default:
+                                                tvRoot.Items.Add(oPair.Key + " : " + oPair.Value.ToString());
+                                                break;
+                                        }
+                                    }
+                                }
+                                tvRoot.IsExpanded = false;
+                                tvRoot.IsSelected = true;
+                                treeView1.Items.Add(tvRoot);
+                                tvRoot.BringIntoView();
                             }
                         }));
                     }
