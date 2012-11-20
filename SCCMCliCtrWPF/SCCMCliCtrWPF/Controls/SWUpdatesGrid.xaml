@@ -4,22 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="400">
     <Grid>
         <DockPanel>
             <DockPanel DockPanel.Dock="Top"  Height="32">
                 <ToolBar Name="toolBar1">
-                    <Button ToolTip="Reload all running processes" Name="bt_Reload" Click="bt_Reload_Click">
+                    <Button ToolTip="Reload updates" Name="bt_Reload" Click="bt_Reload_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico"/>
                             <TextBlock Margin="2,0,0,0">Reload Updates</TextBlock>
                         </StackPanel>
                     </Button>
                     <Separator />
-                    <Button ToolTip="Install all required Updates" Name="bt_InstallAll" Click="bt_InstallAll_Click">
+                    <Button ToolTip="Install all mandatory (deadline) updates." Name="bt_InstallAll" Click="bt_InstallAll_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/SCCMCliCtrWPF;component/Images/Import%20File.ico"/>
-                            <TextBlock Margin="2,0,0,0">Install all required</TextBlock>
+                            <TextBlock Margin="2,0,0,0">Install all mandatory</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Separator />
+                    <Button ToolTip="Install all approved updates." Name="bt_InstallAllApproved" Click="bt_InstallAllApproved_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/Import%20File.ico"/>
+                            <TextBlock Margin="2,0,0,0">Install all</TextBlock>
                         </StackPanel>
                     </Button>
                 </ToolBar>
@@ -38,10 +45,34 @@
                         <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Name="img" Source="/SCCMCliCtrWPF;component/Images/Invalid%20software%20update.gif" Height="16"></Image>
+                                    <Image Name="img" Source="/SCCMCliCtrWPF;component/Images/Software%20update.gif" Height="16"></Image>
                                     <DataTemplate.Triggers>
                                         <DataTrigger Binding="{Binding EvaluationState}" Value="1">
                                             <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Software%20update.gif"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding EvaluationState}" Value="6">
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/ServDeps_103.ico"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding EvaluationState}" Value="7">
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/ServDeps_103.ico"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding EvaluationState}" Value="5">
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Send Receive.ico"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding EvaluationState}" Value="11">
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding EvaluationState}" Value="8">
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Invalid%20software%20update.gif"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding EvaluationState}" Value="9">
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Invalid%20software%20update.gif"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding EvaluationState}" Value="10">
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Invalid%20software%20update.gif"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding EvaluationState}" Value="13">
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Flag.ico"/>
                                         </DataTrigger>
                                     </DataTemplate.Triggers>
                                 </DataTemplate>

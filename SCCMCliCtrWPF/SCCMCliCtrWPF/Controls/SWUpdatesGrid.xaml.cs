@@ -114,5 +114,17 @@ namespace ClientCenter
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
+
+        private void bt_InstallAllApproved_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                oAgent.Client.SoftwareUpdates.InstallAllApprovedUpdates();
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+        }
     }
 }

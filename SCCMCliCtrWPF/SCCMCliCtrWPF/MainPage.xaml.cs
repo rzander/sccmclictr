@@ -19,6 +19,9 @@ using System.ComponentModel;
 using System.Deployment.Application;
 using System.Management;
 
+//using System.IO;
+//using System.Windows.Markup;
+
 namespace ClientCenter
 {
     /// <summary>
@@ -33,6 +36,7 @@ namespace ClientCenter
         public MainPage()
         {
             InitializeComponent();
+
             Application.Current.Exit += new ExitEventHandler(Current_Exit);
             ThemeManager.SetActiveTheme(NavigationPaneTheme.WindowsLive);
             Style s = new Style();

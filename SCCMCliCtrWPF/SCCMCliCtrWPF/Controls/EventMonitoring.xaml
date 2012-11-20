@@ -22,6 +22,13 @@
                             <TextBlock Margin="2,0,0,0" FontWeight="Bold">Stop Monitoring</TextBlock>
                         </StackPanel>
                     </Button>
+                    <Separator />
+                    <Button ToolTip="Stop monitoring events" Name="bt_ClearMonitoring" IsEnabled="True" Click="bt_ClearMonitoring_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/Delete.ico"/>
+                            <TextBlock Margin="2,0,0,0">Clear</TextBlock>
+                        </StackPanel>
+                    </Button>
                 </ToolBar>
             </DockPanel>
             <DockPanel DockPanel.Dock="Bottom" >

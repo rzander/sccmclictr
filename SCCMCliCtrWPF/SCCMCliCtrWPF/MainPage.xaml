@@ -8,7 +8,12 @@
       mc:Ignorable="d"
       xmlns:p="clr-namespace:ClientCenter.Properties" 
       d:DesignHeight="500" d:DesignWidth="800" WindowTitle="Client Center for CM12"
-      Title="Client Center for Configuration Manager" xmlns:my="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" xmlns:my1="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:my2="clr-namespace:System.Windows.Controls.Primitives;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:my3="http://schemas.microsoft.com/wpf/2008/toolkit" xmlns:my4="clr-namespace:ClientCenter" xmlns:my6="clr-namespace:ClientCenter.Controls">
+      Title="Client Center for Configuration Manager" 
+      xmlns:my="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" 
+      xmlns:my1="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" 
+      xmlns:my2="clr-namespace:System.Windows.Controls.Primitives;assembly=System.Windows.Controls.Layout.Toolkit" 
+      xmlns:my3="http://schemas.microsoft.com/wpf/2008/toolkit" xmlns:my4="clr-namespace:ClientCenter" 
+      xmlns:my6="clr-namespace:ClientCenter.Controls">
     <Grid>
         <DockPanel Name="AppDock">
             <DockPanel Name="ConnectionDock" DockPanel.Dock="Top" Height="40" UseLayoutRounding="False">

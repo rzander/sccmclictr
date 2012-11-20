@@ -20,7 +20,7 @@
     <HostInBrowser>true</HostInBrowser>
     <TargetZone>Internet</TargetZone>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -43,8 +43,8 @@
     <SuiteName>SCCM Tools</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>30</ApplicationRevision>
-    <ApplicationVersion>0.0.0.30</ApplicationVersion>
+    <ApplicationRevision>31</ApplicationRevision>
+    <ApplicationVersion>0.0.0.31</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -352,10 +352,11 @@
     <StartArguments />
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>WSUS_Private.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>FD68B0F6DC3ECC43D0650A1CF79321E571129280</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>6A7F2742DAB395FDF264FB49AE797087FE9BE215</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>

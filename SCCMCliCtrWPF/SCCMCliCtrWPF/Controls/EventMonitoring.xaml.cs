@@ -145,5 +145,16 @@ namespace ClientCenter
             catch { }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
+
+        private void bt_ClearMonitoring_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                treeView1.Items.Clear();
+            }
+            catch { }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
     }
 }

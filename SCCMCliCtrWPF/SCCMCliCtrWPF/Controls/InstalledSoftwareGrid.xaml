@@ -42,14 +42,14 @@
                     </DataGrid.Columns>
                     <DataGrid.ContextMenu>
                         <ContextMenu Name="cmSWInstall" Opened="ContextMenu_Opened">
-                            <MenuItem Name="miInstallApp" Header="Install" Click="miInstallApp_Click">
+                            <MenuItem Name="miRepairApp" Header="Repair" Click="miRepairApp_Click">
                                 <MenuItem.Icon>
-                                    <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
+                                    <Image Source="/SCCMCliCtrWPF;component/Images/Setting.ico" Height="24" />
                                 </MenuItem.Icon>
                             </MenuItem>
                         <MenuItem Name="miUnInstallApp" Header="Uninstall" Click="miUnInstallApp_Click">
                             <MenuItem.Icon>
-                                <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
+                                <Image Source="/SCCMCliCtrWPF;component/Images/Delete.ico" Height="24" />
                             </MenuItem.Icon>
                         </MenuItem>
                         </ContextMenu>

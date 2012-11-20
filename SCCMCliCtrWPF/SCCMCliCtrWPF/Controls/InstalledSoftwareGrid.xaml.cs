@@ -79,18 +79,15 @@ namespace ClientCenter.Controls
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
-        private void miInstallApp_Click(object sender, RoutedEventArgs e)
+        private void miRepairApp_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                //Install all selected Updates;
-                List<softwaredistribution.CCM_Application> lApps = new List<softwaredistribution.CCM_Application>();
-                foreach (softwaredistribution.CCM_Application cApp in dataGrid1.SelectedItems)
+                foreach (inventory.AI_InstalledSoftwareCache cApp in dataGrid1.SelectedItems)
                 {
-                    lApps.Add(cApp);
-                    cApp.Install(softwaredistribution.AppPriority.Normal, false);
+                    string sResult = cApp.Repair();
+                    sResult.ToString();
                 }
-                //oAgent.Client.SoftwareUpdates.InstallUpdates(lUpdates);
             }
             catch (Exception ex)
             {
@@ -102,14 +99,11 @@ namespace ClientCenter.Controls
         {
             try
             {
-                //Install all selected Updates;
-                List<softwaredistribution.CCM_Application> lApps = new List<softwaredistribution.CCM_Application>();
-                foreach (softwaredistribution.CCM_Application cApp in dataGrid1.SelectedItems)
+                foreach (inventory.AI_InstalledSoftwareCache cApp in dataGrid1.SelectedItems)
                 {
-                    lApps.Add(cApp);
-                    cApp.Uninstall(softwaredistribution.AppPriority.Normal, false);
+                    string sResult = cApp.Uninstall(); 
+                    sResult.ToString();
                 }
-                //oAgent.Client.SoftwareUpdates.InstallUpdates(lUpdates);
             }
             catch (Exception ex)
             {
@@ -124,16 +118,13 @@ namespace ClientCenter.Controls
             {
                 if (!oSW.SoftwareCode.StartsWith("{"))
                 {
-                    cmSWInstall.Visibility = System.Windows.Visibility.Hidden;
+                    cmSWInstall.IsOpen = false;
                 }
                 else
                 {
-                    cmSWInstall.Visibility = System.Windows.Visibility.Visible;
                 }
             }
         }
-
-
     }
 
     public class SWListConverter : IValueConverter
