@@ -8,11 +8,13 @@
     <Grid>
         <DockPanel>
             <DockPanel DockPanel.Dock="Top">
-                <GroupBox Header="SCCM Agent" Height="100" HorizontalAlignment="Stretch" Name="gbSCCMAgent" VerticalAlignment="Top" >
+                <GroupBox Header="SCCM Agent" Height="150" HorizontalAlignment="Stretch" Name="gbSCCMAgent" VerticalAlignment="Top" >
                     <Grid>
                         <StackPanel Margin="0,5,0,0">
                             <Button Content="Cleanup Message Queue" Height="23" HorizontalAlignment="Center" Name="bt_CleanupMessageQueue" VerticalAlignment="Top" Width="175" Margin="0,5,0,0" Click="bt_CleanupMessageQueue_Click" ToolTip="Cleanup Agent Message Queue and restart the Agent Service." />
                             <Button Content="Delete Agent Certificate" Height="23" HorizontalAlignment="Center" Name="bt_DeleteAgentCertificates" VerticalAlignment="Top" Width="175" Margin="0,5,0,0" IsEnabled="False" />
+                            <Button Content="Repair Agent" Height="23" HorizontalAlignment="Center" Name="bt_RepairAgent" VerticalAlignment="Top" Width="175" Margin="0,5,0,0" IsEnabled="True" Click="bt_RepairAgent_Click" />
+                            <Button Content="Remove Agent" Height="23" HorizontalAlignment="Center" Name="bt_RemoveAgent" VerticalAlignment="Top" Width="175" Margin="0,5,0,0" IsEnabled="True" Click="bt_RemoveAgent_Click" />
                         </StackPanel>
                     </Grid>
                 </GroupBox>
