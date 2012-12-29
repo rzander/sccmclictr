@@ -212,6 +212,14 @@
                                                 </StackPanel>
                                             </TreeViewItem.Header>
                                         </TreeViewItem>
+                                        <TreeViewItem IsExpanded="True" IsSelected="False" Tag="ServiceWindow" Name="tviSWDistSWindow">
+                                            <TreeViewItem.Header>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Image Source="/SCCMCliCtrWPF;component/Images/Datetime.ico" Width="20" Height="20"/>
+                                                    <TextBlock Text="Service Window" Margin="3,0,0,0"></TextBlock>
+                                                </StackPanel>
+                                            </TreeViewItem.Header>
+                                        </TreeViewItem>
                                     </TreeViewItem>
                                 </TreeView>
                             </StackPanel>
@@ -290,6 +298,11 @@
                         <TabItem Header="Agent Settings" Name="AgentSettingsPanel" Tag="AgentSettings" IsSelected="True">
                             <Grid>
                                 <my4:AgentSettingItem HorizontalAlignment="Center" x:Name="agentSettingItem1" VerticalAlignment="Center" IsEnabled="False" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="ServiceWindow" Tag="ServiceWindow">
+                            <Grid>
+                                <my6:ServiceWindowGrid x:Name="serviceWindowGrid1"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="InstalledSW" Tag="InvInstalledSW">

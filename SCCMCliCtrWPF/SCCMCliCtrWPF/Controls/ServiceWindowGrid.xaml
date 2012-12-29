@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="ClientCenter.Controls.ServiceWindowGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" xmlns:my="http://schemas.microsoft.com/wpf/2008/toolkit" xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" xmlns:my1="clr-namespace:ClientCenter.Controls">
+    <Grid>
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Top"  Height="32">
+                <ToolBar Name="toolBar1">
+                    <Button ToolTip="Reload assigned Applications" Name="bt_Reload">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico"/>
+                            <TextBlock Margin="2,0,0,0">Reload Applications</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Separator />
+                </ToolBar>
+            </DockPanel>
+            <Grid>
+                <StackPanel>
+
+                    <my1:ScheduleControl x:Name="scheduleControl1"
+                                     Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Path=ActualWidth}" 
+                                     Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Path=ActualHeight}"/>
+
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</UserControl>

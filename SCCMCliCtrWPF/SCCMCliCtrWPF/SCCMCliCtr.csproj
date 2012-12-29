@@ -43,8 +43,8 @@
     <SuiteName>SCCM Tools</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>32</ApplicationRevision>
-    <ApplicationVersion>0.0.0.32</ApplicationVersion>
+    <ApplicationRevision>33</ApplicationRevision>
+    <ApplicationVersion>0.0.0.33</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -89,6 +89,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -124,6 +125,18 @@
     </Compile>
     <Compile Include="Controls\InstallRepair.xaml.cs">
       <DependentUpon>InstallRepair.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ScheduleControl\DayControl.xaml.cs">
+      <DependentUpon>DayControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ScheduleControl\ScheduleControl.xaml.cs">
+      <DependentUpon>ScheduleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ScheduleControl\TimeLine.xaml.cs">
+      <DependentUpon>TimeLine.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ServiceWindowGrid.xaml.cs">
+      <DependentUpon>ServiceWindowGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SWAllUpdatesGrid.xaml.cs">
       <DependentUpon>SWAllUpdatesGrid.xaml</DependentUpon>
@@ -165,6 +178,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\InstallRepair.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ScheduleControl\DayControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ScheduleControl\ScheduleControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ScheduleControl\TimeLine.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ServiceWindowGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -347,6 +376,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\setupold.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Datetime.ico" />
   </ItemGroup>
   <PropertyGroup>
     <StartArguments />
