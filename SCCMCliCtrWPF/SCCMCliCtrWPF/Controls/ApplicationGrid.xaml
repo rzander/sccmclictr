@@ -22,7 +22,7 @@
                     <Separator />
                 </ToolBar>
             </DockPanel>
-            <StackPanel>
+            <DockPanel>
                 <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" LoadingRow="dataGrid1_LoadingRow" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" SortDirection="Ascending"/>
@@ -52,7 +52,7 @@
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>
-            </StackPanel>
+            </DockPanel>
         </DockPanel>
     </Grid>
 </UserControl>

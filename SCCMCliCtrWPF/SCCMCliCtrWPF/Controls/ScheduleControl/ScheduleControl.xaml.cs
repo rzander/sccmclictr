@@ -22,15 +22,27 @@ namespace ClientCenter.Controls
     /// </summary>
     public partial class ScheduleControl : UserControl
     {
-        public int DaysVisible = 5;
+        private int daysVisible;
 
+        public int DaysVisible
+        {
+            get 
+            {
+                if (daysVisible == 0)
+                    return 7;
+                else
+                    return daysVisible; 
+            }
+            set 
+            {
+                daysVisible = value;
+                UserControl_Loaded(this, null);
+            }
+        }
         public DateTime Startdate = DateTime.Now;
         public ScheduleControl()
         {
             InitializeComponent();
-
-
-
         }
 
         public List<ScheduledTime> ScheduledTimes = new List<ScheduledTime>();
