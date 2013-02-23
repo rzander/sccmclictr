@@ -45,8 +45,8 @@
     <SuiteName>SCCM Tools</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>34</ApplicationRevision>
-    <ApplicationVersion>0.0.0.34</ApplicationVersion>
+    <ApplicationRevision>35</ApplicationRevision>
+    <ApplicationVersion>0.0.0.35</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -85,7 +85,7 @@
     </Reference>
     <Reference Include="sccmclictr.automation, Version=0.0.0.20376, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\sccmclictrlib.0.0.0.16\lib\sccmclictr.automation.dll</HintPath>
+      <HintPath>..\..\sccmclictrlib\sccmclictr.automation\bin\Debug\sccmclictr.automation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

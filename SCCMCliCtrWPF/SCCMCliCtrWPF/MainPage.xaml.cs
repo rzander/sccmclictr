@@ -70,7 +70,7 @@ namespace ClientCenter
             catch { }
             try
             {
-                oAgent.diconnect();
+                oAgent.disconnect();
             }
             catch { }
         }

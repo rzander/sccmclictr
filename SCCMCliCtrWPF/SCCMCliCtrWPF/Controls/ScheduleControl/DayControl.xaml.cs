@@ -117,8 +117,13 @@ namespace ClientCenter.Controls
                 TimeBox TB = new TimeBox();
                 TB.StartTime = tr.startTime;
                 TB.EndTime = tr.endTime;
-
                 
+                LinearGradientBrush lBack = new LinearGradientBrush();
+                lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0x6F, 0x00, 0x00), 1));
+                lBack.GradientStops.Add(new GradientStop(tr.color, 0.314));
+                lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0xFC, 0x64, 0x64), 1));
+                lBack.Opacity = .7;
+                TB.Brush = lBack;
 
                 TB.BlockHeight = BlockHeight;
                 TB.Position = tr.offset;
@@ -137,7 +142,7 @@ namespace ClientCenter.Controls
         {
             public TimeBox()
             {
-                LinearGradientBrush lBack = new LinearGradientBrush();
+                lBack = new LinearGradientBrush();
                 lBack.EndPoint = new Point(0.5, 1);
                 lBack.StartPoint = new Point(0.5, 0);
                 lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0x6F, 0x00, 0x00), 1));
@@ -150,6 +155,19 @@ namespace ClientCenter.Controls
                 this.Background = lBack;
 
                 this.Loaded += new RoutedEventHandler(TimeBox_Loaded);
+                this.MouseEnter += TimeBox_MouseEnter;
+                this.MouseLeave += TimeBox_MouseLeave;
+
+            }
+
+            void TimeBox_MouseLeave(object sender, MouseEventArgs e)
+            {
+                this.Brush.Opacity = .7;
+            }
+
+            void TimeBox_MouseEnter(object sender, MouseEventArgs e)
+            {
+                this.Brush.Opacity = 1;
             }
 
             void TimeBox_Loaded(object sender, RoutedEventArgs e)
@@ -163,6 +181,16 @@ namespace ClientCenter.Controls
             public double BlockHeight;
             public int Position;
             public double xMargin;
+            private LinearGradientBrush lBack;
+            public LinearGradientBrush Brush
+            {
+                get { return lBack; }
+                set
+                {
+                    lBack = value;
+                    this.Background = value;
+                }
+            }
         }
 
         public class timeRange
@@ -172,10 +200,19 @@ namespace ClientCenter.Controls
                 startTime = StartTime;
                 endTime = EndTime;
                 offset = 0;
+                color = Colors.Red;
+            }
+            public timeRange(TimeSpan StartTime, TimeSpan EndTime, Color brushcolor)
+            {
+                startTime = StartTime;
+                endTime = EndTime;
+                offset = 0;
+                color = brushcolor;
             }
             public TimeSpan startTime;
             public TimeSpan endTime;
             internal int offset;
+            public Color color;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

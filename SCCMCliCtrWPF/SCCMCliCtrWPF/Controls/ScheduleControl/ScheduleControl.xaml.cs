@@ -53,9 +53,17 @@ namespace ClientCenter.Controls
             {
                 StartDateTime = startDateTime;
                 Duration = duration;
+                color = Colors.Red;
+            }
+            public ScheduledTime(DateTime startDateTime, TimeSpan duration, Color brushColor)
+            {
+                StartDateTime = startDateTime;
+                Duration = duration;
+                color = brushColor;
             }
             public DateTime StartDateTime;
             public TimeSpan Duration;
+            public Color color;
         }
 
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -119,7 +127,7 @@ namespace ClientCenter.Controls
 
                 if ((oTime.StartDateTime.Date - DateTime.Now.Date) <= new TimeSpan(DaysVisible, 0, 0, 0))
                 {
-                    DC.timeList.Add(new DayControl.timeRange(startTime, endTime));
+                    DC.timeList.Add(new DayControl.timeRange(startTime, endTime, oTime.color));
                 }
 
 

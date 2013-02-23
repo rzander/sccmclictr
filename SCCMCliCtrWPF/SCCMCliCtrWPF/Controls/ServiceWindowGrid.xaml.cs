@@ -57,7 +57,10 @@ namespace ClientCenter.Controls
                         }
 
                     }
-                    catch { }
+                    catch(Exception ex)
+                    {
+                        ex.Message.ToString();
+                    }
                     Mouse.OverrideCursor = Cursors.Arrow;
                 }
             }
@@ -75,6 +78,15 @@ namespace ClientCenter.Controls
                     }
                     break;
                 case ("SMS_ST_NonRecurring"):
+                     ScheduleDecoding.SMS_ST_NonRecurring oSchedNonRec = ((ScheduleDecoding.SMS_ST_NonRecurring)oWin);
+
+                    string sDayNonRec = new DateTime(2009, 2, oSchedNonRec.StartTime.Day).DayOfWeek.ToString();
+                    //DateTime dNextStartTime = oSchedNonRec.NextStartTime;
+                    DateTime dNextRunNonRec = oSchedNonRec.NextStartTime;
+                    if (oSchedNonRec.StartTime + new TimeSpan(oSchedNonRec.DayDuration, oSchedNonRec.HourDuration, 0, 0) >= DateTime.Now.Date)
+                    {
+                        scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRunNonRec, new TimeSpan(oSchedNonRec.DayDuration, oSchedNonRec.HourDuration, oSchedNonRec.MinuteDuration, 0), Colors.Blue));
+                    }
                     break;
                 case ("SMS_ST_RecurInterval"):
                     break;
