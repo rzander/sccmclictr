@@ -124,6 +124,7 @@ namespace ClientCenter.Controls
                 lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0xFC, 0x64, 0x64), 1));
                 lBack.Opacity = .7;
                 TB.Brush = lBack;
+                TB.ToolTip = tr.Text;
 
                 TB.BlockHeight = BlockHeight;
                 TB.Position = tr.offset;
@@ -157,6 +158,7 @@ namespace ClientCenter.Controls
                 this.Loaded += new RoutedEventHandler(TimeBox_Loaded);
                 this.MouseEnter += TimeBox_MouseEnter;
                 this.MouseLeave += TimeBox_MouseLeave;
+
 
             }
 
@@ -195,24 +197,26 @@ namespace ClientCenter.Controls
 
         public class timeRange
         {
-            public timeRange(TimeSpan StartTime, TimeSpan EndTime)
+            public timeRange(TimeSpan StartTime, TimeSpan EndTime, string Title)
             {
                 startTime = StartTime;
                 endTime = EndTime;
                 offset = 0;
                 color = Colors.Red;
             }
-            public timeRange(TimeSpan StartTime, TimeSpan EndTime, Color brushcolor)
+            public timeRange(TimeSpan StartTime, TimeSpan EndTime, Color brushcolor, string Title)
             {
                 startTime = StartTime;
                 endTime = EndTime;
                 offset = 0;
                 color = brushcolor;
+                Text = Title;
             }
             public TimeSpan startTime;
             public TimeSpan endTime;
             internal int offset;
             public Color color;
+            public String Text;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

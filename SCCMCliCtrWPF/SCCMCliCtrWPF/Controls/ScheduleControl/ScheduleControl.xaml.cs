@@ -55,15 +55,17 @@ namespace ClientCenter.Controls
                 Duration = duration;
                 color = Colors.Red;
             }
-            public ScheduledTime(DateTime startDateTime, TimeSpan duration, Color brushColor)
+            public ScheduledTime(DateTime startDateTime, TimeSpan duration, Color brushColor, string title)
             {
                 StartDateTime = startDateTime;
                 Duration = duration;
                 color = brushColor;
+                Title = title;
             }
             public DateTime StartDateTime;
             public TimeSpan Duration;
             public Color color;
+            public string Title;
         }
 
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -121,13 +123,14 @@ namespace ClientCenter.Controls
 
                 if (endTime.TotalHours > 24)
                 {
+                    //Move it to next day
                     endTime = new TimeSpan(24, 0, 0);
-                    AddSchedule(new ScheduledTime(new DateTime(oTime.StartDateTime.Year, oTime.StartDateTime.Month, oTime.StartDateTime.Day, 0, 0, 0).AddDays(1), (oTime.StartDateTime.TimeOfDay + oTime.Duration).Subtract(new TimeSpan(24, 0, 0)))); ;
+                    AddSchedule(new ScheduledTime(new DateTime(oTime.StartDateTime.Year, oTime.StartDateTime.Month, oTime.StartDateTime.Day, 0, 0, 0).AddDays(1), (oTime.StartDateTime.TimeOfDay + oTime.Duration).Subtract(new TimeSpan(24, 0, 0)), oTime.color, oTime.Title)); ;
                 }
 
                 if ((oTime.StartDateTime.Date - DateTime.Now.Date) <= new TimeSpan(DaysVisible, 0, 0, 0))
                 {
-                    DC.timeList.Add(new DayControl.timeRange(startTime, endTime, oTime.color));
+                    DC.timeList.Add(new DayControl.timeRange(startTime, endTime, oTime.color, oTime.Title));
                 }
 
 

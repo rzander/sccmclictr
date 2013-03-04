@@ -85,7 +85,7 @@ namespace ClientCenter.Controls
                     DateTime dNextRunNonRec = oSchedNonRec.NextStartTime;
                     if (oSchedNonRec.StartTime + new TimeSpan(oSchedNonRec.DayDuration, oSchedNonRec.HourDuration, 0, 0) >= DateTime.Now.Date)
                     {
-                        scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRunNonRec, new TimeSpan(oSchedNonRec.DayDuration, oSchedNonRec.HourDuration, oSchedNonRec.MinuteDuration, 0), Colors.Blue));
+                        scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRunNonRec, new TimeSpan(oSchedNonRec.DayDuration, oSchedNonRec.HourDuration, oSchedNonRec.MinuteDuration, 0), Colors.Blue, "Non Recuring"));
                     }
                     break;
                 case ("SMS_ST_RecurInterval"):
@@ -104,7 +104,7 @@ namespace ClientCenter.Controls
 
                     while (dNextRun.Date < DateTime.Now.Date + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
                     {
-                        scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRun, new TimeSpan(oSched.DayDuration, oSched.HourDuration, oSched.MinuteDuration, 0)));
+                        scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRun, new TimeSpan(oSched.DayDuration, oSched.HourDuration, oSched.MinuteDuration, 0), Colors.Red, sRecurText));
                         //add_Appointment(dNextRun, dNextRun + new TimeSpan(oSchedule.DayDuration, oSchedule.HourDuration, oSchedule.MinuteDuration, 0), oSchedule.IsGMT);
                         dNextRun = dNextRun + new TimeSpan(oSched.ForNumberOfWeeks * 7, 0, 0, 0);
                     }
