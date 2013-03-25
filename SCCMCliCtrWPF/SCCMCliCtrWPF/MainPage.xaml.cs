@@ -59,6 +59,13 @@ namespace ClientCenter
             }
             catch { }
 
+            serviceWindowGrid1.RequestRefresh += serviceWindowGrid1_RequestRefresh;
+
+        }
+
+        void serviceWindowGrid1_RequestRefresh(object sender, EventArgs e)
+        {
+            
         }
 
         void Current_Exit(object sender, ExitEventArgs e)

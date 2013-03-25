@@ -123,6 +123,9 @@
     <Compile Include="Controls\InstallRepair.xaml.cs">
       <DependentUpon>InstallRepair.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ScheduleControl\CloseButton.xaml.cs">
+      <DependentUpon>CloseButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ScheduleControl\DayControl.xaml.cs">
       <DependentUpon>DayControl.xaml</DependentUpon>
     </Compile>
@@ -175,6 +178,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\InstallRepair.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ScheduleControl\CloseButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

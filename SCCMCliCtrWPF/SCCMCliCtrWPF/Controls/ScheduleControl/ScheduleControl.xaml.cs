@@ -62,12 +62,38 @@ namespace ClientCenter.Controls
                 color = brushColor;
                 Title = title;
             }
+            public ScheduledTime(DateTime startDateTime, TimeSpan duration, Color brushColor, string title, Boolean ISLocal, string SErviceWindowID)
+            {
+                StartDateTime = startDateTime;
+                Duration = duration;
+                color = brushColor;
+                Title = title;
+                isLocal = ISLocal;
+                ServiceWindowID = SErviceWindowID;
+            }
             public DateTime StartDateTime;
             public TimeSpan Duration;
             public Color color;
+            public Boolean isLocal;
+            public string ServiceWindowID;
             public string Title;
         }
+        
+        public event EventHandler DeleteClick;
+        private delegate void NoArgDelegate();
+        public void Refresh()
+        {
+            stackPanel2.Children.Clear();
+            
+            this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Render,
 
+                (NoArgDelegate)delegate
+            {
+            });
+
+            UserControl_Loaded(this, null);
+            
+        }
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
 
@@ -92,10 +118,10 @@ namespace ClientCenter.Controls
                 DC.Width = DaysDock1.ActualWidth / DaysVisible;
                 DC.Name = "Day" + iDay.ToString();
                 DC.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+                DC.DeleteClick += DC_DeleteClick;
                 List<DayControl.timeRange> tList = new List<DayControl.timeRange>();
-
                 stackPanel2.Children.Add(DC);
-
+                
                 Label lDay = new Label();
                 lDay.Content = Startdate.AddDays(iDay - 1).ToString("dddd", System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat);
 
@@ -110,6 +136,12 @@ namespace ClientCenter.Controls
             }
         }
 
+        void DC_DeleteClick(object sender, EventArgs e)
+        {
+            if (this.DeleteClick != null)
+                this.DeleteClick(sender, e);
+        }
+
         public void AddSchedule(ScheduledTime oTime)
         {
             //int iDay = (DateTime.Now.Date - oTime.StartDateTime).Days;
@@ -118,6 +150,7 @@ namespace ClientCenter.Controls
             {
 
                 DayControl DC = (DayControl)stackPanel2.Children[iDay];
+                
                 TimeSpan startTime = oTime.StartDateTime.TimeOfDay;
                 TimeSpan endTime = oTime.StartDateTime.TimeOfDay + oTime.Duration;
 
@@ -130,10 +163,8 @@ namespace ClientCenter.Controls
 
                 if ((oTime.StartDateTime.Date - DateTime.Now.Date) <= new TimeSpan(DaysVisible, 0, 0, 0))
                 {
-                    DC.timeList.Add(new DayControl.timeRange(startTime, endTime, oTime.color, oTime.Title));
+                    DC.timeList.Add(new DayControl.timeRange(startTime, endTime, oTime.color, oTime.Title, oTime.isLocal, oTime.ServiceWindowID));
                 }
-
-
             }
         }
     }

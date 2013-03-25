@@ -27,9 +27,51 @@ namespace ClientCenter.Controls
     {
         private SCCMAgent oAgent;
         public MyTraceListener Listener;
+        public event EventHandler RequestRefresh;
+
         public ServiceWindowGrid()
         {
             InitializeComponent();
+            scheduleControl1.DeleteClick += scheduleControl1_DeleteClick;
+        }
+
+        void scheduleControl1_DeleteClick(object sender, EventArgs e)
+        {
+            if (sender.GetType() == typeof(CloseButton))
+            {
+                string SWindowID = ((CloseButton)sender).ID;
+                if (oAgent.isConnected)
+                {
+                    Mouse.OverrideCursor = Cursors.Wait;
+                    try
+                    {
+                        oAgent.Client.RequestedConfig.DeleteServiceWindow(SWindowID);
+                        if (this.RequestRefresh != null)
+                            this.RequestRefresh(sender, e);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.Message.ToString();
+                    }
+                    Mouse.OverrideCursor = Cursors.Arrow;
+                }
+                
+            }
+
+            try
+            {
+                if (oAgent.isConnected)
+                {
+                    scheduleControl1.ScheduledTimes.Clear();
+                    SCCMAgentConnection = oAgent;
+                    scheduleControl1.Refresh();
+                }
+            }
+            catch(Exception ex)
+            {
+                ex.Message.ToString();
+            }
         }
 
         public SCCMAgent SCCMAgentConnection
@@ -50,9 +92,9 @@ namespace ClientCenter.Controls
                         if (oAgent.isConnected)
                         {
                             scheduleControl1.ScheduledTimes.Clear();
-                            foreach (sccmclictr.automation.policy.actualConfig.CCM_ServiceWindow oSRW in oAgent.Client.ActualConfig.ServiceWindow)
+                            foreach (sccmclictr.automation.policy.requestedConfig.CCM_ServiceWindow oSRW in oAgent.Client.RequestedConfig.ServiceWindow)
                             {
-                                GetSchedules(oSRW.DecodedSchedule);
+                                GetSchedules(oSRW.DecodedSchedule, oSRW.ServiceWindowID, oSRW.PolicySource);
                             }
                         }
 
@@ -68,13 +110,25 @@ namespace ClientCenter.Controls
 
         public void GetSchedules(object Schedule)
         {
+            GetSchedules(Schedule, "", "");
+        }
+        public void GetSchedules(object Schedule, string ServiceWindowID)
+        {
+            GetSchedules(Schedule, ServiceWindowID, "");
+        }
+        public void GetSchedules(object Schedule, string ServiceWindowID, string PolicySource)
+        {
+            Boolean isLocal = false;
+            if(string.Compare(PolicySource, "LOCAL", true) == 0)
+                isLocal = true;
+
             var oWin = Schedule;
             switch (oWin.GetType().Name)
             {
                 case ("List`1"):
                     foreach (var subsched in oWin as List<object>)
                     {
-                        GetSchedules(subsched);
+                        GetSchedules(subsched, ServiceWindowID);
                     }
                     break;
                 case ("SMS_ST_NonRecurring"):
@@ -85,17 +139,34 @@ namespace ClientCenter.Controls
                     DateTime dNextRunNonRec = oSchedNonRec.NextStartTime;
                     if (oSchedNonRec.StartTime + new TimeSpan(oSchedNonRec.DayDuration, oSchedNonRec.HourDuration, 0, 0) >= DateTime.Now.Date)
                     {
-                        scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRunNonRec, new TimeSpan(oSchedNonRec.DayDuration, oSchedNonRec.HourDuration, oSchedNonRec.MinuteDuration, 0), Colors.Blue, "Non Recuring"));
+                        ScheduleControl.ScheduledTime oControl = new ScheduleControl.ScheduledTime(dNextRunNonRec, new TimeSpan(oSchedNonRec.DayDuration, oSchedNonRec.HourDuration, oSchedNonRec.MinuteDuration, 0), Colors.Blue, "Non Recuring", isLocal, ServiceWindowID);
+                        scheduleControl1.ScheduledTimes.Add(oControl);
                     }
                     break;
                 case ("SMS_ST_RecurInterval"):
+                    ScheduleDecoding.SMS_ST_RecurInterval oSchedInt = ((ScheduleDecoding.SMS_ST_RecurInterval)oWin);
+                    DateTime dNextStartTimeInt = oSchedInt.NextStartTime;
+                    DateTime dNextRunInt = dNextStartTimeInt;
+
+                    string sRecurTextInt = string.Format("Occours Every ({0})Day(s)", oSchedInt.DaySpan);
+                    if(oSchedInt.DaySpan == 0)
+                        sRecurTextInt = string.Format("Occours Every ({0})Hour(s)", oSchedInt.HourSpan);
+
+                    //Check if there is a schedule today... (past)
+                    if (oSchedInt.PreviousStartTime.Date == DateTime.Now.Date)
+                        dNextRunInt = oSchedInt.PreviousStartTime;
+                    while (dNextRunInt.Date < DateTime.Now.Date + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
+                    {
+                        scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRunInt, new TimeSpan(oSchedInt.DayDuration, oSchedInt.HourDuration, oSchedInt.MinuteDuration, 0), Colors.Green, sRecurTextInt, isLocal, ServiceWindowID));
+                        dNextRunInt = dNextRunInt + new TimeSpan(oSchedInt.DaySpan, oSchedInt.HourSpan, oSchedInt.MinuteSpan, 0);
+                    }
                     break;
                 case ("SMS_ST_RecurWeekly"):
                     ScheduleDecoding.SMS_ST_RecurWeekly oSched = ((ScheduleDecoding.SMS_ST_RecurWeekly)oWin);
 
                     string sDay = new DateTime(2009, 2, oSched.Day).DayOfWeek.ToString();
                     DateTime dNextStartTime = oSched.NextStartTime;
-                    string sRecurText = string.Format("Occours Every ({0})weeks on {1}", oSched.ForNumberOfWeeks, sDay);
+                    string sRecurText = string.Format("Occours Every ({0})weeks on {1} " + ServiceWindowID, oSched.ForNumberOfWeeks, sDay);
                     DateTime dNextRun = dNextStartTime;
 
                     //Check if there is a schedule today... (past)
@@ -104,7 +175,7 @@ namespace ClientCenter.Controls
 
                     while (dNextRun.Date < DateTime.Now.Date + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
                     {
-                        scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRun, new TimeSpan(oSched.DayDuration, oSched.HourDuration, oSched.MinuteDuration, 0), Colors.Red, sRecurText));
+                        scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRun, new TimeSpan(oSched.DayDuration, oSched.HourDuration, oSched.MinuteDuration, 0), Colors.Red, sRecurText, isLocal, ServiceWindowID));
                         //add_Appointment(dNextRun, dNextRun + new TimeSpan(oSchedule.DayDuration, oSchedule.HourDuration, oSchedule.MinuteDuration, 0), oSchedule.IsGMT);
                         dNextRun = dNextRun + new TimeSpan(oSched.ForNumberOfWeeks * 7, 0, 0, 0);
                     }
@@ -121,20 +192,7 @@ namespace ClientCenter.Controls
             Mouse.OverrideCursor = Cursors.Wait;
             try
             {
-                scheduleControl1.InitializeComponent();
-                
-                if (oAgent.isConnected)
-                {
-                    scheduleControl1.ScheduledTimes.Clear();
-
-                    foreach (sccmclictr.automation.policy.actualConfig.CCM_ServiceWindow oSRW in oAgent.Client.ActualConfig.ServiceWindow)
-                    {
-                        GetSchedules(oSRW.DecodedSchedule);
-                    }
-
-                    scheduleControl1.DaysVisible = 7;
-                }
-
+                scheduleControl1_DeleteClick(sender, null);
             }
             catch { }
             Mouse.OverrideCursor = Cursors.Arrow;

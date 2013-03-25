@@ -28,6 +28,8 @@ namespace ClientCenter.Controls
             InitializeComponent();
         }
 
+        public event EventHandler DeleteClick;
+
         public double BlockHeight = 0;
 
         public List<timeRange> timeList = new List<timeRange>();
@@ -117,7 +119,8 @@ namespace ClientCenter.Controls
                 TimeBox TB = new TimeBox();
                 TB.StartTime = tr.startTime;
                 TB.EndTime = tr.endTime;
-                
+                TB.CloseClick += TB_CloseClick;
+
                 LinearGradientBrush lBack = new LinearGradientBrush();
                 lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0x6F, 0x00, 0x00), 1));
                 lBack.GradientStops.Add(new GradientStop(tr.color, 0.314));
@@ -125,18 +128,26 @@ namespace ClientCenter.Controls
                 lBack.Opacity = .7;
                 TB.Brush = lBack;
                 TB.ToolTip = tr.Text;
-
+                TB.isLocal = tr.isLocal;
+                TB.ServiceWindowID = tr.ServiceWindowID;
+                TB.BTClose.ID = tr.ServiceWindowID;
                 TB.BlockHeight = BlockHeight;
                 TB.Position = tr.offset;
                 TB.Width = (e.NewSize.Width / (iMaxCount + 1)) - 10;
                 TB.xMargin = ((e.NewSize.Width / (iMaxCount + 1)) * TB.Position) + 5;
                 
+                //Show close button on local policies
+                if (tr.isLocal)
+                    TB.BTClose.Visibility = System.Windows.Visibility.Visible;
                 ControlCanvas.Children.Add(TB);
             }
+        }
 
-
-            
-
+        void TB_CloseClick(object sender, MouseButtonEventArgs e)
+        {
+            sender.ToString();
+            if(this.DeleteClick != null)
+                this.DeleteClick(sender, e);
         }
 
         public class TimeBox : GroupBox
@@ -159,8 +170,12 @@ namespace ClientCenter.Controls
                 this.MouseEnter += TimeBox_MouseEnter;
                 this.MouseLeave += TimeBox_MouseLeave;
 
-
+                BTClose = new CloseButton();
+                BTClose.Visibility = System.Windows.Visibility.Hidden;
+                BTClose.ID = ServiceWindowID;
+                this.AddChild(BTClose);
             }
+
 
             void TimeBox_MouseLeave(object sender, MouseEventArgs e)
             {
@@ -184,6 +199,16 @@ namespace ClientCenter.Controls
             public int Position;
             public double xMargin;
             private LinearGradientBrush lBack;
+            public Boolean isLocal;
+            public string ServiceWindowID;
+            public CloseButton BTClose;
+
+            public event MouseButtonEventHandler CloseClick
+            {
+                add { BTClose.MouseDown += value; }
+                remove { BTClose.MouseDown -= value; }
+            }
+
             public LinearGradientBrush Brush
             {
                 get { return lBack; }
@@ -212,17 +237,23 @@ namespace ClientCenter.Controls
                 color = brushcolor;
                 Text = Title;
             }
+            public timeRange(TimeSpan StartTime, TimeSpan EndTime, Color brushcolor, string Title, Boolean ISLocal, string SErviceWindowsID)
+            {
+                startTime = StartTime;
+                endTime = EndTime;
+                offset = 0;
+                color = brushcolor;
+                Text = Title;
+                isLocal = ISLocal;
+                ServiceWindowID = SErviceWindowsID;
+            }
             public TimeSpan startTime;
             public TimeSpan endTime;
             internal int offset;
             public Color color;
             public String Text;
+            public Boolean isLocal;
+            public string ServiceWindowID;
         }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
     }
 }
