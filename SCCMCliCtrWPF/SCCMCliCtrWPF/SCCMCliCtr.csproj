@@ -18,7 +18,7 @@
     <EnableSecurityDebugging>true</EnableSecurityDebugging>
     <StartAction>URL</StartAction>
     <HostInBrowser>true</HostInBrowser>
-    <TargetZone>Internet</TargetZone>
+    <TargetZone>LocalIntranet</TargetZone>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -45,8 +45,8 @@
     <SuiteName>SCCM Tools</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>36</ApplicationRevision>
-    <ApplicationVersion>0.0.0.36</ApplicationVersion>
+    <ApplicationRevision>37</ApplicationRevision>
+    <ApplicationVersion>0.0.0.37</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -271,7 +271,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Properties\app.manifest" />
+    <None Include="Properties\app.manifest">
+      <SubType>Designer</SubType>
+    </None>
     <AppDesigner Include="Properties\" />
     <None Include="SCCMCliCtrWPF.snk" />
     <None Include="SCCMCliCtr_TemporaryKey.pfx" />

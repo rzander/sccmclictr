@@ -524,6 +524,20 @@ namespace ClientCenter
             oAgent.Client.AgentActions.UserPolicyAgentCleanupCycle();
             Mouse.OverrideCursor = Cursors.Arrow;
         }
+
+        private void ButtonIDMIF_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.IDMIFCollection();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void ButtonFileCollection_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.FileCollection();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
     }
 
     public class MyTraceListener : TraceListener, INotifyPropertyChanged

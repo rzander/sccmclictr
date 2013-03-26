@@ -123,9 +123,15 @@ namespace ClientCenter.Controls
 
                 LinearGradientBrush lBack = new LinearGradientBrush();
                 lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0x6F, 0x00, 0x00), 1));
-                lBack.GradientStops.Add(new GradientStop(tr.color, 0.314));
+
+                if (tr.isLocal)
+                    lBack.GradientStops.Add(new GradientStop(tr.color, 0.314)); 
+                else
+                    lBack.GradientStops.Add(new GradientStop(Colors.IndianRed, 0.314));
+                
                 lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0xFC, 0x64, 0x64), 1));
                 lBack.Opacity = .7;
+
                 TB.Brush = lBack;
                 TB.ToolTip = tr.Text;
                 TB.isLocal = tr.isLocal;
@@ -158,9 +164,14 @@ namespace ClientCenter.Controls
                 lBack.EndPoint = new Point(0.5, 1);
                 lBack.StartPoint = new Point(0.5, 0);
                 lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0x6F, 0x00, 0x00), 1));
-                lBack.GradientStops.Add(new GradientStop(Colors.Red, 0.314));
+                if (isLocal)
+                    lBack.GradientStops.Add(new GradientStop(Colors.Red, 0.314));
+                else
+                    lBack.GradientStops.Add(new GradientStop(Colors.IndianRed, 0.314));
                 lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0xFC, 0x64, 0x64), 1));
                 lBack.Opacity = .7;
+
+
                 this.Header = null;
                 this.BorderThickness = new Thickness(0);
                 this.BorderBrush = new SolidColorBrush(Colors.Black);

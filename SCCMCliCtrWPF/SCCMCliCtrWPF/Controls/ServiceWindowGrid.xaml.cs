@@ -128,13 +128,13 @@ namespace ClientCenter.Controls
                 case ("List`1"):
                     foreach (var subsched in oWin as List<object>)
                     {
-                        GetSchedules(subsched, ServiceWindowID);
+                        GetSchedules(subsched, ServiceWindowID, PolicySource);
                     }
                     break;
                 case ("SMS_ST_NonRecurring"):
                      ScheduleDecoding.SMS_ST_NonRecurring oSchedNonRec = ((ScheduleDecoding.SMS_ST_NonRecurring)oWin);
 
-                    string sDayNonRec = new DateTime(2009, 2, oSchedNonRec.StartTime.Day).DayOfWeek.ToString();
+                    string sDayNonRec = new DateTime(2012, 7, oSchedNonRec.StartTime.Day).DayOfWeek.ToString();
                     //DateTime dNextStartTime = oSchedNonRec.NextStartTime;
                     DateTime dNextRunNonRec = oSchedNonRec.NextStartTime;
                     if (oSchedNonRec.StartTime + new TimeSpan(oSchedNonRec.DayDuration, oSchedNonRec.HourDuration, 0, 0) >= DateTime.Now.Date)
@@ -164,9 +164,9 @@ namespace ClientCenter.Controls
                 case ("SMS_ST_RecurWeekly"):
                     ScheduleDecoding.SMS_ST_RecurWeekly oSched = ((ScheduleDecoding.SMS_ST_RecurWeekly)oWin);
 
-                    string sDay = new DateTime(2009, 2, oSched.Day).DayOfWeek.ToString();
+                    string sDay = new DateTime(2012,7, oSched.Day).DayOfWeek.ToString();
                     DateTime dNextStartTime = oSched.NextStartTime;
-                    string sRecurText = string.Format("Occours Every ({0})weeks on {1} " + ServiceWindowID, oSched.ForNumberOfWeeks, sDay);
+                    string sRecurText = string.Format("Occours Every ({0})weeks on {1} {2}", oSched.ForNumberOfWeeks, sDay, ServiceWindowID);
                     DateTime dNextRun = dNextStartTime;
 
                     //Check if there is a schedule today... (past)

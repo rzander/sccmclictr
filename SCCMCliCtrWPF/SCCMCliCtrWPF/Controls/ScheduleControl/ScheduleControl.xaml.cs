@@ -158,7 +158,7 @@ namespace ClientCenter.Controls
                 {
                     //Move it to next day
                     endTime = new TimeSpan(24, 0, 0);
-                    AddSchedule(new ScheduledTime(new DateTime(oTime.StartDateTime.Year, oTime.StartDateTime.Month, oTime.StartDateTime.Day, 0, 0, 0).AddDays(1), (oTime.StartDateTime.TimeOfDay + oTime.Duration).Subtract(new TimeSpan(24, 0, 0)), oTime.color, oTime.Title)); ;
+                    AddSchedule(new ScheduledTime(new DateTime(oTime.StartDateTime.Year, oTime.StartDateTime.Month, oTime.StartDateTime.Day, 0, 0, 0).AddDays(1), (oTime.StartDateTime.TimeOfDay + oTime.Duration).Subtract(new TimeSpan(24, 0, 0)), oTime.color, oTime.Title, oTime.isLocal, oTime.ServiceWindowID)); ;
                 }
 
                 if ((oTime.StartDateTime.Date - DateTime.Now.Date) <= new TimeSpan(DaysVisible, 0, 0, 0))

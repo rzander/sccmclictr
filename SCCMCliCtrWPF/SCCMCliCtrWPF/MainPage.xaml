@@ -59,15 +59,17 @@
                     </rib:Ribbon.ApplicationMenu>
                     <rib:RibbonTab Header="Agent Actions" IsEnabled="false" Name="ribAgenTActions">
                         <rib:RibbonGroup Header="Inventory">
-                                <rib:RibbonSplitButton Name="ButtonHWInvSplit" Label="HW Inv" ToolTip="Run Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvSplit_Click">
-                                    <rib:RibbonButton Name="ButtonHWInvFull" Label="Full HW Inv" ToolTip="Run a full Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvFull_Click" />
-                                    <rib:RibbonButton Name="ButtonHWInvDleta" Label="Delta HW Inv" ToolTip="Run a delta Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvSplit_Click" />
-                                </rib:RibbonSplitButton>
-                                <rib:RibbonSplitButton Name="ButtonSWInvSplit" Label="SW Inv" ToolTip="Run Software Inventory" LargeImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvSplit_Click">
-                                    <rib:RibbonButton Name="ButtonSWInvFull" Label="Full SW Inv" ToolTip="Run a full Software Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvFull_Click" />
-                                    <rib:RibbonButton Name="ButtonSWInvDelta"  Label="Delta SW Inv" ToolTip="Run a delta Software Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvSplit_Click" />
-                                </rib:RibbonSplitButton>
-                                <rib:RibbonButton Name="ButtonDDR"  Label="DDR" ToolTip="Send a Heartbeat back to the server." LargeImageSource="/SCCMCliCtrWPF;component/Images/Send%20Receive.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Send%20Receive.ico" Click="ButtonDDR_Click" />
+                            <rib:RibbonSplitButton Name="ButtonHWInvSplit" Label="HW Inv" ToolTip="Run Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvSplit_Click">
+                                <rib:RibbonButton Name="ButtonHWInvFull" Label="Full HW Inv" ToolTip="Run a full Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvFull_Click" />
+                                <rib:RibbonButton Name="ButtonHWInvDelta" Label="Delta HW Inv" ToolTip="Run a delta Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvSplit_Click" />
+                                <rib:RibbonButton Name="ButtonIDMIF" Label="Get IDMIF's" ToolTip="Collect IDMIF Files" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonIDMIF_Click" />
+                            </rib:RibbonSplitButton>
+                            <rib:RibbonSplitButton Name="ButtonSWInvSplit" Label="SW Inv" ToolTip="Run Software Inventory" LargeImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvSplit_Click">
+                                <rib:RibbonButton Name="ButtonSWInvFull" Label="Full SW Inv" ToolTip="Run a full Software Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvFull_Click" />
+                                <rib:RibbonButton Name="ButtonSWInvDelta"  Label="Delta SW Inv" ToolTip="Run a delta Software Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonSWInvSplit_Click" />
+                                <rib:RibbonButton Name="ButtonFileCollection"  Label="Collect Files" ToolTip="Collect and upload Files" SmallImageSource="/SCCMCliCtrWPF;component/Images/Icon065.ico" Click="ButtonFileCollection_Click"/>
+                            </rib:RibbonSplitButton>
+                            <rib:RibbonButton Name="ButtonDDR"  Label="DDR" ToolTip="Send a Heartbeat back to the server." LargeImageSource="/SCCMCliCtrWPF;component/Images/Send%20Receive.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Send%20Receive.ico" Click="ButtonDDR_Click" />
                         </rib:RibbonGroup>
                         <rib:RibbonGroup Header="Policy">
                             <rib:RibbonSplitButton Name="ButtonMachinePolicy"  Label="Machine Policy" ToolTip="Download Machine Policy" LargeImageSource="/SCCMCliCtrWPF;component/Images/ComputerPolicy.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/ComputerPolicy.ico" Click="ButtonMachinePolicy_Click" >
