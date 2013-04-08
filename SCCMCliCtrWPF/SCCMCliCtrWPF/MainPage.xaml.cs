@@ -51,6 +51,7 @@ namespace ClientCenter
                     Uri launchUri = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.ActivationUri;
                     tb_TargetComputer.Text = launchUri.Query.Replace("?", "");
                     tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("&ProjectName=sccmclictr", "");
+                    tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("=", "");
 
                     tb_TargetComputer2.Text = tb_TargetComputer.Text;
                 }
