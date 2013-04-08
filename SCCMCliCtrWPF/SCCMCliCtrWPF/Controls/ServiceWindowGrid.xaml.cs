@@ -157,7 +157,7 @@ namespace ClientCenter.Controls
                         dNextRunInt = oSchedInt.PreviousStartTime;
                     while (dNextRunInt.Date < DateTime.Now.Date + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
                     {
-                        scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRunInt, new TimeSpan(oSchedInt.DayDuration, oSchedInt.HourDuration, oSchedInt.MinuteDuration, 0), Colors.Green, sRecurTextInt, isLocal, ServiceWindowID));
+                        scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRunInt, new TimeSpan(oSchedInt.DayDuration, oSchedInt.HourDuration, oSchedInt.MinuteDuration, 0), Colors.Green, sRecurTextInt + " " + ServiceWindowID, isLocal, ServiceWindowID));
                         dNextRunInt = dNextRunInt + new TimeSpan(oSchedInt.DaySpan, oSchedInt.HourSpan, oSchedInt.MinuteSpan, 0);
                     }
                     break;

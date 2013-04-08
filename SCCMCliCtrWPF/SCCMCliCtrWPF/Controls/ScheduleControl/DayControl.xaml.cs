@@ -122,14 +122,22 @@ namespace ClientCenter.Controls
                 TB.CloseClick += TB_CloseClick;
 
                 LinearGradientBrush lBack = new LinearGradientBrush();
-                lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0x6F, 0x00, 0x00), 1));
+                //lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0x6F, 0x00, 0x00), 1));
+                lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0x00, 0x00, 0x00), 1));
+                //lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0xFC, 0xFF, 0xFF), 1));
 
                 if (tr.isLocal)
-                    lBack.GradientStops.Add(new GradientStop(tr.color, 0.314)); 
+                {
+                    lBack.GradientStops.Add(new GradientStop(tr.color, 0.314));
+                    lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0xFC, 0x64, 0x64), 1));
+                }
                 else
-                    lBack.GradientStops.Add(new GradientStop(Colors.IndianRed, 0.314));
+                {
+                    lBack.GradientStops.Add(new GradientStop(Colors.DodgerBlue, 0.314));
+                    lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0xFC, 0xFF, 0xFF), 1));
+                }
                 
-                lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0xFC, 0x64, 0x64), 1));
+                
                 lBack.Opacity = .7;
 
                 TB.Brush = lBack;
@@ -165,10 +173,16 @@ namespace ClientCenter.Controls
                 lBack.StartPoint = new Point(0.5, 0);
                 lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0x6F, 0x00, 0x00), 1));
                 if (isLocal)
+                {
                     lBack.GradientStops.Add(new GradientStop(Colors.Red, 0.314));
+                    lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0xFC, 0x64, 0x64), 1));
+                }
                 else
-                    lBack.GradientStops.Add(new GradientStop(Colors.IndianRed, 0.314));
-                lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0xFC, 0x64, 0x64), 1));
+                {
+                    lBack.GradientStops.Add(new GradientStop(Colors.DodgerBlue, 0.314));
+                    lBack.GradientStops.Add(new GradientStop(Color.FromArgb(0xFF, 0xFC, 0xFF, 0xFF), 1));
+                }
+                
                 lBack.Opacity = .7;
 
 

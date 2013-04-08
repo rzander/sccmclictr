@@ -113,6 +113,20 @@
                                 <rib:RibbonButton Name="btStatesystempolicybulksendlow" Label="State system policy bulk send low" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btStatesystempolicybulksendlow_Click" />
                                 <rib:RibbonButton Name="btSendUnsentStateMessage" Label="Send Unsent State Message" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btSendUnsentStateMessage_Click" />
                                 <rib:RibbonButton Name="btExternaleventdetection" Label="External event detection" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btExternaleventdetection_Click" />
+                                <rib:RibbonButton Name="btSWMeteringUsageRport" Label="Software Metering Generating Usage Report" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btSWMeteringUsageRport_Click" ToolTip="Generate SoftwareMetering usage report" />
+                                <rib:RibbonButton Name="btMSISourceListUpdate" Label="Windows Installer Source List Update Cycle" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btMSISourceListUpdate_Click" ToolTip="Update MSI Source List" />
+                                <rib:RibbonButton Name="btDCMPolicyAction" Label="DCM Policy Action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btDCMPolicyAction_Click" />
+                                <rib:RibbonButton Name="btATMStatusCheckPolicy" Label="AMT Status Check Policy" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btATMStatusCheckPolicy_Click" />
+                                <rib:RibbonButton Name="btPowerManagerSummarizer" Label="Power management start summarizer" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btPowerManagerSummarizer_Click" />
+
+                            </rib:RibbonSplitButton>
+                        </rib:RibbonGroup>
+                        <rib:RibbonGroup Header="Application Mgmt.">
+                            <rib:RibbonSplitButton Name="btAppMgmt" ToolTip="Application Managemnt" LargeImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico">
+                                <rib:RibbonButton Name="btAppManUserPolicyAction" Label="Application manager user policy action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btAppManUserPolicyAction_Click" />
+                                <rib:RibbonButton Name="btAppManMachinePolicyAction" Label="Application manager machine policy action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btAppManMachinePolicyAction_Click" />
+                                <rib:RibbonButton Name="btAppManGlobalEvaluation" Label="Application manager global evaluation action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btAppManGlobalEvaluation_Click" />
+
                             </rib:RibbonSplitButton>
                         </rib:RibbonGroup>
                     </rib:RibbonTab>

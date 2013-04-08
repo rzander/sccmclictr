@@ -538,6 +538,62 @@ namespace ClientCenter
             oAgent.Client.AgentActions.FileCollection();
             Mouse.OverrideCursor = Cursors.Arrow;
         }
+
+        private void btSWMeteringUsageRport_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.SWMeteringUsageReport();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btMSISourceListUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.MSISourceListUpdate();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btDCMPolicyAction_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.DCMPolicy();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btATMStatusCheckPolicy_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.AMTProvisionCycle();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btAppManUserPolicyAction_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.AppManUserPolicyAction();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btAppManMachinePolicyAction_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.AppManPolicyAction();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btAppManGlobalEvaluation_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.AppManGlobalEvaluation();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btPowerManagerSummarizer_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            oAgent.Client.AgentActions.PowerMgmtStartSummarizationTask();
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
     }
 
     public class MyTraceListener : TraceListener, INotifyPropertyChanged
