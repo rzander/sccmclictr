@@ -18,6 +18,8 @@ using System.Diagnostics;
 using System.ComponentModel;
 using System.Deployment.Application;
 using System.Management;
+using System.Security.Principal;
+using System.Reflection;
 
 //using System.IO;
 //using System.Windows.Markup;
@@ -55,14 +57,68 @@ namespace ClientCenter
 
                     tb_TargetComputer2.Text = tb_TargetComputer.Text;
                 }
+                else
+                {
+                    tb_TargetComputer.Text = Environment.GetCommandLineArgs()[1];
+                    tb_TargetComputer2.Text = Environment.GetCommandLineArgs()[1];
+                }
                 //sccmclictr.automation.common.Decrypt(Properties.Settings.Default.Password, Application.ResourceAssembly.ManifestModule.Name);
                 pb_Password.Password = Properties.Settings.Default.Password;
             }
             catch { }
 
+            //Check if App is running as Admin, otherwise restart App as Admin...
+            Application_Startup(this, tb_TargetComputer.Text);
+
             serviceWindowGrid1.RequestRefresh += serviceWindowGrid1_RequestRefresh;
 
         }
+
+        //Code from http://antscode.blogspot.com/2011/02/running-clickonce-application-as.html
+        private bool IsRunAsAdministrator()
+        {
+            var wi = WindowsIdentity.GetCurrent();
+            var wp = new WindowsPrincipal(wi);
+
+            return wp.IsInRole(WindowsBuiltInRole.Administrator);
+        }
+
+        //Code from http://antscode.blogspot.com/2011/02/running-clickonce-application-as.html
+        private void Application_Startup(object sender, string paremeter)
+        {
+            if (!IsRunAsAdministrator())
+            {
+                // It is not possible to launch a ClickOnce app as administrator directly, so instead we launch the
+                // app as administrator in a new process.
+                var processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase);
+                
+                // The following properties run the new process as administrator
+                processInfo.UseShellExecute = true;
+                processInfo.Verb = "runas";
+                processInfo.Arguments = paremeter;
+
+                // Start the new process
+                try
+                {
+                    System.Diagnostics.Process.Start(processInfo);
+                }
+                catch (Exception)
+                {
+                    // The user did not allow the application to run as administrator
+                    MessageBox.Show("Sorry, this application must be run as Administrator.");
+                }
+
+                // Shut down the current process
+                Application.Current.Shutdown();
+            }
+            else
+            {
+                // We are running as administrator
+
+                // Do normal startup stuff...
+            }
+        }
+
 
         void serviceWindowGrid1_RequestRefresh(object sender, EventArgs e)
         {
