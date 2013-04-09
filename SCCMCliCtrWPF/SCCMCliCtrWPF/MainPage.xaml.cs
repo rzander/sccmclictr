@@ -144,12 +144,15 @@ namespace ClientCenter
             }
             catch(Exception ex)
             {
-                ribbon1.IsEnabled = false;
+                //ribbon1.IsEnabled = false;
                 navigationPane1.IsEnabled = false;
                 agentSettingItem1.IsEnabled = false;
                 myTrace.WriteError("Unable to connect: " + sTarget);
                 myTrace.WriteError("Error: "+ ex.Message);
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                ribAgenTActions.IsEnabled = false;
+                ConnectionDock.Visibility = System.Windows.Visibility.Visible;
             }
 
             Mouse.OverrideCursor = Cursors.Arrow;
