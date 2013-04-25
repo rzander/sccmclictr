@@ -44,7 +44,7 @@ namespace ClientCenter
             Style s = new Style();
             s.Setters.Add(new Setter(UIElement.VisibilityProperty, Visibility.Collapsed));
             tabNavigationPanels.ItemContainerStyle = s;
-
+            
             try
             {
                 if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
@@ -70,8 +70,6 @@ namespace ClientCenter
             //Check if App is running as Admin, otherwise restart App as Admin...
             Application_Startup(this, tb_TargetComputer.Text);
 
-            serviceWindowGrid1.RequestRefresh += serviceWindowGrid1_RequestRefresh;
-
         }
 
         //Code from http://antscode.blogspot.com/2011/02/running-clickonce-application-as.html
@@ -88,28 +86,35 @@ namespace ClientCenter
         {
             if (!IsRunAsAdministrator())
             {
-                // It is not possible to launch a ClickOnce app as administrator directly, so instead we launch the
-                // app as administrator in a new process.
-                var processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase);
-                
-                // The following properties run the new process as administrator
-                processInfo.UseShellExecute = true;
-                processInfo.Verb = "runas";
-                processInfo.Arguments = paremeter;
-
-                // Start the new process
-                try
+                if (System.Windows.Interop.BrowserInteropHelper.IsBrowserHosted)
                 {
-                    System.Diagnostics.Process.Start(processInfo);
+                    MessageBox.Show("Sorry, this application must be run as Administrator. Please restart your browser as Administrator.", "Administrative rights required", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                catch (Exception)
+                else
                 {
-                    // The user did not allow the application to run as administrator
-                    MessageBox.Show("Sorry, this application must be run as Administrator.");
-                }
+                    // It is not possible to launch a ClickOnce app as administrator directly, so instead we launch the
+                    // app as administrator in a new process.
+                    var processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase);
 
-                // Shut down the current process
-                Application.Current.Shutdown();
+                    // The following properties run the new process as administrator
+                    processInfo.UseShellExecute = true;
+                    processInfo.Verb = "runas";
+                    processInfo.Arguments = paremeter;
+
+                    // Start the new process
+                    try
+                    {
+                        System.Diagnostics.Process.Start(processInfo);
+                    }
+                    catch (Exception)
+                    {
+                        // The user did not allow the application to run as administrator
+                        MessageBox.Show("Sorry, this application must be run as Administrator.");
+                    }
+
+                    // Shut down the current process
+                    Application.Current.Shutdown();
+                }
             }
             else
             {
@@ -119,11 +124,6 @@ namespace ClientCenter
             }
         }
 
-
-        void serviceWindowGrid1_RequestRefresh(object sender, EventArgs e)
-        {
-            
-        }
 
         void Current_Exit(object sender, ExitEventArgs e)
         {

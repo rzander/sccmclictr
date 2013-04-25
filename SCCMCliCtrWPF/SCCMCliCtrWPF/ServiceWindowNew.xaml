@@ -1,0 +1,42 @@
+﻿<Window x:Class="ClientCenter.ServiceWindowNew"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Create new Service Window" Height="300" Width="450" WindowStartupLocation="CenterScreen" Icon="Images/Add.ico" xmlns:my="http://schemas.microsoft.com/wpf/2008/toolkit" xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" xmlns:sr="http://schemas.divelements.co.uk/wpf/sandribbon">
+    <Grid>
+        <GroupBox Header="Start Time" HorizontalAlignment="Left" Margin="12,12,0,0" VerticalAlignment="Top" Height="85" Width="404">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="117*" />
+                    <ColumnDefinition Width="235*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="Date:" Height="28" Name="label2" Width="42" Margin="6,5,0,36" HorizontalAlignment="Left" />
+                <my:DatePicker HorizontalAlignment="Left" Name="datePicker1" VerticalAlignment="Top" Width="140" Margin="42,6,0,0" Grid.ColumnSpan="2" SelectedDateFormat="Short" />
+                <TextBox Height="23" HorizontalAlignment="Right" Margin="0,6,15,0" Name="timeBox" VerticalAlignment="Top" Width="60" Text="19:00" Grid.Column="1" />
+                <Label Content="Start Time:" Height="28" HorizontalAlignment="Left" Margin="114,4,0,0" Name="label1" VerticalAlignment="Top" Grid.Column="1" />
+            </Grid>
+
+        </GroupBox>
+        
+        <Button Content="OK" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" IsDefault="True" Click="Button_Click_1" Margin="341,227,0,0" />
+        <Button Content="Cancel" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" IsCancel="True" Margin="12,227,0,0" />
+        <GroupBox Header="Duration" Height="63" HorizontalAlignment="Left" Name="groupBox1" VerticalAlignment="Top" Width="404" Margin="12,103,0,0">
+            <Grid>
+                <Label Content="TimeSpan (hh:mm):" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="label4" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Right" Margin="0,8,230,0" Name="tbDuration" VerticalAlignment="Top" Width="38" Text="01:00" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Type" Height="55" HorizontalAlignment="Left" Margin="12,166,0,0" Name="groupBox2" VerticalAlignment="Top" Width="404">
+            <Grid>
+                <ComboBox Height="23" HorizontalAlignment="Left" Margin="54,0,0,0" Name="swTypeComboBox" VerticalAlignment="Top" Width="270">
+                    <ComboBoxItem ClipToBounds="True" Content="All Programs Service Window" IsSelected="True" Tag="1" />
+                    <ComboBoxItem ClipToBounds="True" Content="Program Service Window" IsSelected="False" Tag="2" />
+                    <ComboBoxItem ClipToBounds="True" Content="Reboot Required Service Window" IsSelected="False" Tag="3" />
+                    <ComboBoxItem ClipToBounds="True" Content="Software Update Service Window" IsSelected="False" Tag="4" />
+                    <ComboBoxItem ClipToBounds="True" Content="OSD Service Window" IsSelected="False" Tag="5" />
+                    <ComboBoxItem ClipToBounds="True" Content="Non-working hours" IsSelected="False" Tag="6" />
+                </ComboBox>
+                <Label Content="Type:" Height="28" HorizontalAlignment="Left" Margin="10,-2,0,0" Name="label3" VerticalAlignment="Top" />
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

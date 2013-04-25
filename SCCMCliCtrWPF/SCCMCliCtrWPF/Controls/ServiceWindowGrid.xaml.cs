@@ -197,5 +197,43 @@ namespace ClientCenter.Controls
             catch { }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
+
+        private void bt_NewServiceWindow_Click(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+                ServiceWindowNew oSWForm = new ServiceWindowNew();
+                oSWForm.datePicker1.SelectedDate = DateTime.Now;
+                oSWForm.timeBox.Text = DateTime.Now.ToShortTimeString();
+                oSWForm.ShowDialog();
+                if (oSWForm.DialogResult.HasValue && oSWForm.DialogResult.Value)
+                {
+                    ScheduleDecoding.SMS_ST_NonRecurring oSched = new ScheduleDecoding.SMS_ST_NonRecurring();
+                    if (oSWForm.datePicker1.SelectedDate != null)
+                    {
+                        oSched.StartTime = (DateTime)oSWForm.datePicker1.SelectedDate;
+                        TimeSpan oTime = TimeSpan.Parse(oSWForm.timeBox.Text);
+                        oSched.StartTime = oSched.StartTime.Add(oTime);
+                        oSched.IsGMT = false;
+
+                        //Define duration
+                        TimeSpan tsDuration = DateTime.ParseExact(oSWForm.tbDuration.Text, "hh:mm", System.Globalization.CultureInfo.InvariantCulture).TimeOfDay;
+                        oSched.MinuteDuration = tsDuration.Minutes;
+                        oSched.HourDuration = tsDuration.Hours;
+                        oSched.DayDuration = 0;
+
+                        uint iType = uint.Parse(((ComboBoxItem)oSWForm.swTypeComboBox.SelectedItem).Tag.ToString());
+                        oAgent.Client.RequestedConfig.CreateServiceWindow(oSched.ScheduleID, iType);
+
+                        //Refresh control
+                        scheduleControl1_DeleteClick(sender, null);
+                    }
+                }
+            }
+
+            catch { }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
     }
 }
