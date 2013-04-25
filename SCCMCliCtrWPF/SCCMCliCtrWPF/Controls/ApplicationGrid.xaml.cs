@@ -52,7 +52,7 @@ namespace ClientCenter.Controls
                         //lApps.ToString();
 
                         oAgent = value;
-                        iApplications = oAgent.Client.SoftwareDistribution.Applications.OrderBy(t=>t.FullName).ToList();
+                        iApplications = oAgent.Client.SoftwareDistribution.Applications.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
                         //TEST.Source = BitMapConvert.ToBitmapImage(iApplications[0].IconAsImage);
 
                         dataGrid1.BeginInit();
@@ -76,7 +76,7 @@ namespace ClientCenter.Controls
 
         private void bt_Reload_Click(object sender, RoutedEventArgs e)
         {
-            iApplications = oAgent.Client.SoftwareDistribution.Applications.OrderBy(t => t.FullName).ToList();
+            iApplications = oAgent.Client.SoftwareDistribution.Applications.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o=>o.FullName).ToList();
 
             dataGrid1.BeginInit();
             dataGrid1.ItemsSource = iApplications;
