@@ -186,7 +186,7 @@ namespace ClientCenter
                 eventMonitoring1.Listener = myTrace;
                 invInstalledSWGrid.Listener = myTrace;
                 serviceWindowGrid1.Listener = myTrace;
-                
+                CollectionVariablesGrid1.Listener = myTrace;
 
                 navigationPane1.IsEnabled = true;
                 ribAgenTActions.IsEnabled = true;
@@ -265,6 +265,9 @@ namespace ClientCenter
                                         break;
                                     case "ServiceWindow":
                                         serviceWindowGrid1.SCCMAgentConnection = oAgent;
+                                        break;
+                                    case "Collectionvariables":
+                                        CollectionVariablesGrid1.SCCMAgentConnection = oAgent;
                                         break;
                                 }
                                 break;

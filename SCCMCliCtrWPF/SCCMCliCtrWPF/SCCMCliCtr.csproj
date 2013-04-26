@@ -92,6 +92,10 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\sccmclictrlib\System.Management.Automation.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -114,6 +118,9 @@
     </ApplicationDefinition>
     <Compile Include="Controls\ApplicationGrid.xaml.cs">
       <DependentUpon>ApplicationGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CollectionVariables.xaml.cs">
+      <DependentUpon>CollectionVariables.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\InstalledSoftwareGrid.xaml.cs">
       <DependentUpon>InstalledSoftwareGrid.xaml</DependentUpon>
@@ -172,6 +179,10 @@
     <Page Include="Controls\CacheGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CollectionVariables.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\InstalledSoftwareGrid.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,253 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="PSCollDecode" xml:space="preserve">
+    <value>$script = {
+function Enable-TSDuplicateToken {
+&lt;#
+  .SYNOPSIS
+  Duplicates the Access token of lsass and sets it in the current process thread.
+
+  .DESCRIPTION
+  The Enable-TSDuplicateToken CmdLet duplicates the Access token of lsass and sets it in the current process thread.
+  The CmdLet must be run with elevated permissions.
+
+  .EXAMPLE
+  Enable-TSDuplicateToken
+
+  .LINK
+  http://www.truesec.com
+
+  .NOTES
+  Goude 2012, TreuSec
+#&gt;
+[CmdletBinding()]
+param()
+
+$signature = @"
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+     public struct TokPriv1Luid
+     {
+         public int Count;
+         public long Luid;
+         public int Attr;
+     }
+
+    public const int SE_PRIVILEGE_ENABLED = 0x00000002;
+    public const int TOKEN_QUERY = 0x00000008;
+    public const int TOKEN_ADJUST_PRIVILEGES = 0x00000020;
+    public const UInt32 STANDARD_RIGHTS_REQUIRED = 0x000F0000;
+
+    public const UInt32 STANDARD_RIGHTS_READ = 0x00020000;
+    public const UInt32 TOKEN_ASSIGN_PRIMARY = 0x0001;
+    public const UInt32 TOKEN_DUPLICATE = 0x0002;
+    public const UInt32 TOKEN_IMPERSONATE = 0x0004;
+    public const UInt32 TOKEN_QUERY_SOURCE = 0x0010;
+    public const UInt32 TOKEN_ADJUST_GROUPS = 0x0040;
+    public const UInt32 TOKEN_ADJUST_DEFAULT = 0x0080;
+    public const UInt32 TOKEN_ADJUST_SESSIONID = 0x0100;
+    public const UInt32 TOKEN_READ = (STANDARD_RIGHTS_READ | TOKEN_QUERY);
+    public const UInt32 TOKEN_ALL_ACCESS = (STANDARD_RIGHTS_REQUIRED | TOKEN_ASSIGN_PRIMARY |
+      TOKEN_DUPLICATE | TOKEN_IMPERSONATE | TOKEN_QUERY | TOKEN_QUERY_SOURCE |
+      TOKEN_ADJUST_PRIVILEGES | TOKEN_ADJUST_GROUPS | TOKEN_ADJUST_DEFAULT |
+      TOKEN_ADJUST_SESSIONID);
+
+    public const string SE_TIME_ZONE_NAMETEXT = "SeTimeZonePrivilege";
+    public const int ANYSIZE_ARRAY = 1;
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct LUID
+    {
+      public UInt32 LowPart;
+      public UInt32 HighPart;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct LUID_AND_ATTRIBUTES {
+       public LUID Luid;
+       public UInt32 Attributes;
+    }
+
+
+    public struct TOKEN_PRIVILEGES {
+      public UInt32 PrivilegeCount;
+      [MarshalAs(UnmanagedType.ByValArray, SizeConst=ANYSIZE_ARRAY)]
+      public LUID_AND_ATTRIBUTES [] Privileges;
+    }
+
+    [DllImport("advapi32.dll", SetLastError=true)]
+     public extern static bool DuplicateToken(IntPtr ExistingTokenHandle, int
+        SECURITY_IMPERSONATION_LEVEL, out IntPtr DuplicateTokenHandle);
+
+
+    [DllImport("advapi32.dll", SetLastError=true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static extern bool SetThreadToken(
+      IntPtr PHThread,
+      IntPtr Token
+    );
+
+    [DllImport("advapi32.dll", SetLastError=true)]
+     [return: MarshalAs(UnmanagedType.Bool)]
+      public static extern bool OpenProcessToken(IntPtr ProcessHandle, 
+       UInt32 DesiredAccess, out IntPtr TokenHandle);
+
+    [DllImport("advapi32.dll", SetLastError = true)]
+    public static extern bool LookupPrivilegeValue(string host, string name, ref long pluid);
+
+    [DllImport("kernel32.dll", ExactSpelling = true)]
+    public static extern IntPtr GetCurrentProcess();
+
+    [DllImport("advapi32.dll", ExactSpelling = true, SetLastError = true)]
+     public static extern bool AdjustTokenPrivileges(IntPtr htok, bool disall,
+     ref TokPriv1Luid newst, int len, IntPtr prev, IntPtr relen);
+"@
+
+  $currentPrincipal = New-Object Security.Principal.WindowsPrincipal( [Security.Principal.WindowsIdentity]::GetCurrent())
+  if($currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator) -ne $true) {
+    Write-Warning "Run the Command as an Administrator"
+    Break
+  }
+
+  Add-Type -MemberDefinition $signature -Name AdjPriv -Namespace AdjPriv
+  $adjPriv = [AdjPriv.AdjPriv]
+  [long]$luid = 0
+
+  $tokPriv1Luid = New-Object AdjPriv.AdjPriv+TokPriv1Luid
+  $tokPriv1Luid.Count = 1
+  $tokPriv1Luid.Luid = $luid
+  $tokPriv1Luid.Attr = [AdjPriv.AdjPriv]::SE_PRIVILEGE_ENABLED
+
+  $retVal = $adjPriv::LookupPrivilegeValue($null, "SeDebugPrivilege", [ref]$tokPriv1Luid.Luid)
+
+  [IntPtr]$htoken = [IntPtr]::Zero
+  $retVal = $adjPriv::OpenProcessToken($adjPriv::GetCurrentProcess(), [AdjPriv.AdjPriv]::TOKEN_ALL_ACCESS, [ref]$htoken)
+  
+
+  $tokenPrivileges = New-Object AdjPriv.AdjPriv+TOKEN_PRIVILEGES
+  $retVal = $adjPriv::AdjustTokenPrivileges($htoken, $false, [ref]$tokPriv1Luid, 12, [IntPtr]::Zero, [IntPtr]::Zero)
+
+  if(-not($retVal)) {
+    [System.Runtime.InteropServices.marshal]::GetLastWin32Error()
+    Break
+  }
+
+  $process = (Get-Process -Name lsass)
+  [IntPtr]$hlsasstoken = [IntPtr]::Zero
+  $retVal = $adjPriv::OpenProcessToken($process.Handle, ([AdjPriv.AdjPriv]::TOKEN_IMPERSONATE -BOR [AdjPriv.AdjPriv]::TOKEN_DUPLICATE), [ref]$hlsasstoken)
+
+  [IntPtr]$dulicateTokenHandle = [IntPtr]::Zero
+  $retVal = $adjPriv::DuplicateToken($hlsasstoken, 2, [ref]$dulicateTokenHandle)
+
+  $retval = $adjPriv::SetThreadToken([IntPtr]::Zero, $dulicateTokenHandle)
+  if(-not($retVal)) {
+    [System.Runtime.InteropServices.marshal]::GetLastWin32Error()
+  }
+}
+
+Function UnProtect-PolicySecret {
+&lt;#
+	.SYNOPSIS
+	Decrypts policy secrets
+
+	.DESCRIPTION
+	The UnProtect-PolicySecret CmdLet takes a encrypted string and returnsthe decrypted sting.
+ 
+	.NOTES
+	This function must be run under the local system account on the computer that encrypted the data.
+  
+	.EXAMPLE
+	UnProtect-PolicySecret -data "F600000001000000D08C9DDF0115D1118C7A00C04FC297EB010000006AF233F693"
+
+	.PARAMETER Data
+	[String] Encrypted data
+#&gt;
+
+	[CmdletBinding()] 
+	PARAM (
+		[Parameter(Position=0,Mandatory=$true,HelpMessage="Encrypted sting",ValueFromPipeline=$true)][Alias("Data")][String] $strData 
+	)
+	
+	PROCESS { 
+	    $signature = @'  
+		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+	    public struct DATA_BLOB {
+	        public int cbData;
+	        public System.IntPtr pbData;
+	    }
+		
+	    [DllImport("Crypt32.dll",SetLastError=true, CharSet=CharSet.Auto)]
+	    [return: MarshalAs(UnmanagedType.Bool)]
+	    public static extern bool CryptUnprotectData(
+	        ref DATA_BLOB pDataIn, 
+	        String szDataDescr, 
+	        ref int pOptionalEntropy, 
+	        IntPtr pvReserved, 
+	        ref int pPromptStruct, 
+	        int dwFlags, 
+	        ref DATA_BLOB pDataOut
+		);
+'@
+		# Add-Type so we can access the unmanaged functions from PowerShell
+	    Add-Type -MemberDefinition $signature -Name Crypt32 -Namespace PKI
+		
+		# Chop string up into bytes, and drop the first 4 bytes
+		[System.Byte[]]$byteData = New-Object System.Byte[] $($strData.length / 2 - 4)
+	    for ($i = 0; $i -lt (($strData.length / 2) - 4); $i++)
+	    {
+	        $byteData[$i] = [System.Convert]::ToByte($strData.substring(($i + 4) * 2, 2),16)
+	    }
+		
+		# Create a Blob to contain the encrypted bytes
+	    $cipherTextBlob = New-Object PKI.Crypt32+DATA_BLOB
+	    $cipherTextBlob.cbData = $byteData.length
+	    $cipherTextBlob.pbData = [System.Runtime.Interopservices.Marshal]::AllocCoTaskMem($cipherTextBlob.cbData)
+
+	    # Copy data from original source to the BLOB structure
+	    [System.Runtime.Interopservices.Marshal]::Copy($byteData, 0, $cipherTextBlob.pbData, $cipherTextBlob.cbData)
+	    
+		# Create a Blob to contain the unencrypted bytes
+		$plainTextBlob = New-Object PKI.Crypt32+DATA_BLOB
+
+	    # Decrypt the Blob with the encrypted bytes in it, and store in the plain text Blob
+	    if ([PKI.Crypt32]::CryptUnprotectData([ref]$cipherTextBlob, $null, [ref][IntPtr]::Zero, [IntPtr]::Zero, [ref][IntPtr]::Zero, 1, [ref]$plainTextBlob))
+	    {
+			# If the decryption was sucessful, create a new byte array to contain
+	        $bytePlainText = New-Object byte[] -ArgumentList $plainTextBlob.cbData
+
+	        # Copy data from the plain text Blob to the new byte array
+	        [System.Runtime.Interopservices.Marshal]::Copy($plainTextBlob.pbData, $bytePlainText, 0, $bytePlainText.length)
+	        
+	        # Convert the unicode byte array to plain text string and return it
+	        return $([System.Text.UnicodeEncoding]::Unicode.GetString($bytePlainText))
+	    }
+	    Else
+	    {
+	        write-host ("Decrypt failed, error code: " + [System.Runtime.Interopservices.Marshal]::GetLastWin32Error())
+	    }
+	}
+}
+
+# Impersonate the LocalSystem account on the current thread
+Enable-TSDuplicateToken
+
+#Get CollectionVariables
+[hashtable]$VarResult = @{}
+$CollVars = Get-Wmiobject -Namespace "root\ccm\Policy\Machine\ActualConfig" -Class "CCM_CollectionVariable"
+if($CollVars){
+    foreach($obj in $CollVars) 
+    { 
+        $VarResult.add($obj.Name, $(UnProtect-PolicySecret ([XML]$obj.value).PolicySecret.FirstChild.Value)) 
+    }
+}
+$VarResult
+}
+Invoke-Command $script</value>
+    <comment>Code from http://www.truesec.com/Tools/Tool/Enable-TSDuplicateToken# and http://blogs.technet.com/b/heyscriptingguy/archive/2012/07/06/use-powershell-to-decrypt-lsa-secrets-from-the-registry.aspx, updated and commited by Mark Whittle</comment>
+  </data>
 </root>
