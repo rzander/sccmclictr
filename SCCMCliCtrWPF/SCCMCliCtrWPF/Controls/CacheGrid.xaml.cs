@@ -86,6 +86,11 @@ namespace ClientCenter
             {
                 Process Explorer = new Process();
                 Explorer.StartInfo.FileName = "Explorer.exe";
+
+                //Connect IPC$ if not already connected (not needed with integrated authentication)
+                if (!oAgent.ConnectIPC)
+                    oAgent.ConnectIPC = true;
+
                 string sCachePath = "";
                 try
                 {
@@ -175,6 +180,11 @@ namespace ClientCenter
             {
                 Process Explorer = new Process();
                 Explorer.StartInfo.FileName = "Explorer.exe";
+
+                //Connect IPC$ if not already connected (not needed with integrated authentication)
+                if (!oAgent.ConnectIPC)
+                    oAgent.ConnectIPC = true;
+
                 try
                 {
                     if (dataGrid1.SelectedItem != null)

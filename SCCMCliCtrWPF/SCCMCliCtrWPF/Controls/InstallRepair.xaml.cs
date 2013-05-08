@@ -246,5 +246,20 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
+        private void bt_DelCCM_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                //Repair SCCM Agent...
+                oAgent.Client.Health.DeleteCCMNamespace();
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
     }
 }

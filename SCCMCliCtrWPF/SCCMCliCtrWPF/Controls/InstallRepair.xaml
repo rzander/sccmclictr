@@ -25,6 +25,7 @@
                         <StackPanel Margin="0,5,0,0">
                             <Button Content="Verify WMI Repository" Height="23" HorizontalAlignment="Center" Name="bt_WMICheck" VerticalAlignment="Top" Width="175" ToolTip="winmgmt /verifyrepository" Click="bt_WMICheck_Click" />
                             <Button Content="Performs a consistency check " Height="23" HorizontalAlignment="Center" Name="bt_WMISalvage" VerticalAlignment="Top" Width="175" ToolTip="winmgmt /salvagerepository" Margin="0,5,0,0" Click="bt_WMISalvage_Click" />
+                            <Button Content="Delete root\ccm " Height="23" HorizontalAlignment="Center" Name="bt_DelCCM" VerticalAlignment="Top" Width="175" ToolTip="delete the root\ccm namespace in WMI" Margin="0,5,0,0" Click="bt_DelCCM_Click" />
                             <Button Content="Reset WMI Repository " Height="23" HorizontalAlignment="Center" Name="bt_WMIReset" VerticalAlignment="Top" Width="175" ToolTip="winmgmt /resetrepository" Margin="0,5,0,0" Click="bt_WMIReset_Click" />
                         </StackPanel>
                     </Grid>

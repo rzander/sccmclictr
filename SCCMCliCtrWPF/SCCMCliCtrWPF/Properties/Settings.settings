@@ -103,5 +103,8 @@ while ($a -ne 1)</Value>
     <Setting Name="DefaultLaunchPermission" Type="System.String" Scope="Application">
       <Value Profile="(Default)">O:BAG:BAD:(A;;CCDCLCSWRP;;;SY)(A;;CCDCLCSWRP;;;BA)(A;;CCDCLCSWRP;;;IU)</Value>
     </Setting>
+    <Setting Name="NoLocalAdminCheck" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

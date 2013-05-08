@@ -248,6 +248,12 @@ namespace ClientCenter
             {
                 Process Explorer = new Process();
                 Explorer.StartInfo.FileName = "Explorer.exe";
+                
+                //Connect IPC$ if not already connected (not needed with integrated authentication)
+                if (!oAgent.ConnectIPC)
+                    oAgent.ConnectIPC = true;
+
+
                 string sLogPath = "";
                 try
                 {
@@ -280,6 +286,10 @@ namespace ClientCenter
             {
                 Process Explorer = new Process();
                 Explorer.StartInfo.FileName = "Explorer.exe";
+
+                //Connect IPC$ if not already connected (not needed with integrated authentication)
+                if (!oAgent.ConnectIPC)
+                    oAgent.ConnectIPC = true;
 
                 if (oAgent.Client.AgentProperties.isSCCM2012)
                 {
@@ -333,6 +343,11 @@ namespace ClientCenter
             {
                 Process Explorer = new Process();
                 Explorer.StartInfo.FileName = "Explorer.exe";
+                
+                //Connect IPC$ if not already connected (not needed with integrated authentication)
+                if (!oAgent.ConnectIPC)
+                    oAgent.ConnectIPC = true;
+
                 string sCachePath = "";
                 try
                 {

@@ -52,8 +52,7 @@ namespace ClientCenter
                             //Store Collection Variables for 30s
                             List<PSObject> sRes = oAgent.Client.GetObjectsFromPS(Properties.Resources.PSCollDecode, false, new TimeSpan(0,0,30));
                             
-                            //Need to reconnect otherwise following calls will fail because of some evil code in the script...
-                            oAgent.connect();
+
 
                             //Get reuslts...
                             foreach (PSObject po in sRes)
@@ -78,10 +77,14 @@ namespace ClientCenter
                                     }
                                 }
                             }
+
+                            //Need to reconnect otherwise following calls will fail because of some evil code in the script...
+                            oAgent.disconnect();
+                            oAgent.connect();
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine(ex.Message);
+                            //Console.WriteLine(ex.Message);
                         }
                     }
                     catch { }

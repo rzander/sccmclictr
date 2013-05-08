@@ -67,8 +67,12 @@ namespace ClientCenter
             }
             catch { }
 
-            //Check if App is running as Admin, otherwise restart App as Admin...
-            Application_Startup(this, tb_TargetComputer.Text);
+
+            if (!Properties.Settings.Default.NoLocalAdminCheck)
+            {
+                //Check if App is running as Admin, otherwise restart App as Admin...
+                Application_Startup(this, tb_TargetComputer.Text);
+            }
 
         }
 
@@ -123,7 +127,6 @@ namespace ClientCenter
                 // Do normal startup stuff...
             }
         }
-
 
         void Current_Exit(object sender, ExitEventArgs e)
         {
