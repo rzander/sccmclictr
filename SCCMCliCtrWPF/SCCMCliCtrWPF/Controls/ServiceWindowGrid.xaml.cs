@@ -17,6 +17,7 @@ using System.Diagnostics;
 using sccmclictr.automation;
 using sccmclictr.automation.functions;
 using sccmclictr.automation.schedule;
+using System.Globalization;
 
 namespace ClientCenter.Controls
 {
@@ -205,7 +206,7 @@ namespace ClientCenter.Controls
             {
                 ServiceWindowNew oSWForm = new ServiceWindowNew();
                 oSWForm.datePicker1.SelectedDate = DateTime.Now;
-                oSWForm.timeBox.Text = DateTime.Now.ToShortTimeString();
+                oSWForm.timeBox.Text = DateTime.Now.ToString("t", new CultureInfo("de-CH"));
                 oSWForm.ShowDialog();
                 if (oSWForm.DialogResult.HasValue && oSWForm.DialogResult.Value)
                 {
@@ -213,12 +214,12 @@ namespace ClientCenter.Controls
                     if (oSWForm.datePicker1.SelectedDate != null)
                     {
                         oSched.StartTime = (DateTime)oSWForm.datePicker1.SelectedDate;
-                        TimeSpan oTime = TimeSpan.Parse(oSWForm.timeBox.Text);
+                        TimeSpan oTime = TimeSpan.Parse(oSWForm.timeBox.Text, new CultureInfo("de-CH"));
                         oSched.StartTime = oSched.StartTime.Add(oTime);
                         oSched.IsGMT = false;
 
                         //Define duration
-                        TimeSpan tsDuration = DateTime.ParseExact(oSWForm.tbDuration.Text, "hh:mm", System.Globalization.CultureInfo.InvariantCulture).TimeOfDay;
+                        TimeSpan tsDuration = DateTime.ParseExact(oSWForm.tbDuration.Text, "t", new CultureInfo("de-CH")).TimeOfDay;
                         oSched.MinuteDuration = tsDuration.Minutes;
                         oSched.HourDuration = tsDuration.Hours;
                         oSched.DayDuration = 0;
