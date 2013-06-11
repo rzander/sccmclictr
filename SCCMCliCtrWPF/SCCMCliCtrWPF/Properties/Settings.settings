@@ -106,5 +106,11 @@ while ($a -ne 1)</Value>
     <Setting Name="NoLocalAdminCheck" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="WinRMPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)">5985</Value>
+    </Setting>
+    <Setting Name="WinRMSSL" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -37,6 +37,7 @@ namespace ClientCenter
 
         public MainPage()
         {
+
             InitializeComponent();
 
             Application.Current.Exit += new ExitEventHandler(Current_Exit);
@@ -44,7 +45,9 @@ namespace ClientCenter
             Style s = new Style();
             s.Setters.Add(new Setter(UIElement.VisibilityProperty, Visibility.Collapsed));
             tabNavigationPanels.ItemContainerStyle = s;
-            
+            tb_wsmanport.Text = Properties.Settings.Default.WinRMPort;
+            cb_ssl.IsChecked = Properties.Settings.Default.WinRMSSL;
+
             try
             {
                 if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
@@ -166,12 +169,13 @@ namespace ClientCenter
 
                 if (string.IsNullOrEmpty(tb_Username.Text))
                 {
-                    oAgent = new SCCMAgent(sTarget, null, null);
+                    oAgent = new SCCMAgent(sTarget, null, null, int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
                 }
                 else
                 {
-                    oAgent = new SCCMAgent(sTarget, tb_Username.Text, common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name));
+                    oAgent = new SCCMAgent(sTarget, tb_Username.Text, common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name), int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
                 }
+
                 oAgent.connect();
                 oAgent.PSCode.Listeners.Add(myTrace);
 

@@ -180,5 +180,29 @@ while ($a -ne 1)")]
                 return ((bool)(this["NoLocalAdminCheck"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5985")]
+        public string WinRMPort {
+            get {
+                return ((string)(this["WinRMPort"]));
+            }
+            set {
+                this["WinRMPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool WinRMSSL {
+            get {
+                return ((bool)(this["WinRMSSL"]));
+            }
+            set {
+                this["WinRMSSL"] = value;
+            }
+        }
     }
 }

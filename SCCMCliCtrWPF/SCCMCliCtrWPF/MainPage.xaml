@@ -38,7 +38,7 @@
                                 <rib:RibbonControlSizeDefinition />
                             </rib:RibbonApplicationMenu.QuickAccessToolBarControlSizeDefinition>-->
                             <rib:RibbonApplicationMenuItem Header="Connection Options...">
-                                <StackPanel Width="300">
+                                <StackPanel Width="310" HorizontalAlignment="Left">
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="Username:" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70"  />
                                         <TextBox Height="23" HorizontalAlignment="Left" Name="tb_Username" VerticalAlignment="Top" Width="140" Text="{Binding Source={x:Static p:Settings.Default}, Path=Username, Mode=TwoWay}" />
@@ -47,6 +47,14 @@
                                         <Label Content="Password:" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" />
                                         <PasswordBox Height="23" HorizontalAlignment="Left" Name="pb_Password" VerticalAlignment="Top" Width="140" KeyDown="pb_Password_KeyDown" />
                                     </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Port:" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" />
+                                        <TextBox  Height="23" HorizontalAlignment="Left" Name="tb_wsmanport" VerticalAlignment="Top" Width="60" Text="5985" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="HTTPS (SSL):" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" />
+                                        <CheckBox  Height="23" HorizontalAlignment="Left" Name="cb_ssl" VerticalAlignment="Top" IsChecked="True" />
+                                    </StackPanel>
                                 </StackPanel>
                             </rib:RibbonApplicationMenuItem>
                                 <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Center">
@@ -54,7 +62,7 @@
                                     <TextBox Name="tb_TargetComputer" Text="127.0.0.1" Width="150" Height="25" />
                                     <rib:RibbonButton Name="bt_Connect" VerticalAlignment="Center" Label="Connect" Height="23" Click="bt_Connect_Click" />
                                 </StackPanel>
-                            <Rectangle MinHeight="300"/>
+                            <Rectangle MinHeight="310"/>
                         </rib:RibbonApplicationMenu>
                     </rib:Ribbon.ApplicationMenu>
                     <rib:RibbonTab Header="Agent Actions" IsEnabled="false" Name="ribAgenTActions">
