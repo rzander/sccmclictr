@@ -190,7 +190,7 @@
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
                                                     <Image Source="/SCCMCliCtrWPF;component/Images/Computer_protection.ico" Stretch="Uniform" Width="20" Height="20"/>
-                                                    <TextBlock Text="Missing Updates" Margin="3,0,0,0"></TextBlock>
+                                                    <TextBlock Text="Pending Updates" Margin="3,0,0,0" ToolTip="Show all approved but missing updates."></TextBlock>
                                                 </StackPanel>
                                             </TreeViewItem.Header>
                                         </TreeViewItem>
@@ -198,7 +198,7 @@
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
                                                     <Image Source="/SCCMCliCtrWPF;component/Images/Computer_protection.ico" Stretch="Uniform" Width="20" Height="20"/>
-                                                    <TextBlock Text="All Updates" Margin="3,0,0,0"></TextBlock>
+                                                    <TextBlock Text="All Updates" Margin="3,0,0,0" ToolTip="Show all detected updates."></TextBlock>
                                                 </StackPanel>
                                             </TreeViewItem.Header>
                                         </TreeViewItem>

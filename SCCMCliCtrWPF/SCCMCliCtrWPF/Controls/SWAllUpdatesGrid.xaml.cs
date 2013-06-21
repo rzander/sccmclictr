@@ -104,9 +104,7 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Wait;
             try
             {
-                //iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.GroupBy(a => new { a.ProductID }).Where(grp => grp.Count() > 1).SelectMany(grp => grp.Select(r => r)).ToList();
                 iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.GroupBy(a => new { a.Article, a.Bulletin, a.ProductID }).Select(y => y.First()).OrderBy(t=>t.Article).ToList(); 
-                //iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.OrderBy(t => t.Article).ToList();
                 dataGrid1.BeginInit();
                 dataGrid1.ItemsSource = iUpdates;
                 dataGrid1.EndInit();
@@ -115,6 +113,29 @@ namespace ClientCenter
             {
                 Listener.WriteError(ex.Message);
             }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void bt_ReloadMissing_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                Listener.Filter = new SourceFilter("test");
+                iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.GroupBy(a => new { a.Article, a.Bulletin, a.ProductID }).Select(y => y.First()).Where(u => u.Status == "Missing").OrderBy(t => t.Article).ToList();
+                dataGrid1.BeginInit();
+                dataGrid1.ItemsSource = iUpdates;
+                dataGrid1.EndInit();
+                Listener.Filter = null;
+                //Fake message (we use the content from cache :-)
+                Listener.WriteLine(" get-wmiobject -query \"SELECT * FROM CCM_UpdateStatus\" -namespace \"root\\ccm\\SoftwareUpdates\\UpdatesStore\" | where {$_.status -eq \"Missing\"}");
+
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Listener.Filter = null;
             Mouse.OverrideCursor = Cursors.Arrow;
         }
     }

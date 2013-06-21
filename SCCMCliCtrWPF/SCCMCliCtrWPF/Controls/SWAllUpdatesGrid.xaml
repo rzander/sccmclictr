@@ -4,15 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="400">
     <Grid>
         <DockPanel>
             <DockPanel DockPanel.Dock="Top"  Height="32">
                 <ToolBar Name="toolBar1">
-                    <Button ToolTip="Reload all running processes" Name="bt_Reload" Click="bt_Reload_Click">
+                    <Button ToolTip="Reload all updates..." Name="bt_Reload" Click="bt_Reload_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico"/>
                             <TextBlock Margin="2,0,0,0">Reload Updates</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Separator />
+                    <Button ToolTip="Reload all missing updates..." Name="bt_ReloadMissing" Click="bt_ReloadMissing_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico"/>
+                            <TextBlock Margin="2,0,0,0">Show missing updates</TextBlock>
                         </StackPanel>
                     </Button>
                     <Separator />
