@@ -68,7 +68,15 @@ namespace ClientCenter
                                         System.Collections.Hashtable hRes = new System.Collections.Hashtable();
                                         foreach (System.Collections.DictionaryEntry entry in hTable)
                                         {
-                                            hRes.Add(entry.Key, entry.Value.ToString().Replace("\0", ""));
+                                            string sKey = entry.Key.ToString();
+                                            string sValue = entry.Value.ToString().Replace("\0", "");
+                                            foreach(string sFilter in Properties.Settings.Default.CollectionVariablesFilter)
+                                            {
+                                                if (sKey.IndexOf(sFilter, 0, StringComparison.InvariantCultureIgnoreCase) > 0)
+                                                    sValue = "*********";
+                                            }
+
+                                            hRes.Add(sKey, sValue);
                                         }
 
                                         dataGrid1.BeginInit();
