@@ -162,6 +162,9 @@
     <Compile Include="Controls\SWUpdatesGrid.xaml.cs">
       <DependentUpon>SWUpdatesGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\WMIBrowser.xaml.cs">
+      <DependentUpon>WMIBrowser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ServiceWindowNew.xaml.cs">
       <DependentUpon>ServiceWindowNew.xaml</DependentUpon>
     </Compile>
@@ -223,6 +226,9 @@
     </Page>
     <Page Include="Controls\ExecHistoryGrid.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WMIBrowser.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainPage.xaml">

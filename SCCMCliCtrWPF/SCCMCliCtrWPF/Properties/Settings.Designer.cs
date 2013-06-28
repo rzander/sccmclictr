@@ -215,5 +215,19 @@ while ($a -ne 1)")]
                 return ((global::System.Collections.Specialized.StringCollection)(this["CollectionVariablesFilter"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>OS Architecture|root\cimv2|SELECT VariableValue FROM  Win32_Environment WHERE Name='PROCESSOR_ARCHITECTURE' AND UserName='&lt;SYSTEM&gt;'</string>
+  <string>PC Manufacturer|root\cimv2|SELECT Manufacturer FROM Win32_ComputerSystem</string>
+  <string>LastHWInv|Root\CCM\Scheduler|SELECT LastTriggerTime FROM CCM_Scheduler_History WHERE ScheduleID='{00000000-0000-0000-0000-000000000001}' and UserSID='Machine'</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection AdhocInv {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["AdhocInv"]));
+            }
+        }
     }
 }

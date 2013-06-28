@@ -47,6 +47,7 @@ namespace ClientCenter
             tabNavigationPanels.ItemContainerStyle = s;
             tb_wsmanport.Text = Properties.Settings.Default.WinRMPort;
             cb_ssl.IsChecked = Properties.Settings.Default.WinRMSSL;
+            wmiBroser.lAdhocQueries =  Properties.Settings.Default.AdhocInv.Cast<string>().ToList();;
 
             try
             {
@@ -275,6 +276,9 @@ namespace ClientCenter
                                         break;
                                     case "Collectionvariables":
                                         CollectionVariablesGrid1.SCCMAgentConnection = oAgent;
+                                        break;
+                                    case "WMIBrowser":
+                                        wmiBroser.SCCMAgentConnection = oAgent;
                                         break;
                                 }
                                 break;

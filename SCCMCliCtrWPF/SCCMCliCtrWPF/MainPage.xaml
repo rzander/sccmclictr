@@ -218,6 +218,16 @@
                                                 </StackPanel>
                                             </TreeViewItem.Header>
                                         </TreeViewItem>
+
+                                        <TreeViewItem IsExpanded="True" IsSelected="True" Tag="WMIBrowser" Name="tviWMIBrowser">
+                                            <TreeViewItem.Header>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Image Source="Images/Setting.ico" Stretch="Uniform" Width="16" Height="16"/>
+                                                    <TextBlock Text="Inventory data" Margin="3,0,0,0"></TextBlock>
+                                                </StackPanel>
+                                            </TreeViewItem.Header>
+                                        </TreeViewItem>
+                                        
                                     </TreeViewItem>
                                 </TreeView>
                             </StackPanel>
@@ -330,6 +340,11 @@
                                 <my4:AgentSettingItem HorizontalAlignment="Center" x:Name="agentSettingItem1" VerticalAlignment="Center" IsEnabled="False" />
                             </Grid>
                         </TabItem>
+                        <TabItem Header="WMIBrowser" Tag="WMIBrowser" Name="WMIBrowserTab">
+                            <Grid>
+                                <my6:WMIBrowser x:Name="wmiBroser"  />
+                            </Grid>
+                        </TabItem>
                         <TabItem Header="ServiceWindow" Tag="ServiceWindow" Name="ServiceWindowTab">
                             <Grid>
                                 <my6:ServiceWindowGrid x:Name="serviceWindowGrid1"/>
@@ -378,7 +393,6 @@
                         <TabItem Header="Collection Variables" Name="Collectionvariables" Tag="Collectionvariables" IsSelected="False">
                             <Grid>
                                 <my4:CollectionVariables HorizontalAlignment="Stretch" x:Name="CollectionVariablesGrid1" />
-
                             </Grid>
                         </TabItem>
                     </TabControl>

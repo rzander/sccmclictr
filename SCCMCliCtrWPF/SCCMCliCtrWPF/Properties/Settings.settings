@@ -119,5 +119,13 @@ while ($a -ne 1)</Value>
   &lt;string&gt;PWD&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
+    <Setting Name="AdhocInv" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;OS Architecture|root\cimv2|SELECT VariableValue FROM  Win32_Environment WHERE Name='PROCESSOR_ARCHITECTURE' AND UserName='&amp;lt;SYSTEM&amp;gt;'&lt;/string&gt;
+  &lt;string&gt;PC Manufacturer|root\cimv2|SELECT Manufacturer FROM Win32_ComputerSystem&lt;/string&gt;
+  &lt;string&gt;LastHWInv|Root\CCM\Scheduler|SELECT LastTriggerTime FROM CCM_Scheduler_History WHERE ScheduleID='{00000000-0000-0000-0000-000000000001}' and UserSID='Machine'&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -31,9 +31,7 @@ namespace ClientCenter
         {
             InitializeComponent();
         }
-
-
-
+                
         public SCCMAgent SCCMAgentConnection
         {
             get
