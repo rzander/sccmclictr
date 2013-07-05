@@ -1,4 +1,4 @@
-﻿<Page x:Class="ClientCenter.MainPage"
+﻿<Page xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"  x:Class="ClientCenter.MainPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -22,7 +22,8 @@
                     </LinearGradientBrush>
                 </DockPanel.Background>
                 <TextBlock Text="Target Computer: " VerticalAlignment="Center" Margin="15,0,0,0"></TextBlock>
-                <TextBox Name="tb_TargetComputer2" Width="150" Height="25" Text="{Binding Source={x:Static p:Settings.Default}, Path=DefaultHostName, Mode=TwoWay}" />
+                <Controls:AutoCompleteBox Name="tb_TargetComputer2" Width="150" Height="25" Text="{Binding Source={x:Static p:Settings.Default}, Path=DefaultHostName, Mode=TwoWay}" KeyUp="tb_TargetComputer2_KeyUp" Populating="tb_TargetComputer2_Populating" />
+
                 <Button Name="bt_Connect2"  Content="Connect" VerticalAlignment="Center" Height="25" Width="60" Margin="20,0,0,0" HorizontalAlignment="Left" Click="bt_Connect_Click" />
             </DockPanel>
             <DockPanel Name="RibbonDock" DockPanel.Dock="Top" Height="120">
@@ -59,7 +60,7 @@
                             </rib:RibbonApplicationMenuItem>
                                 <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Center">
                                     <TextBlock Text="Target Computer: " VerticalAlignment="Center"></TextBlock>
-                                    <TextBox Name="tb_TargetComputer" Text="127.0.0.1" Width="150" Height="25" />
+                                    <Controls:AutoCompleteBox Name="tb_TargetComputer" Text="127.0.0.1" Width="150" Height="25" Populating="tb_TargetComputer2_Populating" KeyUp="tb_TargetComputer_KeyUp"   />
                                     <rib:RibbonButton Name="bt_Connect" VerticalAlignment="Center" Label="Connect" Height="23" Click="bt_Connect_Click" />
                                 </StackPanel>
                             <Rectangle MinHeight="310"/>

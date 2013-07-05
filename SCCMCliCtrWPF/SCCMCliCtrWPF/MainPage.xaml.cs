@@ -66,7 +66,7 @@ namespace ClientCenter
                     tb_TargetComputer.Text = Environment.GetCommandLineArgs()[1];
                     tb_TargetComputer2.Text = Environment.GetCommandLineArgs()[1];
                 }
-                //sccmclictr.automation.common.Decrypt(Properties.Settings.Default.Password, Application.ResourceAssembly.ManifestModule.Name);
+
                 pb_Password.Password = Properties.Settings.Default.Password;
             }
             catch { }
@@ -164,6 +164,10 @@ namespace ClientCenter
                 if(sender == bt_Connect2)
                     sTarget = tb_TargetComputer2.Text;
 
+                tb_TargetComputer.Text = sTarget;
+                tb_TargetComputer2.Text = sTarget;
+
+
                 rStatus.Document = new FlowDocument();
                 myTrace = new MyTraceListener(ref rStatus);
                 myTrace.TraceOutputOptions = TraceOptions.None;
@@ -174,12 +178,30 @@ namespace ClientCenter
                 }
                 else
                 {
-                    oAgent = new SCCMAgent(sTarget, tb_Username.Text, common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name), int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
+                    string sPW = common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
+                    oAgent = new SCCMAgent(sTarget, tb_Username.Text, sPW , int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
                 }
 
                 oAgent.connect();
                 oAgent.PSCode.Listeners.Add(myTrace);
 
+                try
+                {
+                    //remove existing entry
+                    if (Properties.Settings.Default.recentlyUsedComputers.Contains(sTarget))
+                        Properties.Settings.Default.recentlyUsedComputers.Remove(sTarget);
+
+                    //add on first position
+                    Properties.Settings.Default.recentlyUsedComputers.Insert(0, sTarget);
+
+                    if (Properties.Settings.Default.recentlyUsedComputers.Count > 10)
+                    {
+                        Properties.Settings.Default.recentlyUsedComputers.RemoveAt(10);
+                    }
+
+                    Properties.Settings.Default.Save();
+                }
+                catch { }
 
                 agentSettingItem1.SCCMAgentConnection = oAgent;
                 agentSettingItem1.Listener = myTrace;
@@ -668,6 +690,42 @@ namespace ClientCenter
             oAgent.Client.AgentActions.PowerMgmtStartSummarizationTask();
             Mouse.OverrideCursor = Cursors.Arrow;
         }
+
+        private void tb_TargetComputer2_KeyUp(object sender, KeyEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            if (e.Key == Key.Enter)
+            {
+                tb_TargetComputer.Text = tb_TargetComputer2.Text;
+                bt_Connect_Click(sender, null);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+
+        }
+
+        private void tb_TargetComputer2_Populating(object sender, PopulatingEventArgs e)
+        {
+            try
+            {
+                AutoCompleteBox oSender = sender as AutoCompleteBox;
+                List<string> lcomputers = new List<string>();
+                oSender.ItemsSource = Properties.Settings.Default.recentlyUsedComputers;
+                oSender.PopulateComplete();
+            }
+            catch { }
+        }
+
+        private void tb_TargetComputer_KeyUp(object sender, KeyEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            if (e.Key == Key.Enter)
+            {
+                tb_TargetComputer2.Text = tb_TargetComputer.Text;
+                bt_Connect_Click(sender, null);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
     }
 
     public class MyTraceListener : TraceListener, INotifyPropertyChanged
