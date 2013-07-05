@@ -47,7 +47,10 @@ namespace ClientCenter
             tabNavigationPanels.ItemContainerStyle = s;
             tb_wsmanport.Text = Properties.Settings.Default.WinRMPort;
             cb_ssl.IsChecked = Properties.Settings.Default.WinRMSSL;
-            wmiBroser.lAdhocQueries =  Properties.Settings.Default.AdhocInv.Cast<string>().ToList();;
+            wmiBroser.lAdhocQueries =  Properties.Settings.Default.AdhocInv.Cast<string>().ToList();
+            if(Properties.Settings.Default.showPingButton)
+                bt_Ping.Visibility = System.Windows.Visibility.Visible;
+
 
             try
             {
@@ -182,8 +185,8 @@ namespace ClientCenter
                     oAgent = new SCCMAgent(sTarget, tb_Username.Text, sPW , int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
                 }
 
-                oAgent.connect();
                 oAgent.PSCode.Listeners.Add(myTrace);
+                oAgent.connect();
 
                 try
                 {
@@ -239,6 +242,7 @@ namespace ClientCenter
 
                 ribAgenTActions.IsEnabled = false;
                 ConnectionDock.Visibility = System.Windows.Visibility.Visible;
+                bt_Ping.Visibility = System.Windows.Visibility.Visible;
             }
 
             Mouse.OverrideCursor = Cursors.Arrow;
@@ -724,6 +728,44 @@ namespace ClientCenter
                 bt_Connect_Click(sender, null);
             }
             Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void bt_Ping_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                System.Net.NetworkInformation.Ping oPing = new System.Net.NetworkInformation.Ping();
+                System.Net.NetworkInformation.PingOptions oPingOptions = new System.Net.NetworkInformation.PingOptions();
+
+                oPingOptions.DontFragment = true;
+
+                // Create a buffer of 32 bytes of data to be transmitted. 
+                string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+                byte[] buffer = Encoding.ASCII.GetBytes(data);
+                int timeout = 120;
+                System.Net.NetworkInformation.PingReply reply = oPing.Send(tb_TargetComputer2.Text, timeout, buffer, oPingOptions);
+                if (reply.Status == System.Net.NetworkInformation.IPStatus.Success)
+                {
+                    rStatus.AppendText("System is online !" + reply.Address.ToString() + "\r");
+                    rStatus.AppendText("Address: " + reply.Address.ToString() + "\r");
+                    rStatus.AppendText("RoundTrip time: " + reply.RoundtripTime + "\r");
+                    
+                    /*rStatus.AppendText("Time to live: " + reply.Options.Ttl + "\r");
+                    rStatus.AppendText("Don't fragment: " + reply.Options.DontFragment + "\r");
+                    rStatus.AppendText("Buffer size: " + reply.Buffer.Length + "\r");*/
+                }
+                else
+                {
+                    rStatus.AppendText("Unable to ping the target device... !" + "\r");
+                    rStatus.AppendText(reply.Status.ToString() + "\r");
+                }
+            }
+            catch
+            {
+                rStatus.AppendText("Unable to ping the target device... !" + "\r");
+            }
+
+
         }
 
     }

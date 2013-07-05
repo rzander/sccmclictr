@@ -134,5 +134,8 @@ while ($a -ne 1)</Value>
   &lt;string&gt;127.0.0.1&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
+    <Setting Name="showPingButton" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
