@@ -125,7 +125,12 @@ while ($a -ne 1)</Value>
   &lt;string&gt;OS Architecture|root\cimv2|SELECT VariableValue FROM  Win32_Environment WHERE Name='PROCESSOR_ARCHITECTURE' AND UserName='&amp;lt;SYSTEM&amp;gt;'&lt;/string&gt;
   &lt;string&gt;PC Manufacturer|root\cimv2|SELECT Manufacturer FROM Win32_ComputerSystem&lt;/string&gt;
   &lt;string&gt;LastHWInv|Root\CCM\Scheduler|SELECT LastTriggerTime FROM CCM_Scheduler_History WHERE ScheduleID='{00000000-0000-0000-0000-000000000001}' and UserSID='Machine'&lt;/string&gt;
+  &lt;string&gt;LastSWInv|Root\CCM\Scheduler|SELECT LastTriggerTime FROM CCM_Scheduler_History WHERE ScheduleID='{00000000-0000-0000-0000-000000000002}' and UserSID='Machine'&lt;/string&gt;
+  &lt;string&gt;LastDDR|Root\CCM\Scheduler|SELECT LastTriggerTime FROM CCM_Scheduler_History WHERE ScheduleID='{00000000-0000-0000-0000-000000000003}' and UserSID='Machine'&lt;/string&gt;
+  &lt;string&gt;LastMachinePolicyRequest|Root\CCM\Scheduler|SELECT LastTriggerTime FROM CCM_Scheduler_History WHERE ScheduleID='{00000000-0000-0000-0000-000000000021}' and UserSID='Machine'&lt;/string&gt;
   &lt;string&gt;LastReboot|root\cimv2|SELECT LastBootUpTime FROM Win32_OperatingSystem&lt;/string&gt;
+  &lt;string&gt;InstallDate|root\cimv2|SELECT InstallDate FROM Win32_OperatingSystem&lt;/string&gt;
+  &lt;string&gt;CurrentUser|root\cimv2|SELECT Username FROM Win32_ComputerSystem&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="recentlyUsedComputers" Type="System.Collections.Specialized.StringCollection" Scope="User">
