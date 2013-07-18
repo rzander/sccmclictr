@@ -85,6 +85,7 @@ namespace ClientCenter.Controls
 
         private void miInstallApp_Click(object sender, RoutedEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             try
             {
                 //Install all selected Updates;
@@ -100,10 +101,12 @@ namespace ClientCenter.Controls
             {
                 Listener.WriteError(ex.Message);
             }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void miUnInstallApp_Click(object sender, RoutedEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             try
             {
                 //Install all selected Updates;
@@ -119,6 +122,48 @@ namespace ClientCenter.Controls
             {
                 Listener.WriteError(ex.Message);
             }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        //Does not work currently; Cancel command must be triggered from local System account and even then the App does not stop.
+        private void miCancelApp_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                //Cancel all selected app;
+                List<softwaredistribution.CCM_Application> lApps = new List<softwaredistribution.CCM_Application>();
+                foreach (softwaredistribution.CCM_Application cApp in dataGrid1.SelectedItems)
+                {
+                    lApps.Add(cApp);
+                    cApp.Cancel();
+                }
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void miDownloadContent_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                //Cancel all selected app;
+                List<softwaredistribution.CCM_Application> lApps = new List<softwaredistribution.CCM_Application>();
+                foreach (softwaredistribution.CCM_Application cApp in dataGrid1.SelectedItems)
+                {
+                    lApps.Add(cApp);
+                    cApp.DownloadContents();
+                }
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
     }
 

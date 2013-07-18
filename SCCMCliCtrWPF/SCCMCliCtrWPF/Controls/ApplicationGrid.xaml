@@ -27,6 +27,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" SortDirection="Ascending"/>
                         <DataGridTextColumn Header="EvaluationState" Binding="{Binding Path=EvaluationState}"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding Path=EvaluationStateText}"/>
                         <DataGridTextColumn Header="InstallState" Binding="{Binding Path=InstallState}"/>
                         <DataGridTextColumn Header="InstallTime" Binding="{Binding Path=LastInstallTime}"/>
                         <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" CanUserResize="True" />
@@ -45,11 +46,21 @@
                                     <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
                                 </MenuItem.Icon>
                             </MenuItem>
-                        <MenuItem Name="miUnInstallApp" Header="Uninstall" Click="miUnInstallApp_Click">
-                            <MenuItem.Icon>
-                                <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
-                            </MenuItem.Icon>
-                        </MenuItem>
+                            <MenuItem Name="miUnInstallApp" Header="Uninstall" Click="miUnInstallApp_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <!--<MenuItem Name="miDownloadContent" Header="DownloadContent" Click="miDownloadContent_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
+                                </MenuItem.Icon>
+                            </MenuItem>-->
+                            <!--<MenuItem Name="miCancelApp" Header="Cancel" Click="miCancelApp_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="/SCCMCliCtrWPF;component/Images/Stop.ico" Height="24" />
+                                </MenuItem.Icon>
+                            </MenuItem>-->
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>
