@@ -236,5 +236,34 @@ namespace ClientCenter.Controls
             catch { }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
+
+        private void bt_CleanServiceWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+
+            try
+            {
+                foreach (sccmclictr.automation.policy.requestedConfig.CCM_ServiceWindow oSW in oAgent.Client.RequestedConfig.ServiceWindow)
+                {
+                    try
+                    {
+                        if (string.Compare(oSW.PolicySource, "local", true) == 0)
+                        {
+                            if (oSW.ServiceWindowType != 6)
+                            {
+                                oAgent.Client.RequestedConfig.DeleteServiceWindow(oSW.ServiceWindowID);
+                            }
+                        }
+                    }
+                    catch { }
+                }
+
+                //Refresh control
+                scheduleControl1_DeleteClick(sender, null);
+            }
+
+            catch { }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
     }
 }
