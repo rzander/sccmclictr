@@ -156,5 +156,17 @@ namespace ClientCenter
             catch { }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
+
+        private void treeView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F2 | (e.Key == Key.C & Keyboard.Modifiers == ModifierKeys.Control))
+            {
+                try
+                {
+                    Clipboard.SetData(DataFormats.Text, treeView1.SelectedItem.ToString());
+                }
+                catch { }
+            }
+        }
     }
 }

@@ -306,6 +306,9 @@ namespace ClientCenter
                                     case "WMIBrowser":
                                         wmiBroser.SCCMAgentConnection = oAgent;
                                         break;
+                                    case "Advertisements":
+                                        advertisementGrid1.SCCMAgentConnection = oAgent;
+                                        break;
                                 }
                                 break;
                             }

@@ -32,7 +32,7 @@
                 </ToolBar>
             </DockPanel>
             <DockPanel DockPanel.Dock="Bottom" >
-                <TreeView Name="treeView1" IsTextSearchEnabled="True" IsManipulationEnabled="True" />
+                <TreeView Name="treeView1" IsTextSearchEnabled="True" IsManipulationEnabled="True" KeyDown="treeView1_KeyDown" />
             </DockPanel>
         </DockPanel>
         

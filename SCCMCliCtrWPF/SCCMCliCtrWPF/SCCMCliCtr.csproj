@@ -128,6 +128,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\AdvertisementGrid.xaml.cs">
+      <DependentUpon>AdvertisementGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ApplicationGrid.xaml.cs">
       <DependentUpon>ApplicationGrid.xaml</DependentUpon>
     </Compile>
@@ -179,6 +182,10 @@
     <Compile Include="ServiceWindowNew.xaml.cs">
       <DependentUpon>ServiceWindowNew.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\AdvertisementGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\AgentComponents.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

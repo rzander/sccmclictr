@@ -166,46 +166,4 @@ namespace ClientCenter.Controls
             Mouse.OverrideCursor = Cursors.Arrow;
         }
     }
-
-    //[ValueConversion(typeof(Image), typeof(BitmapImage))]
-    public class ImageConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            try
-            {
-                return BitMapConvert.ToBitmapImage(common.Base64ToImage(value as string) as System.Drawing.Image) as BitmapImage;
-            }
-            catch { }
-
-            return null;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return value;
-        }
-    }
-
-    static class BitMapConvert
-    {
-        public static BitmapImage ToBitmapImage(this System.Drawing.Image image)
-        {
-            try
-            {
-                MemoryStream ms = new MemoryStream();
-                image.Save(ms, image.RawFormat);
-                BitmapImage bi = new BitmapImage();
-                bi.BeginInit();
-                bi.StreamSource = ms;
-                bi.EndInit();
-                return bi;
-            }
-            catch { }
-
-            return null;
-        }
-    }
-
-
 }
