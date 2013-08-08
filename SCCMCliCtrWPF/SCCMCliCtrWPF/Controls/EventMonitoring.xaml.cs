@@ -74,6 +74,7 @@ namespace ClientCenter
             catch(Exception ex)
             {
                 ex.Message.ToString();
+                Listener.WriteError(ex.Message);
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }

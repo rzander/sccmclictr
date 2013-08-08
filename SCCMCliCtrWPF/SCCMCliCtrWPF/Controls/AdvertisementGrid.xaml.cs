@@ -146,59 +146,62 @@ namespace ClientCenter.Controls
 
         private void dataGrid2_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
+
             if (e.EditAction == DataGridEditAction.Commit)
             {
                 string sProp = ((wmiProp)e.Row.Item).Property.ToString();
+                string sType = ((wmiProp)e.Row.Item).TypeName.ToString();
                 string sVal = ((System.Windows.Controls.TextBox)(e.EditingElement)).Text;
                 string sRelPath = ((sccmclictr.automation.functions.softwaredistribution.CCM_SoftwareDistribution)(dataGrid1.SelectedItem))._RawObject.Properties["__NAMESPACE"].Value.ToString() + ":" + ((sccmclictr.automation.functions.softwaredistribution.CCM_SoftwareDistribution)(dataGrid1.SelectedItem))._RawObject.Properties["__RELPATH"].Value.ToString().Replace("\"", "'");
+                switch (sType.ToLower())
+                {
+                    case "string":
+                        oAgent.Client.SetProperty(sRelPath, sProp, "'" + sVal + "'");
+                        break;
+                    case "boolean":
+                        oAgent.Client.SetProperty(sRelPath, sProp, "$" + sVal);
+                        break;
+                    case "uint32":
+                        oAgent.Client.SetProperty(sRelPath, sProp, sVal);
+                        break;
+                    case "string[]":
+                        oAgent.Client.SetProperty(sRelPath, sProp, "@({" + sVal + "})");
+                        break;
+                }
 
-                oAgent.Client.SetProperty(sRelPath, sProp, "'" + sVal + "'");
             }
         }
 
-
-
-    }
-
-    //[ValueConversion(typeof(Image), typeof(BitmapImage))]
-    public class ImageConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        private void miInstallApp_Click(object sender, RoutedEventArgs e)
         {
-            try
+            Mouse.OverrideCursor = Cursors.Wait;
+            foreach (softwaredistribution.CCM_SoftwareDistribution oSW in dataGrid1.SelectedItems)
             {
-                return BitMapConvert.ToBitmapImage(common.Base64ToImage(value as string) as System.Drawing.Image) as BitmapImage;
+                try
+                {
+                    //Enforce ReRun Always, otherwise Adv may not start a 2nd time
+                    if (!oSW.ADV_RepeatRunBehavior.StartsWith("RerunAlways", StringComparison.CurrentCultureIgnoreCase) | !((oSW.ADV_MandatoryAssignments.HasValue) ? oSW.ADV_MandatoryAssignments.Value : false))
+                    {
+                        oSW.TriggerSchedule(true);
+                        oSW.ADV_RepeatRunBehavior = "RerunAlways";
+                        oSW.ADV_MandatoryAssignments = true;
+                    }
+                    else
+                    {
+                        oSW.TriggerSchedule(true);
+                    }
+                }
+                catch { }
             }
-            catch { }
-
-            return null;
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return value;
-        }
+
     }
 
-    static class BitMapConvert
-    {
-        public static BitmapImage ToBitmapImage(this System.Drawing.Image image)
-        {
-            try
-            {
-                MemoryStream ms = new MemoryStream();
-                image.Save(ms, image.RawFormat);
-                BitmapImage bi = new BitmapImage();
-                bi.BeginInit();
-                bi.StreamSource = ms;
-                bi.EndInit();
-                return bi;
-            }
-            catch { }
 
-            return null;
-        }
-    }
+
+
 
 
 }

@@ -59,6 +59,7 @@ namespace ClientCenter
                     //Pass Parameter like: http://sccmclictr.codeplex.com/releases/clickonce/SCCMCliCtrWPF.application?Computer2
                     Uri launchUri = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.ActivationUri;
                     tb_TargetComputer.Text = launchUri.Query.Replace("?", "");
+                    tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
                     tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("&ProjectName=sccmclictr", "");
                     tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("=", "");
 
@@ -68,6 +69,8 @@ namespace ClientCenter
                 {
                     tb_TargetComputer.Text = Environment.GetCommandLineArgs()[1];
                     tb_TargetComputer2.Text = Environment.GetCommandLineArgs()[1];
+                    tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
+                    tb_TargetComputer2.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
                 }
 
                 pb_Password.Password = Properties.Settings.Default.Password;

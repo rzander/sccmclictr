@@ -70,10 +70,6 @@ namespace ClientCenter.Controls
 
 
 
-        private void dataGrid1_LoadingRow(object sender, DataGridRowEventArgs e)
-        {
-        }
-
         private void bt_Reload_Click(object sender, RoutedEventArgs e)
         {
             iApplications = oAgent.Client.SoftwareDistribution.Applications.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o=>o.FullName).ToList();
@@ -164,6 +160,46 @@ namespace ClientCenter.Controls
                 Listener.WriteError(ex.Message);
             }
             Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+
+    }
+    public class ImageConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            try
+            {
+                return BitMapConvert.ToBitmapImage(common.Base64ToImage(value as string) as System.Drawing.Image) as BitmapImage;
+            }
+            catch { }
+
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value;
+        }
+    }
+
+    static class BitMapConvert
+    {
+        public static BitmapImage ToBitmapImage(this System.Drawing.Image image)
+        {
+            try
+            {
+                MemoryStream ms = new MemoryStream();
+                image.Save(ms, image.RawFormat);
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                bi.StreamSource = ms;
+                bi.EndInit();
+                return bi;
+            }
+            catch { }
+
+            return null;
         }
     }
 }

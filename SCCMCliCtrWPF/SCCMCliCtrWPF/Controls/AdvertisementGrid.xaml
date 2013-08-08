@@ -44,44 +44,39 @@
                                 <DataGridTextColumn Header="Language" Binding="{Binding Path=PKG_Language}"/>
                                 <DataGridTextColumn Header="Program" Binding="{Binding Path=PRG_ProgramName}"/>
                                 <DataGridTextColumn Header="CMD" Binding="{Binding Path=PRG_CommandLine}"/>
-                                <!--<DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Image Source="{Binding Path=Icon, Converter={StaticResource ImageConverter}}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>-->
+                                <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image Name="img" Source="/SCCMCliCtrWPF;component/Images/msi.ico" Height="16"></Image>
+                                            <DataTemplate.Triggers>
+                                                <DataTrigger Binding="{Binding PRG_ProgramID}" Value="*">
+                                                    <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Icon065.ico"/>
+                                                </DataTrigger>
+                                            </DataTemplate.Triggers>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                             </DataGrid.Columns>
-                            <!--<DataGrid.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Name="miInstallApp" Header="Install" Click="miInstallApp_Click">
-                                <MenuItem.Icon>
-                                    <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Name="miUnInstallApp" Header="Uninstall" Click="miUnInstallApp_Click">
-                                <MenuItem.Icon>
-                                    <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Name="miDownloadContent" Header="DownloadContent" Click="miDownloadContent_Click">
-                                <MenuItem.Icon>
-                                    <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                        </ContextMenu>
-                    </DataGrid.ContextMenu>-->
+                            <DataGrid.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Name="miInstallApp" Header="ReRun Advertisement" Click="miInstallApp_Click">
+                                        <MenuItem.Icon>
+                                            <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </DataGrid.ContextMenu>
                         </DataGrid>
                     </ScrollViewer>
                     <GridSplitter ResizeDirection="Rows" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Width="Auto" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" Background="#FF779CBA" />
                     <!--<ScrollViewer Grid.Row="2" Name="ScrollViewer2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">-->
-                        <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid2" VerticalAlignment="Stretch" IsReadOnly="False" SelectionUnit="CellOrRowHeader" Grid.Row="2" CellEditEnding="dataGrid2_CellEditEnding">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Type" Binding="{Binding Path=TypeName}"/>
-                                <DataGridTextColumn Header="Property" Binding="{Binding Path=Property}" SortDirection="Ascending"/>
-                                <DataGridTextColumn Header="Value" Binding="{Binding Path=Value}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                    <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid2" VerticalAlignment="Stretch" IsReadOnly="False" SelectionUnit="CellOrRowHeader" Grid.Row="2" CellEditEnding="dataGrid2_CellEditEnding">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Type" Binding="{Binding Path=TypeName}"/>
+                            <DataGridTextColumn Header="Property" Binding="{Binding Path=Property}" SortDirection="Ascending"/>
+                            <DataGridTextColumn Header="Value" Binding="{Binding Path=Value}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <!--</ScrollViewer>-->
                 </Grid>
 
