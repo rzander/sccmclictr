@@ -45,8 +45,8 @@
     <SuiteName>SCCM Tools</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>48</ApplicationRevision>
-    <ApplicationVersion>0.0.0.48</ApplicationVersion>
+    <ApplicationRevision>49</ApplicationRevision>
+    <ApplicationVersion>0.0.0.49</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>

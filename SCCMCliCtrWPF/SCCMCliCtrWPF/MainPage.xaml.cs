@@ -436,7 +436,10 @@ namespace ClientCenter
             {
                 Process Explorer = new Process();
                 Explorer.StartInfo.FileName = "powershell.exe";
-                Explorer.StartInfo.Arguments = @"-NoExit -Command Enter-PSSession " + oAgent.TargetHostname;
+                if((bool)cb_ssl.IsChecked)
+                    Explorer.StartInfo.Arguments = @"-NoExit -Command Enter-PSSession " + oAgent.TargetHostname + " -Port " + tb_wsmanport.Text + " -UseSSL";
+                else
+                    Explorer.StartInfo.Arguments = @"-NoExit -Command Enter-PSSession " + oAgent.TargetHostname + " -Port " + tb_wsmanport.Text;
                 Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
                 Explorer.Start();
             }
