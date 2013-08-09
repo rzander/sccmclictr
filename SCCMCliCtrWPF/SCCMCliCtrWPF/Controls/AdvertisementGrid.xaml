@@ -8,6 +8,7 @@
              xmlns:custom="clr-namespace:ClientCenter.Controls">
     <UserControl.Resources>
         <custom:ImageConverter x:Key="ImageConverter" />
+        <custom:StatusConverter x:Key="StatusConverter" />
     </UserControl.Resources>
     <Grid>
         <DockPanel>
@@ -20,6 +21,12 @@
                         </StackPanel>
                     </Button>
                     <Separator />
+                    <Button ToolTip="Reload installation Status" Name="bt_ReloadStatus" Click="bt_ReloadStatus_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico"/>
+                            <TextBlock Margin="2,0,0,0">Load Status</TextBlock>
+                        </StackPanel>
+                    </Button>
                 </ToolBar>
             </DockPanel>
             <DockPanel>
@@ -53,6 +60,22 @@
                                                     <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Icon065.ico"/>
                                                 </DataTrigger>
                                             </DataTemplate.Triggers>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Status" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="1">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <!--<Image Source="{Binding Path=PKG_PackageID , Converter={StaticResource StatusConverter}, ConverterParameter=PRG_ProgramName}"/>-->
+                                            <Image Height="16">
+                                                <Image.Source>
+                                                    <MultiBinding Converter="{StaticResource StatusConverter}">
+                                                        <Binding Path="PKG_PackageID" />
+                                                        <Binding Path="PRG_ProgramName" />
+                                                        <Binding Path="ADV_AdvertisementID" />
+                                                    </MultiBinding>
+                                                </Image.Source>
+                                            </Image>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

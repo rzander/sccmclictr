@@ -29,6 +29,7 @@ namespace ClientCenter.Controls
         private SCCMAgent oAgent;
         public MyTraceListener Listener;
         internal List<sccmclictr.automation.functions.softwaredistribution.CCM_SoftwareDistribution> iAdvertisements;
+        public static List<sccmclictr.automation.functions.softwaredistribution.CCM_Program> lProgs;
 
         public AdvertisementGrid()
         {
@@ -53,12 +54,15 @@ namespace ClientCenter.Controls
                         //lApps.ToString();
 
                         oAgent = value;
+
                         iAdvertisements = oAgent.Client.SoftwareDistribution.Advertisements.GroupBy(t => t.ADV_AdvertisementID).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.PKG_Name).ThenBy(o => o.PKG_version).ToList();
-                        //TEST.Source = BitMapConvert.ToBitmapImage(iApplications[0].IconAsImage);
 
                         dataGrid1.BeginInit();
                         dataGrid1.ItemsSource = iAdvertisements;
                         dataGrid1.EndInit();
+
+
+
                     }
                     catch(Exception ex)
                     {
@@ -68,8 +72,6 @@ namespace ClientCenter.Controls
                 }
             }
         }
-
-
 
         private void bt_Reload_Click(object sender, RoutedEventArgs e)
         {
@@ -196,12 +198,68 @@ namespace ClientCenter.Controls
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
+        private void bt_ReloadStatus_Click(object sender, RoutedEventArgs e)
+        {
+            lProgs = oAgent.Client.SoftwareDistribution.Programs;
+
+            dataGrid1.BeginInit();
+            dataGrid1.ItemsSource = iAdvertisements;
+            dataGrid1.EndInit();
+        }
 
     }
 
+    public class StatusConverter : IMultiValueConverter
+    {
+        //Error	2	'ClientCenter.Controls.StatusConverter' does not implement interface member 'System.Windows.Data.IMultiValueConverter.ConvertBack(object, System.Type[], object, System.Globalization.CultureInfo)'	D:\SkyDrive\Dokumente\Visual Studio 2010\Project_ClientCenter\SCCMCliCtr_WPF\SCCMCliCtrWPF\Controls\AdvertisementGrid.xaml.cs	203	18	SCCMCliCtr
+
+        public object Convert(object[] value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            try
+            {
+                //return BitMapConvert.ToBitmapImage(common.Base64ToImage(value as string) as System.Drawing.Image) as BitmapImage;
+                string sAdvID = value[2].ToString();
+                string sPkgID = value[0].ToString();
+                string sProgID = value[1].ToString();
+
+                if (AdvertisementGrid.lProgs != null)
+                {
+                    if (AdvertisementGrid.lProgs.Count > 0)
+                    {
+                        string sStatus = AdvertisementGrid.lProgs.Single(t => t.PackageID == sPkgID & t.ProgramID == sProgID).LastRunStatus;
+                        if (sStatus.StartsWith("Succeeded", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            BitmapImage logo = new BitmapImage();
+                            logo.BeginInit();
+                            logo.UriSource = new Uri("pack://application:,,,/SCCMCliCtrWPF;component/Images/Flag 4.ico");
+                            logo.EndInit();
+
+                            return logo;
+
+                        }
+                        else
+                        {
+                            BitmapImage logo = new BitmapImage();
+                            logo.BeginInit();
+                            logo.UriSource = new Uri("pack://application:,,,/SCCMCliCtrWPF;component/Images/Flag.ico");
+                            logo.EndInit();
+
+                            return logo;
+                        }
+                    }
+                }
 
 
+            }
+            catch { }
 
+            return null;
+        }
 
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+    }
 
 }
