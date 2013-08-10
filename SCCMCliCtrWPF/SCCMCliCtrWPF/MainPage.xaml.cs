@@ -21,7 +21,7 @@ using System.Management;
 using System.Security.Principal;
 using System.Reflection;
 
-//using System.IO;
+using System.IO;
 //using System.Windows.Markup;
 
 namespace ClientCenter
@@ -37,8 +37,37 @@ namespace ClientCenter
 
         public MainPage()
         {
-
             InitializeComponent();
+
+            //Load external Agent Action Tool Plugins...
+            try
+            {
+                string sCurrentDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                foreach (string sFile in Directory.GetFiles(sCurrentDir, "Plugin*.dll", SearchOption.TopDirectoryOnly))
+                {
+                    Assembly asm = Assembly.LoadFile(sFile);
+                    Type[] tlist = asm.GetTypes();
+                    foreach (Type t in tlist)
+                    {
+                        try
+                        {
+                            if (t.Name.StartsWith("AgentActionTool_"))
+                            {
+                                //Make Tool Group visible
+                                rgTools.Visibility = System.Windows.Visibility.Visible;
+
+                                var obj = Activator.CreateInstance(t);
+                                btTools.Items.Add(obj);
+
+                            }
+                        }
+                        catch { }
+                    }
+                }
+
+            }
+            catch { }
+
 
             Application.Current.Exit += new ExitEventHandler(Current_Exit);
             ThemeManager.SetActiveTheme(NavigationPaneTheme.WindowsLive);
@@ -190,6 +219,9 @@ namespace ClientCenter
 
                 oAgent.PSCode.Listeners.Add(myTrace);
                 oAgent.connect();
+
+                //Store Agent settings in Common class for Plugin access.
+                Common.Agent = oAgent;
 
                 try
                 {
@@ -845,7 +877,21 @@ namespace ClientCenter
                 handler(this, e);
             }
         }
-    } 
+    }
+
+    public class Common
+    {
+        internal static SCCMAgent iAgent;
+
+        public static SCCMAgent Agent
+        {
+            get
+            {
+                return iAgent;
+            }
+            set { iAgent = value; }
+        }
+    }
 
 
 

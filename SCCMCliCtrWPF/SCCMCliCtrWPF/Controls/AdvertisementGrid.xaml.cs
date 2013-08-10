@@ -29,7 +29,7 @@ namespace ClientCenter.Controls
         private SCCMAgent oAgent;
         public MyTraceListener Listener;
         internal List<sccmclictr.automation.functions.softwaredistribution.CCM_SoftwareDistribution> iAdvertisements;
-        public static List<sccmclictr.automation.functions.softwaredistribution.CCM_Program> lProgs;
+        public static List<sccmclictr.automation.functions.softwaredistribution.REG_ExecutionHistory> lProgs;
 
         public AdvertisementGrid()
         {
@@ -200,7 +200,7 @@ namespace ClientCenter.Controls
 
         private void bt_ReloadStatus_Click(object sender, RoutedEventArgs e)
         {
-            lProgs = oAgent.Client.SoftwareDistribution.Programs;
+            lProgs = oAgent.Client.SoftwareDistribution.ExecutionHistory;
 
             dataGrid1.BeginInit();
             dataGrid1.ItemsSource = iAdvertisements;
@@ -226,8 +226,8 @@ namespace ClientCenter.Controls
                 {
                     if (AdvertisementGrid.lProgs.Count > 0)
                     {
-                        string sStatus = AdvertisementGrid.lProgs.Single(t => t.PackageID == sPkgID & t.ProgramID == sProgID).LastRunStatus;
-                        if (sStatus.StartsWith("Succeeded", StringComparison.CurrentCultureIgnoreCase))
+                        string sStatus = AdvertisementGrid.lProgs.Single(t => t.PackageID == sPkgID & t._ProgramID == sProgID)._State;
+                        if (sStatus.StartsWith("Success", StringComparison.CurrentCultureIgnoreCase))
                         {
                             BitmapImage logo = new BitmapImage();
                             logo.BeginInit();

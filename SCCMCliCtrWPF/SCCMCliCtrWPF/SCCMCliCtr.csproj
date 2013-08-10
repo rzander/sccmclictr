@@ -435,6 +435,11 @@
   <ItemGroup>
     <Resource Include="Images\Add.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Plugin_CompMgmt.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <PropertyGroup>
     <StartArguments />
   </PropertyGroup>

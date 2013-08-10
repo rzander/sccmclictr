@@ -135,11 +135,15 @@
                             </rib:RibbonSplitButton>
                         </rib:RibbonGroup>
                         <rib:RibbonGroup Header="Application Mgmt.">
-                            <rib:RibbonSplitButton Name="btAppMgmt" ToolTip="Application Managemnt" LargeImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico">
+                            <rib:RibbonSplitButton Name="btAppMgmt" ToolTip="Application Management" LargeImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico">
                                 <rib:RibbonButton Name="btAppManUserPolicyAction" Label="Application manager user policy action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btAppManUserPolicyAction_Click" />
                                 <rib:RibbonButton Name="btAppManMachinePolicyAction" Label="Application manager machine policy action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btAppManMachinePolicyAction_Click" />
                                 <rib:RibbonButton Name="btAppManGlobalEvaluation" Label="Application manager global evaluation action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btAppManGlobalEvaluation_Click" />
 
+                            </rib:RibbonSplitButton>
+                        </rib:RibbonGroup>
+                        <rib:RibbonGroup Name="rgTools" Header="Tools" Visibility="Hidden">
+                            <rib:RibbonSplitButton Name="btTools" Label="..." ToolTip="3rd party Tools" LargeImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico">
                             </rib:RibbonSplitButton>
                         </rib:RibbonGroup>
                     </rib:RibbonTab>
