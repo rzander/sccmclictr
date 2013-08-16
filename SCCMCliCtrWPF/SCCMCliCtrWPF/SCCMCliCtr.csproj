@@ -20,7 +20,7 @@
     <HostInBrowser>true</HostInBrowser>
     <TargetZone>LocalIntranet</TargetZone>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -45,8 +45,8 @@
     <SuiteName>SCCM Tools</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>49</ApplicationRevision>
-    <ApplicationVersion>0.0.0.49</ApplicationVersion>
+    <ApplicationRevision>50</ApplicationRevision>
+    <ApplicationVersion>0.0.0.50</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -137,6 +137,9 @@
     <Compile Include="Controls\CollectionVariables.xaml.cs">
       <DependentUpon>CollectionVariables.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SettingsMgmt.xaml.cs">
+      <DependentUpon>SettingsMgmt.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\InstalledSoftwareGrid.xaml.cs">
       <DependentUpon>InstalledSoftwareGrid.xaml</DependentUpon>
     </Compile>
@@ -203,6 +206,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CollectionVariables.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SettingsMgmt.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

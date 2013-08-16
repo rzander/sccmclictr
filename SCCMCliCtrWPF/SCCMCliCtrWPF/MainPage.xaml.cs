@@ -255,6 +255,7 @@ namespace ClientCenter
                 invInstalledSWGrid.Listener = myTrace;
                 serviceWindowGrid1.Listener = myTrace;
                 CollectionVariablesGrid1.Listener = myTrace;
+                SettingsMgmtGrid.Listener = myTrace;
 
                 navigationPane1.IsEnabled = true;
                 ribAgenTActions.IsEnabled = true;
@@ -344,6 +345,10 @@ namespace ClientCenter
                                     case "Advertisements":
                                         advertisementGrid1.SCCMAgentConnection = oAgent;
                                         break;
+                                    case "SettingsMgmt":
+                                        SettingsMgmtGrid.SCCMAgentConnection = oAgent;
+                                        break;
+
                                 }
                                 break;
                             }

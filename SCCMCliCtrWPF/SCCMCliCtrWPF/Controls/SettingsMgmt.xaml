@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="ClientCenter.Controls.SettingsMgmt"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             xmlns:custom="clr-namespace:ClientCenter.Controls">
+    <UserControl.Resources>
+        <custom:ImageConverter x:Key="ImageConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Top"  Height="32">
+                <ToolBar Name="toolBar1">
+                    <Button ToolTip="Reload assigned Applications" Name="bt_Reload" Click="bt_Reload_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico"/>
+                            <TextBlock Margin="2,0,0,0">Reload Baselines</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Separator />
+                </ToolBar>
+            </DockPanel>
+            <DockPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <ScrollViewer Grid.Row="0" Name="ScrollViewer1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
+                        <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" IsReadOnly="True" Grid.Row="0" SelectionChanged="dataGrid1_SelectionChanged" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Path=DisplayName}" SortDirection="Ascending"/>
+                                <DataGridTextColumn Header="Last Evaluation" Binding="{Binding Path=LastEvalTime}"/>
+                                <DataGridTextColumn Header="Version" Binding="{Binding Path=Version}"/>
+                                <DataGridTextColumn Header="Compliant" Binding="{Binding Path=isCompliant}"/>
+                                <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image Name="img" Source="/SCCMCliCtrWPF;component/Images/Flag.ico" Height="16"></Image>
+                                            <DataTemplate.Triggers>
+                                                <DataTrigger Binding="{Binding LastComplianceStatus }" Value="1">
+                                                    <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Flag 4.ico"/>
+                                                </DataTrigger>
+                                            </DataTemplate.Triggers>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                            <DataGrid.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Name="miEvaluateBaseline" Header="Evaluate" Click="miEvaluateBaseline_Click" >
+                                        <MenuItem.Icon>
+                                            <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </DataGrid.ContextMenu>
+                        </DataGrid>
+                    </ScrollViewer>
+                    <GridSplitter ResizeDirection="Rows" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Width="Auto" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" Background="#FF779CBA" />
+                <DataGrid AutoGenerateColumns="True" HorizontalAlignment="Stretch" Name="dataGrid2" VerticalAlignment="Stretch" IsReadOnly="True" Grid.Row="2">
+                    <DataGrid.Columns>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                </Grid>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>
