@@ -256,6 +256,7 @@ namespace ClientCenter
                 serviceWindowGrid1.Listener = myTrace;
                 CollectionVariablesGrid1.Listener = myTrace;
                 SettingsMgmtGrid.Listener = myTrace;
+                SWDistSummaryGrid1.Listener = myTrace;
 
                 navigationPane1.IsEnabled = true;
                 ribAgenTActions.IsEnabled = true;
@@ -348,7 +349,9 @@ namespace ClientCenter
                                     case "SettingsMgmt":
                                         SettingsMgmtGrid.SCCMAgentConnection = oAgent;
                                         break;
-
+                                    case "SWDistSummary":
+                                        SWDistSummaryGrid1.SCCMAgentConnection = oAgent;
+                                        break;
                                 }
                                 break;
                             }

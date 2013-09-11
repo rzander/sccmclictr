@@ -170,7 +170,20 @@ namespace ClientCenter.Controls
         {
             try
             {
-                return BitMapConvert.ToBitmapImage(common.Base64ToImage(value as string) as System.Drawing.Image) as BitmapImage;
+                if (!string.IsNullOrEmpty(value as string))
+                {
+                    switch (value as string)
+                    {
+                        case "Updates":
+                            return new BitmapImage(new Uri("pack://application:,,,/SCCMCliCtrWPF;component/Images/Computer_protection.ico"));
+                        default:
+                            return BitMapConvert.ToBitmapImage(common.Base64ToImage(value as string) as System.Drawing.Image) as BitmapImage;
+                    }
+                }
+                else
+                {
+                    return new BitmapImage(new Uri("pack://application:,,,/SCCMCliCtrWPF;component/Images/Icon065.ico"));
+                }
             }
             catch { }
 
