@@ -31,7 +31,7 @@
                         <DataGridTextColumn Header="InstallState" Binding="{Binding Path=InstallState}"/>
                         <DataGridTextColumn Header="InstallTime" Binding="{Binding Path=LastInstallTime}"/>
                         <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" CanUserResize="True" />
-                        <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">
+                        <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0" MaxWidth="24">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Image Source="{Binding Path=Icon, Converter={StaticResource ImageConverter}}"/>

@@ -158,7 +158,16 @@ namespace ClientCenter.Controls
                 switch (sType.ToLower())
                 {
                     case "string":
-                        oAgent.Client.SetProperty(sRelPath, sProp, "'" + sVal + "'");
+                        try
+                        {
+                            DateTime oDate = DateTime.Parse(sVal);
+                            string sDate = System.Management.ManagementDateTimeConverter.ToDmtfDateTime(oDate);
+                            oAgent.Client.SetProperty(sRelPath, sProp, "'" + sDate + "'");
+                        }
+                        catch
+                        {
+                            oAgent.Client.SetProperty(sRelPath, sProp, "'" + sVal + "'");
+                        }
                         break;
                     case "boolean":
                         oAgent.Client.SetProperty(sRelPath, sProp, "$" + sVal);
