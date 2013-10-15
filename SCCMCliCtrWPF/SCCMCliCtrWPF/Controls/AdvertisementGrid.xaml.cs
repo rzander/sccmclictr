@@ -55,7 +55,7 @@ namespace ClientCenter.Controls
 
                         oAgent = value;
 
-                        iAdvertisements = oAgent.Client.SoftwareDistribution.Advertisements.GroupBy(t => t.ADV_AdvertisementID).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.PKG_Name).ThenBy(o => o.PKG_version).ToList();
+                        iAdvertisements = oAgent.Client.SoftwareDistribution.Advertisements.OrderBy(o => o.PKG_Name).ThenBy(o => o.PKG_version).ToList();
 
                         dataGrid1.BeginInit();
                         dataGrid1.ItemsSource = iAdvertisements;
