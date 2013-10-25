@@ -37,7 +37,15 @@ namespace ClientCenter
 
         public MainPage()
         {
+
             InitializeComponent();
+
+            try
+            {
+                this.WindowTitle = SCCMCliCtr.Customization.Title;
+            }
+            catch { }
+
 
             //Load external Agent Action Tool Plugins...
             try
@@ -67,6 +75,7 @@ namespace ClientCenter
 
             }
             catch { }
+
 
 
             Application.Current.Exit += new ExitEventHandler(Current_Exit);
@@ -476,6 +485,24 @@ namespace ClientCenter
             {
                 Process Explorer = new Process();
                 Explorer.StartInfo.FileName = "powershell.exe";
+
+                if (!string.IsNullOrEmpty(tb_Username.Text))
+                {
+                    //Run powershell as different user...
+                    if (tb_Username.Text.Contains('\\'))
+                    {
+                        Explorer.StartInfo.UserName = tb_Username.Text.Split('\\')[1];
+                        Explorer.StartInfo.Domain = tb_Username.Text.Split('\\')[0];
+                    }
+                    else
+                        Explorer.StartInfo.UserName = tb_Username.Text;
+                    Explorer.StartInfo.UseShellExecute = false;
+                    
+
+                    //Decode PW
+                    string sPW = common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
+                    Explorer.StartInfo.Password = ToSecure(sPW);
+                }
                 if((bool)cb_ssl.IsChecked)
                     Explorer.StartInfo.Arguments = @"-NoExit -Command Enter-PSSession " + oAgent.TargetHostname + " -Port " + tb_wsmanport.Text + " -UseSSL";
                 else
@@ -488,6 +515,13 @@ namespace ClientCenter
                 myTrace.WriteError(ex.Message);
             }
             Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        public static System.Security.SecureString ToSecure(string current)
+        {
+            var secure = new System.Security.SecureString();
+            foreach (var c in current.ToCharArray()) secure.AppendChar(c);
+            return secure;
         }
 
         private void treeView1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
