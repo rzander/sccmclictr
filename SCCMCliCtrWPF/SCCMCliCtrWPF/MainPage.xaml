@@ -67,6 +67,10 @@
                                     <Controls:AutoCompleteBox Name="tb_TargetComputer" Text="127.0.0.1" Width="150" Height="25" Populating="tb_TargetComputer2_Populating" KeyUp="tb_TargetComputer_KeyUp"   />
                                     <rib:RibbonButton Name="bt_Connect" VerticalAlignment="Center" Label="Connect" Height="23" Click="bt_Connect_Click" />
                                 </StackPanel>
+                            <rib:RibbonApplicationMenuItem Header="Console extensions...">
+                                    <rib:RibbonButton Name="bt_RegConsole" Label="register Console extension" SmallImageSource="Images/setupold.ico" Click="bt_RegConsole_Click"></rib:RibbonButton>
+                                    <rib:RibbonButton Name="bt_UnRegConsole" Label="remove Console extension" SmallImageSource="Images/Delete.ico" Click="bt_UnRegConsole_Click"></rib:RibbonButton>
+                            </rib:RibbonApplicationMenuItem>
                             <Rectangle MinHeight="310"/>
                         </rib:RibbonApplicationMenu>
                     </rib:Ribbon.ApplicationMenu>

@@ -79,6 +79,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\NavigationPane.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin_CMRemote, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Plugin_RemoteTools\bin\Debug\Plugin_CMRemote.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="ReachFramework" />
@@ -319,6 +323,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\Icon16.ico" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -464,13 +469,13 @@
       <Project>{0d137829-f4d7-4f8c-938f-8a5197346501}</Project>
       <Name>Plugin_FEP</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Plugin_MSInfo32\Plugin_MSInfo32.csproj">
+      <Project>{213dd94f-6b81-4544-9826-2451e9e6257e}</Project>
+      <Name>Plugin_MSInfo32</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Plugin_Regedit\Plugin_Regedit.csproj">
       <Project>{00f53159-2a05-4726-8fb3-876f2e540544}</Project>
       <Name>Plugin_Regedit</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Plugin_RemoteTools\Plugin_CMRemote.csproj">
-      <Project>{6f3e70d7-dd38-4236-ba01-8dbc577e0fff}</Project>
-      <Name>Plugin_CMRemote</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

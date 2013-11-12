@@ -193,6 +193,7 @@ namespace ClientCenter.Controls
                     //Enforce ReRun Always, otherwise Adv may not start a 2nd time
                     if (!oSW.ADV_RepeatRunBehavior.StartsWith("RerunAlways", StringComparison.CurrentCultureIgnoreCase) | !((oSW.ADV_MandatoryAssignments.HasValue) ? oSW.ADV_MandatoryAssignments.Value : false))
                     {
+                        
                         oSW.TriggerSchedule(true);
                         oSW.ADV_RepeatRunBehavior = "RerunAlways";
                         oSW.ADV_MandatoryAssignments = true;

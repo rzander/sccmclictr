@@ -117,6 +117,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="clictr" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icon16.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ConsoleExtension" xml:space="preserve">
+    <value>&lt;ActionDescription Class="Executable" SelectionMode="Both" DisplayName="Client Center" MnemonicDisplayName="Client Center..." Description="Open Client Center..."&gt;
+	&lt;ShowOn&gt;
+		&lt;string&gt;ContextMenu&lt;/string&gt;
+	&lt;/ShowOn&gt;
+	&lt;ResourceAssembly&gt;
+		&lt;Assembly&gt;{0}&lt;/Assembly&gt;
+		&lt;Type&gt;SCS_Extensions.Properties.Resources.resources&lt;/Type&gt;
+	&lt;/ResourceAssembly&gt;
+	&lt;ImagesDescription&gt;
+		&lt;ResourceAssembly&gt;
+			&lt;Assembly&gt;{0}&lt;/Assembly&gt;
+			&lt;Type&gt;ClientCenter.Properties.Resources.resources&lt;/Type&gt;
+		&lt;/ResourceAssembly&gt;
+		&lt;ImageResourceName&gt;clictr&lt;/ImageResourceName&gt;
+	&lt;/ImagesDescription&gt;
+	&lt;Executable&gt;
+		&lt;FilePath&gt;{0}&lt;/FilePath&gt;
+		&lt;Parameters&gt;##SUB:Name##&lt;/Parameters&gt;
+	&lt;/Executable&gt;
+&lt;/ActionDescription&gt;</value>
+    <comment>CM12 Console extension</comment>
+  </data>
   <data name="PSCollDecode" xml:space="preserve">
     <value>$script = {
 function Enable-TSDuplicateToken {

@@ -20,7 +20,7 @@ using System.Deployment.Application;
 using System.Management;
 using System.Security.Principal;
 using System.Reflection;
-
+using Microsoft.Win32;
 using System.IO;
 //using System.Windows.Markup;
 
@@ -46,6 +46,8 @@ namespace ClientCenter
             }
             catch { }
 
+            myTrace = new MyTraceListener(ref rStatus);
+            myTrace.TraceOutputOptions = TraceOptions.None;
 
             //Load external Agent Action Tool Plugins...
             try
@@ -449,10 +451,6 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
-
-
-
-
         private void rStatus_TextChanged(object sender, TextChangedEventArgs e)
         {
             rStatus.ScrollToEnd();
@@ -851,6 +849,30 @@ namespace ClientCenter
 
         }
 
+        private void bt_RegConsole_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                console.registerConsoleExtension();
+                rStatus.AppendText("Console extension registered.");
+            }
+            catch { myTrace.WriteError("Unable to register console extension..."); }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void bt_UnRegConsole_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                console.unregisterConsoleExtension();
+                rStatus.AppendText("Console extension removed.");
+            }
+            catch { myTrace.WriteError("Unable to remove console extension..."); }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
     }
 
     public class MyTraceListener : TraceListener, INotifyPropertyChanged
@@ -932,6 +954,103 @@ namespace ClientCenter
                 return iAgent;
             }
             set { iAgent = value; }
+        }
+    }
+
+    public class console
+    {
+        /// <summary>
+        /// Create MMC Extension for CM12
+        /// </summary>
+        public static void registerConsoleExtension()
+        {
+            //SCCM Console Installed ?
+            string sArchitecture = System.Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE").ToLower();
+            RegistryKey rAdminUI = null;
+            switch (sArchitecture)
+            {
+                case "x86":
+                    rAdminUI = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\ConfigMgr10\Setup");
+                    break;
+                case "amd64":
+                    rAdminUI = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\Microsoft\ConfigMgr10\Setup");
+                    break;
+                case "ia64":
+                    rAdminUI = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\ConfigMgr10\Setup");
+                    break;
+            }
+
+            if (rAdminUI != null)
+            {
+                string sUIPath = rAdminUI.GetValue("UI Installation Directory", "").ToString();
+                if (Directory.Exists(sUIPath))
+                {
+                    Directory.CreateDirectory(sUIPath + @"\XmlStorage\Extensions\Actions\3fd01cd1-9e01-461e-92cd-94866b8d1f39");
+                    TextWriter tw1 = new StreamWriter(sUIPath + @"\XmlStorage\Extensions\Actions\3fd01cd1-9e01-461e-92cd-94866b8d1f39\sccmclictr.xml");
+                    tw1.WriteLine(string.Format(Properties.Resources.ConsoleExtension, System.Reflection.Assembly.GetExecutingAssembly().Location));
+                    tw1.Close();
+
+                    Directory.CreateDirectory(sUIPath + @"\XmlStorage\Extensions\Actions\ed9dee86-eadd-4ac8-82a1-7234a4646e62");
+                    tw1 = new StreamWriter(sUIPath + @"\XmlStorage\Extensions\Actions\ed9dee86-eadd-4ac8-82a1-7234a4646e62\sccmclictr.xml");
+                    tw1.WriteLine(string.Format(Properties.Resources.ConsoleExtension, System.Reflection.Assembly.GetExecutingAssembly().Location));
+                    tw1.Close();
+                }
+            }
+            else
+            {
+                throw new Exception("no CM12 console installed.");
+                
+            }
+        }
+
+        /// <summary>
+        /// Remove MMC Extension for CM12
+        /// </summary>
+        public static void unregisterConsoleExtension()
+        {
+            string sArchitecture = System.Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE").ToLower();
+            RegistryKey rAdminUI = null;
+            switch (sArchitecture)
+            {
+                case "x86":
+                    rAdminUI = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\ConfigMgr10\Setup");
+                    break;
+                case "amd64":
+                    rAdminUI = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\Microsoft\ConfigMgr10\Setup");
+                    break;
+                case "ia64":
+                    rAdminUI = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\ConfigMgr10\Setup");
+                    break;
+            }
+
+            //SCCM Console Installed ?
+            if (rAdminUI != null)
+            {
+                string sUIPath = rAdminUI.GetValue("UI Installation Directory", "").ToString();
+
+                if (File.Exists(sUIPath + @"\XmlStorage\Extensions\Actions\3fd01cd1-9e01-461e-92cd-94866b8d1f39\sccmclictr.xml"))
+                {
+                    try
+                    {
+                        File.Delete(sUIPath + @"\XmlStorage\Extensions\Actions\3fd01cd1-9e01-461e-92cd-94866b8d1f39\sccmclictr.xml");
+                    }
+                    catch { }
+                }
+
+                if (File.Exists(sUIPath + @"\XmlStorage\Extensions\Actions\ed9dee86-eadd-4ac8-82a1-7234a4646e62\sccmclictr.xml"))
+                {
+                    try
+                    {
+                        File.Delete(sUIPath + @"\XmlStorage\Extensions\Actions\ed9dee86-eadd-4ac8-82a1-7234a4646e62\sccmclictr.xml");
+                    }
+                    catch { }
+                }
+
+            }
+            else
+            {
+                throw new Exception("no CM12 console installed.");
+            }
         }
     }
 
