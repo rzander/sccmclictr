@@ -26,6 +26,8 @@ namespace ClientCenter
         private SCCMAgent oAgent;
         public MyTraceListener Listener;
 
+        public Boolean OnlyCMServices = false;
+
         public ServicesGrid()
         {
             InitializeComponent();
@@ -47,6 +49,8 @@ namespace ClientCenter
                     {
                         oAgent = value;
                         iServices = oAgent.Client.Services.Win32_Services.OrderBy(t => t.DisplayName).ToList();
+                        if(OnlyCMServices)
+                            iServices = iServices.Where(t =>Properties.Settings.Default.ServicesHighlited.Contains(t.Name)).ToList();
                         dataGrid1.BeginInit();
                         dataGrid1.ItemsSource = iServices;
                         dataGrid1.EndInit();
@@ -99,10 +103,15 @@ namespace ClientCenter
             sccmclictr.automation.functions.Win32_Service item = e.Row.Item as sccmclictr.automation.functions.Win32_Service;
             if (item != null)
             {
-                if(Properties.Settings.Default.ServicesHighlited.Contains(item.Name))
+
+                if (Properties.Settings.Default.ServicesHighlited.Contains(item.Name))
                 {
-                    e.Row.Background = new SolidColorBrush(Colors.BlanchedAlmond);
+                    if (!OnlyCMServices)
+                    {
+                        e.Row.Background = new SolidColorBrush(Colors.BlanchedAlmond);
+                    }
                 }
+
             }
             
 

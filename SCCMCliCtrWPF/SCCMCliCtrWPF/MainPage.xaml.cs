@@ -40,6 +40,7 @@ namespace ClientCenter
 
             InitializeComponent();
 
+
             try
             {
                 this.WindowTitle = SCCMCliCtr.Customization.Title;
@@ -319,6 +320,9 @@ namespace ClientCenter
                                         cacheGrid1.SCCMAgentConnection = oAgent;
                                         break;
                                     case "Services":
+                                        servicesGrid1.OnlyCMServices = false;
+                                        if (((System.Windows.Controls.HeaderedItemsControl)(e.Source)).Name == "CMServices")
+                                            servicesGrid1.OnlyCMServices = true;
                                         servicesGrid1.SCCMAgentConnection = oAgent;
                                         break;
                                     case "Process":

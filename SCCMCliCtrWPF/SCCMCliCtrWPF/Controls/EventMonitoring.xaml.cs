@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using sccmclictr.automation;
 using sccmclictr.automation.functions;
-
+using System.Xml;
 
 namespace ClientCenter
 {
@@ -101,18 +101,30 @@ namespace ClientCenter
                                 tvRoot.Name = sClass;
                                 tvRoot.Tag = HT;
                                 tvRoot.Header = DateTime.Now.ToString() + " " + sClass;
+                                if (sClass == "CCM_PolicyAgent_PolicyDownloadStarted")
+                                {
+                                    tvRoot.Background = new SolidColorBrush(Colors.LightGoldenrodYellow);
+                                }
 
                                 foreach (System.Collections.DictionaryEntry oPair in HT)
                                 {
                                     if (!oPair.Key.ToString().StartsWith("__"))
                                     {
-                                        switch(oPair.Key.ToString())
+                                        switch (oPair.Key.ToString())
                                         {
                                             case "DateTime":
                                                 tvRoot.Items.Add(oPair.Key + " : " + System.Management.ManagementDateTimeConverter.ToDateTime(oPair.Value.ToString()).ToString());
                                                 break;
                                             case "TIME_CREATED":
                                                 tvRoot.Items.Add(oPair.Key + " : " + new DateTime(long.Parse(oPair.Value.ToString())).ToString());
+                                                break;
+                                            case "DownloadSource":
+                                                TreeViewItem tvi = new TreeViewItem();
+                                                tvi.Header = oPair.Key + " : " + oPair.Value.ToString();
+                                                tvi.Items.Add(null);
+                                                tvi.Tag = oPair.Value.ToString();
+                                                tvi.Expanded += new RoutedEventHandler(tvi_Expanded);
+                                                tvRoot.Items.Add(tvi);
                                                 break;
                                             default:
                                                 tvRoot.Items.Add(oPair.Key + " : " + oPair.Value.ToString());
@@ -132,6 +144,29 @@ namespace ClientCenter
 
 
         }
+
+        void tvi_Expanded(object sender, RoutedEventArgs e)
+        {
+            TreeViewItem tvi = ((TreeViewItem)sender);
+            try
+            {
+
+                WebBrowser oWeb = new WebBrowser();
+                string sPol = sccmclictr.automation.policy.localpolicy.DownloadPolicyFromURL(tvi.Tag.ToString());
+                tvi.Items.Clear();
+                oWeb.NavigateToString(sPol);
+                oWeb.MinHeight = 100;
+                oWeb.MinWidth = 400;
+                oWeb.Width = tvi.DesiredSize.Width - 30;
+                oWeb.Height = sPol.Split('\n').Length * 14;
+                oWeb.MaxHeight = treeView1.DesiredSize.Height - 50;
+                tvi.Items.Add(oWeb);
+                tvi.BringIntoView();
+            }
+            catch { }
+            
+        }
+
 
         private void bt_StopMonitoring_Click(object sender, RoutedEventArgs e)
         {

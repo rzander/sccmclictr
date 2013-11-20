@@ -175,6 +175,14 @@
                                                 </StackPanel>
                                             </TreeViewItem.Header>
                                         </TreeViewItem>
+                                        <TreeViewItem IsExpanded="True" Tag="Services" Name="CMServices">
+                                            <TreeViewItem.Header>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Image Source="/SCCMCliCtrWPF;component/Images/ServDeps_103.ico" Stretch="Uniform" Width="20" Height="20"/>
+                                                    <TextBlock Text="CM related Services" Margin="3,0,0,0"></TextBlock>
+                                                </StackPanel>
+                                            </TreeViewItem.Header>
+                                        </TreeViewItem>
                                         <TreeViewItem IsExpanded="True" Tag="Process">
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >

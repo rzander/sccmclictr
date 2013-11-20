@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="400">
+             d:DesignHeight="300" d:DesignWidth="400" xmlns:my="clr-namespace:ClientCenter.Controls">
     <Grid>
         <DockPanel>
             <DockPanel DockPanel.Dock="Top"  Height="32">
@@ -32,9 +32,8 @@
                 </ToolBar>
             </DockPanel>
             <DockPanel DockPanel.Dock="Bottom" >
-                <TreeView Name="treeView1" IsTextSearchEnabled="True" IsManipulationEnabled="True" KeyDown="treeView1_KeyDown" />
+                <TreeView Name="treeView1" IsTextSearchEnabled="True" IsManipulationEnabled="True" KeyDown="treeView1_KeyDown" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
             </DockPanel>
         </DockPanel>
-        
     </Grid>
 </UserControl>

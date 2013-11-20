@@ -15,6 +15,8 @@
   &lt;string&gt;CmRcService&lt;/string&gt;
   &lt;string&gt;Winmgmt&lt;/string&gt;
   &lt;string&gt;PeerDistSvc&lt;/string&gt;
+  &lt;string&gt;smstsmgr&lt;/string&gt;
+  &lt;string&gt;RpcSs&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="Username" Type="System.String" Scope="User">
