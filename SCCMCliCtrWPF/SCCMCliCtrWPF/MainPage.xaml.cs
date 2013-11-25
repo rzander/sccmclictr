@@ -225,6 +225,10 @@ namespace ClientCenter
                 }
                 else
                 {
+                    if(!tb_Username.Text.Contains('\\'))
+                    {
+                        tb_Username.Text = Environment.UserDomainName + '\\' + tb_Username.Text;
+                    }
                     string sPW = common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
                     oAgent = new SCCMAgent(sTarget, tb_Username.Text, sPW , int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
                 }
@@ -497,7 +501,10 @@ namespace ClientCenter
                         Explorer.StartInfo.Domain = tb_Username.Text.Split('\\')[0];
                     }
                     else
+                    {
+                        Explorer.StartInfo.Domain = Environment.UserDomainName;
                         Explorer.StartInfo.UserName = tb_Username.Text;
+                    }
                     Explorer.StartInfo.UseShellExecute = false;
                     
 
