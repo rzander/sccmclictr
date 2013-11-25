@@ -150,7 +150,15 @@ namespace ClientCenter
             TreeViewItem tvi = ((TreeViewItem)sender);
             try
             {
+                TextBox tb = new TextBox();
+                tb.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+                tb.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
 
+                tb.Text = sccmclictr.automation.policy.localpolicy.FormatXML(sccmclictr.automation.policy.localpolicy.DownloadPolicyFromURL(tvi.Tag.ToString()));
+
+                tvi.Items.Clear();
+                
+                /*
                 WebBrowser oWeb = new WebBrowser();
                 string sPol = sccmclictr.automation.policy.localpolicy.DownloadPolicyFromURL(tvi.Tag.ToString());
                 tvi.Items.Clear();
@@ -159,8 +167,8 @@ namespace ClientCenter
                 oWeb.MinWidth = 400;
                 oWeb.Width = tvi.DesiredSize.Width - 30;
                 oWeb.Height = sPol.Split('\n').Length * 14;
-                oWeb.MaxHeight = treeView1.DesiredSize.Height - 50;
-                tvi.Items.Add(oWeb);
+                oWeb.MaxHeight = treeView1.DesiredSize.Height - 50;*/
+                tvi.Items.Add(tb);
                 tvi.BringIntoView();
             }
             catch { }
