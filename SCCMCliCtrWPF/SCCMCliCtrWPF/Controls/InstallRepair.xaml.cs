@@ -261,5 +261,47 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
+        private void bt_installAgent_Click(object sender, RoutedEventArgs e)
+        {
+            InstallAgent oA = new InstallAgent();
+            oA.tb_MPName.Text = oAgent.Client.AgentProperties.ManagementPoint;
+            oA.tb_SiteCode.Text = oAgent.Client.AgentProperties.AssignedSite;
+
+            oA.RefreshMPandSiteCode();
+
+            oA.ShowDialog();
+            if (oA.DialogResult == true)
+            {
+                Mouse.OverrideCursor = Cursors.Wait;
+
+                Listener.WriteLine("Installing CM12 Agent on target device...");
+                oAgent.PSCode.Listeners.Clear();
+                Listener.WriteLine(oAgent.Client.GetStringFromPS(oA.tbInstallPS.Text));
+                oAgent.PSCode.Listeners.Add(Listener);
+
+                Mouse.OverrideCursor = Cursors.Arrow;
+
+                Properties.Settings.Default.AgentInstallMP = oA.tb_MPName.Text;
+                Properties.Settings.Default.AgentInstallSiteCode = oA.tb_SiteCode.Text;
+
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        private void bt_DeleteAgentCertificates_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                //Delete Certificates in the cert store
+                oAgent.Client.Health.DeleteSMSCertificates();
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
     }
 }

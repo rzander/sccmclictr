@@ -45,8 +45,8 @@
     <SuiteName>SCCM Tools</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>56</ApplicationRevision>
-    <ApplicationVersion>0.0.0.56</ApplicationVersion>
+    <ApplicationRevision>57</ApplicationRevision>
+    <ApplicationVersion>0.0.0.57</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -189,6 +189,9 @@
     <Compile Include="Controls\WMIBrowser.xaml.cs">
       <DependentUpon>WMIBrowser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\InstallAgent.xaml.cs">
+      <DependentUpon>InstallAgent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ServiceWindowNew.xaml.cs">
       <DependentUpon>ServiceWindowNew.xaml</DependentUpon>
     </Compile>
@@ -265,6 +268,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\WMIBrowser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\InstallAgent.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainPage.xaml">
