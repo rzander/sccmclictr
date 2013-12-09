@@ -78,5 +78,27 @@ namespace ClientCenter
             catch { }
             Mouse.OverrideCursor = Cursors.Arrow; 
         }
+
+        private void miResolveSID_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                foreach (softwaredistribution.REG_ExecutionHistory oReg in dataGrid1.SelectedItems)
+                {
+                    //oReg.GetUserFromSID();
+                    iHistory.Single(t=>t == oReg).GetUserFromSID();
+                }
+
+
+                //iHistory = oAgent.Client.SoftwareDistribution.ExecutionHistory.OrderBy(t => t._RunStartTime).ToList();
+                dataGrid1.BeginInit();
+                dataGrid1.ItemsSource = null;
+                dataGrid1.ItemsSource = iHistory;
+                dataGrid1.EndInit();
+            }
+            catch { }
+            Mouse.OverrideCursor = Cursors.Arrow; 
+        }
     }
 }

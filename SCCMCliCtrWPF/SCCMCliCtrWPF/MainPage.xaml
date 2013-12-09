@@ -62,14 +62,14 @@
                                     </StackPanel>
                                 </StackPanel>
                             </rib:RibbonApplicationMenuItem>
-                                <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Center">
-                                    <TextBlock Text="Target Computer: " VerticalAlignment="Center"></TextBlock>
-                                    <Controls:AutoCompleteBox Name="tb_TargetComputer" Text="127.0.0.1" Width="150" Height="25" Populating="tb_TargetComputer2_Populating" KeyUp="tb_TargetComputer_KeyUp"   />
-                                    <rib:RibbonButton Name="bt_Connect" VerticalAlignment="Center" Label="Connect" Height="23" Click="bt_Connect_Click" />
-                                </StackPanel>
+                            <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Center">
+                                <TextBlock Text="Target Computer: " VerticalAlignment="Center"></TextBlock>
+                                <Controls:AutoCompleteBox Name="tb_TargetComputer" Text="127.0.0.1" Width="150" Height="25" Populating="tb_TargetComputer2_Populating" KeyUp="tb_TargetComputer_KeyUp"   />
+                                <rib:RibbonButton Name="bt_Connect" VerticalAlignment="Center" Label="Connect" Height="23" Click="bt_Connect_Click" />
+                            </StackPanel>
                             <rib:RibbonApplicationMenuItem Header="Console extensions...">
-                                    <rib:RibbonButton Name="bt_RegConsole" Label="register Console extension" SmallImageSource="Images/setupold.ico" Click="bt_RegConsole_Click"></rib:RibbonButton>
-                                    <rib:RibbonButton Name="bt_UnRegConsole" Label="remove Console extension" SmallImageSource="Images/Delete.ico" Click="bt_UnRegConsole_Click"></rib:RibbonButton>
+                                <rib:RibbonButton Name="bt_RegConsole" Label="register Console extension" SmallImageSource="Images/setupold.ico" Click="bt_RegConsole_Click"></rib:RibbonButton>
+                                <rib:RibbonButton Name="bt_UnRegConsole" Label="remove Console extension" SmallImageSource="Images/Delete.ico" Click="bt_UnRegConsole_Click"></rib:RibbonButton>
                             </rib:RibbonApplicationMenuItem>
                             <Rectangle MinHeight="310"/>
                         </rib:RibbonApplicationMenu>
@@ -364,27 +364,28 @@
             <DockPanel Name="DetailDock" DockPanel.Dock="Right">
                 <DockPanel Name="StatusDock" DockPanel.Dock="Bottom" Height="100" VerticalAlignment="Bottom">
                     <ResizeGrip Name="PSGrip" HorizontalAlignment="Right" VerticalAlignment="Bottom" DockPanel.Dock="Top" MouseLeftButtonDown="PSGrip_MouseLeftButtonDown" MouseLeftButtonUp="PSGrip_MouseLeftButtonUp" />
-                        <RichTextBox Name="rStatus" FontFamily="Courier New" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" TextChanged="rStatus_TextChanged" AcceptsTab="True" FontSize="12">
-                            <RichTextBox.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="#FFC4C4C4" Offset="1" />
-                                    <GradientStop Color="White" Offset="0.424" />
-                                </LinearGradientBrush>
-                            </RichTextBox.Background>
-                            <RichTextBox.Resources>
-                                <Style TargetType="{x:Type Paragraph}">
-                                    <Setter Property="Margin" Value="0"/>
-                                </Style>
-                            </RichTextBox.Resources>
-                        </RichTextBox>
+                    <RichTextBox Name="rStatus" FontFamily="Courier New" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" TextChanged="rStatus_TextChanged" AcceptsTab="True" FontSize="12">
+                        <RichTextBox.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFC4C4C4" Offset="1" />
+                                <GradientStop Color="White" Offset="0.424" />
+                            </LinearGradientBrush>
+                        </RichTextBox.Background>
+                        <RichTextBox.Resources>
+                            <Style TargetType="{x:Type Paragraph}">
+                                <Setter Property="Margin" Value="0"/>
+                            </Style>
+                        </RichTextBox.Resources>
+                    </RichTextBox>
                 </DockPanel>
                 <DockPanel Name="MainDock" DockPanel.Dock="Top">
                     <TabControl Name="tabNavigationPanels">
-                        <TabItem Header="Agent Settings" Name="AgentSettingsPanel" Tag="AgentSettings" IsSelected="True">
+                        <TabItem Header="Agent Settings" Name="AgentSettingsPanel" Tag="AgentSettings" IsSelected="False">
                             <Grid>
                                 <my4:AgentSettingItem HorizontalAlignment="Center" x:Name="agentSettingItem1" VerticalAlignment="Center" IsEnabled="False" />
                             </Grid>
                         </TabItem>
+                        <TabItem/>
                         <TabItem Header="SettingsMgmt" Name="SettingsMgmtPanel" Tag="SettingsMgmt" IsSelected="False">
                             <Grid>
                                 <my6:SettingsMgmt x:Name="SettingsMgmtGrid" />
@@ -448,6 +449,11 @@
                         <TabItem Header="Collection Variables" Name="Collectionvariables" Tag="Collectionvariables" IsSelected="False">
                             <Grid>
                                 <my4:CollectionVariables HorizontalAlignment="Stretch" x:Name="CollectionVariablesGrid1" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="About" Name="About" Tag="About" IsSelected="True">
+                            <Grid>
+                                <my6:About HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
                             </Grid>
                         </TabItem>
                     </TabControl>

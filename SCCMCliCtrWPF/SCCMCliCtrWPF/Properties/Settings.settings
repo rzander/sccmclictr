@@ -217,5 +217,11 @@ catch
         $error[0] 
 } </Value>
     </Setting>
+    <Setting Name="HideTSAdvertisements" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="HideNonUserUIExperienceApplicattions" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

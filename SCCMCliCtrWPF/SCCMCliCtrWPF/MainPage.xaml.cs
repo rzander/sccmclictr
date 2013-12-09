@@ -40,10 +40,22 @@ namespace ClientCenter
 
             InitializeComponent();
 
-
             try
             {
                 this.WindowTitle = SCCMCliCtr.Customization.Title;
+                rStatus.AppendText("Client Center for Configuration Manager (c) 2013 by Roger Zander\n");
+                rStatus.AppendText("Project-Page: http://sccmclictr.codeplex.com\n");
+                rStatus.AppendText("Current Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString());
+
+                if(!SCCMCliCtr.Customization.CheckLicense() | SCCMCliCtr.Customization.isOpenSource)
+                {
+                    this.AgentSettingsPanel.IsSelected = false;
+                }
+                else
+                {
+                    this.AgentSettingsPanel.IsSelected = true;
+                }
+
             }
             catch { }
 

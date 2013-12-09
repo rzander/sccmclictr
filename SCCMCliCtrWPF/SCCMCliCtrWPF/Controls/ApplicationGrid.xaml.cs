@@ -52,7 +52,16 @@ namespace ClientCenter.Controls
                         //lApps.ToString();
 
                         oAgent = value;
-                        iApplications = oAgent.Client.SoftwareDistribution.Applications.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
+                        if (Properties.Settings.Default.HideNonUserUIExperienceApplicattions)
+                        {
+                            List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications.Where(t => t.UserUIExperience == true).ToList();
+                            iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
+                        }
+                        else
+                        {
+                            List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications.ToList();
+                            iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
+                        }
                         //TEST.Source = BitMapConvert.ToBitmapImage(iApplications[0].IconAsImage);
 
                         dataGrid1.BeginInit();
@@ -72,7 +81,16 @@ namespace ClientCenter.Controls
 
         private void bt_Reload_Click(object sender, RoutedEventArgs e)
         {
-            iApplications = oAgent.Client.SoftwareDistribution.Applications.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o=>o.FullName).ToList();
+            if (Properties.Settings.Default.HideNonUserUIExperienceApplicattions)
+            {
+                List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications.Where(t => t.UserUIExperience == true).ToList();
+                iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
+            }
+            else
+            {
+                List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications.ToList();
+                iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
+            }
 
             dataGrid1.BeginInit();
             dataGrid1.ItemsSource = iApplications;

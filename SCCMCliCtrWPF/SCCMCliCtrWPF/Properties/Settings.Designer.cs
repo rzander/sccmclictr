@@ -319,5 +319,23 @@ while ($a -ne 1)")]
                 return ((string)(this["AgentInstallPS"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool HideTSAdvertisements {
+            get {
+                return ((bool)(this["HideTSAdvertisements"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool HideNonUserUIExperienceApplicattions {
+            get {
+                return ((bool)(this["HideNonUserUIExperienceApplicattions"]));
+            }
+        }
     }
 }

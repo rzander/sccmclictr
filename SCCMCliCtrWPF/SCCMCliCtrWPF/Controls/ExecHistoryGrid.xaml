@@ -35,6 +35,11 @@
                             <Image Source="/SCCMCliCtrWPF;component/Images/Delete.ico" Height="24" />
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Name="miResolveSID" Header="Resolve SID" Click="miResolveSID_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/SCCMCliCtrWPF;component/Images/Search File.ico" Height="24" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
