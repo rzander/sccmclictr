@@ -311,7 +311,7 @@
                         </s:NavigationPaneItem>
                         <s:NavigationPaneItem Name="AgentSettingsPane" Header="Agent Settings" ToolTip="ConfigMgr Agent Settings" Image="/SCCMCliCtrWPF;component/Images/Setting.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Setting.ico" IsSelected="True">
                             <StackPanel VerticalAlignment="Stretch">
-                                <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200" Name="treeView1" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000" MouseLeftButtonDown="treeView1_MouseLeftButtonDown" Loaded="treeView1_Loaded">
+                                <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200" Name="treeView1" MouseLeftButtonDown="treeView1_MouseLeftButtonDown" Loaded="treeView1_Loaded"  Background="#00000000" BorderBrush="#00000000" Foreground="#00000000" >
                                     <TreeViewItem Name="tviOverview"  Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="True" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
                                         <TreeViewItem IsExpanded="True" IsSelected="True" Tag="AgentSettings" Name="tviAgentSettings">
                                             <TreeViewItem.Header>
