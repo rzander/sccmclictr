@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Properties="clr-namespace:ClientCenter.Properties" x:Class="ClientCenter.Controls.About" 
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="500">
+             d:DesignHeight="400" d:DesignWidth="800">
     <Grid ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
         <DockPanel>
             <DockPanel.Background>
@@ -24,11 +24,14 @@
             </DockPanel.Background>
             <DockPanel DockPanel.Dock="Left" MaxWidth="180px">
                 <DockPanel DockPanel.Dock="Top">
+                    <StackPanel>
                     <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="/SCCMCliCtrWPF;component/Images/Icon16_256.png"/>
+                    <Label Name="lVersion" Content=""></Label>
+                    </StackPanel>
                 </DockPanel>
                 <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <DockPanel DockPanel.Dock="Top" UseLayoutRounding="False">
-                        <StackPanel>
+                        <StackPanel Name="spMSG">
                             <StackPanel.Background>
                                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                     <GradientStop Color="#FF82AAFF" Offset="0"/>

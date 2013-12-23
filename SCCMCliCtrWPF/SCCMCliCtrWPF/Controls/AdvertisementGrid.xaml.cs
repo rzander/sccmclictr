@@ -18,6 +18,7 @@ using sccmclictr.automation.functions;
 using System.IO;
 using System.Globalization;
 using System.Management.Automation;
+using System.ComponentModel;
 
 namespace ClientCenter.Controls
 {
@@ -84,19 +85,23 @@ namespace ClientCenter.Controls
 
         private void bt_Reload_Click(object sender, RoutedEventArgs e)
         {
+            List<SortDescription> ssort = GetSortInfo(dataGrid1);
+
             if (Properties.Settings.Default.HideTSAdvertisements)
             {
-                List<softwaredistribution.CCM_SoftwareDistribution> oList = oAgent.Client.SoftwareDistribution.Advertisements.OrderBy(o => o.PRG_ProgramID).ThenBy(o => o.PKG_Name).ToList();
+                List<softwaredistribution.CCM_SoftwareDistribution> oList = oAgent.Client.SoftwareDistribution.Advertisements_(true) .OrderBy(o => o.PRG_ProgramID).ThenBy(o => o.PKG_Name).ToList();
                 iAdvertisements = oList.GroupBy(t => t.ADV_AdvertisementID).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.PKG_Name).ToList();
             }
             else
             {
-                List<softwaredistribution.CCM_SoftwareDistribution> oList = oAgent.Client.SoftwareDistribution.Advertisements.OrderBy(o => o.PRG_ProgramID).ThenBy(o => o.PKG_Name).ToList();
+                List<softwaredistribution.CCM_SoftwareDistribution> oList = oAgent.Client.SoftwareDistribution.Advertisements_(true).OrderBy(o => o.PRG_ProgramID).ThenBy(o => o.PKG_Name).ToList();
                 iAdvertisements = oList.OrderBy(o => o.PKG_Name).ToList();
             }
             dataGrid1.BeginInit();
             dataGrid1.ItemsSource = iAdvertisements;
             dataGrid1.EndInit();
+
+            SetSortInfo(dataGrid1, ssort);
         }
 
         private void dataGrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -227,13 +232,61 @@ namespace ClientCenter.Controls
 
         private void bt_ReloadStatus_Click(object sender, RoutedEventArgs e)
         {
+            List<SortDescription> ssort = GetSortInfo(dataGrid1);
+
             lProgs = oAgent.Client.SoftwareDistribution.ExecutionHistory;
 
             dataGrid1.BeginInit();
             dataGrid1.ItemsSource = iAdvertisements;
             dataGrid1.EndInit();
+
+            SetSortInfo(dataGrid1, ssort);
         }
 
+
+        List<DataGridColumn> GetColumnInfo(DataGrid dg)
+        {
+            List<DataGridColumn> columnInfos = new List<DataGridColumn>();
+            foreach (var column in dg.Columns)
+            {
+                columnInfos.Add(column);
+            }
+            return columnInfos;
+        }
+
+        List<SortDescription> GetSortInfo(DataGrid dg)
+        {
+            List<SortDescription> sortInfos = new List<SortDescription>();
+            foreach (var sortDescription in dg.Items.SortDescriptions)
+            {
+                sortInfos.Add(sortDescription);
+            }
+            return sortInfos;
+        }
+
+        void SetColumnInfo(DataGrid dg, List<DataGridColumn> columnInfos)
+        {
+            columnInfos.Sort((c1, c2) => { return c1.DisplayIndex - c2.DisplayIndex; });
+            foreach (var columnInfo in columnInfos)
+            {
+                var column = dg.Columns.FirstOrDefault(col => col.Header == columnInfo.Header);
+                if (column != null)
+                {
+                    column.SortDirection = columnInfo.SortDirection;
+                    column.DisplayIndex = columnInfo.DisplayIndex;
+                    column.Visibility = columnInfo.Visibility;
+                }
+            }
+        }
+
+        void SetSortInfo(DataGrid dg, List<SortDescription> sortInfos)
+        {
+            dg.Items.SortDescriptions.Clear();
+            foreach (var sortInfo in sortInfos)
+            {
+                dg.Items.SortDescriptions.Add(sortInfo);
+            }
+        }
     }
 
     public class StatusConverter : IMultiValueConverter

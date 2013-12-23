@@ -31,7 +31,7 @@
                 <Button Name="bt_Connect2"  Content="Connect" VerticalAlignment="Center" Height="25" Width="60" Margin="20,0,0,0" HorizontalAlignment="Left" Click="bt_Connect_Click" />
             </DockPanel>
             <DockPanel Name="RibbonDock" DockPanel.Dock="Top" Height="120">
-                <Border BorderBrush="Silver" BorderThickness="1" />
+                <!--<Border BorderBrush="Silver" BorderThickness="0" />-->
                 <rib:Ribbon HorizontalAlignment="Stretch" Name="ribbon1" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" ToolTip="Tip" ShowQuickAccessToolBarOnTop="False" Height="153" Grid.ColumnSpan="4" IsEnabled="True">
                     <rib:Ribbon.QuickAccessToolBar>
                         <rib:RibbonQuickAccessToolBar>
@@ -71,6 +71,7 @@
                                 <rib:RibbonButton Name="bt_RegConsole" Label="register Console extension" SmallImageSource="Images/setupold.ico" Click="bt_RegConsole_Click"></rib:RibbonButton>
                                 <rib:RibbonButton Name="bt_UnRegConsole" Label="remove Console extension" SmallImageSource="Images/Delete.ico" Click="bt_UnRegConsole_Click"></rib:RibbonButton>
                             </rib:RibbonApplicationMenuItem>
+                            <rib:RibbonButton Name="bt_About" Label="About.." Click="bt_About_Click"></rib:RibbonButton>
                             <Rectangle MinHeight="310"/>
                         </rib:RibbonApplicationMenu>
                     </rib:Ribbon.ApplicationMenu>
@@ -142,8 +143,7 @@
                             <rib:RibbonSplitButton Name="btAppMgmt" ToolTip="Application Management" LargeImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico">
                                 <rib:RibbonButton Name="btAppManUserPolicyAction" Label="Application manager user policy action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btAppManUserPolicyAction_Click" />
                                 <rib:RibbonButton Name="btAppManMachinePolicyAction" Label="Application manager machine policy action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btAppManMachinePolicyAction_Click" />
-                                <rib:RibbonButton Name="btAppManGlobalEvaluation" Label="Application manager global evaluation action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btAppManGlobalEvaluation_Click" />
-
+                                <!--<rib:RibbonButton Name="btAppManGlobalEvaluation" Label="Application manager global evaluation action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btAppManGlobalEvaluation_Click"/>-->
                             </rib:RibbonSplitButton>
                         </rib:RibbonGroup>
                         <rib:RibbonGroup Name="rgTools" Header="Tools" Visibility="Hidden">
@@ -154,11 +154,9 @@
                 </rib:Ribbon>
             </DockPanel>
             <DockPanel Name="NavigationDock" Width="200" MinWidth="150">
-                <DockPanel Name="FunctionDock" DockPanel.Dock="Top" Height="80">
+                <DockPanel Name="FunctionDock" DockPanel.Dock="Top" Height="0">
                     <Border BorderBrush="Silver" BorderThickness="2" />
                     <StackPanel>
-                        <Label>Sponsored by:</Label>
-                        <Image Name="Sponsor" Source="/SCCMCliCtrWPF;component/Images/syliance_smal.png" />
                     </StackPanel>
                 </DockPanel>
                 <DockPanel Name="MainFunctionsDock" DockPanel.Dock="Bottom" VerticalAlignment="Stretch">
@@ -345,7 +343,7 @@
                                                 </StackPanel>
                                             </TreeViewItem.Header>
                                         </TreeViewItem>
-                                        <TreeViewItem Tag="ClientHealth" IsEnabled="False">
+                                        <TreeViewItem Tag="ClientHealth" IsEnabled="False" Visibility="Hidden">
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
                                                     <Image Source="/SCCMCliCtrWPF;component/Images/Heartbeat.ico" Stretch="Uniform" Width="20" Height="20"/>
@@ -358,7 +356,6 @@
                             </StackPanel>
                         </s:NavigationPaneItem>
                     </s:NavigationPane>
-
                 </DockPanel>
             </DockPanel>
             <DockPanel Name="DetailDock" DockPanel.Dock="Right">
@@ -451,9 +448,9 @@
                                 <my4:CollectionVariables HorizontalAlignment="Stretch" x:Name="CollectionVariablesGrid1" />
                             </Grid>
                         </TabItem>
-                        <TabItem Header="About" Name="About" Tag="About" IsSelected="True">
+                        <TabItem Header="About" Name="AboutPanel" Tag="About" IsSelected="True">
                             <Grid>
-                                <my6:About HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                                <my6:About x:Name="myAbout" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
                             </Grid>
                         </TabItem>
                     </TabControl>

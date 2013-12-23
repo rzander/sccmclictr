@@ -32,6 +32,7 @@ namespace ClientCenter
         }
 
         internal List<sccmclictr.automation.functions.ExtProcess> iProcesses;
+        
         public SCCMAgent SCCMAgentConnection
         {
             get

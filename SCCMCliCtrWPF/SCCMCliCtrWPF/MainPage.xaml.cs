@@ -54,6 +54,7 @@ namespace ClientCenter
                 else
                 {
                     this.AgentSettingsPanel.IsSelected = true;
+                    this.myAbout.MSG = false;
                 }
 
             }
@@ -208,6 +209,20 @@ namespace ClientCenter
         private void bt_Connect_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
+
+            if (oAgent != null)
+            {
+                this.AgentSettingsPanel.IsSelected = true;
+                
+                if (oAgent.isConnected)
+                    oAgent.disconnect();
+                
+                oAgent.Dispose();
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+            }
+
             if (bPasswordChanged)
             {
                 Properties.Settings.Default.Password = common.Encrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
@@ -894,6 +909,11 @@ namespace ClientCenter
             }
             catch { myTrace.WriteError("Unable to remove console extension..."); }
             Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void bt_About_Click(object sender, RoutedEventArgs e)
+        {
+            this.AboutPanel.IsSelected = true;
         }
 
     }

@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using System.Diagnostics;
+using System.Reflection;
 
 namespace ClientCenter.Controls
 {
@@ -26,6 +27,7 @@ namespace ClientCenter.Controls
             InitializeComponent();
 
             tbLicense.Text = Properties.Resources.License;
+            lVersion.Content = "Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -42,6 +44,19 @@ namespace ClientCenter.Controls
                 e.Handled = true;
             }
             catch { }
+        }
+
+        public bool MSG
+        {
+            get { return spMSG.IsVisible; }
+            set 
+            {
+                if (value)
+                    spMSG.Visibility = System.Windows.Visibility.Visible;
+                else
+                    spMSG.Visibility = System.Windows.Visibility.Hidden;
+            }
+            
         }
 
     }
