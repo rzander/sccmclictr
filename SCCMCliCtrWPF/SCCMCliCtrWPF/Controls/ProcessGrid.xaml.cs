@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using sccmclictr.automation;
 using sccmclictr.automation.functions;
+using System.ComponentModel;
 
 namespace ClientCenter
 {
@@ -111,11 +112,64 @@ namespace ClientCenter
         private void bt_Reload_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            iProcesses = oAgent.Client.Process.ExtProcesses(true).Where(t => t.ProcessId > 4).OrderBy(t => t.Name).ToList();
-            dataGrid1.BeginInit();
-            dataGrid1.ItemsSource = iProcesses;
-            dataGrid1.EndInit();
+            try
+            {
+                List<SortDescription> ssort = GetSortInfo(dataGrid1);
+
+                iProcesses = oAgent.Client.Process.ExtProcesses(true).Where(t => t.ProcessId > 4).OrderBy(t => t.Name).ToList();
+                dataGrid1.BeginInit();
+                dataGrid1.ItemsSource = iProcesses;
+                dataGrid1.EndInit();
+
+                SetSortInfo(dataGrid1, ssort);
+            }
+            catch { }
+
             Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        List<DataGridColumn> GetColumnInfo(DataGrid dg)
+        {
+            List<DataGridColumn> columnInfos = new List<DataGridColumn>();
+            foreach (var column in dg.Columns)
+            {
+                columnInfos.Add(column);
+            }
+            return columnInfos;
+        }
+
+        List<SortDescription> GetSortInfo(DataGrid dg)
+        {
+            List<SortDescription> sortInfos = new List<SortDescription>();
+            foreach (var sortDescription in dg.Items.SortDescriptions)
+            {
+                sortInfos.Add(sortDescription);
+            }
+            return sortInfos;
+        }
+
+        void SetColumnInfo(DataGrid dg, List<DataGridColumn> columnInfos)
+        {
+            columnInfos.Sort((c1, c2) => { return c1.DisplayIndex - c2.DisplayIndex; });
+            foreach (var columnInfo in columnInfos)
+            {
+                var column = dg.Columns.FirstOrDefault(col => col.Header == columnInfo.Header);
+                if (column != null)
+                {
+                    column.SortDirection = columnInfo.SortDirection;
+                    column.DisplayIndex = columnInfo.DisplayIndex;
+                    column.Visibility = columnInfo.Visibility;
+                }
+            }
+        }
+
+        void SetSortInfo(DataGrid dg, List<SortDescription> sortInfos)
+        {
+            dg.Items.SortDescriptions.Clear();
+            foreach (var sortInfo in sortInfos)
+            {
+                dg.Items.SortDescriptions.Add(sortInfo);
+            }
         }
     }
 }
