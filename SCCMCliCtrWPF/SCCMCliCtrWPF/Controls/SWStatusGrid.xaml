@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="ClientCenter.Controls.SWStatusGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="400"
+             xmlns:custom="clr-namespace:ClientCenter.Controls">
+    <UserControl.Resources>
+        <custom:ImageConverter x:Key="ImageConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Top" Height="32">
+                <ToolBar Name="toolBar1" HorizontalContentAlignment="Stretch">
+                    <Button ToolTip="Reload Software Status" Name="bt_Reload" Click="bt_Reload_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico"/>
+                            <TextBlock Margin="2,0,0,0">Reload Software List</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Separator />
+                    <Button ToolTip="show SW that is not installed" Name="bt_ReloadActive" Click="bt_ReloadActive_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico"/>
+                            <TextBlock Margin="2,0,0,0">show pending SW</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Separator />
+                </ToolBar>
+            </DockPanel>
+            <DockPanel>
+                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" SortDirection="Ascending"/>
+                        <DataGridTextColumn Header="Type" Binding="{Binding Path=Type}"/>
+                        <DataGridTextColumn Header="Publisher" Binding="{Binding Path=Publisher}"/>
+                        <DataGridTextColumn Header="Available After" Binding="{Binding Path=AvailableAfter}"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}"/>
+                        <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0" MaxWidth="24">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Path=Icon, Converter={StaticResource ImageConverter}}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>
