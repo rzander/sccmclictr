@@ -139,9 +139,31 @@ namespace ClientCenter.Controls
                 
                 
                 lBack.Opacity = .7;
+                string sType = "";
+                switch(tr.ServiceWindowType)
+                {
+                    case 1:
+                        sType = "All Programs Service Window";
+                        break;
+                    case 2:
+                        sType = "Program Service Window";
+                        break;
+                    case 3:
+                        sType = "Reboot Required Service Window";
+                        break;
+                    case 4:
+                        sType = "Software Update Service Window";
+                        break;
+                    case 5:
+                        sType = "OSD Service Window";
+                        break;
+                    case 6:
+                        sType = "Corresponds to non-working hours";
+                        break;
+                }
 
                 TB.Brush = lBack;
-                TB.ToolTip = tr.Text;
+                TB.ToolTip = tr.Text + " \nType:" + sType;
                 TB.isLocal = tr.isLocal;
                 TB.ServiceWindowID = tr.ServiceWindowID;
                 TB.BTClose.ID = tr.ServiceWindowID;
@@ -262,7 +284,7 @@ namespace ClientCenter.Controls
                 color = brushcolor;
                 Text = Title;
             }
-            public timeRange(TimeSpan StartTime, TimeSpan EndTime, Color brushcolor, string Title, Boolean ISLocal, string SErviceWindowsID)
+            public timeRange(TimeSpan StartTime, TimeSpan EndTime, Color brushcolor, string Title, Boolean ISLocal, string SErviceWindowsID, uint? SWType)
             {
                 startTime = StartTime;
                 endTime = EndTime;
@@ -271,6 +293,7 @@ namespace ClientCenter.Controls
                 Text = Title;
                 isLocal = ISLocal;
                 ServiceWindowID = SErviceWindowsID;
+                ServiceWindowType = SWType;
             }
             public TimeSpan startTime;
             public TimeSpan endTime;
@@ -279,6 +302,7 @@ namespace ClientCenter.Controls
             public String Text;
             public Boolean isLocal;
             public string ServiceWindowID;
+            public uint? ServiceWindowType;
         }
     }
 }

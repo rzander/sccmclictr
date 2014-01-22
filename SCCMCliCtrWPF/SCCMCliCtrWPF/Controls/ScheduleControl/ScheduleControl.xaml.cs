@@ -62,7 +62,7 @@ namespace ClientCenter.Controls
                 color = brushColor;
                 Title = title;
             }
-            public ScheduledTime(DateTime startDateTime, TimeSpan duration, Color brushColor, string title, Boolean ISLocal, string SErviceWindowID)
+            public ScheduledTime(DateTime startDateTime, TimeSpan duration, Color brushColor, string title, Boolean ISLocal, string SErviceWindowID, uint? SWType)
             {
                 StartDateTime = startDateTime;
                 Duration = duration;
@@ -70,6 +70,7 @@ namespace ClientCenter.Controls
                 Title = title;
                 isLocal = ISLocal;
                 ServiceWindowID = SErviceWindowID;
+                ServiceWindowType = SWType;
             }
             public DateTime StartDateTime;
             public TimeSpan Duration;
@@ -77,6 +78,7 @@ namespace ClientCenter.Controls
             public Boolean isLocal;
             public string ServiceWindowID;
             public string Title;
+            public uint? ServiceWindowType;
         }
         
         public event EventHandler DeleteClick;
@@ -158,12 +160,12 @@ namespace ClientCenter.Controls
                 {
                     //Move it to next day
                     endTime = new TimeSpan(24, 0, 0);
-                    AddSchedule(new ScheduledTime(new DateTime(oTime.StartDateTime.Year, oTime.StartDateTime.Month, oTime.StartDateTime.Day, 0, 0, 0).AddDays(1), (oTime.StartDateTime.TimeOfDay + oTime.Duration).Subtract(new TimeSpan(24, 0, 0)), oTime.color, oTime.Title, oTime.isLocal, oTime.ServiceWindowID)); ;
+                    AddSchedule(new ScheduledTime(new DateTime(oTime.StartDateTime.Year, oTime.StartDateTime.Month, oTime.StartDateTime.Day, 0, 0, 0).AddDays(1), (oTime.StartDateTime.TimeOfDay + oTime.Duration).Subtract(new TimeSpan(24, 0, 0)), oTime.color, oTime.Title, oTime.isLocal, oTime.ServiceWindowID, oTime.ServiceWindowType)); ;
                 }
 
                 if ((oTime.StartDateTime.Date - DateTime.Now.Date) <= new TimeSpan(DaysVisible, 0, 0, 0))
                 {
-                    DC.timeList.Add(new DayControl.timeRange(startTime, endTime, oTime.color, oTime.Title, oTime.isLocal, oTime.ServiceWindowID));
+                    DC.timeList.Add(new DayControl.timeRange(startTime, endTime, oTime.color, oTime.Title, oTime.isLocal, oTime.ServiceWindowID, oTime.ServiceWindowType));
                 }
             }
         }

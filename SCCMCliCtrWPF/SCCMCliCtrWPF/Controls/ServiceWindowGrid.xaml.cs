@@ -95,7 +95,8 @@ namespace ClientCenter.Controls
                             scheduleControl1.ScheduledTimes.Clear();
                             foreach (sccmclictr.automation.policy.requestedConfig.CCM_ServiceWindow oSRW in oAgent.Client.RequestedConfig.ServiceWindow)
                             {
-                                GetSchedules(oSRW.DecodedSchedule, oSRW.ServiceWindowID, oSRW.PolicySource);
+
+                                GetSchedules(oSRW.DecodedSchedule, oSRW.ServiceWindowID, oSRW.PolicySource, oSRW.ServiceWindowType);
                             }
                         }
 
@@ -111,14 +112,40 @@ namespace ClientCenter.Controls
 
         public void GetSchedules(object Schedule)
         {
-            GetSchedules(Schedule, "", "");
+            GetSchedules(Schedule, "", "", 1);
         }
         public void GetSchedules(object Schedule, string ServiceWindowID)
         {
-            GetSchedules(Schedule, ServiceWindowID, "");
+            GetSchedules(Schedule, ServiceWindowID, "", 1);
         }
-        public void GetSchedules(object Schedule, string ServiceWindowID, string PolicySource)
+        public void GetSchedules(object Schedule, string ServiceWindowID, string PolicySource, uint? SWType)
         {
+            Color cForeColor = Colors.Blue;
+            switch (SWType)
+            {
+                case 1:
+                    cForeColor = Colors.Blue;
+                    break;
+                case 2:
+                    cForeColor = Colors.Brown;
+                    break;
+                case 3:
+                    cForeColor = Colors.Violet;
+                    break;
+                case 4:
+                    cForeColor = Colors.Red;
+                    break;
+                case 5:
+                    cForeColor = Colors.Orange;
+                    break;
+                case 6:
+                    cForeColor = Colors.Green;
+                    break;
+
+                default:
+                    cForeColor = Colors.Blue;
+                    break;
+            }
             Boolean isLocal = false;
             if(string.Compare(PolicySource, "LOCAL", true) == 0)
                 isLocal = true;
@@ -129,7 +156,7 @@ namespace ClientCenter.Controls
                 case ("List`1"):
                     foreach (var subsched in oWin as List<object>)
                     {
-                        GetSchedules(subsched, ServiceWindowID, PolicySource);
+                        GetSchedules(subsched, ServiceWindowID, PolicySource, SWType);
                     }
                     break;
                 case ("SMS_ST_NonRecurring"):
@@ -140,7 +167,8 @@ namespace ClientCenter.Controls
                     DateTime dNextRunNonRec = oSchedNonRec.NextStartTime;
                     if (oSchedNonRec.StartTime + new TimeSpan(oSchedNonRec.DayDuration, oSchedNonRec.HourDuration, 0, 0) >= DateTime.Now.Date)
                     {
-                        ScheduleControl.ScheduledTime oControl = new ScheduleControl.ScheduledTime(dNextRunNonRec, new TimeSpan(oSchedNonRec.DayDuration, oSchedNonRec.HourDuration, oSchedNonRec.MinuteDuration, 0), Colors.Blue, "Non Recuring", isLocal, ServiceWindowID);
+                        
+                        ScheduleControl.ScheduledTime oControl = new ScheduleControl.ScheduledTime(dNextRunNonRec, new TimeSpan(oSchedNonRec.DayDuration, oSchedNonRec.HourDuration, oSchedNonRec.MinuteDuration, 0), cForeColor, "Non Recuring", isLocal, ServiceWindowID, SWType);
                         scheduleControl1.ScheduledTimes.Add(oControl);
                     }
                     break;
@@ -158,7 +186,7 @@ namespace ClientCenter.Controls
                         dNextRunInt = oSchedInt.PreviousStartTime;
                     while (dNextRunInt.Date < DateTime.Now.Date + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
                     {
-                        scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRunInt, new TimeSpan(oSchedInt.DayDuration, oSchedInt.HourDuration, oSchedInt.MinuteDuration, 0), Colors.Green, sRecurTextInt + " " + ServiceWindowID, isLocal, ServiceWindowID));
+                        scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRunInt, new TimeSpan(oSchedInt.DayDuration, oSchedInt.HourDuration, oSchedInt.MinuteDuration, 0), cForeColor, sRecurTextInt + " " + ServiceWindowID, isLocal, ServiceWindowID, SWType));
                         dNextRunInt = dNextRunInt + new TimeSpan(oSchedInt.DaySpan, oSchedInt.HourSpan, oSchedInt.MinuteSpan, 0);
                     }
                     break;
@@ -176,7 +204,7 @@ namespace ClientCenter.Controls
 
                     while (dNextRun.Date < DateTime.Now.Date + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
                     {
-                        scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRun, new TimeSpan(oSched.DayDuration, oSched.HourDuration, oSched.MinuteDuration, 0), Colors.Red, sRecurText, isLocal, ServiceWindowID));
+                        scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRun, new TimeSpan(oSched.DayDuration, oSched.HourDuration, oSched.MinuteDuration, 0), cForeColor, sRecurText, isLocal, ServiceWindowID, SWType));
                         //add_Appointment(dNextRun, dNextRun + new TimeSpan(oSchedule.DayDuration, oSchedule.HourDuration, oSchedule.MinuteDuration, 0), oSchedule.IsGMT);
                         dNextRun = dNextRun + new TimeSpan(oSched.ForNumberOfWeeks * 7, 0, 0, 0);
                     }
