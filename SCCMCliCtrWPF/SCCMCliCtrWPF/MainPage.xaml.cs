@@ -398,6 +398,10 @@ namespace ClientCenter
                                     case "SWDistSummary":
                                         SWDistSummaryGrid1.SCCMAgentConnection = oAgent;
                                         break;
+                                    case "CCMEval":
+                                        CCMEvalGrid.SCCMAgentConnection = oAgent;
+                                        break;
+
                                 }
                                 break;
                             }

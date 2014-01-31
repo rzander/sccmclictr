@@ -343,7 +343,7 @@
                                                 </StackPanel>
                                             </TreeViewItem.Header>
                                         </TreeViewItem>
-                                        <TreeViewItem Tag="ClientHealth" IsEnabled="False" Visibility="Hidden">
+                                        <TreeViewItem Tag="CCMEval" IsEnabled="True" ToolTip="Agent health status">
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
                                                     <Image Source="/SCCMCliCtrWPF;component/Images/Heartbeat.ico" Stretch="Uniform" Width="20" Height="20"/>
@@ -446,6 +446,11 @@
                         <TabItem Header="Collection Variables" Name="Collectionvariables" Tag="Collectionvariables" IsSelected="False">
                             <Grid>
                                 <my4:CollectionVariables HorizontalAlignment="Stretch" x:Name="CollectionVariablesGrid1" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="CCMEval" Name="CCMEval" Tag="CCMEval" IsSelected="False">
+                            <Grid>
+                                <my6:CCMEvalGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="CCMEvalGrid"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="About" Name="AboutPanel" Tag="About" IsSelected="True">

@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="ClientCenter.Controls.CCMEvalGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             xmlns:custom="clr-namespace:ClientCenter.Controls">
+    <UserControl.Resources>
+        <custom:ImageConverter x:Key="ImageConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Top"  Height="32">
+                <ToolBar Name="toolBar1">
+                    <Button ToolTip="Run CCMEval.exe, this may tkae a few seconds to complete." Name="bt_ReRun" Click="bt_ReRun_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico"/>
+                            <TextBlock Margin="2,0,0,0">Run CcmEval.exe</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Separator />
+                    <Button ToolTip="Reload ccmeval.xml" Name="bt_Reload" Click="bt_Reload_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico"/>
+                            <TextBlock Margin="2,0,0,0">Reload scan results</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </ToolBar>
+            </DockPanel>
+            <DockPanel>
+                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Status" Binding="{Binding Path=text}" SortDirection="Ascending"/>
+                        <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}"/>
+                        <DataGridTextColumn Header="ResultDetail" Binding="{Binding Path=ResultDetail}"/>
+                        <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Name="img" Source="/SCCMCliCtrWPF;component/Images/Flag.ico" Height="16"></Image>
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding text}" Value="Passed">
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Flag 4.ico"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding text}" Value="Not Applicable">
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Confirm visible_24.png"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding text}" Value="Remediation Succeeded">
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Warning.ico"/>
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

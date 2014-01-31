@@ -45,8 +45,8 @@
     <SuiteName>SCCM Tools</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.1</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -84,6 +84,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Plugin_RemoteTools\bin\Debug\Plugin_CMRemote.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin_CMResourceExplorer">
+      <HintPath>..\Plugin_ResourceExplorer\bin\Debug\Plugin_CMResourceExplorer.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="ReachFramework" />
@@ -93,7 +96,7 @@
     </Reference>
     <Reference Include="sccmclictr.automation, Version=0.0.0.41, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\sccmclictrlib.0.0.0.41\lib\net40\sccmclictr.automation.dll</HintPath>
+      <HintPath>..\..\sccmclictrlib\sccmclictr.automation\bin\Debug\sccmclictr.automation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -139,6 +142,9 @@
     </Compile>
     <Compile Include="Controls\AdvertisementGrid.xaml.cs">
       <DependentUpon>AdvertisementGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CCMEvalGrid.xaml.cs">
+      <DependentUpon>CCMEvalGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ApplicationGrid.xaml.cs">
       <DependentUpon>ApplicationGrid.xaml</DependentUpon>
@@ -215,6 +221,10 @@
     <Page Include="Controls\AgentSettingItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CCMEvalGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ApplicationGrid.xaml">
       <SubType>Designer</SubType>
@@ -339,6 +349,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Images\Confirm visible_24.png" />
+    <Resource Include="Images\Warning.ico" />
     <Resource Include="Images\Icon16_256.png" />
     <None Include="packages.config" />
     <None Include="Resources\Icon16.ico" />
