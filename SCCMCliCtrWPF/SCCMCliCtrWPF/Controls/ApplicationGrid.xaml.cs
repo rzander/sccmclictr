@@ -82,24 +82,30 @@ namespace ClientCenter.Controls
 
         private void bt_Reload_Click(object sender, RoutedEventArgs e)
         {
-            List<SortDescription> ssort = GetSortInfo(dataGrid1);
-
-            if (Properties.Settings.Default.HideNonUserUIExperienceApplicattions)
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
             {
-                List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications_(true).Where(t => t.UserUIExperience == true).ToList();
-                iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
-            }
-            else
-            {
-                List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications_(true).ToList();
-                iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
-            }
+                List<SortDescription> ssort = GetSortInfo(dataGrid1);
 
-            dataGrid1.BeginInit();
-            dataGrid1.ItemsSource = iApplications;
-            dataGrid1.EndInit();
+                if (Properties.Settings.Default.HideNonUserUIExperienceApplicattions)
+                {
+                    List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications_(true).Where(t => t.UserUIExperience == true).ToList();
+                    iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
+                }
+                else
+                {
+                    List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications_(true).ToList();
+                    iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
+                }
 
-            SetSortInfo(dataGrid1, ssort);
+                dataGrid1.BeginInit();
+                dataGrid1.ItemsSource = iApplications;
+                dataGrid1.EndInit();
+
+                SetSortInfo(dataGrid1, ssort);
+            }
+            catch { }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void miInstallApp_Click(object sender, RoutedEventArgs e)

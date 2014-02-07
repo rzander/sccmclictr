@@ -68,6 +68,7 @@ namespace ClientCenter
 
         private void miInstallUpdate_Click(object sender, RoutedEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             try
             {
                 //Install all selected Updates;
@@ -82,10 +83,12 @@ namespace ClientCenter
             {
                 Listener.WriteError(ex.Message);
             }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void bt_InstallAll_Click(object sender, RoutedEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             try
             {
                 oAgent.Client.SoftwareUpdates.InstallAllRequiredUpdates();
@@ -94,6 +97,7 @@ namespace ClientCenter
             {
                 Listener.WriteError(ex.Message);
             }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void bt_Reload_Click(object sender, RoutedEventArgs e)
@@ -115,6 +119,7 @@ namespace ClientCenter
 
         private void bt_InstallAllApproved_Click(object sender, RoutedEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             try
             {
                 oAgent.Client.SoftwareUpdates.InstallAllApprovedUpdates();
@@ -123,6 +128,7 @@ namespace ClientCenter
             {
                 Listener.WriteError(ex.Message);
             }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
     }
 }

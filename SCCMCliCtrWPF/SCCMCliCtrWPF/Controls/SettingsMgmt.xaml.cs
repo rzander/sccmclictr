@@ -68,15 +68,22 @@ namespace ClientCenter.Controls
 
         private void bt_Reload_Click(object sender, RoutedEventArgs e)
         {
-            iBaselines = oAgent.Client.DCM.DCMBaselines.OrderBy(t => t.DisplayName).ToList();
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                iBaselines = oAgent.Client.DCM.DCMBaselines.OrderBy(t => t.DisplayName).ToList();
 
-            dataGrid1.BeginInit();
-            dataGrid1.ItemsSource = iBaselines;
-            dataGrid1.EndInit();
+                dataGrid1.BeginInit();
+                dataGrid1.ItemsSource = iBaselines;
+                dataGrid1.EndInit();
+            }
+            catch { }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void dataGrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             try
             {
                 dcm.SMS_DesiredConfiguration oDCM = ((DataGrid)e.OriginalSource).SelectedItem as dcm.SMS_DesiredConfiguration;
@@ -91,6 +98,7 @@ namespace ClientCenter.Controls
                 dataGrid2.EndInit();
             }
             catch { }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
         public class wmiProp
         {
@@ -140,11 +148,13 @@ namespace ClientCenter.Controls
 
         private void miEvaluateBaseline_Click(object sender, RoutedEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             foreach(dcm.SMS_DesiredConfiguration oBaseline in dataGrid1.SelectedItems)
             {
                 string sJob = "";
                 oBaseline.TriggerEvaluation(true, out sJob);
             }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
 

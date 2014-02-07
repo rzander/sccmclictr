@@ -85,23 +85,29 @@ namespace ClientCenter.Controls
 
         private void bt_Reload_Click(object sender, RoutedEventArgs e)
         {
-            List<SortDescription> ssort = GetSortInfo(dataGrid1);
-
-            if (Properties.Settings.Default.HideTSAdvertisements)
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
             {
-                List<softwaredistribution.CCM_SoftwareDistribution> oList = oAgent.Client.SoftwareDistribution.Advertisements_(true) .OrderBy(o => o.PRG_ProgramID).ThenBy(o => o.PKG_Name).ToList();
-                iAdvertisements = oList.GroupBy(t => t.ADV_AdvertisementID).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.PKG_Name).ToList();
-            }
-            else
-            {
-                List<softwaredistribution.CCM_SoftwareDistribution> oList = oAgent.Client.SoftwareDistribution.Advertisements_(true).OrderBy(o => o.PRG_ProgramID).ThenBy(o => o.PKG_Name).ToList();
-                iAdvertisements = oList.OrderBy(o => o.PKG_Name).ToList();
-            }
-            dataGrid1.BeginInit();
-            dataGrid1.ItemsSource = iAdvertisements;
-            dataGrid1.EndInit();
+                List<SortDescription> ssort = GetSortInfo(dataGrid1);
 
-            SetSortInfo(dataGrid1, ssort);
+                if (Properties.Settings.Default.HideTSAdvertisements)
+                {
+                    List<softwaredistribution.CCM_SoftwareDistribution> oList = oAgent.Client.SoftwareDistribution.Advertisements_(true).OrderBy(o => o.PRG_ProgramID).ThenBy(o => o.PKG_Name).ToList();
+                    iAdvertisements = oList.GroupBy(t => t.ADV_AdvertisementID).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.PKG_Name).ToList();
+                }
+                else
+                {
+                    List<softwaredistribution.CCM_SoftwareDistribution> oList = oAgent.Client.SoftwareDistribution.Advertisements_(true).OrderBy(o => o.PRG_ProgramID).ThenBy(o => o.PKG_Name).ToList();
+                    iAdvertisements = oList.OrderBy(o => o.PKG_Name).ToList();
+                }
+                dataGrid1.BeginInit();
+                dataGrid1.ItemsSource = iAdvertisements;
+                dataGrid1.EndInit();
+
+                SetSortInfo(dataGrid1, ssort);
+            }
+            catch { }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void dataGrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -232,15 +238,21 @@ namespace ClientCenter.Controls
 
         private void bt_ReloadStatus_Click(object sender, RoutedEventArgs e)
         {
-            List<SortDescription> ssort = GetSortInfo(dataGrid1);
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                List<SortDescription> ssort = GetSortInfo(dataGrid1);
 
-            lProgs = oAgent.Client.SoftwareDistribution.ExecutionHistory;
+                lProgs = oAgent.Client.SoftwareDistribution.ExecutionHistory;
 
-            dataGrid1.BeginInit();
-            dataGrid1.ItemsSource = iAdvertisements;
-            dataGrid1.EndInit();
+                dataGrid1.BeginInit();
+                dataGrid1.ItemsSource = iAdvertisements;
+                dataGrid1.EndInit();
 
-            SetSortInfo(dataGrid1, ssort);
+                SetSortInfo(dataGrid1, ssort);
+            }
+            catch { }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
 

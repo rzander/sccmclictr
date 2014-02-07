@@ -48,13 +48,8 @@ namespace ClientCenter.Controls
                     Mouse.OverrideCursor = Cursors.Wait;
                     try
                     {
-                        //SCCMAgent oAgent = new SCCMAgent("localhost");
-                        //List<softwaredistribution.CCM_Application> lApps = oAgent.Client.SoftwareDistribution.Applications.OrderBy(t => t.FullName).ToList();
-                        //lApps.ToString();
-
                         oAgent = value;
                         iSoftware = oAgent.Client.SoftwareDistribution.SoftwareSummary.GroupBy(t => t.Name).Select(grp => grp.FirstOrDefault()).Where(p=>p.Name != "").OrderBy(o => o.Name).ToList();
-                        //TEST.Source = BitMapConvert.ToBitmapImage(iApplications[0].IconAsImage);
 
                         dataGrid1.BeginInit();
                         dataGrid1.ItemsSource = iSoftware;
@@ -73,28 +68,40 @@ namespace ClientCenter.Controls
 
         private void bt_Reload_Click(object sender, RoutedEventArgs e)
         {
-            iSoftware = oAgent.Client.SoftwareDistribution.SoftwareSummary_(true).GroupBy(t => t.Name).Select(grp => grp.FirstOrDefault()).Where(p => p.Name != "").OrderBy(o => o.Name).ToList();
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                iSoftware = oAgent.Client.SoftwareDistribution.SoftwareSummary_(true).GroupBy(t => t.Name).Select(grp => grp.FirstOrDefault()).Where(p => p.Name != "").OrderBy(o => o.Name).ToList();
 
-            List<SortDescription> ssort = GetSortInfo(dataGrid1);
+                List<SortDescription> ssort = GetSortInfo(dataGrid1);
 
-            dataGrid1.BeginInit();
-            dataGrid1.ItemsSource = iSoftware;
-            dataGrid1.EndInit();
+                dataGrid1.BeginInit();
+                dataGrid1.ItemsSource = iSoftware;
+                dataGrid1.EndInit();
 
-            SetSortInfo(dataGrid1, ssort);
+                SetSortInfo(dataGrid1, ssort);
+            }
+            catch { }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void bt_ReloadActive_Click(object sender, RoutedEventArgs e)
         {
-            iSoftware = oAgent.Client.SoftwareDistribution.SoftwareSummary_(true).GroupBy(t => t.Name).Select(grp => grp.FirstOrDefault()).Where(p => p.Name != "").Where(p=>p.Status != "Installed").OrderBy(o => o.Name).ToList();
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                iSoftware = oAgent.Client.SoftwareDistribution.SoftwareSummary_(true).GroupBy(t => t.Name).Select(grp => grp.FirstOrDefault()).Where(p => p.Name != "").Where(p => p.Status != "Installed").OrderBy(o => o.Name).ToList();
 
-            List<SortDescription> ssort = GetSortInfo(dataGrid1);
+                List<SortDescription> ssort = GetSortInfo(dataGrid1);
 
-            dataGrid1.BeginInit();
-            dataGrid1.ItemsSource = iSoftware;
-            dataGrid1.EndInit();
+                dataGrid1.BeginInit();
+                dataGrid1.ItemsSource = iSoftware;
+                dataGrid1.EndInit();
 
-            SetSortInfo(dataGrid1, ssort);
+                SetSortInfo(dataGrid1, ssort);
+            }
+            catch { }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         List<DataGridColumn> GetColumnInfo(DataGrid dg)

@@ -221,6 +221,7 @@ namespace ClientCenter
 
         private void imgSaveCacheSize_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             try
             {
                 oAgent.Client.SWCache.CacheSize = uint.Parse(tbCacheSize.Text);
@@ -229,6 +230,7 @@ namespace ClientCenter
             {
                 Listener.WriteError(ex.Message);
             }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void dataGrid1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
