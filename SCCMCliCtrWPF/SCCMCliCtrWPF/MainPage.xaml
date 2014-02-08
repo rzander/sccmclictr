@@ -107,9 +107,10 @@
                         <rib:RibbonGroup Header="DCM">
                             <rib:RibbonButton Name="ButtonDCMEval" Label="DCM Check" ToolTip="Desired Configuration Monitoring (DCM) Evaluation cycle." LargeImageSource="/SCCMCliCtrWPF;component/Images/Search%20File.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Search%20File.ico" Click="ButtonDCMEval_Click" />
                         </rib:RibbonGroup>
-                        <rib:RibbonGroup Header="Updates">
+                        <rib:RibbonGroup Header="Updates" ToolTip="Update management">
                             <rib:RibbonSplitButton Name="ButtonEvaluateUpdates1" Label="Update Evaluation" ToolTip="Software Update Assignment and Evaluation cycle." LargeImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png" SmallImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png" Click="ButtonEvaluateUpdates_Click">
                                 <rib:RibbonButton Name="ButtonScanUpdates" Label="Update Scan" ToolTip="Force a Software Update Scan cycle."  SmallImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png" Click="ButtonScanUpdates_Click" />
+                                <rib:RibbonButton Name="ButtonEvaluateUpdates2" Label="Update Evaluation" ToolTip="Software Update Assignment and Evaluation cycle."  SmallImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png" Click="ButtonEvaluateUpdates_Click" />
                             </rib:RibbonSplitButton>
                         </rib:RibbonGroup>
                         <rib:RibbonGroup Header="Powershell">
