@@ -207,8 +207,9 @@ try
     } 
 
 #run ccmsetup 
-    $proc = Start-Process -FilePath 'c:\windows\temp\ccmsetup.exe' -ArgumentList "/mp:$($CM12MP) /source:http://$($CM12MP)/CCM_Client CCMHTTPPORT=80 RESETKEYINFORMATION=TRUE SMSSITECODE=$($CMSiteCode) SMSSLP=$($CM12MP) FSP=$($CM12MP)" 
-    "ccmsetup started..." 
+    $proc = Start-Process -FilePath 'c:\windows\temp\ccmsetup.exe' -PassThru -Wait -ArgumentList "/mp:$($CM12MP) /source:http://$($CM12MP)/CCM_Client CCMHTTPPORT=80 RESETKEYINFORMATION=TRUE SMSSITECODE=$($CMSiteCode) SMSSLP=$($CM12MP) FSP=$($CM12MP)" 
+   Sleep(5) 
+   "ccmsetup started..." 
 } 
 
 catch 

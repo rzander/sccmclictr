@@ -309,11 +309,11 @@ while ($a -ne 1)")]
             "34) /global\" }         \r\n    } catch {} \r\n\r\n#kill existing instances of ccmsetup" +
             ".exe \r\n    $ccm = (Get-Process \'ccmsetup\' -ErrorAction SilentlyContinue) \r\n    i" +
             "f($ccm -ne $null) \r\n    { \r\n            $ccm.kill(); \r\n    } \r\n\r\n#run ccmsetup \r" +
-            "\n    $proc = Start-Process -FilePath \'c:\\windows\\temp\\ccmsetup.exe\' -ArgumentLis" +
-            "t \"/mp:$($CM12MP) /source:http://$($CM12MP)/CCM_Client CCMHTTPPORT=80 RESETKEYIN" +
-            "FORMATION=TRUE SMSSITECODE=$($CMSiteCode) SMSSLP=$($CM12MP) FSP=$($CM12MP)\" \r\n  " +
-            "  \"ccmsetup started...\" \r\n} \r\n\r\ncatch \r\n{ \r\n        \"an Error occured...\" \r\n    " +
-            "    $error[0] \r\n} ")]
+            "\n    $proc = Start-Process -FilePath \'c:\\windows\\temp\\ccmsetup.exe\' -PassThru -W" +
+            "ait -ArgumentList \"/mp:$($CM12MP) /source:http://$($CM12MP)/CCM_Client CCMHTTPPO" +
+            "RT=80 RESETKEYINFORMATION=TRUE SMSSITECODE=$($CMSiteCode) SMSSLP=$($CM12MP) FSP=" +
+            "$($CM12MP)\" \r\n   Sleep(5) \r\n   \"ccmsetup started...\" \r\n} \r\n\r\ncatch \r\n{ \r\n       " +
+            " \"an Error occured...\" \r\n        $error[0] \r\n} ")]
         public string AgentInstallPS {
             get {
                 return ((string)(this["AgentInstallPS"]));

@@ -148,6 +148,15 @@ namespace ClientCenter.Controls
         {
             //int iDay = (DateTime.Now.Date - oTime.StartDateTime).Days;
             int iDay = (oTime.StartDateTime.Date - DateTime.Now.Date).Days;
+            
+            //Check if startTime is in the past
+            if (oTime.StartDateTime.Date < DateTime.Now.Date)
+            {
+                //Show only the hours that are visible today
+                oTime.Duration = (oTime.StartDateTime + oTime.Duration) - DateTime.Now.Date;
+                oTime.StartDateTime = DateTime.Now.Date;
+                iDay = 0;
+            }
             if (iDay < DaysVisible & iDay >= 0)
             {
 

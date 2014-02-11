@@ -963,7 +963,7 @@ namespace ClientCenter
 
         public void WriteError(string message)
         {
-            message = message + "\r\n";
+            //message = message + "\r\n";
             this.builder.AppendLine(message.Replace("PSCode Information: 0 :", "") + "\r\n");
 
             TextRange tr = new TextRange(oROutTB.Document.ContentEnd, oROutTB.Document.ContentEnd);

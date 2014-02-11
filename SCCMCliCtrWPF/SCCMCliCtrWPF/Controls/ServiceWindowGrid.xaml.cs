@@ -182,8 +182,13 @@ namespace ClientCenter.Controls
                         sRecurTextInt = string.Format("Occours Every ({0})Hour(s)", oSchedInt.HourSpan);
 
                     //Check if there is a schedule today... (past)
-                    if (oSchedInt.PreviousStartTime.Date == DateTime.Now.Date)
+                    //if (oSchedInt.PreviousStartTime.Date == DateTime.Now.Date)
+                    //    dNextRunInt = oSchedInt.PreviousStartTime;
+
+                    //Check if there is a schedule today... (past)
+                    if (oSchedInt.PreviousStartTime.AddDays(oSchedInt.DayDuration).AddHours(oSchedInt.HourDuration).Date == DateTime.Now.Date)
                         dNextRunInt = oSchedInt.PreviousStartTime;
+
                     while (dNextRunInt.Date < DateTime.Now.Date + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
                     {
                         scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRunInt, new TimeSpan(oSchedInt.DayDuration, oSchedInt.HourDuration, oSchedInt.MinuteDuration, 0), cForeColor, sRecurTextInt + " " + ServiceWindowID, isLocal, ServiceWindowID, SWType));
@@ -199,7 +204,10 @@ namespace ClientCenter.Controls
                     DateTime dNextRun = dNextStartTime;
 
                     //Check if there is a schedule today... (past)
-                    if (oSched.PreviousStartTime.Date == DateTime.Now.Date)
+                    //if (oSched.PreviousStartTime.Date == DateTime.Now.Date)
+                    //    dNextRun = oSched.PreviousStartTime;
+                    
+                     if (oSched.PreviousStartTime.AddDays(oSched.DayDuration).AddHours(oSched.HourDuration).Date == DateTime.Now.Date)
                         dNextRun = oSched.PreviousStartTime;
 
                     while (dNextRun.Date < DateTime.Now.Date + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))

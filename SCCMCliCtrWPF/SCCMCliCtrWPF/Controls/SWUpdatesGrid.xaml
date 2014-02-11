@@ -45,33 +45,42 @@
                         <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Name="img" Source="/SCCMCliCtrWPF;component/Images/Software%20update.gif" Height="16"></Image>
+                                    <Image Name="img" Source="/SCCMCliCtrWPF;component/Images/Invalid software update.gif" Height="16"></Image>
                                     <DataTemplate.Triggers>
-                                        <DataTrigger Binding="{Binding EvaluationState}" Value="1">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Software%20update.gif"/>
+                                        <DataTrigger Binding="{Binding EvaluationState}" Value="13">
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Warning.ico"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding EvaluationState}" Value="6">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/ServDeps_103.ico"/>
+                                        <DataTrigger Binding="{Binding EvaluationState}" Value="21">
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Warning.ico"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding EvaluationState}" Value="7">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/ServDeps_103.ico"/>
+                                        <DataTrigger Binding="{Binding EvaluationState}" Value="3">
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Icon140.ico"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding EvaluationState}" Value="4">
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Send Receive.ico"/>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding EvaluationState}" Value="5">
                                             <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Send Receive.ico"/>
                                         </DataTrigger>
+                                        <DataTrigger Binding="{Binding EvaluationState}" Value="6">
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Icon140.ico"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding EvaluationState}" Value="7">
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Icon140.ico"/>
+                                        </DataTrigger>
                                         <DataTrigger Binding="{Binding EvaluationState}" Value="11">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico"/>
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Icon140.ico"/>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding EvaluationState}" Value="8">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Invalid%20software%20update.gif"/>
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Flag.ico"/>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding EvaluationState}" Value="9">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Invalid%20software%20update.gif"/>
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Flag.ico"/>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding EvaluationState}" Value="10">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Invalid%20software%20update.gif"/>
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Flag.ico"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding EvaluationState}" Value="13">
+                                        <DataTrigger Binding="{Binding EvaluationState}" Value="16">
                                             <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Flag.ico"/>
                                         </DataTrigger>
                                     </DataTemplate.Triggers>

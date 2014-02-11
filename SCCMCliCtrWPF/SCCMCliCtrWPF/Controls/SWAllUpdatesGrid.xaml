@@ -45,10 +45,10 @@
                         <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Name="img" Source="/SCCMCliCtrWPF;component/Images/Software%20update.gif" Height="16"></Image>
+                                    <Image Name="img" Source="/SCCMCliCtrWPF;component/Images/Software update.gif" Height="16"></Image>
                                     <DataTemplate.Triggers>
                                         <DataTrigger Binding="{Binding Status}" Value="Missing">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Invalid%20software%20update.gif"/>
+                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Invalid software update.gif"/>
                                         </DataTrigger>
                                     </DataTemplate.Triggers>
                                 </DataTemplate>
