@@ -218,9 +218,6 @@ namespace ClientCenter
                     oAgent.disconnect();
                 
                 oAgent.Dispose();
-
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
             }
 
             if (bPasswordChanged)
@@ -241,6 +238,13 @@ namespace ClientCenter
                 tb_TargetComputer.Text = sTarget;
                 tb_TargetComputer2.Text = sTarget;
 
+                if (System.Text.RegularExpressions.Regex.Match(sTarget, "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$", System.Text.RegularExpressions.RegexOptions.CultureInvariant).Success)
+                {
+                    if (sTarget != "127.0.0.1")
+                    {
+                        MessageBox.Show("connecting an IP Address requires Username and Password", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
 
                 rStatus.Document = new FlowDocument();
                 myTrace = new MyTraceListener(ref rStatus);
@@ -252,9 +256,9 @@ namespace ClientCenter
                 }
                 else
                 {
-                    if(!tb_Username.Text.Contains('\\'))
+                    if(!tb_Username.Text.Contains(@"\"))
                     {
-                        tb_Username.Text = Environment.UserDomainName + '\\' + tb_Username.Text;
+                        tb_Username.Text = Environment.UserDomainName + @"\" + tb_Username.Text;
                     }
                     string sPW = common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
                     oAgent = new SCCMAgent(sTarget, tb_Username.Text, sPW , int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
@@ -526,10 +530,10 @@ namespace ClientCenter
                 if (!string.IsNullOrEmpty(tb_Username.Text))
                 {
                     //Run powershell as different user...
-                    if (tb_Username.Text.Contains('\\'))
+                    if (tb_Username.Text.Contains(@"\"))
                     {
-                        Explorer.StartInfo.UserName = tb_Username.Text.Split('\\')[1];
-                        Explorer.StartInfo.Domain = tb_Username.Text.Split('\\')[0];
+                        Explorer.StartInfo.UserName = tb_Username.Text.Split(new string[] { @"\" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                        Explorer.StartInfo.Domain = tb_Username.Text.Split(new string[] { @"\" }, StringSplitOptions.RemoveEmptyEntries)[0];
                     }
                     else
                     {
