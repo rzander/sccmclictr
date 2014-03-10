@@ -57,6 +57,8 @@ namespace ClientCenter.Controls
                     }
                     catch(Exception ex)
                     {
+                        dataGrid1.ItemsSource = null;
+                        dataGrid1.Items.Clear();
                         ex.Message.ToString();
                     }
                     Mouse.OverrideCursor = Cursors.Arrow;
@@ -89,10 +91,6 @@ namespace ClientCenter.Controls
                 dcm.SMS_DesiredConfiguration oDCM = ((DataGrid)e.OriginalSource).SelectedItem as dcm.SMS_DesiredConfiguration;
                 List<dcm.SMS_DesiredConfiguration.ConfigItem> oCIs = oDCM.ConfigItems().OrderBy(t => t.CIName).ToList(); ;
 
-                //System.Collections.ObjectModel.ObservableCollection<wmiProp> oColl = new System.Collections.ObjectModel.ObservableCollection<wmiProp>();
-                //oDCM._RawObject.Properties.Where(w => w.GetType() == typeof(PSProperty) & !w.Name.StartsWith("_")).ToList().ForEach(x => oColl.Add(new wmiProp(x.Name, x.Value, x.TypeNameOfValue)));
-
-
                 dataGrid2.BeginInit();
                 dataGrid2.ItemsSource = oCIs;
                 dataGrid2.EndInit();
@@ -100,60 +98,23 @@ namespace ClientCenter.Controls
             catch { }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
-        public class wmiProp
-        {
-            private string _Value;
-            public wmiProp(string sKey, string sValue, string oType)
-            {
-                Property = sKey;
-                TypeName = oType.Replace("System.", "").Replace("Deserialized.", "");
-                if (!string.IsNullOrEmpty(sValue))
-                    Value = sValue;
-                else
-                    Value = "";
-            }
-
-            public wmiProp(string sKey, object oValue, string oType)
-            {
-                Property = sKey;
-                TypeName = oType.Replace("System.", "").Replace("Deserialized.", "");
-                if (oValue != null)
-                    Value = oValue.ToString();
-                else
-                    Value = "";
-            }
-            public string Property { get; set; }
-            public string Value
-            {
-                get
-                {
-                    return _Value;
-                }
-                set
-                {
-                    _Value = value;
-
-                    //Check if it's in a DateTime Format
-                    if (value.Length == 25)
-                    {
-                        if (value[14] == '.')
-                        {
-                            _Value = System.Management.ManagementDateTimeConverter.ToDateTime(value).ToString();
-                        }
-                    }
-                }
-            }
-            public string TypeName { get; set; }
-        }
 
         private void miEvaluateBaseline_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            foreach(dcm.SMS_DesiredConfiguration oBaseline in dataGrid1.SelectedItems)
+            try
             {
-                string sJob = "";
-                oBaseline.TriggerEvaluation(true, out sJob);
+                foreach (dcm.SMS_DesiredConfiguration oBaseline in dataGrid1.SelectedItems)
+                {
+                    try
+                    {
+                        string sJob = "";
+                        oBaseline.TriggerEvaluation(true, out sJob);
+                    }
+                    catch { }
+                }
             }
+            catch { }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 

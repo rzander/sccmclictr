@@ -242,7 +242,10 @@ namespace ClientCenter
                 {
                     if (sTarget != "127.0.0.1")
                     {
-                        MessageBox.Show("connecting an IP Address requires Username and Password", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        if (string.IsNullOrEmpty(tb_Username.Text) | string.IsNullOrEmpty(pb_Password.Password))
+                        {
+                            MessageBox.Show("connecting an IP Address requires Username and Password", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
                     }
                 }
 

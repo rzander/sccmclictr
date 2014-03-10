@@ -392,27 +392,26 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Wait;
             try
             {
-                if ((bool)cbAutoSite.IsChecked)
+
+                // Initializes the variables to pass to the MessageBox.Show method.
+                string message = "Do you want to restart the SCCM Agent?";
+                string caption = "SCCM Agent must be restarted!";
+                MessageBoxResult result;
+
+                // Displays the MessageBox.
+                result = MessageBox.Show(message, caption, MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.DefaultDesktopOnly);
+
+
+                if (result == MessageBoxResult.Yes)
                 {
-                    // Initializes the variables to pass to the MessageBox.Show method.
-                    string message = "Do you want to restart the SCCM Agent?";
-                    string caption = "SCCM Agent must be restarted!";
-                    MessageBoxResult result;
-
-                    // Displays the MessageBox.
-                    result = MessageBox.Show(message, caption, MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.DefaultDesktopOnly);
-
-
-                    if (result == MessageBoxResult.Yes)
-                    {
-                        oAgent.Client.AgentProperties.EnableAutoAssignment = true;
-                        oAgent.Client.Services.GetService("CcmExec").RestartService();
-                    }
+                    oAgent.Client.AgentProperties.EnableAutoAssignment = ((bool)cbAutoSite.IsChecked);
+                    oAgent.Client.Services.GetService("CcmExec").RestartService();
                 }
                 else
                 {
                     oAgent.Client.AgentProperties.EnableAutoAssignment = ((bool)cbAutoSite.IsChecked);
                 }
+
             }
             catch (Exception ex)
             {
