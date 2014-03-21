@@ -33,7 +33,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <ScrollViewer Grid.Row="0" Name="ScrollViewer1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
-                        <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" IsReadOnly="True" Grid.Row="0" SelectionChanged="dataGrid1_SelectionChanged" >
+                    <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" IsReadOnly="True" Grid.Row="0" SelectionChanged="dataGrid1_SelectionChanged" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Path=DisplayName}" SortDirection="Ascending"/>
                                 <DataGridTextColumn Header="Last Evaluation" Binding="{Binding Path=LastEvalTime}"/>

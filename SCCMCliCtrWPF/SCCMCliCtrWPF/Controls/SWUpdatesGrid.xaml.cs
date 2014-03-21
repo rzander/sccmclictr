@@ -130,5 +130,30 @@ namespace ClientCenter
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
+
+        private void bt_OpenUpdateLog_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                Process Explorer = new Process();
+                Explorer.StartInfo.FileName = "Explorer.exe";
+
+                //Connect IPC$ if not already connected (not needed with integrated authentication)
+                if (!oAgent.ConnectIPC)
+                    oAgent.ConnectIPC = true;
+
+                Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + @"\admin$\WindowsUpdate.log";
+
+
+                Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
+                Explorer.Start();
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
     }
 }
