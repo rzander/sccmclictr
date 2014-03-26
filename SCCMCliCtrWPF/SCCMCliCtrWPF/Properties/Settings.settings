@@ -107,7 +107,7 @@ while ($a -ne 1)</Value>
       <Value Profile="(Default)">O:BAG:BAD:(A;;CCDCLCSWRP;;;SY)(A;;CCDCLCSWRP;;;BA)(A;;CCDCLCSWRP;;;IU)</Value>
     </Setting>
     <Setting Name="NoLocalAdminCheck" Type="System.Boolean" Scope="Application">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="WinRMPort" Type="System.String" Scope="User">
       <Value Profile="(Default)">5985</Value>

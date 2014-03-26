@@ -131,7 +131,7 @@ namespace ClientCenter
             }
             catch { }
 
-
+            //Not needed, local admin is only required if connecting the local machien...
             if (!Properties.Settings.Default.NoLocalAdminCheck)
             {
                 //Check if App is running as Admin, otherwise restart App as Admin...
@@ -150,13 +150,13 @@ namespace ClientCenter
         }
 
         //Code from http://antscode.blogspot.com/2011/02/running-clickonce-application-as.html
-        private void Application_Startup(object sender, string paremeter)
+        private void Application_Startup(object sender, string parameter)
         {
             if (!IsRunAsAdministrator())
             {
                 if (System.Windows.Interop.BrowserInteropHelper.IsBrowserHosted)
                 {
-                    MessageBox.Show("Sorry, this application must be run as Administrator. Please restart your browser as Administrator.", "Administrative rights required", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Sorry, this application must be run as Administrator to connect the local machine. Please restart your browser as Administrator.", "Administrative rights required", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else
                 {
@@ -167,7 +167,7 @@ namespace ClientCenter
                     // The following properties run the new process as administrator
                     processInfo.UseShellExecute = true;
                     processInfo.Verb = "runas";
-                    processInfo.Arguments = paremeter;
+                    processInfo.Arguments = parameter;
 
                     // Start the new process
                     try
@@ -210,6 +210,7 @@ namespace ClientCenter
         {
             Mouse.OverrideCursor = Cursors.Wait;
 
+
             if (oAgent != null)
             {
                 this.AgentSettingsPanel.IsSelected = true;
@@ -237,6 +238,14 @@ namespace ClientCenter
 
                 tb_TargetComputer.Text = sTarget;
                 tb_TargetComputer2.Text = sTarget;
+
+                if(sTarget.ToLower() == "localhost" | sTarget == "127.0.0.1")
+                {
+                    if (!IsRunAsAdministrator())
+                    {
+                        MessageBox.Show("Sorry, connecting the local machine required administrative permissions. Please start the Tool as Administrator.");
+                    }
+                }
 
                 if (System.Text.RegularExpressions.Regex.Match(sTarget, "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$", System.Text.RegularExpressions.RegexOptions.CultureInvariant).Success)
                 {

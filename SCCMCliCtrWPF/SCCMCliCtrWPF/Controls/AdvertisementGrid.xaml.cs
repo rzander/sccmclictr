@@ -50,10 +50,6 @@ namespace ClientCenter.Controls
                     Mouse.OverrideCursor = Cursors.Wait;
                     try
                     {
-                        //SCCMAgent oAgent = new SCCMAgent("localhost");
-                        //List<softwaredistribution.CCM_Application> lApps = oAgent.Client.SoftwareDistribution.Applications.OrderBy(t => t.FullName).ToList();
-                        //lApps.ToString();
-
                         oAgent = value;
 
                         if (Properties.Settings.Default.HideTSAdvertisements)
@@ -176,39 +172,50 @@ namespace ClientCenter.Controls
 
         private void dataGrid2_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-
-            if (e.EditAction == DataGridEditAction.Commit)
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
             {
-                string sProp = ((wmiProp)e.Row.Item).Property.ToString();
-                string sType = ((wmiProp)e.Row.Item).TypeName.ToString();
-                string sVal = ((System.Windows.Controls.TextBox)(e.EditingElement)).Text;
-                string sRelPath = ((sccmclictr.automation.functions.softwaredistribution.CCM_SoftwareDistribution)(dataGrid1.SelectedItem))._RawObject.Properties["__NAMESPACE"].Value.ToString() + ":" + ((sccmclictr.automation.functions.softwaredistribution.CCM_SoftwareDistribution)(dataGrid1.SelectedItem))._RawObject.Properties["__RELPATH"].Value.ToString().Replace("\"", "'");
-                switch (sType.ToLower())
+                if (e.EditAction == DataGridEditAction.Commit)
                 {
-                    case "string":
-                        try
-                        {
-                            DateTime oDate = DateTime.Parse(sVal);
-                            string sDate = System.Management.ManagementDateTimeConverter.ToDmtfDateTime(oDate);
-                            oAgent.Client.SetProperty(sRelPath, sProp, "'" + sDate + "'");
-                        }
-                        catch
-                        {
-                            oAgent.Client.SetProperty(sRelPath, sProp, "'" + sVal + "'");
-                        }
-                        break;
-                    case "boolean":
-                        oAgent.Client.SetProperty(sRelPath, sProp, "$" + sVal);
-                        break;
-                    case "uint32":
-                        oAgent.Client.SetProperty(sRelPath, sProp, sVal);
-                        break;
-                    case "string[]":
-                        oAgent.Client.SetProperty(sRelPath, sProp, "@({" + sVal + "})");
-                        break;
-                }
+                    string sProp = ((wmiProp)e.Row.Item).Property.ToString();
+                    string sType = ((wmiProp)e.Row.Item).TypeName.ToString();
+                    string sVal = ((System.Windows.Controls.TextBox)(e.EditingElement)).Text;
+                    string sRelPath = ((sccmclictr.automation.functions.softwaredistribution.CCM_SoftwareDistribution)(dataGrid1.SelectedItem))._RawObject.Properties["__NAMESPACE"].Value.ToString() + ":" + ((sccmclictr.automation.functions.softwaredistribution.CCM_SoftwareDistribution)(dataGrid1.SelectedItem))._RawObject.Properties["__RELPATH"].Value.ToString().Replace("\"", "'");
+                    switch (sType.ToLower())
+                    {
+                        case "string":
+                            try
+                            {
+                                DateTime oDate = DateTime.Parse(sVal);
+                                string sDate = System.Management.ManagementDateTimeConverter.ToDmtfDateTime(oDate);
+                                oAgent.Client.SetProperty(sRelPath, sProp, "'" + sDate + "'");
+                            }
+                            catch
+                            {
+                                //Fix string for Powershell
+                                sVal = sVal.Replace("\'", "\'\'");
 
+                                oAgent.Client.SetProperty(sRelPath, sProp, "'" + sVal + "'");
+                            }
+                            break;
+                        case "boolean":
+                            oAgent.Client.SetProperty(sRelPath, sProp, "$" + sVal);
+                            break;
+                        case "uint32":
+                            oAgent.Client.SetProperty(sRelPath, sProp, sVal);
+                            break;
+                        case "string[]":
+                            oAgent.Client.SetProperty(sRelPath, sProp, "@({" + sVal + "})");
+                            break;
+                    }
+
+                }
             }
+            catch(Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void miInstallApp_Click(object sender, RoutedEventArgs e)
