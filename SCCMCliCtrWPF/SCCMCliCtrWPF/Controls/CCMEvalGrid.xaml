@@ -13,7 +13,7 @@
         <DockPanel>
             <DockPanel DockPanel.Dock="Top"  Height="32">
                 <ToolBar Name="toolBar1">
-                    <Button ToolTip="Run CCMEval.exe, this may tkae a few seconds to complete." Name="bt_ReRun" Click="bt_ReRun_Click">
+                    <Button ToolTip="Run CCMEval.exe, this may take a few seconds to complete." Name="bt_ReRun" Click="bt_ReRun_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico"/>
                             <TextBlock Margin="2,0,0,0">Run CcmEval.exe</TextBlock>
