@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="ClientCenter.PowerSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600">
+    <Grid>
+        <DataGrid AutoGenerateColumns="False" Name="dataGrid1" IsReadOnly="True" IsTextSearchEnabled="True" EnableColumnVirtualization="True" EnableRowVirtualization="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Property" Binding="{Binding Path=Name}" SortDirection="Ascending"  />
+                <DataGridTextColumn Header="on Power" Binding="{Binding Path=ACDisplayvalue}" />
+                <DataGridTextColumn Header="on Battery" Binding="{Binding Path=DCDisplayvalue}" />
+                <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="/SCCMCliCtrWPF;component/Images/ServDeps_103.ico" Height="16"></Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
