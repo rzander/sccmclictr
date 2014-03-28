@@ -156,6 +156,9 @@
     <Compile Include="Controls\CollectionVariables.xaml.cs">
       <DependentUpon>CollectionVariables.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PowerSettings.xaml.cs">
+      <DependentUpon>PowerSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SWStatusGrid.xaml.cs">
       <DependentUpon>SWStatusGrid.xaml</DependentUpon>
     </Compile>
@@ -239,6 +242,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CollectionVariables.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\PowerSettings.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -353,6 +360,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Images\Pack_close.ico" />
     <Resource Include="Images\Confirm visible_24.png" />
     <Resource Include="Images\Warning.ico" />
     <Resource Include="Images\Icon16_256.png" />

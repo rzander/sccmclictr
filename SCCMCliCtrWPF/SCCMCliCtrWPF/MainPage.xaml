@@ -141,7 +141,7 @@
                             </rib:RibbonSplitButton>
                         </rib:RibbonGroup>
                         <rib:RibbonGroup Header="Application Mgmt.">
-                            <rib:RibbonSplitButton Name="btAppMgmt" ToolTip="Application Management" LargeImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico">
+                            <rib:RibbonSplitButton Name="btAppMgmt" ToolTip="Application Management" LargeImageSource="Images/Pack_close.ico">
                                 <rib:RibbonButton Name="btAppManUserPolicyAction" Label="Application manager user policy action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btAppManUserPolicyAction_Click" />
                                 <rib:RibbonButton Name="btAppManMachinePolicyAction" Label="Application manager machine policy action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btAppManMachinePolicyAction_Click" />
                                 <!--<rib:RibbonButton Name="btAppManGlobalEvaluation" Label="Application manager global evaluation action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btAppManGlobalEvaluation_Click"/>-->
@@ -165,7 +165,7 @@
                         <s:NavigationPaneItem Name="MonitoringPane" Header="Monitoring" Image="/SCCMCliCtrWPF;component/Images/Stocks.ico" IsEnabled="True">
                             <StackPanel VerticalAlignment="Stretch">
                                 <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200" Name="tvMonitoring" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000" Loaded="tvMonitoring_Loaded">
-                                    <TreeViewItem Name="tviMonitorOverview" Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="True" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
+                                    <TreeViewItem Name="tviMonitorOverview" Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="False" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
                                         <TreeViewItem IsExpanded="True" Tag="Services">
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
@@ -202,11 +202,11 @@
                                 </TreeView>
                             </StackPanel>
                         </s:NavigationPaneItem>
-                        <s:NavigationPaneItem Name="InventoryPane" Header="Inventory" Image="/SCCMCliCtrWPF;component/Images/Searching%20Disc.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Searching%20Disc.ico" Selector.IsSelected="True">
+                        <s:NavigationPaneItem Name="InventoryPane" Header="Inventory" Image="/SCCMCliCtrWPF;component/Images/Searching%20Disc.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Searching%20Disc.ico" Selector.IsSelected="False" IsSelected="True">
                             <StackPanel VerticalAlignment="Stretch">
                                 <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200" Name="tvInventory" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000" MouseLeftButtonDown="treeView1_MouseLeftButtonDown" Loaded="tvInventory_Loaded">
-                                    <TreeViewItem Name="tviInvOverview"  Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="True" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
-                                        <TreeViewItem IsExpanded="True" IsSelected="True" Tag="SWUpdates" Name="tviInvUpdates">
+                                    <TreeViewItem Name="tviInvOverview"  Header="Overview" FontSize="14" Margin="0,5,0,0" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected" IsSelected="True">
+                                        <TreeViewItem IsExpanded="True" Tag="SWUpdates" Name="tviInvUpdates">
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
                                                     <Image Source="/SCCMCliCtrWPF;component/Images/Computer_protection.ico" Stretch="Uniform" Width="20" Height="20"/>
@@ -256,6 +256,16 @@
                                                 </StackPanel>
                                             </TreeViewItem.Header>
                                         </TreeViewItem>
+
+                                        <TreeViewItem IsExpanded="True" IsSelected="True" Tag="PwrSettings" Name="tviPWRSettings">
+                                            <TreeViewItem.Header>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Image Source="Images/Setting.ico" Stretch="Uniform" Width="16" Height="16"/>
+                                                    <TextBlock Text="Power Settings" Margin="3,0,0,0"></TextBlock>
+                                                </StackPanel>
+                                            </TreeViewItem.Header>
+                                        </TreeViewItem>
+
                                     </TreeViewItem>
                                 </TreeView>
                             </StackPanel>
@@ -267,7 +277,7 @@
                                         <TreeViewItem IsExpanded="True" IsSelected="False" Tag="SWDistApps" Name="tviSWDistApps">
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
-                                                    <Image Source="/SCCMCliCtrWPF;component/Images/Icon140.ico" Stretch="Uniform" Width="20" Height="20"/>
+                                                    <Image Source="Images/Pack_close.ico" Stretch="Uniform" Width="20" Height="20"/>
                                                     <TextBlock Text="Applications" Margin="3,0,0,0"></TextBlock>
                                                 </StackPanel>
                                             </TreeViewItem.Header>
@@ -457,6 +467,11 @@
                         <TabItem Header="About" Name="AboutPanel" Tag="About" IsSelected="True">
                             <Grid>
                                 <my6:About x:Name="myAbout" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="PwrSettings" Name="PwrSettingsPanel" Tag="PwrSettings">
+                            <Grid>
+                                <my4:PowerSettings x:Name="PwrSettingsPane"/>
                             </Grid>
                         </TabItem>
                     </TabControl>

@@ -243,7 +243,7 @@ namespace ClientCenter
                 {
                     if (!IsRunAsAdministrator())
                     {
-                        MessageBox.Show("Sorry, connecting the local machine required administrative permissions. Please start the Tool as Administrator.");
+                        MessageBox.Show("Sorry, connecting the local machine requires administrative permissions. Please start the Tool as Administrator.");
                     }
                 }
 
@@ -416,6 +416,9 @@ namespace ClientCenter
                                         break;
                                     case "CCMEval":
                                         CCMEvalGrid.SCCMAgentConnection = oAgent;
+                                        break;
+                                    case "PwrSettings":
+                                        PwrSettingsPane.SCCMAgentConnection = oAgent;
                                         break;
 
                                 }
