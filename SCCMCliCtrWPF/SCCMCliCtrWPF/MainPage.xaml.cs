@@ -37,6 +37,8 @@ namespace ClientCenter
 
         public MainPage()
         {
+            Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             InitializeComponent();
 
@@ -118,6 +120,32 @@ namespace ClientCenter
                     tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("=", "");
 
                     tb_TargetComputer2.Text = tb_TargetComputer.Text;
+
+                    if (!IsRunAsAdministrator())
+                    {
+                        if (!System.Windows.Interop.BrowserInteropHelper.IsBrowserHosted)
+                        {
+                            // It is not possible to launch a ClickOnce app as administrator directly, so instead we launch the
+                            // app as administrator in a new process.
+                            var processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase);
+
+                            // The following properties run the new process as administrator
+                            processInfo.UseShellExecute = true;
+                            processInfo.Verb = "runas";
+                            processInfo.Arguments = tb_TargetComputer2.Text;
+
+                            // Start the new process
+                            try
+                            {
+                                System.Diagnostics.Process.Start(processInfo);
+                                // Shut down the current process
+                                Application.Current.Shutdown();
+                            }
+                            catch (Exception)
+                            {
+                            }
+                        }
+                    }
                 }
                 else
                 {
@@ -139,6 +167,8 @@ namespace ClientCenter
             }
 
         }
+
+
 
         //Code from http://antscode.blogspot.com/2011/02/running-clickonce-application-as.html
         private bool IsRunAsAdministrator()
@@ -190,6 +220,16 @@ namespace ClientCenter
 
                 // Do normal startup stuff...
             }
+        }
+
+        void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            e.ToString();
+        }
+
+        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            e.ToString();
         }
 
         void Current_Exit(object sender, ExitEventArgs e)
