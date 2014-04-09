@@ -360,8 +360,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Resource Include="Images\On.ico" />
-    <Resource Include="Images\Icon012.ico" />
     <Resource Include="Images\Pack_close.ico" />
     <Resource Include="Images\Confirm visible_24.png" />
     <Resource Include="Images\Warning.ico" />

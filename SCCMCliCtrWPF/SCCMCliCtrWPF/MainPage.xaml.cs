@@ -123,34 +123,33 @@ namespace ClientCenter
 
                     if (!IsRunAsAdministrator())
                     {
-                        if (!System.Windows.Interop.BrowserInteropHelper.IsBrowserHosted)
+
+                        // It is not possible to launch a ClickOnce app as administrator directly, so instead we launch the
+                        // app as administrator in a new process.
+                        var processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase);
+
+                        // The following properties run the new process as administrator
+                        processInfo.UseShellExecute = true;
+                        processInfo.Verb = "runas";
+                        processInfo.Arguments = tb_TargetComputer2.Text;
+
+                        // Start the new process
+                        try
                         {
-                            // It is not possible to launch a ClickOnce app as administrator directly, so instead we launch the
-                            // app as administrator in a new process.
-                            var processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase);
-
-                            // The following properties run the new process as administrator
-                            processInfo.UseShellExecute = true;
-                            processInfo.Verb = "runas";
-                            processInfo.Arguments = tb_TargetComputer2.Text;
-
-                            // Start the new process
-                            try
-                            {
-                                System.Diagnostics.Process.Start(processInfo);
-                                // Shut down the current process
-                                Application.Current.Shutdown();
-                            }
-                            catch (Exception)
-                            {
-                            }
+                            System.Diagnostics.Process.Start(processInfo);
+                            
+                            // Shut down the current process
+                            Application.Current.Shutdown();
+                        }
+                        catch (Exception)
+                        {
                         }
                     }
                 }
                 else
                 {
-                    tb_TargetComputer.Text = Environment.GetCommandLineArgs()[1];
-                    tb_TargetComputer2.Text = Environment.GetCommandLineArgs()[1];
+                    tb_TargetComputer.Text = Environment.GetCommandLineArgs()[1].Trim();
+                    tb_TargetComputer2.Text = Environment.GetCommandLineArgs()[1].Trim();
                     tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
                     tb_TargetComputer2.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
                 }
@@ -269,6 +268,9 @@ namespace ClientCenter
                 bPasswordChanged = false;
             }
 
+            tb_TargetComputer.Text = tb_TargetComputer.Text.Trim();
+            tb_TargetComputer2.Text = tb_TargetComputer2.Text.Trim();
+            
             string sTarget = tb_TargetComputer.Text;
             try
             {
@@ -882,6 +884,7 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Wait;
             if (e.Key == Key.Enter)
             {
+                tb_TargetComputer2.Text = tb_TargetComputer2.Text.Trim();
                 tb_TargetComputer.Text = tb_TargetComputer2.Text;
                 bt_Connect_Click(sender, null);
             }
@@ -906,6 +909,7 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Wait;
             if (e.Key == Key.Enter)
             {
+                tb_TargetComputer.Text = tb_TargetComputer.Text.Trim();
                 tb_TargetComputer2.Text = tb_TargetComputer.Text;
                 bt_Connect_Click(sender, null);
             }
@@ -925,7 +929,7 @@ namespace ClientCenter
                 string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
                 byte[] buffer = Encoding.ASCII.GetBytes(data);
                 int timeout = 120;
-                System.Net.NetworkInformation.PingReply reply = oPing.Send(tb_TargetComputer2.Text, timeout, buffer, oPingOptions);
+                System.Net.NetworkInformation.PingReply reply = oPing.Send(tb_TargetComputer2.Text.Trim(), timeout, buffer, oPingOptions);
                 if (reply.Status == System.Net.NetworkInformation.IPStatus.Success)
                 {
                     rStatus.AppendText("System is online !" + reply.Address.ToString() + "\r");
