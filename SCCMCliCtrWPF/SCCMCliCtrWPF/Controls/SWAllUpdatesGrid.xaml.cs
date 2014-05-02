@@ -48,9 +48,15 @@ namespace ClientCenter
                     {
                         oAgent = value;
 
-                        //Remove duplicates
-                        iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.GroupBy(a => new { a.Article, a.Bulletin, a.ProductID }).Select(y => y.First()).OrderBy(t => t.Article).ToList(); 
-
+                        if (cb_Filter.IsChecked == true)
+                        {
+                            //Remove duplicates, load only the first time...
+                            iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.GroupBy(a => new { a.Article, a.Bulletin, a.ProductID }).Select(y => y.First()).OrderBy(t => t.Article).ToList();
+                        }
+                        else
+                        {
+                            iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.OrderBy(t => t.Article).ToList();
+                        }
                         dataGrid1.BeginInit();
                         dataGrid1.ItemsSource = iUpdates;
                         dataGrid1.EndInit();
@@ -108,7 +114,15 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Wait;
             try
             {
-                iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.GroupBy(a => new { a.Article, a.Bulletin, a.ProductID }).Select(y => y.First()).OrderBy(t=>t.Article).ToList(); 
+                if (cb_Filter.IsChecked == true)
+                {
+                    iUpdates = oAgent.Client.SoftwareUpdates.GetUpdateStatus(true).GroupBy(a => new { a.Article, a.Bulletin, a.ProductID }).Select(y => y.First()).OrderBy(t => t.Article).ToList();
+                }
+                else
+                {
+                    iUpdates = oAgent.Client.SoftwareUpdates.GetUpdateStatus(true).OrderBy(t => t.Article).ToList();
+                }
+                
                 dataGrid1.BeginInit();
                 dataGrid1.ItemsSource = iUpdates;
                 dataGrid1.EndInit();
@@ -126,7 +140,15 @@ namespace ClientCenter
             try
             {
                 Listener.Filter = new SourceFilter("test");
-                iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.GroupBy(a => new { a.Article, a.Bulletin, a.ProductID }).Select(y => y.First()).Where(u => u.Status == "Missing").OrderBy(t => t.Article).ToList();
+                //iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.GroupBy(a => new { a.Article, a.Bulletin, a.ProductID }).Select(y => y.First()).Where(u => u.Status == "Missing").OrderBy(t => t.Article).ToList();
+                if (cb_Filter.IsChecked == true)
+                {
+                    iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.GroupBy(a => new { a.Article, a.Bulletin, a.ProductID }).Select(y => y.First()).Where(u => u.Status == "Missing").OrderBy(t => t.Article).ToList();
+                }
+                else
+                {
+                    iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.Where(u => u.Status == "Missing").OrderBy(t => t.Article).ToList();
+                }
                 dataGrid1.BeginInit();
                 dataGrid1.ItemsSource = iUpdates;
                 dataGrid1.EndInit();
@@ -167,6 +189,33 @@ namespace ClientCenter
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         
+        }
+
+        private void cb_Filter_Checked(object sender, RoutedEventArgs e)
+        {
+            if (oAgent != null)
+            {
+                iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.GroupBy(a => new { a.Article, a.Bulletin, a.ProductID }).Select(y => y.First()).OrderBy(t => t.Article).ToList();
+                dataGrid1.Columns[8].Visibility = System.Windows.Visibility.Hidden;
+                dataGrid1.Columns[9].Visibility = System.Windows.Visibility.Hidden;
+                dataGrid1.BeginInit();
+                dataGrid1.ItemsSource = iUpdates;
+                dataGrid1.EndInit();
+            }
+        }
+
+        private void cb_Filter_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (oAgent != null)
+            {
+
+                iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.OrderBy(t => t.Article).ToList();
+                dataGrid1.Columns[8].Visibility = System.Windows.Visibility.Visible;
+                dataGrid1.Columns[9].Visibility = System.Windows.Visibility.Visible;
+                dataGrid1.BeginInit();
+                dataGrid1.ItemsSource = iUpdates;
+                dataGrid1.EndInit();
+            }
         }
     }
 }

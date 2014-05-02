@@ -248,7 +248,7 @@
                                             </TreeViewItem.Header>
                                         </TreeViewItem>
 
-                                        <TreeViewItem IsExpanded="True" IsSelected="True" Tag="SettingsMgmt" Name="tviDCMBaselines">
+                                        <TreeViewItem IsExpanded="True" IsSelected="False" Tag="SettingsMgmt" Name="tviDCMBaselines">
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
                                                     <Image Source="Images/Setting.ico" Stretch="Uniform" Width="16" Height="16"/>
@@ -257,7 +257,7 @@
                                             </TreeViewItem.Header>
                                         </TreeViewItem>
 
-                                        <TreeViewItem IsExpanded="True" IsSelected="True" Tag="PwrSettings" Name="tviPWRSettings">
+                                        <TreeViewItem IsExpanded="True" IsSelected="False" Tag="PwrSettings" Name="tviPWRSettings">
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
                                                     <Image Source="Images/Icon012.ico" Stretch="Uniform" Width="16" Height="16"/>

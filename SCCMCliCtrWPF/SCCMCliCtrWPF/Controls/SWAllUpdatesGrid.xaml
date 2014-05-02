@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="650">
+             d:DesignHeight="300" d:DesignWidth="850">
     <Grid>
         <DockPanel>
             <DockPanel DockPanel.Dock="Top"  Height="32">
@@ -12,11 +12,11 @@
                     <Button ToolTip="Reload all updates..." Name="bt_Reload" Click="bt_Reload_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico"/>
-                            <TextBlock Margin="2,0,0,0">Reload Updates</TextBlock>
+                            <TextBlock Margin="2,0,0,0">Reload Updates </TextBlock>
                         </StackPanel>
                     </Button>
                     <Separator />
-                    <Button ToolTip="Reload all missing updates..." Name="bt_ReloadMissing" Click="bt_ReloadMissing_Click">
+                    <Button ToolTip="Filter only missing updates (no reload)" Name="bt_ReloadMissing" Click="bt_ReloadMissing_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico"/>
                             <TextBlock Margin="2,0,0,0">Show missing updates</TextBlock>
@@ -36,6 +36,11 @@
                             <TextBlock Margin="2,0,0,0">Open WindowsUpdate.log</TextBlock>
                         </StackPanel>
                     </Button>
+                    <Button ToolTip="Hide duplicates" Name="bt_Filter">
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox Name="cb_Filter" IsChecked="True" Checked="cb_Filter_Checked" Unchecked="cb_Filter_Unchecked">Hide duplicates</CheckBox>
+                        </StackPanel>
+                    </Button>
                 </ToolBar>
              </DockPanel>
             <DockPanel DockPanel.Dock="Top">
@@ -49,6 +54,8 @@
                         <DataGridTextColumn Header="SourceVersion" Binding="{Binding Path=SourceVersion}"/>
                         <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}"/>
                         <DataGridTextColumn Header="Title" Binding="{Binding Path=Title}"/>
+                        <DataGridTextColumn Header="UniqueID" Binding="{Binding Path=UniqueId}" DisplayIndex="9" Visibility="Hidden"/>
+                        <DataGridTextColumn Header="ProductID" Binding="{Binding Path=ProductID}" DisplayIndex="10" Visibility="Hidden"/>
                         <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

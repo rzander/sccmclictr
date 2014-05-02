@@ -105,7 +105,7 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Wait;
             try
             {
-                this.iUpdates = oAgent.Client.SoftwareUpdates.SoftwareUpdateReload.OrderBy(t => t.ArticleID).ToList();
+                this.iUpdates = oAgent.Client.SoftwareUpdates.GetSoftwareUpdate(true).OrderBy(t => t.ArticleID).ToList();
                 dataGrid1.BeginInit();
                 dataGrid1.ItemsSource = iUpdates;
                 dataGrid1.EndInit();
