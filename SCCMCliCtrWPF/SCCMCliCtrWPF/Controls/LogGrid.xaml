@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <DataGrid AutoGenerateColumns="False" Name="LogGridList" AreRowDetailsFrozen="True" SelectionUnit="Cell">
+        <DataGrid AutoGenerateColumns="False" Name="LogGridList" AreRowDetailsFrozen="True" SelectionUnit="Cell" LoadingRow="LogGridList_LoadingRow">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=LogText}" Header="Log Text" MaxWidth="1000" MinWidth="50">
                     <DataGridTextColumn.ElementStyle>
@@ -17,7 +17,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Path=Component}"  Header="Component"/>
-                <DataGridTextColumn Binding="{Binding Path=Date}"  Header="DateTime"/>
+                <DataGridTextColumn Binding="{Binding Path=Date, StringFormat=\{0:yyyy.MM.dd HH:mm:ss.fff\}}" Header="DateTime"/>
             </DataGrid.Columns>
         </DataGrid>
 

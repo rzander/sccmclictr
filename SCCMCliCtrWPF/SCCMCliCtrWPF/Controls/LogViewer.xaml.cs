@@ -57,93 +57,125 @@ namespace ClientCenter.Controls
             InitializeComponent();
         }
 
-        private void cb_LogFiles_DropDownOpened(object sender, EventArgs e)
-        {
-
-        }
-
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             try
             {
                 int iLines = int.Parse(tbLines.Text);
                 TabPanel.Items.Clear();
 
-                foreach (CheckBox cb in MI.Items)
+                foreach (object ob in MI.Items)
                 {
-                    if (cb.IsChecked == true)
+                    try
                     {
-                        //DG.DataContext = oData;
-                        string sFile = cb.Tag as string;
-                        string sName = cb.Content as string;
-                        TabItem ti = new TabItem();
-                        LogGrid LG = new LogGrid();
+                        if (ob.GetType() != typeof(CheckBox))
+                            continue;
 
+                        CheckBox cb = ob as CheckBox;
 
-                        List<PSObject> lRes = oAgent.Client.GetObjectsFromPS(string.Format("Get-Content {0} -Tail {1}", sFile, iLines));
-                        foreach (PSObject oLine in lRes)
+                        if (cb.IsChecked == true)
                         {
+                            //DG.DataContext = oData;
+                            string sFile = cb.Tag as string;
+                            string sName = cb.Content as string;
+                            TabItem ti = new TabItem();
+                            LogGrid LG = new LogGrid();
 
-                            string sOrg = oLine.ToString();
 
-                            //Check if Line has at least 5 Tabs (e.g. WindowsUpdate.log)
-                            if (sOrg.Count(f => f == '\t') > 4)
+                            List<PSObject> lRes = oAgent.Client.GetObjectsFromPS(string.Format("Get-Content {0} -Tail {1}", sFile, iLines));
+                            foreach (PSObject oLine in lRes)
                             {
-                                try
+
+                                string sOrg = oLine.ToString();
+
+                                //Check if Line has at least 5 Tabs (e.g. WindowsUpdate.log)
+                                if (sOrg.Count(f => f == '\t') > 4)
                                 {
-                                    string sText = sOrg.Split('\t')[5];
-                                    string sComp = sOrg.Split('\t')[4];
-                                    string sDate = sOrg.Split('\t')[0];
-                                    string sTime = sOrg.Split('\t')[1];
+                                    try
+                                    {
+                                        string sText = sOrg.Split('\t')[5];
+                                        string sComp = sOrg.Split('\t')[4];
+                                        string sDate = sOrg.Split('\t')[0];
+                                        string sTime = sOrg.Split('\t')[1];
 
-                                    DateTime logdate = DateTime.ParseExact(sDate + " " + sTime, "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                                        DateTime logdate = DateTime.ParseExact(sDate + " " + sTime, "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
 
-                                    LG.LogLines.Add(new LogGrid.LogEntry() { LogText = sText, Component = sComp, Date = logdate });
-                                    continue;
+                                        LG.LogLines.Add(new LogGrid.LogEntry() { LogText = sText, Component = sComp, Date = logdate });
+                                        continue;
+                                    }
+                                    catch { }
                                 }
-                                catch { }
-                            }
 
-                            //Check for SCCM Log format
-                            if (sOrg.StartsWith("<![LOG["))
-                            {
-                                try
+                                //Check for SCCM Log format
+                                if (sOrg.StartsWith("<![LOG["))
                                 {
-                                    string sText = sOrg.Substring(7, sOrg.IndexOf("]LOG]!>") - 7);
-                                    string sTemp = sOrg.Substring(sOrg.IndexOf("LOG]!>") + 7);
+                                    try
+                                    {
+                                        string sText = sOrg.Substring(7, sOrg.IndexOf("]LOG]!>") - 7);
+                                        string sTemp = sOrg.Substring(sOrg.IndexOf("LOG]!>") + 7);
 
-                                    List<string> parts = Regex.Matches(sTemp, @"[\""].+?[\""]|[^ ]+").Cast<Match>().Select(m => m.Value).ToList();
+                                        List<string> parts = Regex.Matches(sTemp, @"[\""].+?[\""]|[^ ]+").Cast<Match>().Select(m => m.Value).ToList();
 
-                                    string sComp = parts.First(p => p.StartsWith("component")).Split('=')[1].Replace("\"", "");
-                                    string sDate = parts.First(p => p.StartsWith("date")).Split('=')[1].Replace("\"", ""); ;
-                                    string sTime = parts.First(p => p.StartsWith("time")).Split('=')[1].Replace("\"", "").Split('-')[0];
-                                    DateTime logdate = DateTime.ParseExact(sDate + " " + sTime, "MM-dd-yyyy HH:mm:ss.fff", CultureInfo.InvariantCulture);
-                                    LG.LogLines.Add(new LogGrid.LogEntry() { LogText = sText, Component = sComp, Date = logdate });
-                                    continue;
+                                        string sComp = parts.First(p => p.StartsWith("component")).Split('=')[1].Replace("\"", "");
+                                        string sDate = parts.First(p => p.StartsWith("date")).Split('=')[1].Replace("\"", ""); ;
+                                        string sTime = parts.First(p => p.StartsWith("time")).Split('=')[1].Replace("\"", "").Split('-')[0];
+                                        DateTime logdate = DateTime.ParseExact(sDate + " " + sTime, "MM-dd-yyyy HH:mm:ss.fff", CultureInfo.InvariantCulture);
+                                        LG.LogLines.Add(new LogGrid.LogEntry() { LogText = sText, Component = sComp, Date = logdate });
+                                        continue;
+                                    }
+                                    catch { }
                                 }
-                                catch { }
+
+                                if (!string.IsNullOrEmpty(sOrg))
+                                {
+                                    LG.LogLines.Add(new LogGrid.LogEntry() { LogText = sOrg, Component = "", Date = DateTime.Now });
+                                }
+
+
+
                             }
 
-                            if (!string.IsNullOrEmpty(sOrg))
-                            {
-                                LG.LogLines.Add(new LogGrid.LogEntry() { LogText = sOrg, Component = "", Date = DateTime.Now });
-                            }
 
+                            ti.Header = sName;
+                            ti.Name = sName.Split('.')[0];
+                            ti.Content = LG;
 
-
+                            TabPanel.Items.Add(ti);
                         }
-
-
-                        ti.Header = sName;
-                        ti.Name = sName.Split('.')[0];
-                        ti.Content = LG;
-
-                        TabPanel.Items.Add(ti);
                     }
+                    catch { }
                 }
             }
             catch { }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (oAgent != null)
+            {
+                Mouse.OverrideCursor = Cursors.Wait;
+                try
+                {
+                    if (MI.Items.Count <= 3)
+                    {
+                        string sLogPath = oAgent.Client.AgentProperties.LocalSCCMAgentLogPath;
+                        foreach (string sFile in oAgent.Client.AgentProperties.LocalSCCMAgentLogFiles)
+                        {
+                            CheckBox CB = new CheckBox();
+                            CB.Tag = sLogPath + "\\" + sFile;
+                            CB.Content = sFile;
+                            MI.Items.Add(CB);
+                        }
+                    }
+                }
+                catch { }
+                Mouse.OverrideCursor = Cursors.Arrow;
+            }
+
+        }
+
     }
 }

@@ -37,5 +37,24 @@ namespace ClientCenter.Controls
             get { return LogGridList.ItemsSource as List<LogEntry>; }
             set { LogGridList.ItemsSource  = value; }
         }
+
+        private void LogGridList_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            try
+            {
+                string sText = (e.Row.Item as LogEntry).LogText;
+                if (sText.IndexOf("failed", StringComparison.CurrentCultureIgnoreCase) > -1 | sText.IndexOf("error sending", StringComparison.CurrentCultureIgnoreCase) > -1)
+                {
+                    e.Row.Background = Brushes.Salmon;
+                    return;
+                }
+                if (sText.IndexOf("warning", StringComparison.CurrentCultureIgnoreCase) > -1)
+                {
+                    e.Row.Background = Brushes.Yellow;
+                }
+            }
+            catch { }
+        }
+
     }
 }
