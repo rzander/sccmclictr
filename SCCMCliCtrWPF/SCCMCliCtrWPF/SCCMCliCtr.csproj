@@ -81,16 +81,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\NavigationPane.dll</HintPath>
     </Reference>
-    <Reference Include="Plugin_CMRemote, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Plugin_RemoteTools\bin\Debug\Plugin_CMRemote.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin_CMResourceExplorer">
-      <HintPath>..\Plugin_ResourceExplorer\bin\Debug\Plugin_CMResourceExplorer.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin_Explorer">
-      <HintPath>..\Plugin_Explorer\bin\Debug\Plugin_Explorer.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="ReachFramework" />
@@ -155,6 +145,12 @@
     </Compile>
     <Compile Include="Controls\CollectionVariables.xaml.cs">
       <DependentUpon>CollectionVariables.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LogGrid.xaml.cs">
+      <DependentUpon>LogGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LogViewer.xaml.cs">
+      <DependentUpon>LogViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PowerSettings.xaml.cs">
       <DependentUpon>PowerSettings.xaml</DependentUpon>
@@ -242,6 +238,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CollectionVariables.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\LogGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LogViewer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -360,6 +364,28 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="Plugin_CMRemote.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Plugin_CMResourceExplorer.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Plugin_CompMgmt.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Plugin_Explorer.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Plugin_FEP.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Plugin_MSInfo32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Plugin_Regedit.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Plugin_SelfUpdate.dll" />
     <Resource Include="Images\Icon012.ico" />
     <Resource Include="Images\Pack_close.ico" />
     <Resource Include="Images\Confirm visible_24.png" />
@@ -500,22 +526,6 @@
       <Project>{8594ceff-4e26-42b5-8e17-f398dae7f757}</Project>
       <Name>Customization</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Plugin_CompMgmt\Plugin_CompMgmt.csproj">
-      <Project>{0a6a892e-974e-4e3d-8227-1685fba8a61c}</Project>
-      <Name>Plugin_CompMgmt</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Plugin_FEP\Plugin_FEP.csproj">
-      <Project>{0d137829-f4d7-4f8c-938f-8a5197346501}</Project>
-      <Name>Plugin_FEP</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Plugin_MSInfo32\Plugin_MSInfo32.csproj">
-      <Project>{213dd94f-6b81-4544-9826-2451e9e6257e}</Project>
-      <Name>Plugin_MSInfo32</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Plugin_Regedit\Plugin_Regedit.csproj">
-      <Project>{00f53159-2a05-4726-8fb3-876f2e540544}</Project>
-      <Name>Plugin_Regedit</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PublishFile Include="Customization.dll.config">
@@ -526,6 +536,16 @@
       </TargetPath>
       <PublishState>Auto</PublishState>
       <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Plugin_SelfUpdate.dll">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="SCCMCliCtrWPF.exe.config">

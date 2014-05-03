@@ -152,6 +152,7 @@
                             </rib:RibbonSplitButton>
                         </rib:RibbonGroup>
                     </rib:RibbonTab>
+
                 </rib:Ribbon>
             </DockPanel>
             <DockPanel Name="NavigationDock" Width="200" MinWidth="150">
@@ -165,7 +166,7 @@
                         <s:NavigationPaneItem Name="MonitoringPane" Header="Monitoring" Image="/SCCMCliCtrWPF;component/Images/Stocks.ico" IsEnabled="True">
                             <StackPanel VerticalAlignment="Stretch">
                                 <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200" Name="tvMonitoring" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000" Loaded="tvMonitoring_Loaded">
-                                    <TreeViewItem Name="tviMonitorOverview" Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="False" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
+                                    <TreeViewItem Name="tviMonitorOverview" Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="True" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
                                         <TreeViewItem IsExpanded="True" Tag="Services">
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
@@ -198,14 +199,22 @@
                                                 </StackPanel>
                                             </TreeViewItem.Header>
                                         </TreeViewItem>
+                                        <TreeViewItem IsExpanded="True" Tag="LogMonitoring">
+                                            <TreeViewItem.Header>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Image Source="Images/Repair.ico" Stretch="Uniform" Width="20" Height="20"/>
+                                                    <TextBlock Text="Log Monitoring" Margin="3,0,0,0"></TextBlock>
+                                                </StackPanel>
+                                            </TreeViewItem.Header>
+                                        </TreeViewItem>
                                     </TreeViewItem>
                                 </TreeView>
                             </StackPanel>
                         </s:NavigationPaneItem>
-                        <s:NavigationPaneItem Name="InventoryPane" Header="Inventory" Image="/SCCMCliCtrWPF;component/Images/Searching%20Disc.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Searching%20Disc.ico" Selector.IsSelected="False" IsSelected="True">
+                        <s:NavigationPaneItem Name="InventoryPane" Header="Inventory" Image="/SCCMCliCtrWPF;component/Images/Searching%20Disc.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Searching%20Disc.ico" Selector.IsSelected="False" IsSelected="False">
                             <StackPanel VerticalAlignment="Stretch">
                                 <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200" Name="tvInventory" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000" MouseLeftButtonDown="treeView1_MouseLeftButtonDown" Loaded="tvInventory_Loaded">
-                                    <TreeViewItem Name="tviInvOverview"  Header="Overview" FontSize="14" Margin="0,5,0,0" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected" IsSelected="True">
+                                    <TreeViewItem Name="tviInvOverview"  Header="Overview" FontSize="14" Margin="0,5,0,0" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected" IsSelected="False">
                                         <TreeViewItem IsExpanded="True" Tag="SWUpdates" Name="tviInvUpdates">
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
@@ -273,7 +282,7 @@
                         <s:NavigationPaneItem Name="SWDistPane" Header="Software Distribution" Image="/SCCMCliCtrWPF;component/Images/Import%20File.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Import%20File.ico" IsSelected="False">
                             <StackPanel VerticalAlignment="Stretch">
                                 <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200" Name="tvSWDist" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000" MouseLeftButtonDown="treeView1_MouseLeftButtonDown" Loaded="tvSWDist_Loaded">
-                                    <TreeViewItem Name="tviSWDistOverview"  Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="True" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
+                                    <TreeViewItem Name="tviSWDistOverview"  Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="False" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
                                         <TreeViewItem IsExpanded="True" IsSelected="False" Tag="SWDistApps" Name="tviSWDistApps">
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
@@ -318,11 +327,11 @@
                                 </TreeView>
                             </StackPanel>
                         </s:NavigationPaneItem>
-                        <s:NavigationPaneItem Name="AgentSettingsPane" Header="Agent Settings" ToolTip="ConfigMgr Agent Settings" Image="/SCCMCliCtrWPF;component/Images/Setting.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Setting.ico" IsSelected="True">
+                        <s:NavigationPaneItem Name="AgentSettingsPane" Header="Agent Settings" ToolTip="ConfigMgr Agent Settings" Image="/SCCMCliCtrWPF;component/Images/Setting.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Setting.ico" IsSelected="False">
                             <StackPanel VerticalAlignment="Stretch">
                                 <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200" Name="treeView1" MouseLeftButtonDown="treeView1_MouseLeftButtonDown" Loaded="treeView1_Loaded"  Background="#00000000" BorderBrush="#00000000" Foreground="#00000000" >
-                                    <TreeViewItem Name="tviOverview"  Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="True" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
-                                        <TreeViewItem IsExpanded="True" IsSelected="True" Tag="AgentSettings" Name="tviAgentSettings">
+                                    <TreeViewItem Name="tviOverview"  Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="False" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
+                                        <TreeViewItem Tag="AgentSettings" Name="tviAgentSettings">
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
                                                     <Image Source="/SCCMCliCtrWPF;component/Images/Setting.ico" Stretch="Uniform" Width="20" Height="20"/>
@@ -393,7 +402,11 @@
                                 <my4:AgentSettingItem HorizontalAlignment="Center" x:Name="agentSettingItem1" VerticalAlignment="Center" IsEnabled="False" />
                             </Grid>
                         </TabItem>
-                        <TabItem/>
+                        <TabItem Header="Log Monitoring" Tag="LogMonitoring" Name="LogMonitoringPanel">
+                            <Grid>
+                                <my6:LogViewer x:Name="LogViewPane"/>
+                            </Grid>
+                        </TabItem>
                         <TabItem Header="SettingsMgmt" Name="SettingsMgmtPanel" Tag="SettingsMgmt" IsSelected="False">
                             <Grid>
                                 <my6:SettingsMgmt x:Name="SettingsMgmtGrid" />
@@ -474,6 +487,8 @@
                                 <my4:PowerSettings x:Name="PwrSettingsPane"/>
                             </Grid>
                         </TabItem>
+                        <TabItem/>
+                        
                     </TabControl>
                 </DockPanel>
             </DockPanel>

@@ -1,0 +1,39 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Properties="clr-namespace:ClientCenter.Properties" xmlns:local="clr-namespace:ClientCenter.Controls" xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="ClientCenter.Controls.LogViewer" 
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="800">
+    <Grid>
+        <DockPanel VerticalAlignment="Top" HorizontalAlignment="Stretch">
+            <DockPanel DockPanel.Dock="Top" Height="32">
+                <ToolBar x:Name="ToolBar1">
+                    <Menu Height="27" VerticalAlignment="Top" Width="100">
+                        <MenuItem Name="MI"  Header="Select Files:">
+                            <CheckBox Content="WindowsUpdate.log" Tag="C:\Windows\WindowsUpdate.log"/>
+                            <CheckBox Content="ccmsetup.log" Tag="C:\Windows\ccmsetup\Logs\ccmsetup.log"/>
+                        </MenuItem>
+                    </Menu>
+                    <Separator />
+                    <Label Content="Lines to load:" Height="27" VerticalAlignment="Top"/>
+                    <TextBox x:Name="tbLines" Height="27" Margin="0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="40" ToolTip="Number of Lines (from Bottom) to read."/>
+                    <Separator />
+                    <Button Click="Button_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico"/>
+                            <TextBlock Margin="2,0,0,0"><Run Text="Read Logs"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Separator />
+
+                </ToolBar>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <TabControl x:Name="TabPanel"/>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>
+

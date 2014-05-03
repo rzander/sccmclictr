@@ -42,6 +42,8 @@ namespace ClientCenter
 
             InitializeComponent();
 
+            AgentSettingsPane.IsSelected = true;
+
             try
             {
                 this.WindowTitle = SCCMCliCtr.Customization.Title;
@@ -358,6 +360,7 @@ namespace ClientCenter
                 CollectionVariablesGrid1.Listener = myTrace;
                 SettingsMgmtGrid.Listener = myTrace;
                 SWDistSummaryGrid1.Listener = myTrace;
+                LogViewPane.Listener = myTrace;
 
                 navigationPane1.IsEnabled = true;
                 ribAgenTActions.IsEnabled = true;
@@ -461,6 +464,9 @@ namespace ClientCenter
                                         break;
                                     case "PwrSettings":
                                         PwrSettingsPane.SCCMAgentConnection = oAgent;
+                                        break;
+                                    case "LogMonitoring":
+                                        LogViewPane.SCCMAgentConnection = oAgent;
                                         break;
 
                                 }
