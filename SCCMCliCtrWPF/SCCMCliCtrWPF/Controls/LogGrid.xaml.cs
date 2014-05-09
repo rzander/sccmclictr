@@ -43,7 +43,8 @@ namespace ClientCenter.Controls
             try
             {
                 string sText = (e.Row.Item as LogEntry).LogText;
-                if (sText.IndexOf("failed", StringComparison.CurrentCultureIgnoreCase) > -1 | sText.IndexOf("error sending", StringComparison.CurrentCultureIgnoreCase) > -1)
+                if (sText.IndexOf("failed", StringComparison.CurrentCultureIgnoreCase) > -1 | 
+                    sText.IndexOf("error", StringComparison.CurrentCultureIgnoreCase) > -1 )
                 {
                     e.Row.Background = Brushes.Salmon;
                     return;
@@ -51,6 +52,7 @@ namespace ClientCenter.Controls
                 if (sText.IndexOf("warning", StringComparison.CurrentCultureIgnoreCase) > -1)
                 {
                     e.Row.Background = Brushes.Yellow;
+                    return;
                 }
             }
             catch { }

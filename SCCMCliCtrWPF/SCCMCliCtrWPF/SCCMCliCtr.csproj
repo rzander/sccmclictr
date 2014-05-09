@@ -45,8 +45,8 @@
     <SuiteName>SCCM Tools</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>8</ApplicationRevision>
-    <ApplicationVersion>1.0.0.8</ApplicationVersion>
+    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationVersion>1.0.0.9</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -383,9 +383,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Plugin_Regedit.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Plugin_SelfUpdate.dll" />
+    <Resource Include="Images\Tools.ico" />
     <Resource Include="Images\Icon012.ico" />
     <Resource Include="Images\Pack_close.ico" />
     <Resource Include="Images\Confirm visible_24.png" />
@@ -536,16 +537,6 @@
       </TargetPath>
       <PublishState>Auto</PublishState>
       <IncludeHash>False</IncludeHash>
-      <FileType>File</FileType>
-    </PublishFile>
-    <PublishFile Include="Plugin_SelfUpdate.dll">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="SCCMCliCtrWPF.exe.config">

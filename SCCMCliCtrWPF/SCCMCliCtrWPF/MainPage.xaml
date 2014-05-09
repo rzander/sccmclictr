@@ -142,13 +142,13 @@
                         </rib:RibbonGroup>
                         <rib:RibbonGroup Header="App.Mgmt." ToolTip="Application related actions">
                             <rib:RibbonSplitButton Name="btAppMgmt" ToolTip="Application Management" LargeImageSource="Images/Pack_close.ico" Label="...">
-                                <rib:RibbonButton Name="btAppManUserPolicyAction" Label="Application manager user policy action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btAppManUserPolicyAction_Click" />
-                                <rib:RibbonButton Name="btAppManMachinePolicyAction" Label="Application manager machine policy action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btAppManMachinePolicyAction_Click" />
-                                <rib:RibbonButton Name="btAppManGlobalEvaluation" Label="Application manager global evaluation action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btAppManGlobalEvaluation_Click" ToolTip="Application Global Evaluation Task (COM)"/>
+                                <rib:RibbonButton Name="btAppManUserPolicyAction" Label="Application manager user policy action" SmallImageSource="Images/Pack_close.ico" Click="btAppManUserPolicyAction_Click" />
+                                <rib:RibbonButton Name="btAppManMachinePolicyAction" Label="Application manager machine policy action" SmallImageSource="Images/Pack_close.ico" Click="btAppManMachinePolicyAction_Click" />
+                                <rib:RibbonButton Name="btAppManGlobalEvaluation" Label="Application manager global evaluation action" SmallImageSource="Images/Pack_close.ico" Click="btAppManGlobalEvaluation_Click" ToolTip="Application Global Evaluation Task (COM)"/>
                             </rib:RibbonSplitButton>
                         </rib:RibbonGroup>
                         <rib:RibbonGroup Name="rgTools" Header="Tools" Visibility="Hidden">
-                            <rib:RibbonSplitButton Name="btTools" Label="..." ToolTip="3rd party Tools" LargeImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico">
+                            <rib:RibbonSplitButton Name="btTools" Label="..." ToolTip="3rd party Tools" LargeImageSource="Images/Tools.ico" SmallImageSource="Images/Tools.ico">
                             </rib:RibbonSplitButton>
                         </rib:RibbonGroup>
                     </rib:RibbonTab>

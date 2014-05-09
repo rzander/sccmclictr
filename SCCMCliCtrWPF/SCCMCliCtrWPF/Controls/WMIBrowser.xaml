@@ -21,6 +21,8 @@
                         <ListBoxItem Content="root\cimv2"/>
                         <ListBoxItem Content="root\cimv2\sms"/>
                         <ListBoxItem Content="root\ccm"/>
+                        <ListBoxItem Content="root\cimv2\Security\MicrosoftTpm"/>
+                        <ListBoxItem Content="root\cimv2\Security\MicrosoftVolumeEncryption"/>
                     </ComboBox>
                     <Separator />
                     <ComboBox x:Name="cb_Classes" Width="163" SelectionChanged="cb_Classes_SelectionChanged"/>

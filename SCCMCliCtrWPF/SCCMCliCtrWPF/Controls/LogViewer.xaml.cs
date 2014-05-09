@@ -84,7 +84,7 @@ namespace ClientCenter.Controls
                             LogGrid LG = new LogGrid();
 
 
-                            List<PSObject> lRes = oAgent.Client.GetObjectsFromPS(string.Format("Get-Content {0} -Tail {1}", sFile, iLines));
+                            List<PSObject> lRes = oAgent.Client.GetObjectsFromPS(string.Format("Get-Content '{0}' -Tail {1}", sFile, iLines));
                             foreach (PSObject oLine in lRes)
                             {
 

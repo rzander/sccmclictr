@@ -28,7 +28,6 @@
                         </StackPanel>
                     </Button>
                     <Separator />
-
                 </ToolBar>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top">
