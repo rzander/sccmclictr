@@ -61,6 +61,12 @@ namespace ClientCenter
                     this.myAbout.MSG = false;
                 }
 
+                if(Properties.Settings.Default.HideShutdownPane)
+                {
+                    installRepair1.gbRestart.IsEnabled = false;
+                    installRepair1.gbRestart.Visibility = System.Windows.Visibility.Hidden;
+                }
+
             }
             catch { }
 
