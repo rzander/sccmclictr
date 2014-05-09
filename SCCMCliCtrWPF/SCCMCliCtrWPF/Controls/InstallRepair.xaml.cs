@@ -303,5 +303,56 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
+        private void btLogoff_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                if (MessageBox.Show("Warning: All users will logoff immediately without a Warning !", "Logoff all Users", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
+                {
+                    oAgent.Client.GetStringFromPS("(quser).split('\n') | ? { !$_.contains('USERNAME') } | % { logoff $_.substring(43,2).Trim() }");
+                }
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btRestart_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                if (MessageBox.Show("Warning: All users will logoff immediately without a Warning and computer gets restarted !", "Restart Computer", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
+                {
+                    oAgent.Client.GetStringFromPS("Restart-Computer -Force");
+                }
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btShutdown_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                if (MessageBox.Show("Warning: All users will logoff immediately without a Warning and the computer shuts down !", "Logoff all Users", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
+                {
+                    oAgent.Client.GetStringFromPS("Stop-Computer -Force");
+                }
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
     }
 }
