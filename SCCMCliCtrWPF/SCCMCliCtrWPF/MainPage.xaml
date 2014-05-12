@@ -76,7 +76,7 @@
                         </rib:RibbonApplicationMenu>
                     </rib:Ribbon.ApplicationMenu>
                     <rib:RibbonTab Header="Agent Actions" IsEnabled="false" Name="ribAgenTActions">
-                        <rib:RibbonGroup Header="Inventory">
+                        <rib:RibbonGroup Header="Inventory" SmallImageSource="Images/Memory.ico">
                             <rib:RibbonSplitButton Name="ButtonHWInvSplit" Label="HW Inv" ToolTip="Run Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" LargeImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvSplit_Click">
                                 <rib:RibbonButton Name="ButtonHWInvFull" Label="Full HW Inv" ToolTip="Run a full Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvFull_Click" />
                                 <rib:RibbonButton Name="ButtonHWInvDelta" Label="Delta HW Inv" ToolTip="Run a delta Hardware Inventory" SmallImageSource="/SCCMCliCtrWPF;component/Images/Memory.ico" Click="ButtonHWInvSplit_Click" />
@@ -89,7 +89,7 @@
                             </rib:RibbonSplitButton>
                             <rib:RibbonButton Name="ButtonDDR"  Label="DDR" ToolTip="Send a Heartbeat back to the server." LargeImageSource="/SCCMCliCtrWPF;component/Images/Send%20Receive.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Send%20Receive.ico" Click="ButtonDDR_Click" />
                         </rib:RibbonGroup>
-                        <rib:RibbonGroup Header="Policy">
+                        <rib:RibbonGroup Header="Policy" SmallImageSource="Images/ComputerPolicy.ico">
                             <rib:RibbonSplitButton Name="ButtonMachinePolicy"  Label="Machine Policy" ToolTip="Download Machine Policy" LargeImageSource="/SCCMCliCtrWPF;component/Images/ComputerPolicy.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/ComputerPolicy.ico" Click="ButtonMachinePolicy_Click" >
                                 <rib:RibbonButton Name="btResetPolicy" Label="Reset Policy" ToolTip="Reset all local policies" SmallImageSource="/SCCMCliCtrWPF;component/Images/Delete.ico" Click="btResetPolicy_Click"></rib:RibbonButton>
                                 <rib:RibbonButton Name="btRequestMachineAssignments" Label="Request Machine Assignments" ToolTip="Request Machine Assignments" SmallImageSource="/SCCMCliCtrWPF;component/Images/ComputerPolicy.ico" Click="btRequestMachineAssignments_Click"></rib:RibbonButton>
@@ -97,27 +97,27 @@
                                 <rib:RibbonButton Name="btMachinePolicyAgentCleanup" Label="Machine Policy Agent Cleanup" ToolTip="Machine Policy Agent Cleanup" SmallImageSource="/SCCMCliCtrWPF;component/Images/ComputerPolicy.ico" Click="btMachinePolicyAgentCleanup_Click"></rib:RibbonButton>
                                 <rib:RibbonButton Name="btPolicyAgentValidateMachinePolicy" Label="Policy Agent Validate Machine Policy" ToolTip="Policy Agent Validate Machine Policy" SmallImageSource="/SCCMCliCtrWPF;component/Images/ComputerPolicy.ico" Click="btPolicyAgentValidateMachinePolicy_Click"></rib:RibbonButton>
                             </rib:RibbonSplitButton>
-                            <rib:RibbonSplitButton Name="ButtonUserPolicy" Label="User Policy" ToolTip="Download User Policy" LargeImageSource="/SCCMCliCtrWPF;component/Images/UserPolicy.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/UserPolicy.ico" Click="ButtonUserPolicy_Click" >
+                            <rib:RibbonSplitButton Name="ButtonUserPolicy" Label="User Policy" ToolTip="Download User Policy" LargeImageSource="/SCCMCliCtrWPF;component/Images/UserPolicy.ico" SmallImageSource="Images/UserPolicy.ico" Click="ButtonUserPolicy_Click" >
                                 <rib:RibbonButton Name="btRequestUserAssignment" Label="Policy Agent Request User Assignment" ToolTip="Request User Assignments" SmallImageSource="/SCCMCliCtrWPF;component/Images/UserPolicy.ico" Click="btRequestUserAssignment_Click"></rib:RibbonButton>
                                 <rib:RibbonButton Name="btEvaluateUserAssignment" Label="Evaluate User Assignment" ToolTip="Policy Agent Evaluate Assignment (User)" SmallImageSource="/SCCMCliCtrWPF;component/Images/UserPolicy.ico" Click="btEvaluateUserAssignment_Click"></rib:RibbonButton>
                                 <rib:RibbonButton Name="btUserPolicyAgentCleanup" Label="User Policy Agent Cleanup" ToolTip="User Policy Agent Cleanup" SmallImageSource="/SCCMCliCtrWPF;component/Images/UserPolicy.ico" Click="btUserPolicyAgentCleanup_Click"></rib:RibbonButton>
                                 <rib:RibbonButton Name="btPolicyAgentValidateUserPolicy" Label="Policy Agent Validate User Policy" ToolTip="Policy Agent Validate User Policy" SmallImageSource="/SCCMCliCtrWPF;component/Images/UserPolicy.ico" Click="btPolicyAgentValidateUserPolicy_Click"></rib:RibbonButton>
                             </rib:RibbonSplitButton>
                         </rib:RibbonGroup>
-                        <rib:RibbonGroup Header="DCM" ToolTip="Settings Management (DCM)">
+                        <rib:RibbonGroup Header="DCM" ToolTip="Settings Management (DCM)" SmallImageSource="Images/Search File.ico">
                             <rib:RibbonButton Name="ButtonDCMEval" Label="DCM Check" ToolTip="Desired Configuration Monitoring (DCM) Evaluation cycle." LargeImageSource="/SCCMCliCtrWPF;component/Images/Search%20File.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Search%20File.ico" Click="ButtonDCMEval_Click" />
                         </rib:RibbonGroup>
-                        <rib:RibbonGroup Header="Updates" ToolTip="Update management">
-                            <rib:RibbonSplitButton Name="ButtonEvaluateUpdates1" Label="Update Evaluation" ToolTip="Software Update Assignment and Evaluation cycle." LargeImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png" SmallImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png" Click="ButtonEvaluateUpdates_Click">
+                        <rib:RibbonGroup Header="Updates" ToolTip="Update management" SmallImageSource="Images/SWUpdate.png">
+                            <rib:RibbonSplitButton Name="ButtonEvaluateUpdates1" Label="Update Evaluation" ToolTip="Software Update Assignment and Evaluation cycle." LargeImageSource="Images/SWUpdate.png" SmallImageSource="Images/SWUpdate.png" Click="ButtonEvaluateUpdates_Click">
                                 <rib:RibbonButton Name="ButtonScanUpdates" Label="Update Scan" ToolTip="Force a Software Update Scan cycle."  SmallImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png" Click="ButtonScanUpdates_Click" />
                                 <rib:RibbonButton Name="ButtonEvaluateUpdates2" Label="Update Evaluation" ToolTip="Software Update Assignment and Evaluation cycle."  SmallImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png" Click="ButtonEvaluateUpdates_Click" />
                             </rib:RibbonSplitButton>
                         </rib:RibbonGroup>
-                        <rib:RibbonGroup Header="Powershell" ToolTip="Open powershell from the target system (remoting)">
-                            <rib:RibbonButton Name="btOpenPSConsole" Label="Open Console" ToolTip="Open powershell from the target system (remoting)"  LargeImageSource="/SCCMCliCtrWPF;component/Images/Windows_PowerShell_icon.png" SmallImageSource="/SCCMCliCtrWPF;component/Images/Windows_PowerShell_icon.png" Click="btOpenPSConsole_Click" />
+                        <rib:RibbonGroup Header="Powershell" ToolTip="Open powershell from the target system (remoting)" SmallImageSource="Images/Windows_PowerShell_icon.png">
+                            <rib:RibbonButton Name="btOpenPSConsole" Label="Open Console" ToolTip="Open powershell from the target system (remoting)"  LargeImageSource="Images/Windows_PowerShell_icon.png" SmallImageSource="Images/Windows_PowerShell_icon.png" Click="btOpenPSConsole_Click" />
                         </rib:RibbonGroup>
-                        <rib:RibbonGroup Header="Maintenance" ToolTip="additional maintenance tasks">
-                            <rib:RibbonSplitButton Name="btMaintenance" ToolTip="Maintenance Tasks" LargeImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Label="...">
+                        <rib:RibbonGroup Header="Maintenance" ToolTip="additional maintenance tasks" SmallImageSource="Images/Repair.ico">
+                            <rib:RibbonSplitButton Name="btMaintenance" ToolTip="Maintenance Tasks" LargeImageSource="Images/Repair.ico" Label="..." SmallImageSource="Images/Repair.ico">
                                 <rib:RibbonButton Name="btClientMachineAuthentication" Label="Client Machine Authentication" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btClientMachineAuthentication_Click" />
                                 <rib:RibbonButton Name="btClearingproxysettingscache" Label="Clearing proxy settings cache" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btClearingproxysettingscache_Click" />
                                 <rib:RibbonButton Name="btLSRefreshLocationsTask" Label="Location Service Refresh Locations Task" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btLSRefreshLocationsTask_Click" />
@@ -140,14 +140,14 @@
 
                             </rib:RibbonSplitButton>
                         </rib:RibbonGroup>
-                        <rib:RibbonGroup Header="App.Mgmt." ToolTip="Application related actions">
-                            <rib:RibbonSplitButton Name="btAppMgmt" ToolTip="Application Management" LargeImageSource="Images/Pack_close.ico" Label="...">
+                        <rib:RibbonGroup Header="App.Mgmt." ToolTip="Application related actions" SmallImageSource="Images/Pack_close.ico">
+                            <rib:RibbonSplitButton Name="btAppMgmt" ToolTip="Application Management" LargeImageSource="Images/Pack_close.ico" SmallImageSource="Images/Pack_close.ico" Label="...">
                                 <rib:RibbonButton Name="btAppManUserPolicyAction" Label="Application manager user policy action" SmallImageSource="Images/Pack_close.ico" Click="btAppManUserPolicyAction_Click" />
                                 <rib:RibbonButton Name="btAppManMachinePolicyAction" Label="Application manager machine policy action" SmallImageSource="Images/Pack_close.ico" Click="btAppManMachinePolicyAction_Click" />
                                 <rib:RibbonButton Name="btAppManGlobalEvaluation" Label="Application manager global evaluation action" SmallImageSource="Images/Pack_close.ico" Click="btAppManGlobalEvaluation_Click" ToolTip="Application Global Evaluation Task (COM)"/>
                             </rib:RibbonSplitButton>
                         </rib:RibbonGroup>
-                        <rib:RibbonGroup Name="rgTools" Header="Tools" Visibility="Hidden">
+                        <rib:RibbonGroup Name="rgTools" Header="Tools" Visibility="Hidden" SmallImageSource="Images/Tools.ico">
                             <rib:RibbonSplitButton Name="btTools" Label="..." ToolTip="3rd party Tools" LargeImageSource="Images/Tools.ico" SmallImageSource="Images/Tools.ico">
                             </rib:RibbonSplitButton>
                         </rib:RibbonGroup>

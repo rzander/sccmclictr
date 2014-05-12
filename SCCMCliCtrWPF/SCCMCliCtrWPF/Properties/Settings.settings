@@ -224,5 +224,8 @@ catch
     <Setting Name="HideNonUserUIExperienceApplicattions" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="HideShutdownPane" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
