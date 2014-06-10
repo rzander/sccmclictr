@@ -55,12 +55,12 @@ namespace ClientCenter.Controls
                         oAgent = value;
                         if (Properties.Settings.Default.HideNonUserUIExperienceApplicattions)
                         {
-                            List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications.Where(t => t.UserUIExperience == true).ToList();
+                            List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications_(false).Where(t => t.UserUIExperience == true).ToList();
                             iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
                         }
                         else
                         {
-                            List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications.ToList();
+                            List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications_(false).ToList();
                             iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
                         }
                         //TEST.Source = BitMapConvert.ToBitmapImage(iApplications[0].IconAsImage);

@@ -137,7 +137,8 @@
                                 <rib:RibbonButton Name="btDCMPolicyAction" Label="DCM Policy Action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btDCMPolicyAction_Click" />
                                 <rib:RibbonButton Name="btATMStatusCheckPolicy" Label="AMT Status Check Policy" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btATMStatusCheckPolicy_Click" />
                                 <rib:RibbonButton Name="btPowerManagerSummarizer" Label="Power management start summarizer" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btPowerManagerSummarizer_Click" />
-
+                                <rib:RibbonButton Name="btResetPausedSWDist" Label="Reset Paused Software Distribution" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btResetPausedSWDist_Click" ToolTip="" />
+                                <rib:RibbonButton Name="btResetProvisioningMode" Label="Reset Provisioning Mode" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btResetProvisioningMode_Click" ToolTip="Task-Sequence aborts may end in active ProvisioningMode. ProvisioningMode will prevent SW distribution." />
                             </rib:RibbonSplitButton>
                         </rib:RibbonGroup>
                         <rib:RibbonGroup Header="App.Mgmt." ToolTip="Application related actions" SmallImageSource="Images/Pack_close.ico">

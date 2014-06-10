@@ -151,6 +151,7 @@ namespace ClientCenter
                         }
                         catch (Exception)
                         {
+                            return;
                         }
                     }
                 }
@@ -993,6 +994,30 @@ namespace ClientCenter
         private void bt_About_Click(object sender, RoutedEventArgs e)
         {
             this.AboutPanel.IsSelected = true;
+        }
+
+        private void btResetPausedSWDist_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                if(!oAgent.Client.AgentActions.ResetPausedSWDist())
+                    myTrace.WriteError("Unable to reset paused SWDist...");
+            }
+            catch {  }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btResetProvisioningMode_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                if(!oAgent.Client.AgentActions.ResetProvisioningMode())
+                    myTrace.WriteError("Unable to reset ProvisioningMode...");
+            }
+            catch { }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
     }

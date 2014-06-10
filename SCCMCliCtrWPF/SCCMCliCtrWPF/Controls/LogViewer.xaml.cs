@@ -82,7 +82,7 @@ namespace ClientCenter.Controls
                             string sName = cb.Content as string;
                             TabItem ti = new TabItem();
                             LogGrid LG = new LogGrid();
-
+                            DateTime LastDT = new DateTime();
 
                             List<PSObject> lRes = oAgent.Client.GetObjectsFromPS(string.Format("Get-Content '{0}' -Tail {1}", sFile, iLines));
                             foreach (PSObject oLine in lRes)
@@ -101,7 +101,7 @@ namespace ClientCenter.Controls
                                         string sTime = sOrg.Split('\t')[1];
 
                                         DateTime logdate = DateTime.ParseExact(sDate + " " + sTime, "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
-
+                                        LastDT = logdate;
                                         LG.LogLines.Add(new LogGrid.LogEntry() { LogText = sText, Component = sComp, Date = logdate });
                                         continue;
                                     }
@@ -122,6 +122,7 @@ namespace ClientCenter.Controls
                                         string sDate = parts.First(p => p.StartsWith("date")).Split('=')[1].Replace("\"", ""); ;
                                         string sTime = parts.First(p => p.StartsWith("time")).Split('=')[1].Replace("\"", "").Split('-')[0];
                                         DateTime logdate = DateTime.ParseExact(sDate + " " + sTime, "MM-dd-yyyy HH:mm:ss.fff", CultureInfo.InvariantCulture);
+                                        LastDT = logdate;
                                         LG.LogLines.Add(new LogGrid.LogEntry() { LogText = sText, Component = sComp, Date = logdate });
                                         continue;
                                     }
@@ -130,7 +131,7 @@ namespace ClientCenter.Controls
 
                                 if (!string.IsNullOrEmpty(sOrg))
                                 {
-                                    LG.LogLines.Add(new LogGrid.LogEntry() { LogText = sOrg, Component = "", Date = DateTime.Now });
+                                    LG.LogLines.Add(new LogGrid.LogEntry() { LogText = sOrg, Component = "", Date = LastDT});
                                 }
 
 
