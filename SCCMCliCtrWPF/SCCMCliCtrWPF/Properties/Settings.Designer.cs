@@ -221,18 +221,26 @@ while ($a -ne 1)")]
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>OS Architecture|root\cimv2|SELECT VariableValue FROM  Win32_Environment WHERE Name='PROCESSOR_ARCHITECTURE' AND UserName='&lt;SYSTEM&gt;'</string>
-  <string>PC Manufacturer|root\cimv2|SELECT Manufacturer FROM Win32_ComputerSystem</string>
-  <string>LastHWInv|Root\CCM\Scheduler|SELECT LastTriggerTime FROM CCM_Scheduler_History WHERE ScheduleID='{00000000-0000-0000-0000-000000000001}' and UserSID='Machine'</string>
-  <string>LastSWInv|Root\CCM\Scheduler|SELECT LastTriggerTime FROM CCM_Scheduler_History WHERE ScheduleID='{00000000-0000-0000-0000-000000000002}' and UserSID='Machine'</string>
-  <string>LastDDR|Root\CCM\Scheduler|SELECT LastTriggerTime FROM CCM_Scheduler_History WHERE ScheduleID='{00000000-0000-0000-0000-000000000003}' and UserSID='Machine'</string>
-  <string>LastMachinePolicyRequest|Root\CCM\Scheduler|SELECT LastTriggerTime FROM CCM_Scheduler_History WHERE ScheduleID='{00000000-0000-0000-0000-000000000021}' and UserSID='Machine'</string>
-  <string>LastReboot|root\cimv2|SELECT LastBootUpTime FROM Win32_OperatingSystem</string>
-  <string>InstallDate|root\cimv2|SELECT InstallDate FROM Win32_OperatingSystem</string>
-  <string>CurrentUser|root\cimv2|SELECT Username FROM Win32_ComputerSystem</string>
-</ArrayOfString>")]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>OS Architecture|root\\cimv2|SELECT VariableValue FROM  Win32_Environment WH" +
+            "ERE Name=\'PROCESSOR_ARCHITECTURE\' AND UserName=\'&lt;SYSTEM&gt;\'</string>\r\n  <str" +
+            "ing>PC Manufacturer|root\\cimv2|SELECT Manufacturer FROM Win32_ComputerSystem</st" +
+            "ring>\r\n  <string>LastHWInv|Root\\CCM\\Scheduler|SELECT LastTriggerTime FROM CCM_Sc" +
+            "heduler_History WHERE ScheduleID=\'{00000000-0000-0000-0000-000000000001}\' and Us" +
+            "erSID=\'Machine\'</string>\r\n  <string>LastSWInv|Root\\CCM\\Scheduler|SELECT LastTrig" +
+            "gerTime FROM CCM_Scheduler_History WHERE ScheduleID=\'{00000000-0000-0000-0000-00" +
+            "0000000002}\' and UserSID=\'Machine\'</string>\r\n  <string>LastDDR|Root\\CCM\\Schedule" +
+            "r|SELECT LastTriggerTime FROM CCM_Scheduler_History WHERE ScheduleID=\'{00000000-" +
+            "0000-0000-0000-000000000003}\' and UserSID=\'Machine\'</string>\r\n  <string>LastMach" +
+            "inePolicyRequest|Root\\CCM\\Scheduler|SELECT LastTriggerTime FROM CCM_Scheduler_Hi" +
+            "story WHERE ScheduleID=\'{00000000-0000-0000-0000-000000000021}\' and UserSID=\'Mac" +
+            "hine\'</string>\r\n  <string>LastReboot|root\\cimv2|SELECT LastBootUpTime FROM Win32" +
+            "_OperatingSystem</string>\r\n  <string>InstallDate|root\\cimv2|SELECT InstallDate F" +
+            "ROM Win32_OperatingSystem</string>\r\n  <string>CurrentUser|root\\cimv2|SELECT User" +
+            "name FROM Win32_ComputerSystem</string>\r\n  <string>PrimaryUsers|ROOT\\ccm\\Policy\\" +
+            "Machine\\ActualConfig|SELECT * FROM CCM_UserAffinity WHERE IsUserAffinitySet = \'T" +
+            "rue\'</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection AdhocInv {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["AdhocInv"]));
