@@ -126,10 +126,11 @@ namespace ClientCenter
                     tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
                     tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("&ProjectName=sccmclictr", "");
                     tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("=", "");
-
+                    tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-Embedding", "");
+                    
                     tb_TargetComputer2.Text = tb_TargetComputer.Text;
-
-                    if (!IsRunAsAdministrator())
+                    
+                    if (!IsRunAsAdministrator() & !System.Windows.Interop.BrowserInteropHelper.IsBrowserHosted)
                     {
 
                         // It is not possible to launch a ClickOnce app as administrator directly, so instead we launch the
@@ -161,6 +162,8 @@ namespace ClientCenter
                     tb_TargetComputer2.Text = Environment.GetCommandLineArgs()[1].Trim();
                     tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
                     tb_TargetComputer2.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
+                    tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-Embedding", "");
+                    tb_TargetComputer2.Text = tb_TargetComputer2.Text.Replace("-Embedding", "");
                 }
 
                 pb_Password.Password = Properties.Settings.Default.Password;

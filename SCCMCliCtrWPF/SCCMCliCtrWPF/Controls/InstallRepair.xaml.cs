@@ -310,7 +310,7 @@ namespace ClientCenter
             {
                 if (MessageBox.Show("Warning: All users will logoff immediately without a Warning !", "Logoff all Users", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
                 {
-                    oAgent.Client.GetStringFromPS("(quser).split('\n') | ? { !$_.contains('USERNAME') } | % { logoff $_.substring(43,2).Trim() }");
+                    oAgent.Client.GetStringFromPS("(quser) | ? { !$_.contains('USERNAME') } | % { logoff $_.substring(43,2).Trim() }");
                 }
             }
             catch (Exception ex)

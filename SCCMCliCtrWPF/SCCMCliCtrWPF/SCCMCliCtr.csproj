@@ -18,9 +18,9 @@
     <EnableSecurityDebugging>true</EnableSecurityDebugging>
     <StartAction>URL</StartAction>
     <HostInBrowser>true</HostInBrowser>
-    <TargetZone>Internet</TargetZone>
+    <TargetZone>LocalIntranet</TargetZone>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -55,12 +55,14 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -70,13 +72,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
     <Reference Include="Microsoft.Build" />
-    <Reference Include="Microsoft.Windows.Shell">
-      <HintPath>..\Microsoft.Windows.Shell.dll</HintPath>
-    </Reference>
     <Reference Include="NavigationPane, Version=1.0.4317.19063, Culture=neutral, PublicKeyToken=b239f36db07135c1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\NavigationPane.dll</HintPath>
@@ -88,8 +88,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\RibbonControlsLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="sccmclictr.automation, Version=0.0.0.41, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="sccmclictr.automation, Version=0.0.0.57, Culture=neutral, PublicKeyToken=4fdf3a809cf778d4, processorArchitecture=MSIL">
       <HintPath>..\..\sccmclictrlib\sccmclictr.automation\bin\Debug\sccmclictr.automation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -531,28 +530,7 @@
       <Name>Customization</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <PublishFile Include="Customization.dll.config">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Auto</PublishState>
-      <IncludeHash>False</IncludeHash>
-      <FileType>File</FileType>
-    </PublishFile>
-    <PublishFile Include="SCCMCliCtrWPF.exe.config">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Auto</PublishState>
-      <IncludeHash>False</IncludeHash>
-      <FileType>File</FileType>
-    </PublishFile>
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <StartArguments />
   </PropertyGroup>
@@ -579,6 +557,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ManifestTimestampUrl>http://timestamp.comodoca.com/authenticode</ManifestTimestampUrl>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>ClientCenter.App</StartupObject>
   </PropertyGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
