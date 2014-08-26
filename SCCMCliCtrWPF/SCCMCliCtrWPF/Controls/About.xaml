@@ -27,6 +27,7 @@
                     <StackPanel>
                     <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="/SCCMCliCtrWPF;component/Images/Icon16_256.png"/>
                     <Label Name="lVersion" Content=""></Label>
+                    <Label Name="lAssembly" Content=""></Label>
                     </StackPanel>
                 </DockPanel>
                 <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">

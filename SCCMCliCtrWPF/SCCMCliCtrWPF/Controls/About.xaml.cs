@@ -27,7 +27,8 @@ namespace ClientCenter.Controls
             InitializeComponent();
 
             tbLicense.Text = Properties.Resources.License;
-            lVersion.Content = "Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            lVersion.Content = "Version: " + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString(); 
+            lAssembly.Content = "Assembly: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

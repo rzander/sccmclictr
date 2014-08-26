@@ -26,6 +26,8 @@
                 <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" SortDirection="Ascending"/>
+                        <DataGridTextColumn Header="Version" Binding="{Binding Path=SoftwareVersion}"/>
+                        <DataGridTextColumn Header="Rev" Binding="{Binding Path=Revision}"/>
                         <DataGridTextColumn Header="EvaluationState" Binding="{Binding Path=EvaluationState}"/>
                         <DataGridTextColumn Header="Status" Binding="{Binding Path=EvaluationStateText}"/>
                         <DataGridTextColumn Header="InstallState" Binding="{Binding Path=InstallState}"/>

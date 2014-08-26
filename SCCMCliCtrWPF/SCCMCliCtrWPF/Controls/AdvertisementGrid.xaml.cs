@@ -35,6 +35,7 @@ namespace ClientCenter.Controls
         public AdvertisementGrid()
         {
             InitializeComponent();
+            cb_TSAdv.IsChecked = Properties.Settings.Default.HideTSAdvertisements;
         }
 
         public SCCMAgent SCCMAgentConnection
@@ -86,7 +87,7 @@ namespace ClientCenter.Controls
             {
                 List<SortDescription> ssort = GetSortInfo(dataGrid1);
 
-                if (Properties.Settings.Default.HideTSAdvertisements)
+                if (cb_TSAdv.IsChecked == true)
                 {
                     List<softwaredistribution.CCM_SoftwareDistribution> oList = oAgent.Client.SoftwareDistribution.Advertisements_(true).OrderBy(o => o.PRG_ProgramID).ThenBy(o => o.PKG_Name).ToList();
                     iAdvertisements = oList.GroupBy(t => t.ADV_AdvertisementID).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.PKG_Name).ToList();
@@ -304,6 +305,24 @@ namespace ClientCenter.Controls
             foreach (var sortInfo in sortInfos)
             {
                 dg.Items.SortDescriptions.Add(sortInfo);
+            }
+        }
+
+        private void cb_TSAdv_Checked(object sender, RoutedEventArgs e)
+        {
+            if (cb_TSAdv.IsFocused)
+            {
+                Properties.Settings.Default.HideTSAdvertisements = true;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        private void cb_TSAdv_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (cb_TSAdv.IsFocused)
+            {
+                Properties.Settings.Default.HideTSAdvertisements = false;
+                Properties.Settings.Default.Save();
             }
         }
     }
