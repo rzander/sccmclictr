@@ -29,6 +29,7 @@ namespace ClientCenter
         public AgentSettingItem()
         {
             InitializeComponent();
+
         }
 
         public SCCMAgent SCCMAgentConnection

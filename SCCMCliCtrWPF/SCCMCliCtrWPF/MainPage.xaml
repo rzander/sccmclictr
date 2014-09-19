@@ -167,7 +167,7 @@
                         <s:NavigationPaneItem Name="MonitoringPane" Header="Monitoring" Image="/SCCMCliCtrWPF;component/Images/Stocks.ico" IsEnabled="True">
                             <StackPanel VerticalAlignment="Stretch">
                                 <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200" Name="tvMonitoring" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000" Loaded="tvMonitoring_Loaded">
-                                    <TreeViewItem Name="tviMonitorOverview" Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="True" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
+                                    <TreeViewItem Name="tviMonitorOverview" Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="False" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">
                                         <TreeViewItem IsExpanded="True" Tag="Services">
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal" >
@@ -328,7 +328,7 @@
                                 </TreeView>
                             </StackPanel>
                         </s:NavigationPaneItem>
-                        <s:NavigationPaneItem Name="AgentSettingsPane" Header="Agent Settings" ToolTip="ConfigMgr Agent Settings" Image="/SCCMCliCtrWPF;component/Images/Setting.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Setting.ico" IsSelected="False">
+                        <s:NavigationPaneItem Name="AgentSettingsPane" Header="Agent Settings" ToolTip="ConfigMgr Agent Settings" Image="/SCCMCliCtrWPF;component/Images/Setting.ico" ImageSmall="/SCCMCliCtrWPF;component/Images/Setting.ico" IsSelected="True">
                             <StackPanel VerticalAlignment="Stretch">
                                 <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200" Name="treeView1" MouseLeftButtonDown="treeView1_MouseLeftButtonDown" Loaded="treeView1_Loaded"  Background="#00000000" BorderBrush="#00000000" Foreground="#00000000" >
                                     <TreeViewItem Name="tviOverview"  Header="Overview" FontSize="14" Margin="0,5,0,0" IsSelected="False" OverridesDefaultStyle="False" IsExpanded="True" Selected="TreeViewItem_Selected">

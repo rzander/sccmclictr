@@ -181,6 +181,27 @@ namespace ClientCenter
 
         }
 
+        public void PageReset()
+        {
+            AgentSettingsPane.IsSelected = true;
+
+            if (!SCCMCliCtr.Customization.CheckLicense() | SCCMCliCtr.Customization.isOpenSource)
+            {
+                this.AgentSettingsPanel.IsSelected = false;
+            }
+            else
+            {
+                this.AgentSettingsPanel.IsSelected = true;
+                this.myAbout.MSG = false;
+            }
+
+            eventMonitoring1.bt_StopMonitoring_Click(this, null);
+
+            AgentSettingsPane.IsSelected = true;
+            tviAgentSettings.IsSelected = true;
+            
+        }
+
 
 
         //Code from http://antscode.blogspot.com/2011/02/running-clickonce-application-as.html
@@ -263,15 +284,25 @@ namespace ClientCenter
         {
             Mouse.OverrideCursor = Cursors.Wait;
 
-
             if (oAgent != null)
             {
                 this.AgentSettingsPanel.IsSelected = true;
-                
+
                 if (oAgent.isConnected)
-                    oAgent.disconnect();
+                {
+                    try
+                    {
+                        eventMonitoring1.bt_StopMonitoring_Click(sender, e);
+
+                        oAgent.Client.Monitoring.AsynchronousScript.Close();
+                        oAgent.disconnect();
+                    }
+                    catch { }
+                }
                 
                 oAgent.Dispose();
+                PageReset();
+               
             }
 
             if (bPasswordChanged)

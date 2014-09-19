@@ -305,31 +305,32 @@ while ($a -ne 1)")]
             "webclient = New-Object System.Net.WebClient \r\n    $url = \"http://$($CM12MP)/CCM_" +
             "Client/ccmsetup.exe\" \r\n    $file = \"c:\\windows\\temp\\ccmsetup.exe\" \r\n    $webclie" +
             "nt.DownloadFile($url,$file)\r\n\r\n#download CU3 Patch from MP , must be copied manu" +
-            "ally to the Client directory.\r\n#$url = \"<http://$($CM12MP)/CCM_Client/configmgr2" +
-            "012ac-sp1-kb2882125-x64.msp>\" \r\n#$file = \"c:\\windows\\temp\\configmgr2012ac-sp1-kb" +
-            "2882125-x64.msp\" \r\n#$webclient.DownloadFile($url,$file)\r\n\r\n#stop the old sms age" +
-            "nt service \r\n    stop-service \'ccmexec\' -ErrorAction SilentlyContinue \r\n\r\n#Clean" +
-            "up cache \r\n    if($ccmcache -ne $null) \r\n    { \r\n        try \r\n        { \r\n     " +
-            "   dir $ccmcache \'*\' -directory | % { [io.directory]::delete($_.fullname, $true)" +
-            "  } -ErrorAction SilentlyContinue \r\n        } catch {} \r\n    } \r\n\r\n#Cleanup Exec" +
-            "ution History \r\n    Remove-Item -Path \'HKLM:\\SOFTWARE\\Wow6432Node\\Microsoft\\SMS\\" +
-            "Mobile Client\\*\' -Recurse -ErrorAction SilentlyContinue \r\n\r\n#Cleanup App-V 4.6 P" +
-            "ackages \r\n    try \r\n    { \r\n        (get-wmiobject -query \"SELECT * FROM Package" +
-            " WHERE SftPath like \'%\' AND InUse = \'FALSE\' \" -namespace \"root\\Microsoft\\appvirt" +
-            "\\client\") | % { start-process -wait sftmime.exe -argumentlist \"delete package:$(" +
-            "[char]34)$($_.Name)$([char]34) /global\" }         \r\n    } catch {} \r\n\r\n#kill exi" +
-            "sting instances of ccmsetup.exe \r\n    $ccm = (Get-Process \'ccmsetup\' -ErrorActio" +
-            "n SilentlyContinue) \r\n    if($ccm -ne $null) \r\n    { \r\n            $ccm.kill(); " +
-            "\r\n    } \r\n\r\n#run ccmsetup\r\n \r\nif(test-path \"c:\\windows\\temp\\configmgr2012ac-sp1-" +
-            "kb2882125-x64.msp\") {\r\n    $proc = Start-Process -FilePath \'c:\\windows\\temp\\ccms" +
-            "etup.exe\' -PassThru -Wait -ArgumentList \"Patch=\"\"c:\\windows\\temp\\configmgr2012ac" +
-            "-sp1-kb2882125-x64.msp\"\" /mp:$($CM12MP) /source:http://$($CM12MP)/CCM_Client CCM" +
-            "HTTPPORT=80 RESETKEYINFORMATION=TRUE SMSSITECODE=$($CMSiteCode) SMSSLP=$($CM12MP" +
-            ") FSP=$($CM12MP)\"\r\n} else { \r\n    $proc = Start-Process -FilePath \'c:\\windows\\te" +
-            "mp\\ccmsetup.exe\' -PassThru -Wait -ArgumentList \"/mp:$($CM12MP) /source:http://$(" +
-            "$CM12MP)/CCM_Client CCMHTTPPORT=80 RESETKEYINFORMATION=TRUE SMSSITECODE=$($CMSit" +
-            "eCode) SMSSLP=$($CM12MP) FSP=$($CM12MP)\"  }\r\n   Sleep(5) \r\n   \"ccmsetup started." +
-            "..\" \r\n} \r\n\r\ncatch \r\n{ \r\n        \"an Error occured...\" \r\n        $error[0] \r\n} ")]
+            "ally to the Client directory.\r\n#$url = \"http://$($CM12MP)/CCM_Client/configmgr20" +
+            "12ac-r2-kb2970177-x64.msp\" \r\n#$file = \"c:\\windows\\temp\\configmgr2012ac-r2-kb2970" +
+            "177-x64.msp\" \r\n#$webclient.DownloadFile($url,$file)\r\n\r\n#stop the old sms agent s" +
+            "ervice \r\n    stop-service \'ccmexec\' -ErrorAction SilentlyContinue \r\n\r\n#Cleanup c" +
+            "ache \r\n    if($ccmcache -ne $null) \r\n    { \r\n        try \r\n        { \r\n        d" +
+            "ir $ccmcache \'*\' -directory | % { [io.directory]::delete($_.fullname, $true)  } " +
+            "-ErrorAction SilentlyContinue \r\n        } catch {} \r\n    } \r\n\r\n#Cleanup Executio" +
+            "n History \r\n    Remove-Item -Path \'HKLM:\\SOFTWARE\\Wow6432Node\\Microsoft\\SMS\\Mobi" +
+            "le Client\\*\' -Recurse -ErrorAction SilentlyContinue \r\n\r\n#Cleanup App-V 4.6 Packa" +
+            "ges \r\n    try \r\n    { \r\n        (get-wmiobject -query \"SELECT * FROM Package WHE" +
+            "RE SftPath like \'%\' AND InUse = \'FALSE\' \" -namespace \"root\\Microsoft\\appvirt\\cli" +
+            "ent\") | % { start-process -wait sftmime.exe -argumentlist \"delete package:$([cha" +
+            "r]34)$($_.Name)$([char]34) /global\" }         \r\n    } catch {} \r\n\r\n#kill existin" +
+            "g instances of ccmsetup.exe \r\n    $ccm = (Get-Process \'ccmsetup\' -ErrorAction Si" +
+            "lentlyContinue) \r\n    if($ccm -ne $null) \r\n    { \r\n            $ccm.kill(); \r\n  " +
+            "  } \r\n\r\n#run ccmsetup\r\n \r\nif(test-path \"c:\\windows\\temp\\configmgr2012ac-r2-kb297" +
+            "0177-x64.msp\") {\r\n    $proc = Start-Process -FilePath \'c:\\windows\\temp\\ccmsetup." +
+            "exe\' -PassThru -Wait -ArgumentList \"Patch=\"\"c:\\windows\\temp\\configmgr2012ac-r2-k" +
+            "b2970177-x64.msp\"\" /mp:$($CM12MP) /source:http://$($CM12MP)/CCM_Client CCMHTTPPO" +
+            "RT=80 RESETKEYINFORMATION=TRUE SMSSITECODE=$($CMSiteCode) SMSSLP=$($CM12MP) FSP=" +
+            "$($CM12MP)\"\r\n   Sleep(5) \r\n   \"ccmsetup started...\" \r\n} else { \r\n    $proc = Sta" +
+            "rt-Process -FilePath \'c:\\windows\\temp\\ccmsetup.exe\' -PassThru -Wait -ArgumentLis" +
+            "t \"/mp:$($CM12MP) /source:http://$($CM12MP)/CCM_Client CCMHTTPPORT=80 RESETKEYIN" +
+            "FORMATION=TRUE SMSSITECODE=$($CMSiteCode) SMSSLP=$($CM12MP) FSP=$($CM12MP)\"  }\r\n" +
+            "   Sleep(5) \r\n   \"ccmsetup started...\" \r\n} \r\n\r\ncatch \r\n{ \r\n        \"an Error occ" +
+            "ured...\" \r\n        $error[0] \r\n} ")]
         public string AgentInstallPS {
             get {
                 return ((string)(this["AgentInstallPS"]));

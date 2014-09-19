@@ -176,7 +176,7 @@ namespace ClientCenter
         }
 
 
-        private void bt_StopMonitoring_Click(object sender, RoutedEventArgs e)
+        public void bt_StopMonitoring_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
             try
@@ -190,7 +190,7 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
-        private void bt_ClearMonitoring_Click(object sender, RoutedEventArgs e)
+        public void bt_ClearMonitoring_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
             try
