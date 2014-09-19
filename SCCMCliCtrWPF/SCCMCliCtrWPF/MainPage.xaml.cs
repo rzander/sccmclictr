@@ -53,7 +53,7 @@ namespace ClientCenter
                 rStatus.AppendText("Assembly Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString() + "\n");
 
 
-                if(!SCCMCliCtr.Customization.CheckLicense() | SCCMCliCtr.Customization.isOpenSource)
+                if (!SCCMCliCtr.Customization.CheckLicense() | SCCMCliCtr.Customization.isOpenSource)
                 {
                     this.AgentSettingsPanel.IsSelected = false;
                 }
@@ -63,7 +63,7 @@ namespace ClientCenter
                     this.myAbout.MSG = false;
                 }
 
-                if(Properties.Settings.Default.HideShutdownPane)
+                if (Properties.Settings.Default.HideShutdownPane)
                 {
                     installRepair1.gbRestart.IsEnabled = false;
                     installRepair1.gbRestart.Visibility = System.Windows.Visibility.Hidden;
@@ -113,8 +113,8 @@ namespace ClientCenter
             tabNavigationPanels.ItemContainerStyle = s;
             tb_wsmanport.Text = Properties.Settings.Default.WinRMPort;
             cb_ssl.IsChecked = Properties.Settings.Default.WinRMSSL;
-            wmiBroser.lAdhocQueries =  Properties.Settings.Default.AdhocInv.Cast<string>().ToList();
-            if(Properties.Settings.Default.showPingButton)
+            wmiBroser.lAdhocQueries = Properties.Settings.Default.AdhocInv.Cast<string>().ToList();
+            if (Properties.Settings.Default.showPingButton)
                 bt_Ping.Visibility = System.Windows.Visibility.Visible;
 
 
@@ -129,9 +129,9 @@ namespace ClientCenter
                     tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("&ProjectName=sccmclictr", "");
                     tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("=", "");
                     tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-Embedding", "");
-                    
+
                     tb_TargetComputer2.Text = tb_TargetComputer.Text;
-                    
+
                     if (!IsRunAsAdministrator() & !System.Windows.Interop.BrowserInteropHelper.IsBrowserHosted)
                     {
 
@@ -148,7 +148,7 @@ namespace ClientCenter
                         try
                         {
                             System.Diagnostics.Process.Start(processInfo);
-                            
+
                             // Shut down the current process
                             Application.Current.Shutdown();
                         }
@@ -179,6 +179,14 @@ namespace ClientCenter
                 Application_Startup(this, tb_TargetComputer.Text);
             }
 
+            if (Environment.GetCommandLineArgs().Count() > 1)
+            {
+                if (!string.IsNullOrEmpty(tb_TargetComputer.Text))
+                {
+                    bt_Connect_Click(this, null);
+                }
+            }
+
         }
 
         public void PageReset()
@@ -199,7 +207,7 @@ namespace ClientCenter
 
             AgentSettingsPane.IsSelected = true;
             tviAgentSettings.IsSelected = true;
-            
+
         }
 
 
@@ -299,10 +307,10 @@ namespace ClientCenter
                     }
                     catch { }
                 }
-                
+
                 oAgent.Dispose();
                 PageReset();
-               
+
             }
 
             if (bPasswordChanged)
@@ -315,18 +323,18 @@ namespace ClientCenter
 
             tb_TargetComputer.Text = tb_TargetComputer.Text.Trim();
             tb_TargetComputer2.Text = tb_TargetComputer2.Text.Trim();
-            
+
             string sTarget = tb_TargetComputer.Text;
             try
             {
-                
-                if(sender == bt_Connect2)
+
+                if (sender == bt_Connect2)
                     sTarget = tb_TargetComputer2.Text;
 
                 tb_TargetComputer.Text = sTarget;
                 tb_TargetComputer2.Text = sTarget;
 
-                if(sTarget.ToLower() == "localhost" | sTarget == "127.0.0.1")
+                if (sTarget.ToLower() == "localhost" | sTarget == "127.0.0.1")
                 {
                     if (!IsRunAsAdministrator())
                     {
@@ -355,12 +363,12 @@ namespace ClientCenter
                 }
                 else
                 {
-                    if(!tb_Username.Text.Contains(@"\"))
+                    if (!tb_Username.Text.Contains(@"\"))
                     {
                         tb_Username.Text = Environment.UserDomainName + @"\" + tb_Username.Text;
                     }
                     string sPW = common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
-                    oAgent = new SCCMAgent(sTarget, tb_Username.Text, sPW , int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
+                    oAgent = new SCCMAgent(sTarget, tb_Username.Text, sPW, int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
                 }
 
                 oAgent.PSCode.Listeners.Add(myTrace);
@@ -413,15 +421,15 @@ namespace ClientCenter
                 agentSettingItem1.IsEnabled = true;
 
                 this.WindowTitle = sTarget;
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 //ribbon1.IsEnabled = false;
                 navigationPane1.IsEnabled = false;
                 agentSettingItem1.IsEnabled = false;
                 myTrace.WriteError("Unable to connect: " + sTarget);
-                myTrace.WriteError("Error: "+ ex.Message);
+                myTrace.WriteError("Error: " + ex.Message);
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
                 ribAgenTActions.IsEnabled = false;
@@ -430,7 +438,7 @@ namespace ClientCenter
             }
 
             Mouse.OverrideCursor = Cursors.Arrow;
-           
+
         }
 
         private void TreeViewItem_Selected(object sender, RoutedEventArgs e)
@@ -605,12 +613,12 @@ namespace ClientCenter
             rStatus.ScrollToEnd();
         }
 
-        bool isResizing = false; 
+        bool isResizing = false;
         Point startPt;
         private void PSGrip_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Mouse.Capture(this.PSGrip); 
-            startPt = e.GetPosition(this.PSGrip); 
+            Mouse.Capture(this.PSGrip);
+            startPt = e.GetPosition(this.PSGrip);
             isResizing = true;
         }
 
@@ -647,13 +655,13 @@ namespace ClientCenter
                         Explorer.StartInfo.UserName = tb_Username.Text;
                     }
                     Explorer.StartInfo.UseShellExecute = false;
-                    
+
 
                     //Decode PW
                     string sPW = common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
                     Explorer.StartInfo.Password = ToSecure(sPW);
                 }
-                if((bool)cb_ssl.IsChecked)
+                if ((bool)cb_ssl.IsChecked)
                     Explorer.StartInfo.Arguments = @"-NoExit -Command Enter-PSSession " + oAgent.TargetHostname + " -Port " + tb_wsmanport.Text + " -UseSSL";
                 else
                     Explorer.StartInfo.Arguments = @"-NoExit -Command Enter-PSSession " + oAgent.TargetHostname + " -Port " + tb_wsmanport.Text;
@@ -984,7 +992,7 @@ namespace ClientCenter
                     rStatus.AppendText("System is online !" + reply.Address.ToString() + "\r");
                     rStatus.AppendText("Address: " + reply.Address.ToString() + "\r");
                     rStatus.AppendText("RoundTrip time: " + reply.RoundtripTime + "\r");
-                    
+
                     /*rStatus.AppendText("Time to live: " + reply.Options.Ttl + "\r");
                     rStatus.AppendText("Don't fragment: " + reply.Options.DontFragment + "\r");
                     rStatus.AppendText("Buffer size: " + reply.Buffer.Length + "\r");*/
@@ -1037,10 +1045,10 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Wait;
             try
             {
-                if(!oAgent.Client.AgentActions.ResetPausedSWDist())
+                if (!oAgent.Client.AgentActions.ResetPausedSWDist())
                     myTrace.WriteError("Unable to reset paused SWDist...");
             }
-            catch {  }
+            catch { }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
@@ -1049,7 +1057,7 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Wait;
             try
             {
-                if(!oAgent.Client.AgentActions.ResetProvisioningMode())
+                if (!oAgent.Client.AgentActions.ResetProvisioningMode())
                     myTrace.WriteError("Unable to reset ProvisioningMode...");
             }
             catch { }
@@ -1081,7 +1089,7 @@ namespace ClientCenter
 
             this.builder.Append(message.Replace("PSCode Information: 0 :", ""));
             oROutTB.AppendText(message.Replace("PSCode Information: 0 :", ""));
-            
+
             this.OnPropertyChanged(new PropertyChangedEventArgs("Trace"));
         }
 
@@ -1182,7 +1190,7 @@ namespace ClientCenter
             else
             {
                 throw new Exception("no CM12 console installed.");
-                
+
             }
         }
 
