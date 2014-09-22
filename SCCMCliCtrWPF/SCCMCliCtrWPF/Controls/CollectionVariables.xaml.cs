@@ -44,15 +44,22 @@ namespace ClientCenter
                     Mouse.OverrideCursor = Cursors.Wait;
                     try
                     {
-                        oAgent = value;
+                        if (oAgent != value)
+                        {
+                            oAgent = value;
+                            try
+                            {
+                                dataGrid1.Items.Clear();
+                            }
+                            catch { }
+                        }
+
                         oAgent.PSCode.Listeners.Clear();
                         try
                         {
                             
                             //Store Collection Variables for 30s
                             List<PSObject> sRes = oAgent.Client.GetObjectsFromPS(Properties.Resources.PSCollDecode, false, new TimeSpan(0,0,30));
-                            
-
 
                             //Get reuslts...
                             foreach (PSObject po in sRes)

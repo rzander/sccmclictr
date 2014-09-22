@@ -48,12 +48,19 @@ namespace ClientCenter.Controls
                     Mouse.OverrideCursor = Cursors.Wait;
                     try
                     {
-                        oAgent = value;
-                        iBaselines = oAgent.Client.DCM.DCMBaselines.OrderBy(t => t.DisplayName).ToList(); //SoftwareDistribution.Applications.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
+                        if (oAgent != value)
+                        {
+                            oAgent = value;
+                            try
+                            {
+                                iBaselines = oAgent.Client.DCM.DCMBaselines.OrderBy(t => t.DisplayName).ToList(); //SoftwareDistribution.Applications.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
 
-                        dataGrid1.BeginInit();
-                        dataGrid1.ItemsSource = iBaselines;
-                        dataGrid1.EndInit();
+                                dataGrid1.BeginInit();
+                                dataGrid1.ItemsSource = iBaselines;
+                                dataGrid1.EndInit();
+                            }
+                            catch { }
+                        }
                     }
                     catch(Exception ex)
                     {
@@ -65,7 +72,6 @@ namespace ClientCenter.Controls
                 }
             }
         }
-
 
 
         private void bt_Reload_Click(object sender, RoutedEventArgs e)

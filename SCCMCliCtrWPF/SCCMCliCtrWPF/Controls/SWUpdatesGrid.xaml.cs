@@ -45,12 +45,19 @@ namespace ClientCenter
                     Mouse.OverrideCursor = Cursors.Wait;
                     try
                     {
-                        oAgent = value;
+                        if (oAgent != value)
+                        {
+                            oAgent = value;
+                            try
+                            {
 
-                        iUpdates = oAgent.Client.SoftwareUpdates.SoftwareUpdate.OrderBy(t => t.ArticleID).ToList();
-                        dataGrid1.BeginInit();
-                        dataGrid1.ItemsSource = iUpdates;
-                        dataGrid1.EndInit();
+                                iUpdates = oAgent.Client.SoftwareUpdates.SoftwareUpdate.OrderBy(t => t.ArticleID).ToList();
+                                dataGrid1.BeginInit();
+                                dataGrid1.ItemsSource = iUpdates;
+                                dataGrid1.EndInit();
+                            }
+                            catch { }
+                        }
                     }
                     catch { }
                     Mouse.OverrideCursor = Cursors.Arrow;

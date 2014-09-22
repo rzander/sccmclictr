@@ -89,6 +89,7 @@
       <HintPath>..\RibbonControlsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="sccmclictr.automation, Version=0.0.0.57, Culture=neutral, PublicKeyToken=4fdf3a809cf778d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\sccmclictrlib\sccmclictr.automation\bin\Debug\sccmclictr.automation.dll</HintPath>
     </Reference>
     <Reference Include="System" />

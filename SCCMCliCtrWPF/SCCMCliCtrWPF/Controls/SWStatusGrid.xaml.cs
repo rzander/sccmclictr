@@ -48,12 +48,19 @@ namespace ClientCenter.Controls
                     Mouse.OverrideCursor = Cursors.Wait;
                     try
                     {
-                        oAgent = value;
-                        iSoftware = oAgent.Client.SoftwareDistribution.SoftwareSummary.GroupBy(t => t.Name).Select(grp => grp.FirstOrDefault()).Where(p=>p.Name != "").OrderBy(o => o.Name).ToList();
+                        if (oAgent != value)
+                        {
+                            oAgent = value;
+                            try
+                            {
+                                iSoftware = oAgent.Client.SoftwareDistribution.SoftwareSummary.GroupBy(t => t.Name).Select(grp => grp.FirstOrDefault()).Where(p => p.Name != "").OrderBy(o => o.Name).ToList();
 
-                        dataGrid1.BeginInit();
-                        dataGrid1.ItemsSource = iSoftware;
-                        dataGrid1.EndInit();
+                                dataGrid1.BeginInit();
+                                dataGrid1.ItemsSource = iSoftware;
+                                dataGrid1.EndInit();
+                            }
+                            catch { }
+                        }
                     }
                     catch(Exception ex)
                     {

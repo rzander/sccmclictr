@@ -46,20 +46,27 @@ namespace ClientCenter
                     Mouse.OverrideCursor = Cursors.Wait;
                     try
                     {
-                        oAgent = value;
+                        if (oAgent != value)
+                        {
+                            oAgent = value;
+                            try
+                            {
 
-                        if (cb_Filter.IsChecked == true)
-                        {
-                            //Remove duplicates, load only the first time...
-                            iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.GroupBy(a => new { a.Article, a.Bulletin, a.ProductID }).Select(y => y.First()).OrderBy(t => t.Article).ToList();
+                                if (cb_Filter.IsChecked == true)
+                                {
+                                    //Remove duplicates, load only the first time...
+                                    iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.GroupBy(a => new { a.Article, a.Bulletin, a.ProductID }).Select(y => y.First()).OrderBy(t => t.Article).ToList();
+                                }
+                                else
+                                {
+                                    iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.OrderBy(t => t.Article).ToList();
+                                }
+                                dataGrid1.BeginInit();
+                                dataGrid1.ItemsSource = iUpdates;
+                                dataGrid1.EndInit();
+                            }
+                            catch { }
                         }
-                        else
-                        {
-                            iUpdates = oAgent.Client.SoftwareUpdates.UpdateStatus.OrderBy(t => t.Article).ToList();
-                        }
-                        dataGrid1.BeginInit();
-                        dataGrid1.ItemsSource = iUpdates;
-                        dataGrid1.EndInit();
                     }
                     catch { }
                     Mouse.OverrideCursor = Cursors.Arrow;

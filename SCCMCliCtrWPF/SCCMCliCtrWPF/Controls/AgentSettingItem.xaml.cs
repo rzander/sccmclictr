@@ -42,18 +42,40 @@ namespace ClientCenter
             {
                 if (value.isConnected)
                 {
-                    oAgent = value;
-                    spAgentSettings.IsEnabled = true;
-                    spHTTPPort.IsEnabled = true;
-                    spHTTPSPort.IsEnabled = true;
+                    if (oAgent != value)
+                    {
+                        oAgent = value;
+                        try
+                        {
+                            Mouse.OverrideCursor = Cursors.Wait;
 
-                    Mouse.OverrideCursor = Cursors.Wait;
+                            spAgentSettings.IsEnabled = true;
+                            spHTTPPort.IsEnabled = true;
+                            spHTTPSPort.IsEnabled = true;
 
-                    imgSiteCode_MouseLeftButtonDown(this, null);
-                    imgAgentVersion_MouseLeftButtonDown(this, null);
-                    imgMP_MouseLeftButtonDown(this, null);
-                    
-                    Mouse.OverrideCursor = Cursors.Arrow;
+                            tbAgentVersion.Text = "";
+                            tbCachePath.Text = "";
+                            tbDNSSuffix.Text = "";
+                            tbGUID.Text = "";
+                            tbInetMP.Text = "";
+                            tbLogPath.Text = "";
+                            tbMP.Text = "";
+                            tbProxyMP.Text = "";
+                            tbSiteCode.Text = "";
+                            tbSetupPath.Text = "";
+                            tbSLP.Text = "";
+                            tbHTTPPort.Text = "";
+                            tbHTTPSPort.Text = "";
+                            cbAutoSite.IsChecked = false;
+
+                            imgSiteCode_MouseLeftButtonDown(this, null);
+                            imgAgentVersion_MouseLeftButtonDown(this, null);
+                            imgMP_MouseLeftButtonDown(this, null);
+
+                            Mouse.OverrideCursor = Cursors.Arrow;
+                        }
+                        catch { }
+                    }
                 }
             }
         }

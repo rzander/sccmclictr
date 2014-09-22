@@ -51,22 +51,29 @@ namespace ClientCenter.Controls
                     Mouse.OverrideCursor = Cursors.Wait;
                     try
                     {
-                        oAgent = value;
-
-                        if (Properties.Settings.Default.HideTSAdvertisements)
+                        if (oAgent != value)
                         {
-                            List<softwaredistribution.CCM_SoftwareDistribution> oList = oAgent.Client.SoftwareDistribution.Advertisements.OrderBy(o => o.PRG_ProgramID).ThenBy(o => o.PKG_Name).ToList();
-                            iAdvertisements = oList.GroupBy(t => t.ADV_AdvertisementID).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.PKG_Name).ToList();
-                        }
-                        else
-                        {
-                            List<softwaredistribution.CCM_SoftwareDistribution> oList = oAgent.Client.SoftwareDistribution.Advertisements.OrderBy(o => o.PRG_ProgramID).ThenBy(o => o.PKG_Name).ToList();
-                            iAdvertisements = oList.OrderBy(o=>o.PKG_Name).ToList();
-                        }
+                            oAgent = value;
+                            try
+                            {
 
-                        dataGrid1.BeginInit();
-                        dataGrid1.ItemsSource = iAdvertisements;
-                        dataGrid1.EndInit();
+                                if (Properties.Settings.Default.HideTSAdvertisements)
+                                {
+                                    List<softwaredistribution.CCM_SoftwareDistribution> oList = oAgent.Client.SoftwareDistribution.Advertisements.OrderBy(o => o.PRG_ProgramID).ThenBy(o => o.PKG_Name).ToList();
+                                    iAdvertisements = oList.GroupBy(t => t.ADV_AdvertisementID).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.PKG_Name).ToList();
+                                }
+                                else
+                                {
+                                    List<softwaredistribution.CCM_SoftwareDistribution> oList = oAgent.Client.SoftwareDistribution.Advertisements.OrderBy(o => o.PRG_ProgramID).ThenBy(o => o.PKG_Name).ToList();
+                                    iAdvertisements = oList.OrderBy(o => o.PKG_Name).ToList();
+                                }
+
+                                dataGrid1.BeginInit();
+                                dataGrid1.ItemsSource = iAdvertisements;
+                                dataGrid1.EndInit();
+                            }
+                            catch { }
+                        }
 
 
 

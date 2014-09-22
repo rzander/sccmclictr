@@ -48,15 +48,23 @@ namespace ClientCenter.Controls
                     Mouse.OverrideCursor = Cursors.Wait;
                     try
                     {
-                        oAgent = value;
+                        if (oAgent != value)
+                        {
+                            oAgent = value;
+                            try
+                            {
 
-                        List<sccmclictr.automation.functions.health.ccmeval> oList = oAgent.Client.Health.GetCCMEvalStatus();
-                        iCCMEval = oList.OrderBy(o => o.Description).ToList();
+                                List<sccmclictr.automation.functions.health.ccmeval> oList = oAgent.Client.Health.GetCCMEvalStatus();
+                                iCCMEval = oList.OrderBy(o => o.Description).ToList();
 
+                                dataGrid1.BeginInit();
+                                dataGrid1.ItemsSource = iCCMEval;
+                                dataGrid1.EndInit();
 
-                        dataGrid1.BeginInit();
-                        dataGrid1.ItemsSource = iCCMEval;
-                        dataGrid1.EndInit();
+                                lLastDate.Content = oAgent.Client.Health.LastCCMEval.ToString();
+                            }
+                            catch { }
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -85,6 +93,8 @@ namespace ClientCenter.Controls
                 dataGrid1.EndInit();
 
                 SetSortInfo(dataGrid1, ssort);
+
+                lLastDate.Content = oAgent.Client.Health.LastCCMEval.ToString();
             }
             catch { }
             Mouse.OverrideCursor = Cursors.Arrow;

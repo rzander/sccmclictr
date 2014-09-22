@@ -52,22 +52,29 @@ namespace ClientCenter.Controls
                         //List<softwaredistribution.CCM_Application> lApps = oAgent.Client.SoftwareDistribution.Applications.OrderBy(t => t.FullName).ToList();
                         //lApps.ToString();
 
-                        oAgent = value;
-                        if (Properties.Settings.Default.HideNonUserUIExperienceApplicattions)
+                        if (oAgent != value)
                         {
-                            List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications_(false).Where(t => t.UserUIExperience == true).ToList();
-                            iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
-                        }
-                        else
-                        {
-                            List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications_(false).ToList();
-                            iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
-                        }
-                        //TEST.Source = BitMapConvert.ToBitmapImage(iApplications[0].IconAsImage);
+                            oAgent = value;
+                            try
+                            {
+                                if (Properties.Settings.Default.HideNonUserUIExperienceApplicattions)
+                                {
+                                    List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications_(false).Where(t => t.UserUIExperience == true).ToList();
+                                    iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
+                                }
+                                else
+                                {
+                                    List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications_(false).ToList();
+                                    iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
+                                }
+                                //TEST.Source = BitMapConvert.ToBitmapImage(iApplications[0].IconAsImage);
 
-                        dataGrid1.BeginInit();
-                        dataGrid1.ItemsSource = iApplications;
-                        dataGrid1.EndInit();
+                                dataGrid1.BeginInit();
+                                dataGrid1.ItemsSource = iApplications;
+                                dataGrid1.EndInit();
+                            }
+                            catch { }
+                        }
                     }
                     catch(Exception ex)
                     {

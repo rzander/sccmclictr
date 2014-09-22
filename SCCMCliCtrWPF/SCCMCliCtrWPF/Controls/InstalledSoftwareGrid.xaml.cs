@@ -47,12 +47,19 @@ namespace ClientCenter.Controls
                     Mouse.OverrideCursor = Cursors.Wait;
                     try
                     {
-                        oAgent = value;
-                        iInstalledSW = oAgent.Client.Inventory.InstalledSoftware.OrderBy(t => t.ProductName).ToList();
+                        if (oAgent != value)
+                        {
+                            oAgent = value;
+                            try
+                            {
+                                iInstalledSW = oAgent.Client.Inventory.InstalledSoftware.OrderBy(t => t.ProductName).ToList();
 
-                        dataGrid1.BeginInit();
-                        dataGrid1.ItemsSource = iInstalledSW;
-                        dataGrid1.EndInit();
+                                dataGrid1.BeginInit();
+                                dataGrid1.ItemsSource = iInstalledSW;
+                                dataGrid1.EndInit();
+                            }
+                            catch { }
+                        }
                     }
                     catch(Exception ex)
                     {

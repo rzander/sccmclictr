@@ -47,12 +47,19 @@ namespace ClientCenter
                     Mouse.OverrideCursor = Cursors.Wait;
                     try
                     {
-                        oAgent = value;
-                        
-                        iProcesses = oAgent.Client.Process.ExtProcesses(false).Where(t=>t.ProcessId > 4).OrderBy(t => t.Name).ToList();
-                        dataGrid1.BeginInit();
-                        dataGrid1.ItemsSource = iProcesses;
-                        dataGrid1.EndInit();
+                        if (oAgent != value)
+                        {
+                            oAgent = value;
+                            try
+                            {
+
+                                iProcesses = oAgent.Client.Process.ExtProcesses(false).Where(t => t.ProcessId > 4).OrderBy(t => t.Name).ToList();
+                                dataGrid1.BeginInit();
+                                dataGrid1.ItemsSource = iProcesses;
+                                dataGrid1.EndInit();
+                            }
+                            catch { }
+                        }
                     }
                     catch { }
                     Mouse.OverrideCursor = Cursors.Arrow;
