@@ -167,10 +167,11 @@ namespace ClientCenter
                     tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-Embedding", "");
                     tb_TargetComputer2.Text = tb_TargetComputer2.Text.Replace("-Embedding", "");
                 }
-
-                pb_Password.Password = Properties.Settings.Default.Password;
             }
             catch { }
+
+            pb_Password.Password = Properties.Settings.Default.Password;
+            tb_Username.Text = Properties.Settings.Default.Username;
 
             //Not needed, local admin is only required if connecting the local machien...
             if (!Properties.Settings.Default.NoLocalAdminCheck)
@@ -204,6 +205,7 @@ namespace ClientCenter
             }
 
             eventMonitoring1.bt_StopMonitoring_Click(this, null);
+            eventMonitoring1.treeView1.Items.Clear();
 
             AgentSettingsPane.IsSelected = true;
             tviAgentSettings.IsSelected = true;
