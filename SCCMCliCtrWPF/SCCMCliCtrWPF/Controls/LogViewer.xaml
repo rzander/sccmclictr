@@ -10,8 +10,8 @@
         <DockPanel VerticalAlignment="Top" HorizontalAlignment="Stretch">
             <DockPanel DockPanel.Dock="Top" Height="32">
                 <ToolBar x:Name="ToolBar1">
-                    <Menu VerticalAlignment="Center" Width="100" ScrollViewer.CanContentScroll="True">
-                        <MenuItem Name="MI"  Header="Select Files:" BorderBrush="Black">
+                    <Menu VerticalAlignment="Center" ScrollViewer.CanContentScroll="True">
+                        <MenuItem Name="MI"  Header="Select Files:" BorderBrush="Black" MouseDoubleClick="MI_MouseDoubleClick">
                             <CheckBox Content="WindowsUpdate.log" Tag="C:\Windows\WindowsUpdate.log"/>
                             <CheckBox Content="ccmsetup.log" Tag="C:\Windows\ccmsetup\Logs\ccmsetup.log"/>
                             <Separator />

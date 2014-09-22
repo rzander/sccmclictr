@@ -45,12 +45,21 @@ namespace ClientCenter
                     Mouse.OverrideCursor = Cursors.Wait;
                     try
                     {
-                        oAgent = value;
+                        if (oAgent != value)
+                        {
+                            oAgent = value;
 
-                        /*iHistory = oAgent.Client.SoftwareDistribution.ExecutionHistory.OrderBy(t => t._RunStartTime).ToList();
-                        dataGrid1.BeginInit();
-                        dataGrid1.ItemsSource = iHistory;
-                        dataGrid1.EndInit(); */
+                            //Cleanup on reconnect
+                            try
+                            {
+                                oAgent.Client.Monitoring.AsynchronousScript.TypedOutput -= AsynchronousScript_TypedOutput;
+                                oAgent.Client.Monitoring.AsynchronousScript.Close();
+                                bt_StartMonitoring.IsEnabled = true;
+                                bt_StopMonitoring.IsEnabled = false;
+                                treeView1.Items.Clear();
+                            }
+                            catch { }
+                        }
                     }
                     catch { }
                     Mouse.OverrideCursor = Cursors.Arrow;

@@ -44,7 +44,16 @@ namespace ClientCenter.Controls
                     Mouse.OverrideCursor = Cursors.Wait;
                     try
                     {
-                        oAgent = value;
+                        if (oAgent != value)
+                        {
+                            oAgent = value;
+                            try
+                            {
+                                TabPanel.Items.Clear();
+                                MI.Items.Clear();
+                            }
+                            catch { }
+                        }
                     }
                     catch { }
                     Mouse.OverrideCursor = Cursors.Arrow;
@@ -56,7 +65,6 @@ namespace ClientCenter.Controls
         {
             InitializeComponent();
         }
-
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -133,11 +141,7 @@ namespace ClientCenter.Controls
                                 {
                                     LG.LogLines.Add(new LogGrid.LogEntry() { LogText = sOrg, Component = "", Date = LastDT});
                                 }
-
-
-
                             }
-
 
                             ti.Header = sName;
                             ti.Name = sName.Split('.')[0];
@@ -145,6 +149,15 @@ namespace ClientCenter.Controls
 
                             TabPanel.Items.Add(ti);
                         }
+                    }
+                    catch { }
+                }
+
+                if (TabPanel.Items.Count > 0)
+                {
+                    try
+                    {
+                        ((TabItem)TabPanel.Items[0]).IsSelected = true;
                     }
                     catch { }
                 }
@@ -176,6 +189,27 @@ namespace ClientCenter.Controls
                 Mouse.OverrideCursor = Cursors.Arrow;
             }
 
+        }
+
+        private void MI_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                foreach (CheckBox cb in MI.Items)
+                {
+                    try
+                    {
+                        if (cb.IsChecked == true)
+                            cb.IsChecked = false;
+                    }
+                    catch { }
+                }
+
+                TabPanel.Items.Clear();
+            }
+            catch { }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
     }
