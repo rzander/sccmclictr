@@ -41,7 +41,21 @@
                 </GroupBox>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top"  Height="26">
-                <ToolBar Height="26" Name="toolBar1" />
+                <ToolBar Height="26" Name="toolBar1" >
+                    <Button ToolTip="Reload Cache-Items" Name="bt_Reload" Click="bt_Reload_Click" >
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico"/>
+                            <TextBlock Margin="2,0,0,0">Reload Cache-Items</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Separator />
+                    <Button ToolTip="Cleanup orphaned Items" Name="bt_Cleanup" Click="bt_Cleanup_Click" >
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/Delete.ico"/>
+                            <TextBlock Margin="2,0,0,0">Cleanup orphaned Items</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </ToolBar>
             </DockPanel>
             <DockPanel DockPanel.Dock="Bottom" Height="25">
                 <StatusBar>

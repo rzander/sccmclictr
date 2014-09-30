@@ -45,21 +45,25 @@ namespace ClientCenter
                     List<SortDescription> ssort = GetSortInfo(dataGrid1);
                     try
                     {
-                        oAgent = value;
-                        iCache = oAgent.Client.SWCache.CachedContent.OrderBy(t => t.ReferenceCount).ToList();
-                        dataGrid1.BeginInit();
-                        dataGrid1.ItemsSource = iCache;
-                        dataGrid1.EndInit();
-
-                        uint? iTotalSize = 0;
-                        foreach (sccmclictr.automation.functions.swcache.CacheInfoEx CacheItem in iCache)
+                        if (oAgent != value)
                         {
-                            if (CacheItem.ContentSize != null)
+                            oAgent = value;
+
+                            iCache = oAgent.Client.SWCache.CachedContent.OrderBy(t => t.ReferenceCount).ToList();
+                            dataGrid1.BeginInit();
+                            dataGrid1.ItemsSource = iCache;
+                            dataGrid1.EndInit();
+
+                            uint? iTotalSize = 0;
+                            foreach (sccmclictr.automation.functions.swcache.CacheInfoEx CacheItem in iCache)
                             {
-                                iTotalSize = iTotalSize + CacheItem.ContentSize;
+                                if (CacheItem.ContentSize != null)
+                                {
+                                    iTotalSize = iTotalSize + CacheItem.ContentSize;
+                                }
                             }
+                            sbiContentSize.Content = ((iTotalSize) / 1024).ToString() + " (MB)";
                         }
-                        sbiContentSize.Content = ((iTotalSize) / 1024).ToString() + " (MB)";
                     }
                     catch { }
                     SetSortInfo(dataGrid1, ssort);
@@ -282,6 +286,48 @@ namespace ClientCenter
             {
                 dg.Items.SortDescriptions.Add(sortInfo);
             }
+        }
+
+        private void bt_Reload_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            List<SortDescription> ssort = GetSortInfo(dataGrid1);
+            try
+            {
+                iCache = oAgent.Client.SWCache.CachedContent.OrderBy(t => t.ReferenceCount).ToList();
+                dataGrid1.BeginInit();
+                dataGrid1.ItemsSource = iCache;
+                dataGrid1.EndInit();
+
+                uint? iTotalSize = 0;
+                foreach (sccmclictr.automation.functions.swcache.CacheInfoEx CacheItem in iCache)
+                {
+                    if (CacheItem.ContentSize != null)
+                    {
+                        iTotalSize = iTotalSize + CacheItem.ContentSize;
+                    }
+                }
+                sbiContentSize.Content = ((iTotalSize) / 1024).ToString() + " (MB)";
+            }
+            catch { }
+            SetSortInfo(dataGrid1, ssort);
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void bt_Cleanup_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                string sResult = oAgent.Client.SWCache.CleanupOrphanedCacheItems();
+                Listener.WriteLine(sResult);
+            }
+            catch(Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+
         }
     }
 }

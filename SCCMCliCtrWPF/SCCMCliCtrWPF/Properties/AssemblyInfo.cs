@@ -14,7 +14,7 @@ using System.Security.Permissions;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SCCM Tools")]
 [assembly: AssemblyProduct("SCCMCliCtrWPF")]
-[assembly: AssemblyCopyright("Copyright ©  2012 by Roger Zander")]
+[assembly: AssemblyCopyright("Copyright ©  2014 by Roger Zander")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
