@@ -1063,6 +1063,30 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
+        private void btResetSystemTaskExclude_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                if (!oAgent.Client.AgentActions.SystemTaskExclude())
+                    myTrace.WriteError("Unable to reset SystemTaskExclude...");
+            }
+            catch { }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btDeleteIsCacheCopyNeededCallBack_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                if (!oAgent.Client.AgentActions.IsCacheCopyNeededCallBack())
+                    myTrace.WriteError("Unable to delete IsCacheCopyNeededCallBack...");
+            }
+            catch { }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
     }
 
     public class MyTraceListener : TraceListener, INotifyPropertyChanged

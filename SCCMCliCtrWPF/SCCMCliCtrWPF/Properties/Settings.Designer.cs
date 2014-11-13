@@ -240,7 +240,10 @@ while ($a -ne 1)")]
             "ROM Win32_OperatingSystem</string>\r\n  <string>CurrentUser|root\\cimv2|SELECT User" +
             "name FROM Win32_ComputerSystem</string>\r\n  <string>PrimaryUsers|ROOT\\ccm\\Policy\\" +
             "Machine\\ActualConfig|SELECT * FROM CCM_UserAffinity WHERE IsUserAffinitySet = \'T" +
-            "rue\'</string>\r\n</ArrayOfString>")]
+            "rue\'</string>\r\n  <string>FreeDiskSpace on C: (Bytes)|ROOT\\cimv2|SELECT FreeSpace" +
+            " FROM Win32_LogicalDisk WHERE DeviceID=\'C:\'</string>\r\n  <string>DiskSpace on C: " +
+            "(Bytes)|ROOT\\cimv2|SELECT Size FROM Win32_LogicalDisk WHERE DeviceID=\'C:\'</strin" +
+            "g>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection AdhocInv {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["AdhocInv"]));
