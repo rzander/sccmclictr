@@ -204,6 +204,9 @@ namespace ClientCenter
                 this.myAbout.MSG = false;
             }
 
+            eventMonitoring1.bt_StopMonitoring_Click(this, null);
+            eventMonitoring1.treeView1.Items.Clear();
+
             AgentSettingsPane.IsSelected = true;
             tviAgentSettings.IsSelected = true;
 
