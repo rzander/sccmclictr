@@ -1090,6 +1090,20 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
+        private void btRefreshServerComplianceState_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                oAgent.Client.Health.RefreshServerComplianceState();
+            }
+            catch
+            {
+                myTrace.WriteError("Unable to RefreshServerComplianceState...");
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
     }
 
     public class MyTraceListener : TraceListener, INotifyPropertyChanged
