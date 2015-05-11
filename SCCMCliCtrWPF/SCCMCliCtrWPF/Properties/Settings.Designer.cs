@@ -243,7 +243,8 @@ while ($a -ne 1)")]
             "rue\'</string>\r\n  <string>FreeDiskSpace on C: (Bytes)|ROOT\\cimv2|SELECT FreeSpace" +
             " FROM Win32_LogicalDisk WHERE DeviceID=\'C:\'</string>\r\n  <string>DiskSpace on C: " +
             "(Bytes)|ROOT\\cimv2|SELECT Size FROM Win32_LogicalDisk WHERE DeviceID=\'C:\'</strin" +
-            "g>\r\n</ArrayOfString>")]
+            "g>\r\n  <string>Running Executions|root\\CCM\\SoftMgmtAgent|select * from ccm_execut" +
+            "ionrequestex</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection AdhocInv {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["AdhocInv"]));

@@ -137,6 +137,7 @@ while ($a -ne 1)</Value>
   &lt;string&gt;PrimaryUsers|ROOT\ccm\Policy\Machine\ActualConfig|SELECT * FROM CCM_UserAffinity WHERE IsUserAffinitySet = 'True'&lt;/string&gt;
   &lt;string&gt;FreeDiskSpace on C: (Bytes)|ROOT\cimv2|SELECT FreeSpace FROM Win32_LogicalDisk WHERE DeviceID='C:'&lt;/string&gt;
   &lt;string&gt;DiskSpace on C: (Bytes)|ROOT\cimv2|SELECT Size FROM Win32_LogicalDisk WHERE DeviceID='C:'&lt;/string&gt;
+  &lt;string&gt;Running Executions|root\CCM\SoftMgmtAgent|select * from ccm_executionrequestex&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="recentlyUsedComputers" Type="System.Collections.Specialized.StringCollection" Scope="User">

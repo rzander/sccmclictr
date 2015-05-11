@@ -642,10 +642,18 @@ namespace ClientCenter
             {
                 Process Explorer = new Process();
                 Explorer.StartInfo.FileName = "powershell.exe";
-
+                string sCred = "";
                 if (!string.IsNullOrEmpty(tb_Username.Text))
                 {
+                    sCred = string.Format("$creds = New-Object System.Management.Automation.PSCredential ({0}, (ConvertTo-SecureString {1} -AsPlainText -Force))", tb_Username.Text, tb_Username.Text, common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name)) + ";";
+
+                    if ((bool)cb_ssl.IsChecked)
+                        Explorer.StartInfo.Arguments = sCred + @"-NoExit -Command Enter-PSSession " + oAgent.TargetHostname + " -Port " + tb_wsmanport.Text + " -UseSSL -Credentials $creds" ;
+                    else
+                        Explorer.StartInfo.Arguments = sCred + @"-NoExit -Command Enter-PSSession " + oAgent.TargetHostname + " -Port " + tb_wsmanport.Text + " -Credentials $creds";
+
                     //Run powershell as different user...
+                    /*
                     if (tb_Username.Text.Contains(@"\"))
                     {
                         Explorer.StartInfo.UserName = tb_Username.Text.Split(new string[] { @"\" }, StringSplitOptions.RemoveEmptyEntries)[1];
@@ -657,16 +665,20 @@ namespace ClientCenter
                         Explorer.StartInfo.UserName = tb_Username.Text;
                     }
                     Explorer.StartInfo.UseShellExecute = false;
-
+                    
 
                     //Decode PW
-                    string sPW = common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
-                    Explorer.StartInfo.Password = ToSecure(sPW);
+                    //string sPW = common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
+                    //Explorer.StartInfo.Password = ToSecure(sPW);
+                     */
                 }
-                if ((bool)cb_ssl.IsChecked)
-                    Explorer.StartInfo.Arguments = @"-NoExit -Command Enter-PSSession " + oAgent.TargetHostname + " -Port " + tb_wsmanport.Text + " -UseSSL";
                 else
-                    Explorer.StartInfo.Arguments = @"-NoExit -Command Enter-PSSession " + oAgent.TargetHostname + " -Port " + tb_wsmanport.Text;
+                {
+                    if ((bool)cb_ssl.IsChecked)
+                        Explorer.StartInfo.Arguments = @"-NoExit -Command Enter-PSSession " + oAgent.TargetHostname + " -Port " + tb_wsmanport.Text + " -UseSSL";
+                    else
+                        Explorer.StartInfo.Arguments = @"-NoExit -Command Enter-PSSession " + oAgent.TargetHostname + " -Port " + tb_wsmanport.Text;
+                }
                 Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
                 Explorer.Start();
             }
