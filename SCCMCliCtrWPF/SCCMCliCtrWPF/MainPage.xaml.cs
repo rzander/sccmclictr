@@ -645,32 +645,12 @@ namespace ClientCenter
                 string sCred = "";
                 if (!string.IsNullOrEmpty(tb_Username.Text))
                 {
-                    sCred = string.Format("$creds = New-Object System.Management.Automation.PSCredential ({0}, (ConvertTo-SecureString {1} -AsPlainText -Force))", tb_Username.Text, tb_Username.Text, common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name)) + ";";
+                    sCred = string.Format("$creds = New-Object System.Management.Automation.PSCredential ('{0}', (ConvertTo-SecureString '{1}' -AsPlainText -Force))", tb_Username.Text, common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name)) + ";";
 
                     if ((bool)cb_ssl.IsChecked)
-                        Explorer.StartInfo.Arguments = sCred + @"-NoExit -Command Enter-PSSession " + oAgent.TargetHostname + " -Port " + tb_wsmanport.Text + " -UseSSL -Credentials $creds" ;
+                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + "Enter-PSSession '" + oAgent.TargetHostname + "' -Port " + tb_wsmanport.Text + " -UseSSL -Credential $creds";
                     else
-                        Explorer.StartInfo.Arguments = sCred + @"-NoExit -Command Enter-PSSession " + oAgent.TargetHostname + " -Port " + tb_wsmanport.Text + " -Credentials $creds";
-
-                    //Run powershell as different user...
-                    /*
-                    if (tb_Username.Text.Contains(@"\"))
-                    {
-                        Explorer.StartInfo.UserName = tb_Username.Text.Split(new string[] { @"\" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                        Explorer.StartInfo.Domain = tb_Username.Text.Split(new string[] { @"\" }, StringSplitOptions.RemoveEmptyEntries)[0];
-                    }
-                    else
-                    {
-                        Explorer.StartInfo.Domain = Environment.UserDomainName;
-                        Explorer.StartInfo.UserName = tb_Username.Text;
-                    }
-                    Explorer.StartInfo.UseShellExecute = false;
-                    
-
-                    //Decode PW
-                    //string sPW = common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
-                    //Explorer.StartInfo.Password = ToSecure(sPW);
-                     */
+                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + "Enter-PSSession '" + oAgent.TargetHostname + "' -Port " + tb_wsmanport.Text + " -Credential $creds";
                 }
                 else
                 {
