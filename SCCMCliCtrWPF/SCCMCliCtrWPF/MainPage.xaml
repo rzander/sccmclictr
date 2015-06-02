@@ -156,7 +156,8 @@
                             </rib:RibbonSplitButton>
                         </rib:RibbonGroup>
                     </rib:RibbonTab>
-
+                    <rib:RibbonTab Header="Custom Actions" IsEnabled="False" Name="ribCustActions" Visibility="Collapsed">
+                    </rib:RibbonTab>
                 </rib:Ribbon>
             </DockPanel>
             <DockPanel Name="NavigationDock" Width="200" MinWidth="150">

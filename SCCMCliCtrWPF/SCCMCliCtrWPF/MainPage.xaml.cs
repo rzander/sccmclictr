@@ -42,6 +42,11 @@ namespace ClientCenter
 
             InitializeComponent();
 
+            //Disbale SSL/TLS Errors
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+            //Disable CRL Check
+            System.Net.ServicePointManager.CheckCertificateRevocationList = false;
+
             AgentSettingsPane.IsSelected = true;
 
             try
@@ -91,10 +96,31 @@ namespace ClientCenter
                             {
                                 //Make Tool Group visible
                                 rgTools.Visibility = System.Windows.Visibility.Visible;
+                                rgTools.IsEnabled = true;
 
                                 var obj = Activator.CreateInstance(t);
                                 btTools.Items.Add(obj);
 
+                            }
+
+                            if (t.Name.StartsWith("CustomTools_"))
+                            {
+                                var obj = Activator.CreateInstance(t);
+                                var item = ((System.Windows.Controls.ContentControl)(obj)).Content;
+
+                                //ribCustActions.Items.Add(obj);
+
+                                //Get first Child Control
+                                var first = ((System.Windows.Controls.Panel)(item)).Children[0];
+                                
+                                //Detach first Control from Grid
+                                Grid par = VisualTreeHelper.GetParent(first) as Grid;
+                                par.Children.Remove(first);
+
+                                //Add Control without binding to Grid
+                                ribCustActions.Items.Add(first);
+                                ribCustActions.IsEnabled = true;
+                                ribCustActions.Visibility = System.Windows.Visibility.Visible;
                             }
                         }
                         catch { }
@@ -172,6 +198,7 @@ namespace ClientCenter
 
             pb_Password.Password = Properties.Settings.Default.Password;
             tb_Username.Text = Properties.Settings.Default.Username;
+            Common.Hostname = tb_TargetComputer.Text.Trim();
 
             //Not needed, local admin is only required if connecting the local machien...
             if (!Properties.Settings.Default.NoLocalAdminCheck)
@@ -939,6 +966,9 @@ namespace ClientCenter
                 tb_TargetComputer.Text = tb_TargetComputer2.Text;
                 bt_Connect_Click(sender, null);
             }
+
+            Common.Hostname = ((AutoCompleteBox)sender).Text;
+
             Mouse.OverrideCursor = Cursors.Arrow;
 
         }
@@ -964,6 +994,9 @@ namespace ClientCenter
                 tb_TargetComputer2.Text = tb_TargetComputer.Text;
                 bt_Connect_Click(sender, null);
             }
+            
+           Common.Hostname = ((AutoCompleteBox)sender).Text;
+
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
@@ -1178,6 +1211,8 @@ namespace ClientCenter
             }
             set { iAgent = value; }
         }
+
+        public static string Hostname { get; set; }
     }
 
     public class console
