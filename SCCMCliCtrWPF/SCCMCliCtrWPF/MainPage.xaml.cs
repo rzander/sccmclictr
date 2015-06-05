@@ -22,7 +22,7 @@ using System.Security.Principal;
 using System.Reflection;
 using Microsoft.Win32;
 using System.IO;
-//using System.Windows.Markup;
+using System.Threading;
 
 namespace ClientCenter
 {
@@ -34,6 +34,7 @@ namespace ClientCenter
         public SCCMAgent oAgent;
         public MyTraceListener myTrace;
         private bool bPasswordChanged = false;
+        delegate void AnonymousDelegate();
 
         public MainPage()
         {
@@ -83,55 +84,92 @@ namespace ClientCenter
             //Load external Agent Action Tool Plugins...
             try
             {
-                string sCurrentDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                foreach (string sFile in Directory.GetFiles(sCurrentDir, "Plugin*.dll", SearchOption.TopDirectoryOnly))
+                new Thread(() =>
                 {
-                    Assembly asm = Assembly.LoadFile(sFile);
-                    Type[] tlist = asm.GetTypes();
-                    foreach (Type t in tlist)
+                    Thread.CurrentThread.IsBackground = true;
+                    string sCurrentDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                    foreach (string sFile in Directory.GetFiles(sCurrentDir, "Plugin*.dll", SearchOption.TopDirectoryOnly))
                     {
                         try
                         {
-                            if (t.Name.StartsWith("AgentActionTool_"))
+                            Assembly asm = Assembly.LoadFile(sFile);
+                            Type[] tlist = asm.GetTypes();
+                            foreach (Type t in tlist)
                             {
-                                //Make Tool Group visible
-                                rgTools.Visibility = System.Windows.Visibility.Visible;
-                                rgTools.IsEnabled = true;
+                                try
+                                {
+                                    if (t.Name.StartsWith("AgentActionTool_"))
+                                    {
+                                        //Make Tool Group visible
+                                        AnonymousDelegate dEnable = delegate()
+                                        {
+                                            rgTools.Visibility = System.Windows.Visibility.Visible;
+                                            rgTools.IsEnabled = true;
+                                        };
+                                        Dispatcher.Invoke(dEnable);
 
-                                var obj = Activator.CreateInstance(t);
-                                btTools.Items.Add(obj);
 
-                            }
+                                        new Thread(() =>
+                                        {
+                                            Thread.CurrentThread.IsBackground = true;
+                                            /* run your code here */
+                                            try
+                                            {
+                                                AnonymousDelegate dUpdate = delegate()
+                                                {
+                                                    var obj = Activator.CreateInstance(t);
+                                                    btTools.Items.Add(obj);
+                                                };
+                                                Dispatcher.Invoke(dUpdate);
+                                            }
+                                            catch { }
 
-                            if (t.Name.StartsWith("CustomTools_"))
-                            {
-                                var obj = Activator.CreateInstance(t);
-                                var item = ((System.Windows.Controls.ContentControl)(obj)).Content;
+                                        }).Start();
+                                    }
 
-                                //ribCustActions.Items.Add(obj);
+                                    if (t.Name.StartsWith("CustomTools_"))
+                                    {
+                                        new Thread(() =>
+                                        {
+                                            Thread.CurrentThread.IsBackground = true;
+                                            /* run your code here */
+                                            try
+                                            {
+                                                AnonymousDelegate dUpdate = delegate()
+                                                {
+                                                    var obj = Activator.CreateInstance(t);
+                                                    var item = ((System.Windows.Controls.ContentControl)(obj)).Content;
 
-                                //Get first Child Control
-                                var first = ((System.Windows.Controls.Panel)(item)).Children[0];
-                                
-                                //Detach first Control from Grid
-                                Grid par = VisualTreeHelper.GetParent(first) as Grid;
-                                par.Children.Remove(first);
+                                                    //ribCustActions.Items.Add(obj);
 
-                                //Add Control without binding to Grid
-                                ribCustActions.Items.Add(first);
-                                ribCustActions.IsEnabled = true;
-                                ribCustActions.Visibility = System.Windows.Visibility.Visible;
+                                                    //Get first Child Control
+                                                    var first = ((System.Windows.Controls.Panel)(item)).Children[0];
+
+                                                    //Detach first Control from Grid
+                                                    Grid par = VisualTreeHelper.GetParent(first) as Grid;
+                                                    par.Children.Remove(first);
+
+                                                    //Add Control without binding to Grid
+                                                    ribCustActions.Items.Add(first);
+                                                    ribCustActions.IsEnabled = true;
+                                                    ribCustActions.Visibility = System.Windows.Visibility.Visible;
+                                                };
+                                                Dispatcher.Invoke(dUpdate);
+                                            }
+                                            catch { }
+
+                                        }).Start();
+                                    }
+                                }
+                                catch { }
                             }
                         }
                         catch { }
                     }
-                }
-
+                }).Start();
             }
             catch { }
-
-
-
+            
             Application.Current.Exit += new ExitEventHandler(Current_Exit);
             ThemeManager.SetActiveTheme(NavigationPaneTheme.WindowsLive);
             Style s = new Style();
@@ -957,6 +995,17 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
+
+        private void tb_TargetComputer2_TextChanged(object sender, RoutedEventArgs e)
+        {
+            Common.Hostname = ((AutoCompleteBox)sender).Text;
+        }
+
+        private void tb_TargetComputer_TextChanged(object sender, RoutedEventArgs e)
+        {
+            Common.Hostname = ((AutoCompleteBox)sender).Text;
+        }
+
         private void tb_TargetComputer2_KeyUp(object sender, KeyEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
@@ -1128,6 +1177,10 @@ namespace ClientCenter
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
+
+
+
+
 
     }
 
