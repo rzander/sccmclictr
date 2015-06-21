@@ -121,74 +121,78 @@ namespace AgentActionTools
 
         private void rb_Download_Click(object sender, RoutedEventArgs e)
         {
-            string svProDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\vPro";
-            string sLocalPath = Environment.ExpandEnvironmentVariables("%TEMP%");
-            string sZipFile = System.IO.Path.Combine(sLocalPath, "IntelvProSCCMAddOn-v2.zip");
-            string svProTempFolder = System.IO.Path.Combine(sLocalPath, "vProTempFolder");
-            string sMSI = System.IO.Path.Combine(svProTempFolder, "x64\\IntelvProSccmAddOnx64.msi");
-            string sUnpacked = System.IO.Path.Combine(svProTempFolder, "Unpacked");
-
-            if (!Directory.Exists(svProDir))
+            try
             {
-                Directory.CreateDirectory(svProDir);
-            }
+                string svProDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\vPro";
+                string sLocalPath = Environment.ExpandEnvironmentVariables("%TEMP%");
+                string sZipFile = System.IO.Path.Combine(sLocalPath, "IntelvProSCCMAddOn-v2.zip");
+                string svProTempFolder = System.IO.Path.Combine(sLocalPath, "vProTempFolder");
+                string sMSI = System.IO.Path.Combine(svProTempFolder, "x64\\IntelvProSccmAddOnx64.msi");
+                string sUnpacked = System.IO.Path.Combine(svProTempFolder, "Unpacked");
 
-            if (!File.Exists(sZipFile))
-            {
-                string swgetVpro = string.Format("wget http://downloadmirror.intel.com/21835/eng/IntelvProSCCMAddOn-v2.zip -OutFile \"{0}\"", sZipFile);
-
-                try
+                if (!Directory.Exists(svProDir))
                 {
-                    var oResult = _RunPS(swgetVpro);
+                    Directory.CreateDirectory(svProDir);
                 }
-                catch { }
-            }
 
-            if(File.Exists(sZipFile))
-            {
-                if (!Directory.Exists(svProTempFolder))
+                if (!File.Exists(sZipFile))
                 {
-                    Directory.CreateDirectory(svProTempFolder);
-                    Directory.CreateDirectory(sUnpacked);
-
-                    string sUnZip = string.Format("(new-object -com shell.application).namespace(\"{0}\").CopyHere((new-object -com shell.application).namespace(\"{1}\").Items(),16)", svProTempFolder, sZipFile);
+                    string swgetVpro = string.Format("wget http://downloadmirror.intel.com/21835/eng/IntelvProSCCMAddOn-v2.zip -OutFile \"{0}\"", sZipFile);
 
                     try
                     {
-                        var oResult = _RunPS(sUnZip);
-                    }
-                    catch { }
-
-                    string sMSIUnpack = string.Format("& msiexec.exe /a `\"{0}`\" /qb TARGETDIR=`\"{1}`\" |Write-Output", sMSI, sUnpacked);
-
-                    try
-                    {
-                        var oResult = _RunPS(sMSIUnpack);
-                    }
-                    catch { }
-
-
-
-                    string sCopyItems = string.Format("Copy-Item \"{0}\\*\" \"{1}\" -Exclude \"IntelvProSccmAddOnx64.msi\" -Force", sUnpacked, svProDir);
-
-                    try
-                    {
-                        var oResult = _RunPS(sCopyItems);
+                        var oResult = _RunPS(swgetVpro);
                     }
                     catch { }
                 }
 
-                Directory.Delete(svProTempFolder, true);
-                File.Delete(sZipFile);
-            }
-            else
-            {
-                MessageBox.Show("IntelvProSCCMAddOn-v2.zip could not be downloaded, try manually. Copy the required Files to: " + svProDir);
-                Process.Start("http://downloadmirror.intel.com/21835/eng/IntelvProSCCMAddOn-v2.zip");
-                Process.Start(svProDir);
-            }
+                if (File.Exists(sZipFile))
+                {
+                    if (!Directory.Exists(svProTempFolder))
+                    {
+                        Directory.CreateDirectory(svProTempFolder);
+                        Directory.CreateDirectory(sUnpacked);
 
-            StartCheck();
+                        string sUnZip = string.Format("(new-object -com shell.application).namespace(\"{0}\").CopyHere((new-object -com shell.application).namespace(\"{1}\").Items(),16)", svProTempFolder, sZipFile);
+
+                        try
+                        {
+                            var oResult = _RunPS(sUnZip);
+                        }
+                        catch { }
+
+                        string sMSIUnpack = string.Format("& msiexec.exe /a `\"{0}`\" /qb TARGETDIR=`\"{1}`\" |Write-Output", sMSI, sUnpacked);
+
+                        try
+                        {
+                            var oResult = _RunPS(sMSIUnpack);
+                        }
+                        catch { }
+
+
+
+                        string sCopyItems = string.Format("Copy-Item \"{0}\\*\" \"{1}\" -Exclude \"IntelvProSccmAddOnx64.msi\" -Force", sUnpacked, svProDir);
+
+                        try
+                        {
+                            var oResult = _RunPS(sCopyItems);
+                        }
+                        catch { }
+                    }
+
+                    Directory.Delete(svProTempFolder, true);
+                    File.Delete(sZipFile);
+                }
+                else
+                {
+                    MessageBox.Show("IntelvProSCCMAddOn-v2.zip could not be downloaded, try manually. Copy the required Files to: " + svProDir);
+                    Process.Start("http://downloadmirror.intel.com/21835/eng/IntelvProSCCMAddOn-v2.zip");
+                    Process.Start(svProDir);
+                }
+
+                StartCheck();
+            }
+            catch { }
         }
 
         private void StartCheck()

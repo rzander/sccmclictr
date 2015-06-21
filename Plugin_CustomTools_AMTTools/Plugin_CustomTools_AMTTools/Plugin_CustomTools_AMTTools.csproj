@@ -92,8 +92,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="vPro\AlarmExt.InstallState" />
-    <None Include="vPro\KVMView.exe.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -112,14 +110,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Download.ico" />
-    <Content Include="vPro\AlarmExt.exe" />
-    <Content Include="vPro\imrsdk_x64.dll" />
-    <Content Include="vPro\Intel.Wsman.Scripting.DLL" />
-    <Content Include="vPro\KVMLib.dll" />
-    <Content Include="vPro\KVMView.exe" />
-    <Content Include="vPro\LicenseManager.DLL" />
-    <Content Include="vPro\MPSView.exe" />
-    <Content Include="vPro\vncamt.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="vPro\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
