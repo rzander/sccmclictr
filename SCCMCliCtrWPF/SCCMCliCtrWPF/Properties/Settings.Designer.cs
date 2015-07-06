@@ -371,5 +371,17 @@ while ($a -ne 1)")]
                 return ((bool)(this["HideShutdownPane"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Enter-PSSession {0}  -port {1}")]
+        public string OpenPSConsoleCommand {
+            get {
+                return ((string)(this["OpenPSConsoleCommand"]));
+            }
+            set {
+                this["OpenPSConsoleCommand"] = value;
+            }
+        }
     }
 }

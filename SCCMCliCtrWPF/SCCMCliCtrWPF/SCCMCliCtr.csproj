@@ -365,7 +365,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Content Include="Plugin_AMTTools.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Plugin_AppV46.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -394,7 +394,12 @@
     <Content Include="Plugin_Regedit.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Plugin_SelfUpdate.dll" />
+    <Content Include="Plugin_SelfUpdate.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Plugin_StatusMessageViewer.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Images\Tools.ico" />
     <Resource Include="Images\Icon012.ico" />
     <Resource Include="Images\Pack_close.ico" />

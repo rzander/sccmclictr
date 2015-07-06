@@ -708,21 +708,24 @@ namespace ClientCenter
                 Process Explorer = new Process();
                 Explorer.StartInfo.FileName = "powershell.exe";
                 string sCred = "";
+                string sPS = string.Format(Properties.Settings.Default.OpenPSConsoleCommand, oAgent.TargetHostname, tb_wsmanport.Text);
                 if (!string.IsNullOrEmpty(tb_Username.Text))
                 {
                     sCred = string.Format("$creds = New-Object System.Management.Automation.PSCredential ('{0}', (ConvertTo-SecureString '{1}' -AsPlainText -Force))", tb_Username.Text, common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name)) + ";";
 
+
                     if ((bool)cb_ssl.IsChecked)
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + "Enter-PSSession '" + oAgent.TargetHostname + "' -Port " + tb_wsmanport.Text + " -UseSSL -Credential $creds";
+                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + sPS + " -UseSSL -Credential $creds";
                     else
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + "Enter-PSSession '" + oAgent.TargetHostname + "' -Port " + tb_wsmanport.Text + " -Credential $creds";
+                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + sPS + " -Credential $creds";
+                    
                 }
                 else
                 {
                     if ((bool)cb_ssl.IsChecked)
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command Enter-PSSession " + oAgent.TargetHostname + " -Port " + tb_wsmanport.Text + " -UseSSL";
+                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sPS + " -UseSSL";
                     else
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command Enter-PSSession " + oAgent.TargetHostname + " -Port " + tb_wsmanport.Text;
+                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sPS;
                 }
                 Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
                 Explorer.Start();
