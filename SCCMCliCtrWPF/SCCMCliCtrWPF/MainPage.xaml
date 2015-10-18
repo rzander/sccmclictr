@@ -1,9 +1,8 @@
-﻿<Window xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"  x:Class="ClientCenter.MainPage"
+﻿<Window xmlns:s="NavigationPane"  xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"  x:Class="ClientCenter.MainPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:s="http://www.stemasoft.com/xaml" DataContext="{Binding}"  
       xmlns:rib="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon"
       mc:Ignorable="d"
       xmlns:p="clr-namespace:ClientCenter.Properties" 
@@ -166,7 +165,7 @@
                     </StackPanel>
                 </DockPanel>
                 <DockPanel Name="MainFunctionsDock" DockPanel.Dock="Bottom" VerticalAlignment="Stretch">
-                    <s:NavigationPane Name="navigationPane1" HorizontalAlignment="Stretch" DockPanel.Dock="Bottom" LargeItems="4" IsSmallItemsVisible="False" IsMinimizeButtonVisible="False" HasSplitter="True" HasResizeThumb="False" IsEnabled="False">
+                    <s:NavigationPane Name="navigationPane1" ItemsButtonsContextMenu="{x:Null}" HorizontalAlignment="Stretch" DockPanel.Dock="Bottom" LargeItems="4" IsSmallItemsVisible="False" IsMinimizeButtonVisible="False" HasSplitter="True" HasResizeThumb="False" IsEnabled="False" CanMinimize="False" IsDefaultConfigureMenuEnabled="False">
                         <s:NavigationPaneItem Name="MonitoringPane" Header="Monitoring" Image="/SCCMCliCtrWPF;component/Images/Stocks.ico" IsEnabled="True">
                             <StackPanel VerticalAlignment="Stretch">
                                 <TreeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200" Name="tvMonitoring" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000" Loaded="tvMonitoring_Loaded">
