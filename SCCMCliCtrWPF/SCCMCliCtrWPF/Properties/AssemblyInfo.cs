@@ -3,8 +3,6 @@ using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
-using System.Security;
-using System.Security.Permissions;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -13,7 +11,7 @@ using System.Security.Permissions;
 [assembly: AssemblyDescription("Client Center for CM12")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SCCM Tools")]
-[assembly: AssemblyProduct("SCCMCliCtrWPF")]
+[assembly: AssemblyProduct("SCCMCliCtr")]
 [assembly: AssemblyCopyright("Copyright ©  2014 by Roger Zander")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -54,4 +52,4 @@ using System.Security.Permissions;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.2.*")]
-[assembly: AssemblyFileVersion("1.0.2.3")]
+[assembly: AssemblyFileVersion("1.0.2.4")]

@@ -10,7 +10,7 @@
                     <ColumnDefinition Width="235*" />
                 </Grid.ColumnDefinitions>
                 <Label Content="Date:" Height="28" Name="label2" Width="42" Margin="6,5,0,36" HorizontalAlignment="Left" />
-                <my:DatePicker HorizontalAlignment="Left" Name="datePicker1" VerticalAlignment="Top" Width="140" Margin="42,6,0,0" Grid.ColumnSpan="2" SelectedDateFormat="Short" />
+                <DatePicker HorizontalAlignment="Left" Name="datePicker1" VerticalAlignment="Top" Width="140" Margin="42,6,0,0" Grid.ColumnSpan="2" SelectedDateFormat="Short" />
                 <TextBox Height="23" HorizontalAlignment="Right" Margin="0,6,15,0" Name="timeBox" VerticalAlignment="Top" Width="60" Text="19:00" Grid.Column="1" />
                 <Label Content="Start Time:" Height="28" HorizontalAlignment="Left" Margin="114,4,0,0" Name="label1" VerticalAlignment="Top" Grid.Column="1" />
             </Grid>

@@ -4,20 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 using Stema.Controls;
 using sccmclictr.automation;
 using System.Diagnostics;
 using System.ComponentModel;
-using System.Deployment.Application;
-using System.Management;
 using System.Security.Principal;
 using System.Reflection;
 using Microsoft.Win32;
@@ -29,7 +23,7 @@ namespace ClientCenter
     /// <summary>
     /// Interaction logic for Page1.xaml
     /// </summary>
-    public partial class MainPage : Page
+    public partial class MainPage : Window
     {
         public SCCMAgent oAgent;
         public MyTraceListener myTrace;
@@ -43,6 +37,8 @@ namespace ClientCenter
 
             InitializeComponent();
 
+            ribbon1.ContextMenu = null;
+            
             //Disbale SSL/TLS Errors
             System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
             //Disable CRL Check
@@ -52,7 +48,7 @@ namespace ClientCenter
 
             try
             {
-                this.WindowTitle = SCCMCliCtr.Customization.Title;
+                this.Title = SCCMCliCtr.Customization.Title;
                 rStatus.AppendText("Client Center for Configuration Manager (c) 2013 by Roger Zander\n");
                 rStatus.AppendText("Project-Page: http://sccmclictr.codeplex.com\n");
                 rStatus.AppendText("Current Version: " + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n");
@@ -169,7 +165,6 @@ namespace ClientCenter
                 }).Start();
             }
             catch { }
-            
             Application.Current.Exit += new ExitEventHandler(Current_Exit);
             ThemeManager.SetActiveTheme(NavigationPaneTheme.WindowsLive);
             Style s = new Style();
@@ -236,6 +231,7 @@ namespace ClientCenter
 
             pb_Password.Password = Properties.Settings.Default.Password;
             tb_Username.Text = Properties.Settings.Default.Username;
+
             Common.Hostname = tb_TargetComputer.Text.Trim();
 
             //Not needed, local admin is only required if connecting the local machien...
@@ -487,7 +483,7 @@ namespace ClientCenter
                 ribbon1.IsEnabled = true;
                 agentSettingItem1.IsEnabled = true;
 
-                this.WindowTitle = sTarget;
+                this.Title = sTarget;
 
             }
             catch (Exception ex)
@@ -718,7 +714,7 @@ namespace ClientCenter
                         Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + sPS + " -UseSSL -Credential $creds";
                     else
                         Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + sPS + " -Credential $creds";
-                    
+
                 }
                 else
                 {
@@ -998,7 +994,6 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
-
         private void tb_TargetComputer2_TextChanged(object sender, RoutedEventArgs e)
         {
             Common.Hostname = ((AutoCompleteBox)sender).Text;
@@ -1046,8 +1041,8 @@ namespace ClientCenter
                 tb_TargetComputer2.Text = tb_TargetComputer.Text;
                 bt_Connect_Click(sender, null);
             }
-            
-           Common.Hostname = ((AutoCompleteBox)sender).Text;
+
+            Common.Hostname = ((AutoCompleteBox)sender).Text;
 
             Mouse.OverrideCursor = Cursors.Arrow;
         }
@@ -1180,11 +1175,6 @@ namespace ClientCenter
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
-
-
-
-
-
     }
 
     public class MyTraceListener : TraceListener, INotifyPropertyChanged
