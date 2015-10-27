@@ -147,71 +147,73 @@ while ($a -ne 1)</Value>
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="AgentInstallPS" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">$CM12MP = 'Management Point FQDN' 
-$CMSiteCode = 'xxx'  
+      <Value Profile="(Default)">
+        $CMMP = 'Management Point FQDN'
+        $CMSiteCode = 'xxx'
 
-$ErrorActionPreference = "SilentlyContinue" 
+        $ErrorActionPreference = "SilentlyContinue"
 
-#Only migrate non CM12 Agents 
-if(([wmi]"ROOT\ccm:SMS_Client=@").ClientVersion.StartsWith('5.')) 
-{ 
-    "Already migrated..." 
-    exit 0 
-} 
+        #Only migrate non ConfigMgr Agents
+        if(([wmi]"ROOT\ccm:SMS_Client=@").ClientVersion.StartsWith('5.'))
+        {
+        "Already migrated..."
+        exit 0
+        }
 
-try 
-{ 
-#Get ccm cache path for later cleanup... 
-    try 
-    { 
-        $ccmcache = ([wmi]"ROOT\ccm\SoftMgmtAgent:CacheConfig.ConfigKey='Cache'").Location 
-    } catch {} 
+        try
+        {
+        #Get ccm cache path for later cleanup...
+        try
+        {
+        $ccmcache = ([wmi]"ROOT\ccm\SoftMgmtAgent:CacheConfig.ConfigKey='Cache'").Location
+        } catch {}
 
-#download ccmsetup.exe from MP 
-    $webclient = New-Object System.Net.WebClient 
-    $url = "http://$($CM12MP)/CCM_Client/ccmsetup.exe" 
-    $file = "c:\windows\temp\ccmsetup.exe" 
-    $webclient.DownloadFile($url,$file) 
+        #download ccmsetup.exe from MP
+        $webclient = New-Object System.Net.WebClient
+        $url = "http://$($CMMP)/CCM_Client/ccmsetup.exe"
+        $file = "c:\windows\temp\ccmsetup.exe"
+        $webclient.DownloadFile($url,$file)
 
-#stop the old sms agent service 
-    stop-service 'ccmexec' -ErrorAction SilentlyContinue 
+        #stop the old sms agent service
+        stop-service 'ccmexec' -ErrorAction SilentlyContinue
 
-#Cleanup cache 
-    if($ccmcache -ne $null) 
-    { 
-        try 
-        { 
-        dir $ccmcache '*' -directory | % { [io.directory]::delete($_.fullname, $true)  } -ErrorAction SilentlyContinue 
-        } catch {} 
-    } 
+        #Cleanup cache
+        if($ccmcache -ne $null)
+        {
+        try
+        {
+        dir $ccmcache '*' -directory | % { [io.directory]::delete($_.fullname, $true)  } -ErrorAction SilentlyContinue
+        } catch {}
+        }
 
-#Cleanup Execution History 
-    Remove-Item -Path 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\SMS\Mobile Client\*' -Recurse -ErrorAction SilentlyContinue 
+        #Cleanup Execution History
+        Remove-Item -Path 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\SMS\Mobile Client\*' -Recurse -ErrorAction SilentlyContinue
 
-#Cleanup App-V 4.6 Packages 
-    try 
-    { 
-        (get-wmiobject -query "SELECT * FROM Package WHERE SftPath like '%' AND InUse = 'FALSE' " -namespace "root\Microsoft\appvirt\client") | % { start-process -wait sftmime.exe -argumentlist "delete package:$([char]34)$($_.Name)$([char]34) /global" }         
-    } catch {} 
+        #Cleanup App-V 4.6 Packages
+        try
+        {
+        (get-wmiobject -query "SELECT * FROM Package WHERE SftPath like '%' AND InUse = 'FALSE' " -namespace "root\Microsoft\appvirt\client") | % { start-process -wait sftmime.exe -argumentlist "delete package:$([char]34)$($_.Name)$([char]34) /global" }
+        } catch {}
 
-#kill existing instances of ccmsetup.exe 
-    $ccm = (Get-Process 'ccmsetup' -ErrorAction SilentlyContinue) 
-    if($ccm -ne $null) 
-    { 
-            $ccm.kill(); 
-    } 
+        #kill existing instances of ccmsetup.exe
+        $ccm = (Get-Process 'ccmsetup' -ErrorAction SilentlyContinue)
+        if($ccm -ne $null)
+        {
+        $ccm.kill();
+        }
 
-#run ccmsetup 
-    $proc = Start-Process -FilePath 'c:\windows\temp\ccmsetup.exe' -PassThru -Wait -ArgumentList "/mp:$($CM12MP) /source:http://$($CM12MP)/CCM_Client CCMHTTPPORT=80 RESETKEYINFORMATION=TRUE SMSSITECODE=$($CMSiteCode) SMSSLP=$($CM12MP) FSP=$($CM12MP)" 
-   Sleep(5) 
-   "ccmsetup started..." 
-} 
+        #run ccmsetup
+        $proc = Start-Process -FilePath 'c:\windows\temp\ccmsetup.exe' -PassThru -Wait -ArgumentList "/mp:$($CMMP) /source:http://$($CMMP)/CCM_Client CCMHTTPPORT=80 RESETKEYINFORMATION=TRUE SMSSITECODE=$($CMSiteCode) SMSSLP=$($CMMP) FSP=$($CMMP)"
+        Sleep(5)
+        "ccmsetup started..."
+        }
 
-catch 
-{ 
-        "an Error occured..." 
-        $error[0] 
-} </Value>
+        catch
+        {
+        "an Error occured..."
+        $error[0]
+        }
+      </Value>
     </Setting>
     <Setting Name="AdhocInv" Type="System.Collections.Specialized.StringCollection" Scope="Application">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;

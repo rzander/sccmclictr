@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ClientCenter.InstallAgent"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Install CM12 Agent" Height="600" Width="800" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Icon="/SCCMCliCtrWPF;component/Images/Setting.ico" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+        Title="Install ConfigMgr Agent" Height="600" Width="800" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Icon="/SCCMCliCtrWPF;component/Images/Setting.ico" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
     <Grid>
         <StackPanel Orientation="Vertical">
         <GroupBox Header="Agent Settings" HorizontalAlignment="Stretch" VerticalAlignment="Top">
@@ -12,7 +12,7 @@
                 </StackPanel>
                 <StackPanel Height="32" HorizontalAlignment="Stretch" VerticalAlignment="Top" Orientation="Horizontal">
                     <Label Content="Site Code:" HorizontalAlignment="right" VerticalAlignment="Top" Width="150"/>
-                    <TextBox x:Name="tb_SiteCode" HorizontalAlignment="Stretch" Height="23" TextWrapping="NoWrap" Width="200" ToolTip="CM12 Site Code (3Digits)" LostFocus="tb_SiteCode_LostFocus"/>
+                        <TextBox x:Name="tb_SiteCode" HorizontalAlignment="Stretch" Height="23" TextWrapping="NoWrap" Width="200" ToolTip="ConfigMgr Site Code (3Digits)" LostFocus="tb_SiteCode_LostFocus"/>
                 </StackPanel>
             </StackPanel>
         </GroupBox>

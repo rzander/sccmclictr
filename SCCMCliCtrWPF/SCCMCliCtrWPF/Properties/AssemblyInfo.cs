@@ -7,8 +7,8 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SCCMCliCtrWPF")]
-[assembly: AssemblyDescription("Client Center for CM12")]
+[assembly: AssemblyTitle("SCCMCliCtr")]
+[assembly: AssemblyDescription("Client Center for ConfigMgr")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SCCM Tools")]
 [assembly: AssemblyProduct("SCCMCliCtr")]
@@ -52,4 +52,4 @@ using System.Windows;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.2.*")]
-[assembly: AssemblyFileVersion("1.0.2.4")]
+[assembly: AssemblyFileVersion("1.0.2.5")]

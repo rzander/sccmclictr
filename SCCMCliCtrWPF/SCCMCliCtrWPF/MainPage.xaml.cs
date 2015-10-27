@@ -1264,7 +1264,7 @@ namespace ClientCenter
     public class console
     {
         /// <summary>
-        /// Create MMC Extension for CM12
+        /// Create MMC Extension for ConfigMgr
         /// </summary>
         public static void registerConsoleExtension()
         {
@@ -1302,13 +1302,13 @@ namespace ClientCenter
             }
             else
             {
-                throw new Exception("no CM12 console installed.");
+                throw new Exception("no ConfigMgr console installed.");
 
             }
         }
 
         /// <summary>
-        /// Remove MMC Extension for CM12
+        /// Remove MMC Extension for ConfigMgr
         /// </summary>
         public static void unregisterConsoleExtension()
         {
@@ -1353,7 +1353,7 @@ namespace ClientCenter
             }
             else
             {
-                throw new Exception("no CM12 console installed.");
+                throw new Exception("no ConfigMgr console installed.");
             }
         }
     }

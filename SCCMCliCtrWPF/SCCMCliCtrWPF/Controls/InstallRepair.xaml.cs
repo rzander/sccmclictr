@@ -280,7 +280,7 @@ namespace ClientCenter
             {
                 Mouse.OverrideCursor = Cursors.Wait;
 
-                Listener.WriteLine("Installing CM12 Agent on target device...");
+                Listener.WriteLine("Installing ConfigMgr Agent on target device...");
                 oAgent.PSCode.Listeners.Clear();
                 Listener.WriteLine(oAgent.Client.GetStringFromPS(oA.tbInstallPS.Text));
                 oAgent.PSCode.Listeners.Add(Listener);

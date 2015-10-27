@@ -127,7 +127,7 @@
                 </StackPanel>
                 <StackPanel Height="32" HorizontalAlignment="Left" Name="spSLP" VerticalAlignment="Top" Orientation="Horizontal">
                     <Label Content="Server Locator Point:" Height="28" Name="lSLP" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
-                    <TextBox Height="23" Name="tbSLP" Width="250" Margin="0,0,10,0" ToolTip="Server Locator Point (on CM12 it's the MP)" />
+                    <TextBox Height="23" Name="tbSLP" Width="250" Margin="0,0,10,0" ToolTip="Server Locator Point (on ConfigMgr it's the MP)" />
                     <ToolBarPanel Height="24" Name="tbpSLP">
                         <ToolBar Name="toolBSLP" >
                             <Image Name="imgGetSLP" Source="/SCCMCliCtrWPF;component/Images/shell32.dll_I0017_0409.ico" Stretch="Uniform" Width="20" Height="20" Visibility="Visible"  ToolTip="Get the assigned Server Locator Point" MouseLeftButtonDown="imgGetSLP_MouseLeftButtonDown">

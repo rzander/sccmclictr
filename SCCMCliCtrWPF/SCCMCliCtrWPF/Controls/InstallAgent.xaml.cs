@@ -77,13 +77,13 @@ namespace ClientCenter
 
         private void tb_MPName_LostFocus(object sender, RoutedEventArgs e)
         {
-            int iStart = tbInstallPS.Text.IndexOf("$CM12MP");
+            int iStart = tbInstallPS.Text.IndexOf("$CMMP");
             if (iStart >= 0)
             {
                 int iEnd = tbInstallPS.Text.IndexOf("\n", iStart) + 1;
 
                 tbInstallPS.Text = tbInstallPS.Text.Remove(iStart, iEnd - iStart);
-                tbInstallPS.Text = tbInstallPS.Text.Insert(iStart, "$CM12MP='" + tb_MPName.Text + "'\n");
+                tbInstallPS.Text = tbInstallPS.Text.Insert(iStart, "$CMMP='" + tb_MPName.Text + "'\n");
             }
         }
 

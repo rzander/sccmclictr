@@ -298,32 +298,35 @@ while ($a -ne 1)")]
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("$CM12MP = \'Management Point FQDN\' \r\n$CMSiteCode = \'xxx\'  \r\n\r\n$ErrorActionPreferen" +
-            "ce = \"SilentlyContinue\" \r\n\r\n#Only migrate non CM12 Agents \r\nif(([wmi]\"ROOT\\ccm:S" +
-            "MS_Client=@\").ClientVersion.StartsWith(\'5.\')) \r\n{ \r\n    \"Already migrated...\" \r\n" +
-            "    exit 0 \r\n} \r\n\r\ntry \r\n{ \r\n#Get ccm cache path for later cleanup... \r\n    try " +
-            "\r\n    { \r\n        $ccmcache = ([wmi]\"ROOT\\ccm\\SoftMgmtAgent:CacheConfig.ConfigKe" +
-            "y=\'Cache\'\").Location \r\n    } catch {} \r\n\r\n#download ccmsetup.exe from MP \r\n    $" +
-            "webclient = New-Object System.Net.WebClient \r\n    $url = \"http://$($CM12MP)/CCM_" +
-            "Client/ccmsetup.exe\" \r\n    $file = \"c:\\windows\\temp\\ccmsetup.exe\" \r\n    $webclie" +
-            "nt.DownloadFile($url,$file) \r\n\r\n#stop the old sms agent service \r\n    stop-servi" +
-            "ce \'ccmexec\' -ErrorAction SilentlyContinue \r\n\r\n#Cleanup cache \r\n    if($ccmcache" +
-            " -ne $null) \r\n    { \r\n        try \r\n        { \r\n        dir $ccmcache \'*\' -direc" +
-            "tory | % { [io.directory]::delete($_.fullname, $true)  } -ErrorAction SilentlyCo" +
-            "ntinue \r\n        } catch {} \r\n    } \r\n\r\n#Cleanup Execution History \r\n    Remove-" +
-            "Item -Path \'HKLM:\\SOFTWARE\\Wow6432Node\\Microsoft\\SMS\\Mobile Client\\*\' -Recurse -" +
-            "ErrorAction SilentlyContinue \r\n\r\n#Cleanup App-V 4.6 Packages \r\n    try \r\n    { \r" +
-            "\n        (get-wmiobject -query \"SELECT * FROM Package WHERE SftPath like \'%\' AND" +
-            " InUse = \'FALSE\' \" -namespace \"root\\Microsoft\\appvirt\\client\") | % { start-proce" +
-            "ss -wait sftmime.exe -argumentlist \"delete package:$([char]34)$($_.Name)$([char]" +
-            "34) /global\" }         \r\n    } catch {} \r\n\r\n#kill existing instances of ccmsetup" +
-            ".exe \r\n    $ccm = (Get-Process \'ccmsetup\' -ErrorAction SilentlyContinue) \r\n    i" +
-            "f($ccm -ne $null) \r\n    { \r\n            $ccm.kill(); \r\n    } \r\n\r\n#run ccmsetup \r" +
-            "\n    $proc = Start-Process -FilePath \'c:\\windows\\temp\\ccmsetup.exe\' -PassThru -W" +
-            "ait -ArgumentList \"/mp:$($CM12MP) /source:http://$($CM12MP)/CCM_Client CCMHTTPPO" +
-            "RT=80 RESETKEYINFORMATION=TRUE SMSSITECODE=$($CMSiteCode) SMSSLP=$($CM12MP) FSP=" +
-            "$($CM12MP)\" \r\n   Sleep(5) \r\n   \"ccmsetup started...\" \r\n} \r\n\r\ncatch \r\n{ \r\n       " +
-            " \"an Error occured...\" \r\n        $error[0] \r\n} ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\r\n        $CMMP = \'Management Point FQDN\'\r\n        $CMSiteCode = \'xxx\'\r\n\r\n       " +
+            " $ErrorActionPreference = \"SilentlyContinue\"\r\n\r\n        #Only migrate non Config" +
+            "Mgr Agents\r\n        if(([wmi]\"ROOT\\ccm:SMS_Client=@\").ClientVersion.StartsWith(\'" +
+            "5.\'))\r\n        {\r\n        \"Already migrated...\"\r\n        exit 0\r\n        }\r\n\r\n  " +
+            "      try\r\n        {\r\n        #Get ccm cache path for later cleanup...\r\n        " +
+            "try\r\n        {\r\n        $ccmcache = ([wmi]\"ROOT\\ccm\\SoftMgmtAgent:CacheConfig.Co" +
+            "nfigKey=\'Cache\'\").Location\r\n        } catch {}\r\n\r\n        #download ccmsetup.exe" +
+            " from MP\r\n        $webclient = New-Object System.Net.WebClient\r\n        $url = \"" +
+            "http://$($CMMP)/CCM_Client/ccmsetup.exe\"\r\n        $file = \"c:\\windows\\temp\\ccmse" +
+            "tup.exe\"\r\n        $webclient.DownloadFile($url,$file)\r\n\r\n        #stop the old s" +
+            "ms agent service\r\n        stop-service \'ccmexec\' -ErrorAction SilentlyContinue\r\n" +
+            "\r\n        #Cleanup cache\r\n        if($ccmcache -ne $null)\r\n        {\r\n        tr" +
+            "y\r\n        {\r\n        dir $ccmcache \'*\' -directory | % { [io.directory]::delete(" +
+            "$_.fullname, $true)  } -ErrorAction SilentlyContinue\r\n        } catch {}\r\n      " +
+            "  }\r\n\r\n        #Cleanup Execution History\r\n        Remove-Item -Path \'HKLM:\\SOFT" +
+            "WARE\\Wow6432Node\\Microsoft\\SMS\\Mobile Client\\*\' -Recurse -ErrorAction SilentlyCo" +
+            "ntinue\r\n\r\n        #Cleanup App-V 4.6 Packages\r\n        try\r\n        {\r\n        (" +
+            "get-wmiobject -query \"SELECT * FROM Package WHERE SftPath like \'%\' AND InUse = \'" +
+            "FALSE\' \" -namespace \"root\\Microsoft\\appvirt\\client\") | % { start-process -wait s" +
+            "ftmime.exe -argumentlist \"delete package:$([char]34)$($_.Name)$([char]34) /globa" +
+            "l\" }\r\n        } catch {}\r\n\r\n        #kill existing instances of ccmsetup.exe\r\n  " +
+            "      $ccm = (Get-Process \'ccmsetup\' -ErrorAction SilentlyContinue)\r\n        if(" +
+            "$ccm -ne $null)\r\n        {\r\n        $ccm.kill();\r\n        }\r\n\r\n        #run ccms" +
+            "etup\r\n        $proc = Start-Process -FilePath \'c:\\windows\\temp\\ccmsetup.exe\' -Pa" +
+            "ssThru -Wait -ArgumentList \"/mp:$($CMMP) /source:http://$($CMMP)/CCM_Client CCMH" +
+            "TTPPORT=80 RESETKEYINFORMATION=TRUE SMSSITECODE=$($CMSiteCode) SMSSLP=$($CMMP) F" +
+            "SP=$($CMMP)\"\r\n        Sleep(5)\r\n        \"ccmsetup started...\"\r\n        }\r\n\r\n    " +
+            "    catch\r\n        {\r\n        \"an Error occured...\"\r\n        $error[0]\r\n        " +
+            "}\r\n      ")]
         public string AgentInstallPS {
             get {
                 return ((string)(this["AgentInstallPS"]));

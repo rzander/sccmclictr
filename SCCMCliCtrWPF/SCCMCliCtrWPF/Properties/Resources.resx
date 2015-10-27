@@ -142,7 +142,7 @@
 		&lt;Parameters&gt;##SUB:Name##&lt;/Parameters&gt;
 	&lt;/Executable&gt;
 &lt;/ActionDescription&gt;</value>
-    <comment>CM12 Console extension</comment>
+    <comment>ConfigMgr Console extension</comment>
   </data>
   <data name="PSCollDecode" xml:space="preserve">
     <value>$script = {
