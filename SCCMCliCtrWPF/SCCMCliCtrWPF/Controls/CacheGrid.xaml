@@ -75,6 +75,7 @@
                         <DataGridTextColumn Header="Type" Binding="{Binding Path=ContentType}" />
                         <DataGridTextColumn Header="Persistent" Binding="{Binding Path=PersistInCache}" />
                         <DataGridTextColumn Header="Reference count" Binding="{Binding Path=ReferenceCount}" />
+                        <DataGridTextColumn Header="PeerCaching" Binding="{Binding Path=PeerCaching}" />
                     </DataGrid.Columns>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
