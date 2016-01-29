@@ -264,16 +264,20 @@ namespace ClientCenter
         private void bt_installAgent_Click(object sender, RoutedEventArgs e)
         {
             InstallAgent oA = new InstallAgent();
-            if (string.IsNullOrEmpty(oA.tb_MPName.Text))
+            try
             {
-                oA.tb_MPName.Text = oAgent.Client.AgentProperties.ManagementPoint;
-            }
-            if (string.IsNullOrEmpty(oA.tb_SiteCode.Text))
-            {
-                oA.tb_SiteCode.Text = oAgent.Client.AgentProperties.AssignedSite;
-            }
+                if (string.IsNullOrEmpty(oA.tb_MPName.Text))
+                {
+                    oA.tb_MPName.Text = oAgent.Client.AgentProperties.ManagementPoint;
+                }
+                if (string.IsNullOrEmpty(oA.tb_SiteCode.Text))
+                {
+                    oA.tb_SiteCode.Text = oAgent.Client.AgentProperties.AssignedSite;
+                }
 
-            oA.RefreshMPandSiteCode();
+                oA.RefreshMPandSiteCode();
+            }
+            catch { }
 
             oA.ShowDialog();
             if (oA.DialogResult == true)

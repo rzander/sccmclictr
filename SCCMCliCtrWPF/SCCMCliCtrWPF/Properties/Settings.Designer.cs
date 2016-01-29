@@ -298,43 +298,6 @@ while ($a -ne 1)")]
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n        $CMMP = \'Management Point FQDN\'\r\n        $CMSiteCode = \'xxx\'\r\n\r\n       " +
-            " $ErrorActionPreference = \"SilentlyContinue\"\r\n\r\n        #Only migrate non Config" +
-            "Mgr Agents\r\n        if(([wmi]\"ROOT\\ccm:SMS_Client=@\").ClientVersion.StartsWith(\'" +
-            "5.\'))\r\n        {\r\n        \"Already migrated...\"\r\n        exit 0\r\n        }\r\n\r\n  " +
-            "      try\r\n        {\r\n        #Get ccm cache path for later cleanup...\r\n        " +
-            "try\r\n        {\r\n        $ccmcache = ([wmi]\"ROOT\\ccm\\SoftMgmtAgent:CacheConfig.Co" +
-            "nfigKey=\'Cache\'\").Location\r\n        } catch {}\r\n\r\n        #download ccmsetup.exe" +
-            " from MP\r\n        $webclient = New-Object System.Net.WebClient\r\n        $url = \"" +
-            "http://$($CMMP)/CCM_Client/ccmsetup.exe\"\r\n        $file = \"c:\\windows\\temp\\ccmse" +
-            "tup.exe\"\r\n        $webclient.DownloadFile($url,$file)\r\n\r\n        #stop the old s" +
-            "ms agent service\r\n        stop-service \'ccmexec\' -ErrorAction SilentlyContinue\r\n" +
-            "\r\n        #Cleanup cache\r\n        if($ccmcache -ne $null)\r\n        {\r\n        tr" +
-            "y\r\n        {\r\n        dir $ccmcache \'*\' -directory | % { [io.directory]::delete(" +
-            "$_.fullname, $true)  } -ErrorAction SilentlyContinue\r\n        } catch {}\r\n      " +
-            "  }\r\n\r\n        #Cleanup Execution History\r\n        Remove-Item -Path \'HKLM:\\SOFT" +
-            "WARE\\Wow6432Node\\Microsoft\\SMS\\Mobile Client\\*\' -Recurse -ErrorAction SilentlyCo" +
-            "ntinue\r\n\r\n        #Cleanup App-V 4.6 Packages\r\n        try\r\n        {\r\n        (" +
-            "get-wmiobject -query \"SELECT * FROM Package WHERE SftPath like \'%\' AND InUse = \'" +
-            "FALSE\' \" -namespace \"root\\Microsoft\\appvirt\\client\") | % { start-process -wait s" +
-            "ftmime.exe -argumentlist \"delete package:$([char]34)$($_.Name)$([char]34) /globa" +
-            "l\" }\r\n        } catch {}\r\n\r\n        #kill existing instances of ccmsetup.exe\r\n  " +
-            "      $ccm = (Get-Process \'ccmsetup\' -ErrorAction SilentlyContinue)\r\n        if(" +
-            "$ccm -ne $null)\r\n        {\r\n        $ccm.kill();\r\n        }\r\n\r\n        #run ccms" +
-            "etup\r\n        $proc = Start-Process -FilePath \'c:\\windows\\temp\\ccmsetup.exe\' -Pa" +
-            "ssThru -Wait -ArgumentList \"/mp:$($CMMP) /source:http://$($CMMP)/CCM_Client CCMH" +
-            "TTPPORT=80 RESETKEYINFORMATION=TRUE SMSSITECODE=$($CMSiteCode) SMSSLP=$($CMMP) F" +
-            "SP=$($CMMP)\"\r\n        Sleep(5)\r\n        \"ccmsetup started...\"\r\n        }\r\n\r\n    " +
-            "    catch\r\n        {\r\n        \"an Error occured...\"\r\n        $error[0]\r\n        " +
-            "}\r\n      ")]
-        public string AgentInstallPS {
-            get {
-                return ((string)(this["AgentInstallPS"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
             "tring>OS Architecture|root\\cimv2|SELECT VariableValue FROM  Win32_Environment WH" +
@@ -375,6 +338,40 @@ while ($a -ne 1)")]
             }
             set {
                 this["OpenPSConsoleCommand"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("$CMMP = \'Management Point FQDN\' \r\n$CMSiteCode = \'xxx\'  \r\n\r\n$ErrorActionPreference" +
+            " = \"SilentlyContinue\" \r\n\r\n#Only migrate non CM Agents \r\nif(([wmi]\"ROOT\\ccm:SMS_C" +
+            "lient=@\").ClientVersion.StartsWith(\'5.\')) \r\n{ \r\n    \"Already migrated...\" \r\n    " +
+            "exit 0 \r\n} \r\n\r\ntry \r\n{ \r\n#Get ccm cache path for later cleanup... \r\n    try \r\n  " +
+            "  { \r\n        $ccmcache = ([wmi]\"ROOT\\ccm\\SoftMgmtAgent:CacheConfig.ConfigKey=\'C" +
+            "ache\'\").Location \r\n    } catch {} \r\n\r\n#download ccmsetup.exe from MP \r\n    $webc" +
+            "lient = New-Object System.Net.WebClient \r\n    $url = \"http://$($CMMP)/CCM_Client" +
+            "/ccmsetup.exe\" \r\n    $file = \"c:\\windows\\temp\\ccmsetup.exe\" \r\n    $webclient.Dow" +
+            "nloadFile($url,$file) \r\n\r\n#stop the old sms agent service \r\n    stop-service \'cc" +
+            "mexec\' -ErrorAction SilentlyContinue \r\n\r\n#Cleanup cache \r\n    if($ccmcache -ne $" +
+            "null) \r\n    { \r\n        try \r\n        { \r\n        dir $ccmcache \'*\' -directory |" +
+            " % { [io.directory]::delete($_.fullname, $true)  } -ErrorAction SilentlyContinue" +
+            " \r\n        } catch {} \r\n    } \r\n\r\n#Cleanup Execution History \r\n    Remove-Item -" +
+            "Path \'HKLM:\\SOFTWARE\\Wow6432Node\\Microsoft\\SMS\\Mobile Client\\*\' -Recurse -ErrorA" +
+            "ction SilentlyContinue \r\n\r\n#Cleanup App-V 4.6 Packages \r\n    try \r\n    { \r\n     " +
+            "   (get-wmiobject -query \"SELECT * FROM Package WHERE SftPath like \'%\' AND InUse" +
+            " = \'FALSE\' \" -namespace \"root\\Microsoft\\appvirt\\client\") | % { start-process -wa" +
+            "it sftmime.exe -argumentlist \"delete package:$([char]34)$($_.Name)$([char]34) /g" +
+            "lobal\" }         \r\n    } catch {} \r\n\r\n#kill existing instances of ccmsetup.exe \r" +
+            "\n    $ccm = (Get-Process \'ccmsetup\' -ErrorAction SilentlyContinue) \r\n    if($ccm" +
+            " -ne $null) \r\n    { \r\n            $ccm.kill(); \r\n    } \r\n\r\n#run ccmsetup \r\n    $" +
+            "proc = Start-Process -FilePath \'c:\\windows\\temp\\ccmsetup.exe\' -PassThru -Wait -A" +
+            "rgumentList \"/mp:$($CMMP) /source:http://$($CMMP)/CCM_Client CCMHTTPPORT=80 RESE" +
+            "TKEYINFORMATION=TRUE SMSSITECODE=$($CMSiteCode) SMSSLP=$($CMMP) FSP=$($CMMP)\" \r\n" +
+            "   Sleep(5) \r\n   \"ccmsetup started...\" \r\n} \r\n\r\ncatch \r\n{ \r\n        \"an Error occ" +
+            "ured...\" \r\n        $error[0] \r\n} ")]
+        public string AgentInstallPS {
+            get {
+                return ((string)(this["AgentInstallPS"]));
             }
         }
     }

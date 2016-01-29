@@ -8,11 +8,11 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SCCMCliCtr")]
-[assembly: AssemblyDescription("Client Center for ConfigMgr")]
+[assembly: AssemblyDescription("Client Center for Configurtaion Manager")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SCCM Tools")]
 [assembly: AssemblyProduct("SCCMCliCtr")]
-[assembly: AssemblyCopyright("Copyright ©  2014 by Roger Zander")]
+[assembly: AssemblyCopyright("Copyright ©  2016 by Roger Zander")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -52,4 +52,4 @@ using System.Windows;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.2.*")]
-[assembly: AssemblyFileVersion("1.0.2.5")]
+[assembly: AssemblyFileVersion("1.0.2.8")]

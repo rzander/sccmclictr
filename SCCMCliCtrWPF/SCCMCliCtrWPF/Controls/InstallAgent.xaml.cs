@@ -22,32 +22,40 @@ namespace ClientCenter
         {
             InitializeComponent();
 
-            if (!string.IsNullOrEmpty(Properties.Settings.Default.AgentInstallSiteCode))
+            try
             {
-                tb_SiteCode.Text = Properties.Settings.Default.AgentInstallSiteCode;
+                if (!string.IsNullOrEmpty(Properties.Settings.Default.AgentInstallSiteCode))
+                {
+                    tb_SiteCode.Text = Properties.Settings.Default.AgentInstallSiteCode;
+                }
+
+                if (!string.IsNullOrEmpty(Properties.Settings.Default.AgentInstallMP))
+                {
+                    tb_MPName.Text = Properties.Settings.Default.AgentInstallMP;
+                }
+
+                tbInstallPS.Text = Properties.Settings.Default.AgentInstallPS;
+
+                tb_SiteCode_LostFocus(this, null);
+                tb_MPName_LostFocus(this, null);
+
+
+                sc1.Height = (7 * tbInstallPS.Text.Split('\n').Count());
+                if (sc1.Height > 100)
+                    sc1.Height = sc1.Height - 30;
             }
-
-            if (!string.IsNullOrEmpty(Properties.Settings.Default.AgentInstallMP))
-            {
-                tb_MPName.Text = Properties.Settings.Default.AgentInstallMP;
-            }
-
-            tbInstallPS.Text = Properties.Settings.Default.AgentInstallPS;
-
-            tb_SiteCode_LostFocus(this, null);
-            tb_MPName_LostFocus(this, null);
-
-            
-            sc1.Height = (7 * tbInstallPS.Text.Split('\n').Count()) ;
-            if (sc1.Height > 100)
-                sc1.Height = sc1.Height - 30;
+            catch { }
             
         }
 
         public void RefreshMPandSiteCode()
         {
-            tb_SiteCode_LostFocus(this, null);
-            tb_MPName_LostFocus(this, null);
+            try
+            {
+                tb_SiteCode_LostFocus(this, null);
+                tb_MPName_LostFocus(this, null);
+            }
+            catch { }
         }
 
         private void tb_SiteCode_LostFocus(object sender, RoutedEventArgs e)
