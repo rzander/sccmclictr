@@ -1197,6 +1197,11 @@ namespace ClientCenter
         {
             //Paragraph p = oROutTB.Document.Blocks.FirstBlock as Paragraph;
             //p.LineHeight = 10; 
+            if (message.Contains("#ERROR:"))
+            {
+                WriteError(message);
+                return;
+            }
 
             this.builder.Append(message.Replace("PSCode Information: 0 :", ""));
             oROutTB.AppendText(message.Replace("PSCode Information: 0 :", ""));
@@ -1206,6 +1211,12 @@ namespace ClientCenter
 
         public override void WriteLine(string message)
         {
+            if (message.Contains("#ERROR:"))
+            {
+                WriteError(message);
+                return;
+            }
+
             this.builder.AppendLine(message.Replace("PSCode Information: 0 :", "") + "\r\n");
 
             TextRange tr = new TextRange(oROutTB.Document.ContentEnd, oROutTB.Document.ContentEnd);
@@ -1219,10 +1230,10 @@ namespace ClientCenter
         public void WriteError(string message)
         {
             //message = message + "\r\n";
-            this.builder.AppendLine(message.Replace("PSCode Information: 0 :", "") + "\r\n");
+            this.builder.AppendLine(message.Replace("PSCode Information: 0 :", "").Replace("#ERROR:", "") + "\r\n");
 
             TextRange tr = new TextRange(oROutTB.Document.ContentEnd, oROutTB.Document.ContentEnd);
-            tr.Text = message.Replace("PSCode Information: 0 :", "") + "\r\n";
+            tr.Text = message.Replace("PSCode Information: 0 :", "").Replace("#ERROR:", "") + "\r\n";
             tr.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Red);
             tr.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Bold);
 
