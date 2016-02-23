@@ -711,17 +711,17 @@ namespace ClientCenter
 
 
                     if ((bool)cb_ssl.IsChecked)
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + sPS + " -UseSSL -Credential $creds";
+                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + sPS + " -UseSSL -Credential $creds -SessionOption (New-PSSessionOption -NoMachineProfile)";
                     else
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + sPS + " -Credential $creds";
+                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + sPS + " -Credential $creds -SessionOption (New-PSSessionOption -NoMachineProfile)";
 
                 }
                 else
                 {
                     if ((bool)cb_ssl.IsChecked)
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sPS + " -UseSSL";
+                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sPS + " -UseSSL -SessionOption (New-PSSessionOption -NoMachineProfile)";
                     else
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sPS;
+                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sPS + " -SessionOption (New-PSSessionOption -NoMachineProfile)";
                 }
                 Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
                 Explorer.Start();
