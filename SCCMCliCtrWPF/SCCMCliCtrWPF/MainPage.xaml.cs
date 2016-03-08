@@ -165,6 +165,7 @@ namespace ClientCenter
                 }).Start();
             }
             catch { }
+
             Application.Current.Exit += new ExitEventHandler(Current_Exit);
             ThemeManager.SetActiveTheme(NavigationPaneTheme.WindowsLive);
             Style s = new Style();
@@ -235,19 +236,23 @@ namespace ClientCenter
             Common.Hostname = tb_TargetComputer.Text.Trim();
 
             //Not needed, local admin is only required if connecting the local machien...
-            if (!Properties.Settings.Default.NoLocalAdminCheck)
+            /*if (!Properties.Settings.Default.NoLocalAdminCheck)
             {
                 //Check if App is running as Admin, otherwise restart App as Admin...
                 Application_Startup(this, tb_TargetComputer.Text);
-            }
+            }*/
 
-            if (Environment.GetCommandLineArgs().Count() > 1)
+            try
             {
-                if (!string.IsNullOrEmpty(tb_TargetComputer.Text))
+                if (Environment.GetCommandLineArgs().Count() > 1)
                 {
-                    bt_Connect_Click(this, null);
+                    if (!string.IsNullOrEmpty(tb_TargetComputer.Text))
+                    {
+                        bt_Connect_Click(this, null);
+                    }
                 }
             }
+            catch { }
 
         }
 
@@ -498,6 +503,7 @@ namespace ClientCenter
                 ribAgenTActions.IsEnabled = false;
                 ConnectionDock.Visibility = System.Windows.Visibility.Visible;
                 bt_Ping.Visibility = System.Windows.Visibility.Visible;
+
             }
 
             Mouse.OverrideCursor = Cursors.Arrow;
