@@ -50,7 +50,7 @@
                         <DataGridTextColumn Header="Bulletin" Binding="{Binding Path=Bulletin}" />
                         <DataGridTextColumn Header="Language" Binding="{Binding Path=Language}"  />
                         <DataGridTextColumn Header="RevisionNumber" Binding="{Binding Path=RevisionNumber}" />
-                        <DataGridTextColumn Header="ScanTime" Binding="{Binding Path=ScanTime}"/>
+                        <DataGridTextColumn Header="ScanTime" Binding="{Binding Path=ScanTime, StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
                         <DataGridTextColumn Header="SourceVersion" Binding="{Binding Path=SourceVersion}"/>
                         <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}"/>
                         <DataGridTextColumn Header="Title" Binding="{Binding Path=Title}"/>

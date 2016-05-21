@@ -31,7 +31,7 @@
                         <DataGridTextColumn Header="EvaluationState" Binding="{Binding Path=EvaluationState}"/>
                         <DataGridTextColumn Header="Status" Binding="{Binding Path=EvaluationStateText}"/>
                         <DataGridTextColumn Header="InstallState" Binding="{Binding Path=InstallState}"/>
-                        <DataGridTextColumn Header="InstallTime" Binding="{Binding Path=LastInstallTime}"/>
+                        <DataGridTextColumn Header="InstallTime" Binding="{Binding Path=LastInstallTime, StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
                         <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" CanUserResize="True" />
                         <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0" MaxWidth="24">
                             <DataGridTemplateColumn.CellTemplate>

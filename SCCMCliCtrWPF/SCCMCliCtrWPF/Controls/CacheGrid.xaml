@@ -69,7 +69,7 @@
                         <DataGridTextColumn Header="Content ID" Binding="{Binding Path=ContentId}" SortDirection="Ascending" />
                         <DataGridTextColumn Header="Size" Binding="{Binding Path=ContentSize}" />
                         <DataGridTextColumn Header="Version" Binding="{Binding Path=ContentVer}" />
-                        <DataGridTextColumn Header="Last used" Binding="{Binding Path=LastReferenced}" />
+                        <DataGridTextColumn Header="Last used" Binding="{Binding Path=LastReferenced, StringFormat='yyyy-MM-dd HH:mm:ss'}" />
                         <DataGridTextColumn Header="Location" Binding="{Binding Path=Location}" />
                         <DataGridTextColumn Header="Cache ID" Binding="{Binding Path=CacheId}" />
                         <DataGridTextColumn Header="Type" Binding="{Binding Path=ContentType}" />

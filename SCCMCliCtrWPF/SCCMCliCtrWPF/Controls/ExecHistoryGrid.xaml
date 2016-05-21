@@ -12,7 +12,7 @@
                 <DataGridTextColumn Header="User" Binding="{Binding Path=UserID}" SortDirection="Ascending"  />
                 <DataGridTextColumn Header="Package-ID" Binding="{Binding Path=PackageID}" SortDirection="Ascending" />
                 <DataGridTextColumn Header="Program Name" Binding="{Binding Path=_ProgramID}" />
-                <DataGridTextColumn Header="Last Start-Time" Binding="{Binding Path=_RunStartTime}" />
+                <DataGridTextColumn Header="Last Start-Time" Binding="{Binding Path=_RunStartTime, StringFormat='yyyy-MM-dd HH:mm:ss'}" />
                 <DataGridTextColumn Header="Error Code" Binding="{Binding Path=SuccessOrFailureCode}" />
                 <DataGridTextColumn Header="Reason" Binding="{Binding Path=SuccessOrFailureReason}" />
                 <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">

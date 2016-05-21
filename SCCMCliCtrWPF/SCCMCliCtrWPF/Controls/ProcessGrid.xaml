@@ -29,7 +29,7 @@
                         <DataGridTextColumn Header="Process Id" Binding="{Binding Path=ProcessId}" />
                         <DataGridTextColumn Header="Owner" Binding="{Binding Path=Owner}" />
                         <DataGridTextColumn Header="Threads" Binding="{Binding Path=ThreadCount}" />
-                        <DataGridTextColumn Header="CreationDate" Binding="{Binding Path=CreationDate}" />
+                        <DataGridTextColumn Header="CreationDate" Binding="{Binding Path=CreationDate, StringFormat='yyyy-MM-dd HH:mm:ss'}" />
                         <DataGridTextColumn Header="Parent Id" Binding="{Binding Path=ParentProcessId}" />
                         <DataGridTextColumn Header="ExecutablePath" Binding="{Binding Path=ExecutablePath}" Width="200"/>
                         <DataGridTextColumn Header="CommandLine" Binding="{Binding Path=CommandLine}" Width="350" />

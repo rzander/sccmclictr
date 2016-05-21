@@ -36,7 +36,7 @@
                     <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" IsReadOnly="True" Grid.Row="0" SelectionChanged="dataGrid1_SelectionChanged" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Path=DisplayName}" SortDirection="Ascending"/>
-                                <DataGridTextColumn Header="Last Evaluation" Binding="{Binding Path=LastEvalTime}"/>
+                                <DataGridTextColumn Header="Last Evaluation" Binding="{Binding Path=LastEvalTime, StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
                                 <DataGridTextColumn Header="Version" Binding="{Binding Path=Version}"/>
                                 <DataGridTextColumn Header="Compliant" Binding="{Binding Path=isCompliant}"/>
                                 <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">

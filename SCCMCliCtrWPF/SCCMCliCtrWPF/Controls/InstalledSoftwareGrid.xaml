@@ -28,7 +28,7 @@
                         <DataGridTextColumn Header="Product Name" Binding="{Binding Path=ProductName}" SortDirection="Ascending"/>
                         <DataGridTextColumn Header="Publisher" Binding="{Binding Path=Publisher}"/>
                         <DataGridTextColumn Header="Product Version" Binding="{Binding Path=ProductVersion}"/>
-                        <DataGridTextColumn Header="Install Date" Binding="{Binding Path=InstallDate}" />
+                        <DataGridTextColumn Header="Install Date" Binding="{Binding Path=InstallDate, StringFormat='yyyy-MM-dd HH:mm:ss'}" />
                         <DataGridTextColumn Header="Installed Location" Binding="{Binding Path=InstalledLocation}" />
                         <DataGridTextColumn Header="InstallSource" Binding="{Binding Path=InstallSource}" />
                         <DataGridTextColumn Header="Product Code" Binding="{Binding Path=SoftwareCode}" CanUserResize="True" />

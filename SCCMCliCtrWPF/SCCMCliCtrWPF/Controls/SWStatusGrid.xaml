@@ -35,7 +35,7 @@
                         <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" SortDirection="Ascending"/>
                         <DataGridTextColumn Header="Type" Binding="{Binding Path=Type}"/>
                         <DataGridTextColumn Header="Publisher" Binding="{Binding Path=Publisher}"/>
-                        <DataGridTextColumn Header="Available After" Binding="{Binding Path=AvailableAfter}"/>
+                        <DataGridTextColumn Header="Available After" Binding="{Binding Path=AvailableAfter, StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
                         <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}"/>
                         <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0" MaxWidth="24">
                             <DataGridTemplateColumn.CellTemplate>
