@@ -208,6 +208,7 @@ try
 
 #Cleanup Execution History 
     Remove-Item -Path 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\SMS\Mobile Client\*' -Recurse -ErrorAction SilentlyContinue 
+    Remove-Item -Path 'HKLM:\SOFTWARE\Microsoft\SMS\Mobile Client\*' -Recurse -ErrorAction SilentlyContinue 
 
 #Cleanup App-V 4.6 Packages 
     try 

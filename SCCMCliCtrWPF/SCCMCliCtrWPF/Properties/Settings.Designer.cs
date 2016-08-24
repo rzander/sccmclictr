@@ -357,18 +357,19 @@ while ($a -ne 1)")]
             " % { [io.directory]::delete($_.fullname, $true)  } -ErrorAction SilentlyContinue" +
             " \r\n        } catch {} \r\n    } \r\n\r\n#Cleanup Execution History \r\n    Remove-Item -" +
             "Path \'HKLM:\\SOFTWARE\\Wow6432Node\\Microsoft\\SMS\\Mobile Client\\*\' -Recurse -ErrorA" +
-            "ction SilentlyContinue \r\n\r\n#Cleanup App-V 4.6 Packages \r\n    try \r\n    { \r\n     " +
-            "   (get-wmiobject -query \"SELECT * FROM Package WHERE SftPath like \'%\' AND InUse" +
-            " = \'FALSE\' \" -namespace \"root\\Microsoft\\appvirt\\client\") | % { start-process -wa" +
-            "it sftmime.exe -argumentlist \"delete package:$([char]34)$($_.Name)$([char]34) /g" +
-            "lobal\" }         \r\n    } catch {} \r\n\r\n#kill existing instances of ccmsetup.exe \r" +
-            "\n    $ccm = (Get-Process \'ccmsetup\' -ErrorAction SilentlyContinue) \r\n    if($ccm" +
-            " -ne $null) \r\n    { \r\n            $ccm.kill(); \r\n    } \r\n\r\n#run ccmsetup \r\n    $" +
-            "proc = Start-Process -FilePath \'c:\\windows\\temp\\ccmsetup.exe\' -PassThru -Wait -A" +
-            "rgumentList \"/mp:$($CMMP) /source:http://$($CMMP)/CCM_Client CCMHTTPPORT=80 RESE" +
-            "TKEYINFORMATION=TRUE SMSSITECODE=$($CMSiteCode) SMSSLP=$($CMMP) FSP=$($CMMP)\" \r\n" +
-            "   Sleep(5) \r\n   \"ccmsetup started...\" \r\n} \r\n\r\ncatch \r\n{ \r\n        \"an Error occ" +
-            "ured...\" \r\n        $error[0] \r\n} ")]
+            "ction SilentlyContinue \r\n    Remove-Item -Path \'HKLM:\\SOFTWARE\\Microsoft\\SMS\\Mob" +
+            "ile Client\\*\' -Recurse -ErrorAction SilentlyContinue \r\n\r\n#Cleanup App-V 4.6 Pack" +
+            "ages \r\n    try \r\n    { \r\n        (get-wmiobject -query \"SELECT * FROM Package WH" +
+            "ERE SftPath like \'%\' AND InUse = \'FALSE\' \" -namespace \"root\\Microsoft\\appvirt\\cl" +
+            "ient\") | % { start-process -wait sftmime.exe -argumentlist \"delete package:$([ch" +
+            "ar]34)$($_.Name)$([char]34) /global\" }         \r\n    } catch {} \r\n\r\n#kill existi" +
+            "ng instances of ccmsetup.exe \r\n    $ccm = (Get-Process \'ccmsetup\' -ErrorAction S" +
+            "ilentlyContinue) \r\n    if($ccm -ne $null) \r\n    { \r\n            $ccm.kill(); \r\n " +
+            "   } \r\n\r\n#run ccmsetup \r\n    $proc = Start-Process -FilePath \'c:\\windows\\temp\\cc" +
+            "msetup.exe\' -PassThru -Wait -ArgumentList \"/mp:$($CMMP) /source:http://$($CMMP)/" +
+            "CCM_Client CCMHTTPPORT=80 RESETKEYINFORMATION=TRUE SMSSITECODE=$($CMSiteCode) SM" +
+            "SSLP=$($CMMP) FSP=$($CMMP)\" \r\n   Sleep(5) \r\n   \"ccmsetup started...\" \r\n} \r\n\r\ncat" +
+            "ch \r\n{ \r\n        \"an Error occured...\" \r\n        $error[0] \r\n} ")]
         public string AgentInstallPS {
             get {
                 return ((string)(this["AgentInstallPS"]));

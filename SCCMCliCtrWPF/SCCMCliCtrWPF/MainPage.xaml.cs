@@ -49,7 +49,7 @@ namespace ClientCenter
             try
             {
                 this.Title = SCCMCliCtr.Customization.Title;
-                rStatus.AppendText("Client Center for Configuration Manager (c) 2013 by Roger Zander\n");
+                rStatus.AppendText("Client Center for Configuration Manager (c) 2016 by Roger Zander\n");
                 rStatus.AppendText("Project-Page: http://sccmclictr.codeplex.com\n");
                 rStatus.AppendText("Current Version: " + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n");
                 rStatus.AppendText("Assembly Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString() + "\n");
@@ -248,7 +248,8 @@ namespace ClientCenter
                 {
                     if (!string.IsNullOrEmpty(tb_TargetComputer.Text))
                     {
-                        bt_Connect_Click(this, null);
+                        System.Threading.Tasks.Task.Run(() => { bt_Connect_Click(this, null); });
+                        //bt_Connect_Click(this, null);
                     }
                 }
             }
@@ -358,155 +359,160 @@ namespace ClientCenter
 
         private void bt_Connect_Click(object sender, RoutedEventArgs e)
         {
-            Mouse.OverrideCursor = Cursors.Wait;
-
-            if (oAgent != null)
+            sender.ToString();
+            AnonymousDelegate dUpdate = delegate ()
             {
-                this.AgentSettingsPanel.IsSelected = true;
+                Mouse.OverrideCursor = Cursors.Wait;
 
-                if (oAgent.isConnected)
+                if (oAgent != null)
                 {
-                    try
+                    this.AgentSettingsPanel.IsSelected = true;
+
+                    if (oAgent.isConnected)
                     {
-                        eventMonitoring1.bt_StopMonitoring_Click(sender, e);
-
-                        oAgent.Client.Monitoring.AsynchronousScript.Close();
-                        oAgent.disconnect();
-                    }
-                    catch { }
-                }
-
-                oAgent.Dispose();
-                PageReset();
-
-            }
-
-            if (bPasswordChanged)
-            {
-                Properties.Settings.Default.Password = common.Encrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
-                Properties.Settings.Default.Save();
-                pb_Password.Password = Properties.Settings.Default.Password;
-                bPasswordChanged = false;
-            }
-
-            tb_TargetComputer.Text = tb_TargetComputer.Text.Trim();
-            tb_TargetComputer2.Text = tb_TargetComputer2.Text.Trim();
-
-            string sTarget = tb_TargetComputer.Text;
-            try
-            {
-
-                if (sender == bt_Connect2)
-                    sTarget = tb_TargetComputer2.Text;
-
-                tb_TargetComputer.Text = sTarget;
-                tb_TargetComputer2.Text = sTarget;
-
-                if (sTarget.ToLower() == "localhost" | sTarget == "127.0.0.1")
-                {
-                    if (!IsRunAsAdministrator())
-                    {
-                        MessageBox.Show("Sorry, connecting the local machine requires administrative permissions. Please start the Tool as Administrator.");
-                    }
-                }
-
-                if (System.Text.RegularExpressions.Regex.Match(sTarget, "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$", System.Text.RegularExpressions.RegexOptions.CultureInvariant).Success)
-                {
-                    if (sTarget != "127.0.0.1")
-                    {
-                        if (string.IsNullOrEmpty(tb_Username.Text) | string.IsNullOrEmpty(pb_Password.Password))
+                        try
                         {
-                            MessageBox.Show("connecting an IP Address requires Username and Password", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            eventMonitoring1.bt_StopMonitoring_Click(sender, e);
+
+                            oAgent.Client.Monitoring.AsynchronousScript.Close();
+                            oAgent.disconnect();
                         }
+                        catch { }
                     }
+
+                    oAgent.Dispose();
+                    PageReset();
+
                 }
 
-                rStatus.Document = new FlowDocument();
-                myTrace = new MyTraceListener(ref rStatus);
-                myTrace.TraceOutputOptions = TraceOptions.None;
-
-                if (string.IsNullOrEmpty(tb_Username.Text))
+                if (bPasswordChanged)
                 {
-                    oAgent = new SCCMAgent(sTarget, null, null, int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
-                }
-                else
-                {
-                    if (!tb_Username.Text.Contains(@"\"))
-                    {
-                        tb_Username.Text = Environment.UserDomainName + @"\" + tb_Username.Text;
-                    }
-                    string sPW = common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
-                    oAgent = new SCCMAgent(sTarget, tb_Username.Text, sPW, int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
+                    Properties.Settings.Default.Password = common.Encrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
+                    Properties.Settings.Default.Save();
+                    pb_Password.Password = Properties.Settings.Default.Password;
+                    bPasswordChanged = false;
                 }
 
-                oAgent.PSCode.Listeners.Add(myTrace);
-                oAgent.connect();
+                tb_TargetComputer.Text = tb_TargetComputer.Text.Trim();
+                tb_TargetComputer2.Text = tb_TargetComputer2.Text.Trim();
 
-                //Store Agent settings in Common class for Plugin access.
-                Common.Agent = oAgent;
-
+                string sTarget = tb_TargetComputer.Text;
                 try
                 {
-                    //remove existing entry
-                    if (Properties.Settings.Default.recentlyUsedComputers.Contains(sTarget))
-                        Properties.Settings.Default.recentlyUsedComputers.Remove(sTarget);
 
-                    //add on first position
-                    Properties.Settings.Default.recentlyUsedComputers.Insert(0, sTarget);
+                    if (sender == bt_Connect2)
+                        sTarget = tb_TargetComputer2.Text;
 
-                    if (Properties.Settings.Default.recentlyUsedComputers.Count > 10)
+                    tb_TargetComputer.Text = sTarget;
+                    tb_TargetComputer2.Text = sTarget;
+
+                    if (sTarget.ToLower() == "localhost" | sTarget == "127.0.0.1")
                     {
-                        Properties.Settings.Default.recentlyUsedComputers.RemoveAt(10);
+                        if (!IsRunAsAdministrator())
+                        {
+                            MessageBox.Show("Sorry, connecting the local machine requires administrative permissions. Please start the Tool as Administrator.");
+                        }
                     }
 
-                    Properties.Settings.Default.Save();
+                    if (System.Text.RegularExpressions.Regex.Match(sTarget, "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$", System.Text.RegularExpressions.RegexOptions.CultureInvariant).Success)
+                    {
+                        if (sTarget != "127.0.0.1")
+                        {
+                            if (string.IsNullOrEmpty(tb_Username.Text) | string.IsNullOrEmpty(pb_Password.Password))
+                            {
+                                MessageBox.Show("connecting an IP Address requires Username and Password", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            }
+                        }
+                    }
+
+                    rStatus.Document = new FlowDocument();
+                    myTrace = new MyTraceListener(ref rStatus);
+                    myTrace.TraceOutputOptions = TraceOptions.None;
+
+                    if (string.IsNullOrEmpty(tb_Username.Text))
+                    {
+                        oAgent = new SCCMAgent(sTarget, null, null, int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
+                    }
+                    else
+                    {
+                        if (!tb_Username.Text.Contains(@"\"))
+                        {
+                            tb_Username.Text = Environment.UserDomainName + @"\" + tb_Username.Text;
+                        }
+                        string sPW = common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
+                        oAgent = new SCCMAgent(sTarget, tb_Username.Text, sPW, int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
+                    }
+
+                    oAgent.PSCode.Listeners.Add(myTrace);
+                    oAgent.connect();
+
+                    //Store Agent settings in Common class for Plugin access.
+                    Common.Agent = oAgent;
+
+                    try
+                    {
+                        //remove existing entry
+                        if (Properties.Settings.Default.recentlyUsedComputers.Contains(sTarget))
+                            Properties.Settings.Default.recentlyUsedComputers.Remove(sTarget);
+
+                        //add on first position
+                        Properties.Settings.Default.recentlyUsedComputers.Insert(0, sTarget);
+
+                        if (Properties.Settings.Default.recentlyUsedComputers.Count > 10)
+                        {
+                            Properties.Settings.Default.recentlyUsedComputers.RemoveAt(10);
+                        }
+
+                        Properties.Settings.Default.Save();
+                    }
+                    catch { }
+
+                    agentSettingItem1.SCCMAgentConnection = oAgent;
+                    agentSettingItem1.Listener = myTrace;
+                    cacheGrid1.Listener = myTrace;
+                    servicesGrid1.Listener = myTrace;
+                    processGrid1.Listener = myTrace;
+                    sWUpdatesGrid1.Listener = myTrace;
+                    execHistoryGrid1.Listener = myTrace;
+                    sWAllUpdatesGrid1.Listener = myTrace;
+                    installRepair1.Listener = myTrace;
+                    applicationGrid1.Listener = myTrace;
+                    eventMonitoring1.Listener = myTrace;
+                    invInstalledSWGrid.Listener = myTrace;
+                    serviceWindowGrid1.Listener = myTrace;
+                    CollectionVariablesGrid1.Listener = myTrace;
+                    SettingsMgmtGrid.Listener = myTrace;
+                    SWDistSummaryGrid1.Listener = myTrace;
+                    LogViewPane.Listener = myTrace;
+
+                    navigationPane1.IsEnabled = true;
+                    ribAgenTActions.IsEnabled = true;
+
+                    ConnectionDock.Visibility = System.Windows.Visibility.Collapsed;
+                    ribbon1.IsEnabled = true;
+                    agentSettingItem1.IsEnabled = true;
+
+                    this.Title = sTarget;
+
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    //ribbon1.IsEnabled = false;
+                    navigationPane1.IsEnabled = false;
+                    agentSettingItem1.IsEnabled = false;
+                    myTrace.WriteError("Unable to connect: " + sTarget);
+                    myTrace.WriteError("Error: " + ex.Message);
+                    ribAgenTActions.IsEnabled = false;
+                    ConnectionDock.Visibility = System.Windows.Visibility.Visible;
+                    bt_Ping.Visibility = System.Windows.Visibility.Visible;
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
 
-                agentSettingItem1.SCCMAgentConnection = oAgent;
-                agentSettingItem1.Listener = myTrace;
-                cacheGrid1.Listener = myTrace;
-                servicesGrid1.Listener = myTrace;
-                processGrid1.Listener = myTrace;
-                sWUpdatesGrid1.Listener = myTrace;
-                execHistoryGrid1.Listener = myTrace;
-                sWAllUpdatesGrid1.Listener = myTrace;
-                installRepair1.Listener = myTrace;
-                applicationGrid1.Listener = myTrace;
-                eventMonitoring1.Listener = myTrace;
-                invInstalledSWGrid.Listener = myTrace;
-                serviceWindowGrid1.Listener = myTrace;
-                CollectionVariablesGrid1.Listener = myTrace;
-                SettingsMgmtGrid.Listener = myTrace;
-                SWDistSummaryGrid1.Listener = myTrace;
-                LogViewPane.Listener = myTrace;
+                Mouse.OverrideCursor = Cursors.Arrow;
+            };
+            Dispatcher.Invoke(dUpdate);
 
-                navigationPane1.IsEnabled = true;
-                ribAgenTActions.IsEnabled = true;
 
-                ConnectionDock.Visibility = System.Windows.Visibility.Collapsed;
-                ribbon1.IsEnabled = true;
-                agentSettingItem1.IsEnabled = true;
-
-                this.Title = sTarget;
-
-            }
-            catch (Exception ex)
-            {
-                //ribbon1.IsEnabled = false;
-                navigationPane1.IsEnabled = false;
-                agentSettingItem1.IsEnabled = false;
-                myTrace.WriteError("Unable to connect: " + sTarget);
-                myTrace.WriteError("Error: " + ex.Message);
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                ribAgenTActions.IsEnabled = false;
-                ConnectionDock.Visibility = System.Windows.Visibility.Visible;
-                bt_Ping.Visibility = System.Windows.Visibility.Visible;
-
-            }
-
-            Mouse.OverrideCursor = Cursors.Arrow;
 
         }
 
@@ -730,6 +736,7 @@ namespace ClientCenter
                         Explorer.StartInfo.Arguments = @"-NoExit -Command " + sPS + " -SessionOption (New-PSSessionOption -NoMachineProfile)";
                 }
                 Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
+                
                 Explorer.Start();
             }
             catch (Exception ex)
@@ -1315,6 +1322,11 @@ namespace ClientCenter
                     tw1 = new StreamWriter(sUIPath + @"\XmlStorage\Extensions\Actions\ed9dee86-eadd-4ac8-82a1-7234a4646e62\sccmclictr.xml");
                     tw1.WriteLine(string.Format(Properties.Resources.ConsoleExtension, System.Reflection.Assembly.GetExecutingAssembly().Location));
                     tw1.Close();
+
+                    Directory.CreateDirectory(sUIPath + @"\XmlStorage\Extensions\Actions\0770186d-ea57-4276-a46b-7344ae081b58");
+                    tw1 = new StreamWriter(sUIPath + @"\XmlStorage\Extensions\Actions\0770186d-ea57-4276-a46b-7344ae081b58\sccmclictr.xml");
+                    tw1.WriteLine(string.Format(Properties.Resources.ConsoleExtension, System.Reflection.Assembly.GetExecutingAssembly().Location));
+                    tw1.Close();
                 }
             }
             else
@@ -1363,6 +1375,15 @@ namespace ClientCenter
                     try
                     {
                         File.Delete(sUIPath + @"\XmlStorage\Extensions\Actions\ed9dee86-eadd-4ac8-82a1-7234a4646e62\sccmclictr.xml");
+                    }
+                    catch { }
+                }
+
+                if (File.Exists(sUIPath + @"\XmlStorage\Extensions\Actions\0770186d-ea57-4276-a46b-7344ae081b58\sccmclictr.xml"))
+                {
+                    try
+                    {
+                        File.Delete(sUIPath + @"\XmlStorage\Extensions\Actions\0770186d-ea57-4276-a46b-7344ae081b58\sccmclictr.xml");
                     }
                     catch { }
                 }
