@@ -18,6 +18,7 @@ using Microsoft.Win32;
 using System.IO;
 using System.Threading;
 
+
 namespace ClientCenter
 {
     /// <summary>

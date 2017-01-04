@@ -300,29 +300,32 @@ while ($a -ne 1)")]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>OS Architecture|root\\cimv2|SELECT VariableValue FROM  Win32_Environment WH" +
-            "ERE Name=\'PROCESSOR_ARCHITECTURE\' AND UserName=\'&lt;SYSTEM&gt;\'</string>\r\n  <str" +
-            "ing>PC Manufacturer|root\\cimv2|SELECT Manufacturer FROM Win32_ComputerSystem</st" +
-            "ring>\r\n  <string>LastHWInv|Root\\CCM\\Scheduler|SELECT LastTriggerTime FROM CCM_Sc" +
-            "heduler_History WHERE ScheduleID=\'{00000000-0000-0000-0000-000000000001}\' and Us" +
-            "erSID=\'Machine\'</string>\r\n  <string>LastSWInv|Root\\CCM\\Scheduler|SELECT LastTrig" +
-            "gerTime FROM CCM_Scheduler_History WHERE ScheduleID=\'{00000000-0000-0000-0000-00" +
-            "0000000002}\' and UserSID=\'Machine\'</string>\r\n  <string>LastDDR|Root\\CCM\\Schedule" +
-            "r|SELECT LastTriggerTime FROM CCM_Scheduler_History WHERE ScheduleID=\'{00000000-" +
-            "0000-0000-0000-000000000003}\' and UserSID=\'Machine\'</string>\r\n  <string>LastMach" +
-            "inePolicyRequest|Root\\CCM\\Scheduler|SELECT LastTriggerTime FROM CCM_Scheduler_Hi" +
-            "story WHERE ScheduleID=\'{00000000-0000-0000-0000-000000000021}\' and UserSID=\'Mac" +
-            "hine\'</string>\r\n  <string>LastReboot|root\\cimv2|SELECT LastBootUpTime FROM Win32" +
-            "_OperatingSystem</string>\r\n  <string>InstallDate|root\\cimv2|SELECT InstallDate F" +
-            "ROM Win32_OperatingSystem</string>\r\n  <string>CurrentUser|root\\cimv2|SELECT User" +
-            "name FROM Win32_ComputerSystem</string>\r\n  <string>PrimaryUsers|ROOT\\ccm\\Policy\\" +
-            "Machine\\ActualConfig|SELECT * FROM CCM_UserAffinity WHERE IsUserAffinitySet = \'T" +
-            "rue\'</string>\r\n  <string>FreeDiskSpace on C: (Bytes)|ROOT\\cimv2|SELECT FreeSpace" +
-            " FROM Win32_LogicalDisk WHERE DeviceID=\'C:\'</string>\r\n  <string>DiskSpace on C: " +
-            "(Bytes)|ROOT\\cimv2|SELECT Size FROM Win32_LogicalDisk WHERE DeviceID=\'C:\'</strin" +
-            "g>\r\n  <string>Running Executions|root\\CCM\\SoftMgmtAgent|select MIFPackageName, R" +
-            "equestID, programID, ReceivedTime, SuspendReboot, advertid, contentid, RunningSt" +
-            "ate, State from ccm_executionrequestex</string>\r\n</ArrayOfString>")]
+            "tring>Operating System|root\\cimv2|SELECT Caption FROM Win32_OperatingSystem</str" +
+            "ing>\r\n  <string>OS Build|root\\cimv2|SELECT BuildNumber FROM Win32_OperatingSyste" +
+            "m</string>\r\n  <string>OS Architecture|root\\cimv2|SELECT VariableValue FROM  Win3" +
+            "2_Environment WHERE Name=\'PROCESSOR_ARCHITECTURE\' AND UserName=\'&lt;SYSTEM&gt;\'<" +
+            "/string>\r\n  <string>PC Manufacturer|root\\cimv2|SELECT Manufacturer FROM Win32_Co" +
+            "mputerSystem</string>\r\n  <string>LastHWInv|Root\\CCM\\Scheduler|SELECT LastTrigger" +
+            "Time FROM CCM_Scheduler_History WHERE ScheduleID=\'{00000000-0000-0000-0000-00000" +
+            "0000001}\' and UserSID=\'Machine\'</string>\r\n  <string>LastSWInv|Root\\CCM\\Scheduler" +
+            "|SELECT LastTriggerTime FROM CCM_Scheduler_History WHERE ScheduleID=\'{00000000-0" +
+            "000-0000-0000-000000000002}\' and UserSID=\'Machine\'</string>\r\n  <string>LastDDR|R" +
+            "oot\\CCM\\Scheduler|SELECT LastTriggerTime FROM CCM_Scheduler_History WHERE Schedu" +
+            "leID=\'{00000000-0000-0000-0000-000000000003}\' and UserSID=\'Machine\'</string>\r\n  " +
+            "<string>LastMachinePolicyRequest|Root\\CCM\\Scheduler|SELECT LastTriggerTime FROM " +
+            "CCM_Scheduler_History WHERE ScheduleID=\'{00000000-0000-0000-0000-000000000021}\' " +
+            "and UserSID=\'Machine\'</string>\r\n  <string>LastReboot|root\\cimv2|SELECT LastBootU" +
+            "pTime FROM Win32_OperatingSystem</string>\r\n  <string>InstallDate|root\\cimv2|SELE" +
+            "CT InstallDate FROM Win32_OperatingSystem</string>\r\n  <string>CurrentUser|root\\c" +
+            "imv2|SELECT Username FROM Win32_ComputerSystem</string>\r\n  <string>PrimaryUsers|" +
+            "ROOT\\ccm\\Policy\\Machine\\ActualConfig|SELECT * FROM CCM_UserAffinity WHERE IsUser" +
+            "AffinitySet = \'True\'</string>\r\n  <string>FreeDiskSpace on C: (Bytes)|ROOT\\cimv2|" +
+            "SELECT FreeSpace FROM Win32_LogicalDisk WHERE DeviceID=\'C:\'</string>\r\n  <string>" +
+            "DiskSpace on C: (Bytes)|ROOT\\cimv2|SELECT Size FROM Win32_LogicalDisk WHERE Devi" +
+            "ceID=\'C:\'</string>\r\n  <string>Running Executions|root\\CCM\\SoftMgmtAgent|select M" +
+            "IFPackageName, RequestID, programID, ReceivedTime, SuspendReboot, advertid, cont" +
+            "entid, RunningState, State from ccm_executionrequestex</string>\r\n</ArrayOfString" +
+            ">")]
         public global::System.Collections.Specialized.StringCollection AdhocInv {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["AdhocInv"]));
@@ -344,32 +347,30 @@ while ($a -ne 1)")]
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("$CMMP = \'Management Point FQDN\' \r\n$CMSiteCode = \'xxx\'  \r\n\r\n$ErrorActionPreference" +
-            " = \"SilentlyContinue\" \r\n\r\n#Only migrate non CM Agents \r\nif(([wmi]\"ROOT\\ccm:SMS_C" +
-            "lient=@\").ClientVersion.StartsWith(\'5.\')) \r\n{ \r\n    \"Already migrated...\" \r\n    " +
-            "exit 0 \r\n} \r\n\r\ntry \r\n{ \r\n#Get ccm cache path for later cleanup... \r\n    try \r\n  " +
-            "  { \r\n        $ccmcache = ([wmi]\"ROOT\\ccm\\SoftMgmtAgent:CacheConfig.ConfigKey=\'C" +
-            "ache\'\").Location \r\n    } catch {} \r\n\r\n#download ccmsetup.exe from MP \r\n    $webc" +
-            "lient = New-Object System.Net.WebClient \r\n    $url = \"http://$($CMMP)/CCM_Client" +
-            "/ccmsetup.exe\" \r\n    $file = \"c:\\windows\\temp\\ccmsetup.exe\" \r\n    $webclient.Dow" +
-            "nloadFile($url,$file) \r\n\r\n#stop the old sms agent service \r\n    stop-service \'cc" +
-            "mexec\' -ErrorAction SilentlyContinue \r\n\r\n#Cleanup cache \r\n    if($ccmcache -ne $" +
-            "null) \r\n    { \r\n        try \r\n        { \r\n        dir $ccmcache \'*\' -directory |" +
-            " % { [io.directory]::delete($_.fullname, $true)  } -ErrorAction SilentlyContinue" +
-            " \r\n        } catch {} \r\n    } \r\n\r\n#Cleanup Execution History \r\n    Remove-Item -" +
-            "Path \'HKLM:\\SOFTWARE\\Wow6432Node\\Microsoft\\SMS\\Mobile Client\\*\' -Recurse -ErrorA" +
-            "ction SilentlyContinue \r\n    Remove-Item -Path \'HKLM:\\SOFTWARE\\Microsoft\\SMS\\Mob" +
-            "ile Client\\*\' -Recurse -ErrorAction SilentlyContinue \r\n\r\n#Cleanup App-V 4.6 Pack" +
-            "ages \r\n    try \r\n    { \r\n        (get-wmiobject -query \"SELECT * FROM Package WH" +
-            "ERE SftPath like \'%\' AND InUse = \'FALSE\' \" -namespace \"root\\Microsoft\\appvirt\\cl" +
-            "ient\") | % { start-process -wait sftmime.exe -argumentlist \"delete package:$([ch" +
-            "ar]34)$($_.Name)$([char]34) /global\" }         \r\n    } catch {} \r\n\r\n#kill existi" +
-            "ng instances of ccmsetup.exe \r\n    $ccm = (Get-Process \'ccmsetup\' -ErrorAction S" +
-            "ilentlyContinue) \r\n    if($ccm -ne $null) \r\n    { \r\n            $ccm.kill(); \r\n " +
-            "   } \r\n\r\n#run ccmsetup \r\n    $proc = Start-Process -FilePath \'c:\\windows\\temp\\cc" +
-            "msetup.exe\' -PassThru -Wait -ArgumentList \"/mp:$($CMMP) /source:http://$($CMMP)/" +
-            "CCM_Client CCMHTTPPORT=80 RESETKEYINFORMATION=TRUE SMSSITECODE=$($CMSiteCode) SM" +
-            "SSLP=$($CMMP) FSP=$($CMMP)\" \r\n   Sleep(5) \r\n   \"ccmsetup started...\" \r\n} \r\n\r\ncat" +
-            "ch \r\n{ \r\n        \"an Error occured...\" \r\n        $error[0] \r\n} ")]
+            " = \"SilentlyContinue\" \r\n\r\ntry \r\n{ \r\n#Get ccm cache path for later cleanup... \r\n " +
+            "   try \r\n    { \r\n        $ccmcache = ([wmi]\"ROOT\\ccm\\SoftMgmtAgent:CacheConfig.C" +
+            "onfigKey=\'Cache\'\").Location \r\n    } catch {} \r\n\r\n#download ccmsetup.exe from MP " +
+            "\r\n    $webclient = New-Object System.Net.WebClient \r\n    $url = \"http://$($CMMP)" +
+            "/CCM_Client/ccmsetup.exe\" \r\n    $file = \"c:\\windows\\temp\\ccmsetup.exe\" \r\n    $we" +
+            "bclient.DownloadFile($url,$file) \r\n\r\n#stop the old sms agent service \r\n    stop-" +
+            "service \'ccmexec\' -ErrorAction SilentlyContinue \r\n\r\n#Cleanup cache \r\n    if($ccm" +
+            "cache -ne $null) \r\n    { \r\n        try \r\n        { \r\n        dir $ccmcache \'*\' -" +
+            "directory | % { [io.directory]::delete($_.fullname, $true)  } -ErrorAction Silen" +
+            "tlyContinue \r\n        } catch {} \r\n    } \r\n\r\n#Cleanup Execution History \r\n    Re" +
+            "move-Item -Path \'HKLM:\\SOFTWARE\\Wow6432Node\\Microsoft\\SMS\\Mobile Client\\*\' -Recu" +
+            "rse -ErrorAction SilentlyContinue \r\n    Remove-Item -Path \'HKLM:\\SOFTWARE\\Micros" +
+            "oft\\SMS\\Mobile Client\\*\' -Recurse -ErrorAction SilentlyContinue \r\n\r\n#Cleanup App" +
+            "-V 4.6 Packages \r\n    try \r\n    { \r\n        (get-wmiobject -query \"SELECT * FROM" +
+            " Package WHERE SftPath like \'%\' AND InUse = \'FALSE\' \" -namespace \"root\\Microsoft" +
+            "\\appvirt\\client\") | % { start-process -wait sftmime.exe -argumentlist \"delete pa" +
+            "ckage:$([char]34)$($_.Name)$([char]34) /global\" }         \r\n    } catch {} \r\n\r\n#" +
+            "kill existing instances of ccmsetup.exe \r\n    $ccm = (Get-Process \'ccmsetup\' -Er" +
+            "rorAction SilentlyContinue) \r\n    if($ccm -ne $null) \r\n    { \r\n            $ccm." +
+            "kill(); \r\n    } \r\n\r\n#run ccmsetup \r\n    $proc = Start-Process -FilePath \'c:\\wind" +
+            "ows\\temp\\ccmsetup.exe\' -PassThru -Wait -ArgumentList \"/mp:$($CMMP) /source:http:" +
+            "//$($CMMP)/CCM_Client CCMHTTPPORT=80 RESETKEYINFORMATION=TRUE SMSSITECODE=$($CMS" +
+            "iteCode) SMSSLP=$($CMMP) FSP=$($CMMP)\" \r\n   Sleep(5) \r\n   \"ccmsetup started...\" " +
+            "\r\n} \r\n\r\ncatch \r\n{ \r\n        \"an Error occured...\" \r\n        $error[0] \r\n} ")]
         public string AgentInstallPS {
             get {
                 return ((string)(this["AgentInstallPS"]));
