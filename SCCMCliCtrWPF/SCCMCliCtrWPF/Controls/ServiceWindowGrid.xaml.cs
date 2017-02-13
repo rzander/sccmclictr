@@ -93,11 +93,15 @@ namespace ClientCenter.Controls
                         if (oAgent.isConnected)
                         {
                             scheduleControl1.ScheduledTimes.Clear();
-                            foreach (sccmclictr.automation.policy.requestedConfig.CCM_ServiceWindow oSRW in oAgent.Client.RequestedConfig.ServiceWindow)
-                            {
 
-                                GetSchedules(oSRW.DecodedSchedule, oSRW.ServiceWindowID, oSRW.PolicySource, oSRW.ServiceWindowType);
+                            try
+                            {
+                                foreach (sccmclictr.automation.policy.requestedConfig.CCM_ServiceWindow oSRW in oAgent.Client.RequestedConfig.ServiceWindow)
+                                {
+                                    GetSchedules(oSRW.DecodedSchedule, oSRW.ServiceWindowID, oSRW.PolicySource, oSRW.ServiceWindowType);
+                                }
                             }
+                            catch { }
                         }
 
                     }
@@ -151,77 +155,103 @@ namespace ClientCenter.Controls
                 isLocal = true;
 
             var oWin = Schedule;
-            switch (oWin.GetType().Name)
+            try
             {
-                case ("List`1"):
-                    foreach (var subsched in oWin as List<object>)
-                    {
-                        GetSchedules(subsched, ServiceWindowID, PolicySource, SWType);
-                    }
-                    break;
-                case ("SMS_ST_NonRecurring"):
-                     ScheduleDecoding.SMS_ST_NonRecurring oSchedNonRec = ((ScheduleDecoding.SMS_ST_NonRecurring)oWin);
+                switch (oWin.GetType().Name)
+                {
+                    case ("List`1"):
+                        foreach (var subsched in oWin as List<object>)
+                        {
+                            GetSchedules(subsched, ServiceWindowID, PolicySource, SWType);
+                        }
+                        break;
+                    case ("SMS_ST_NonRecurring"):
+                        ScheduleDecoding.SMS_ST_NonRecurring oSchedNonRec = ((ScheduleDecoding.SMS_ST_NonRecurring)oWin);
 
-                    string sDayNonRec = new DateTime(2012, 7, oSchedNonRec.StartTime.Day).DayOfWeek.ToString();
-                    //DateTime dNextStartTime = oSchedNonRec.NextStartTime;
-                    DateTime dNextRunNonRec = oSchedNonRec.NextStartTime;
-                    if (oSchedNonRec.StartTime + new TimeSpan(oSchedNonRec.DayDuration, oSchedNonRec.HourDuration, 0, 0) >= DateTime.Now.Date)
-                    {
-                        
-                        ScheduleControl.ScheduledTime oControl = new ScheduleControl.ScheduledTime(dNextRunNonRec, new TimeSpan(oSchedNonRec.DayDuration, oSchedNonRec.HourDuration, oSchedNonRec.MinuteDuration, 0), cForeColor, "Non Recuring", isLocal, ServiceWindowID, SWType);
-                        scheduleControl1.ScheduledTimes.Add(oControl);
-                    }
-                    break;
-                case ("SMS_ST_RecurInterval"):
-                    ScheduleDecoding.SMS_ST_RecurInterval oSchedInt = ((ScheduleDecoding.SMS_ST_RecurInterval)oWin);
-                    DateTime dNextStartTimeInt = oSchedInt.NextStartTime;
-                    DateTime dNextRunInt = dNextStartTimeInt;
+                        string sDayNonRec = new DateTime(2012, 7, oSchedNonRec.StartTime.Day).DayOfWeek.ToString();
 
-                    string sRecurTextInt = string.Format("Occours Every ({0})Day(s)", oSchedInt.DaySpan);
-                    if(oSchedInt.DaySpan == 0)
-                        sRecurTextInt = string.Format("Occours Every ({0})Hour(s)", oSchedInt.HourSpan);
+                        DateTime dNextRunNonRec = oSchedNonRec.NextStartTime;
+                        if (oSchedNonRec.StartTime + new TimeSpan(oSchedNonRec.DayDuration, oSchedNonRec.HourDuration, 0, 0) >= DateTime.Now.Date)
+                        {
 
-                    //Check if there is a schedule today... (past)
-                    //if (oSchedInt.PreviousStartTime.Date == DateTime.Now.Date)
-                    //    dNextRunInt = oSchedInt.PreviousStartTime;
+                            ScheduleControl.ScheduledTime oControl = new ScheduleControl.ScheduledTime(dNextRunNonRec, new TimeSpan(oSchedNonRec.DayDuration, oSchedNonRec.HourDuration, oSchedNonRec.MinuteDuration, 0), cForeColor, "Non Recuring", isLocal, ServiceWindowID, SWType);
+                            scheduleControl1.ScheduledTimes.Add(oControl);
+                        }
+                        break;
+                    case ("SMS_ST_RecurInterval"):
+                        ScheduleDecoding.SMS_ST_RecurInterval oSchedInt = ((ScheduleDecoding.SMS_ST_RecurInterval)oWin);
+                        DateTime dNextStartTimeInt = oSchedInt.NextStartTime;
+                        DateTime dNextRunInt = dNextStartTimeInt;
 
-                    //Check if there is a schedule today... (past)
-                    if (oSchedInt.PreviousStartTime.AddDays(oSchedInt.DayDuration).AddHours(oSchedInt.HourDuration).Date == DateTime.Now.Date)
-                        dNextRunInt = oSchedInt.PreviousStartTime;
+                        string sRecurTextInt = string.Format("Occours Every ({0})Day(s)", oSchedInt.DaySpan);
+                        if (oSchedInt.DaySpan == 0)
+                            sRecurTextInt = string.Format("Occours Every ({0})Hour(s)", oSchedInt.HourSpan);
 
-                    while (dNextRunInt.Date < DateTime.Now.Date + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
-                    {
-                        scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRunInt, new TimeSpan(oSchedInt.DayDuration, oSchedInt.HourDuration, oSchedInt.MinuteDuration, 0), cForeColor, sRecurTextInt + " " + ServiceWindowID, isLocal, ServiceWindowID, SWType));
-                        dNextRunInt = dNextRunInt + new TimeSpan(oSchedInt.DaySpan, oSchedInt.HourSpan, oSchedInt.MinuteSpan, 0);
-                    }
-                    break;
-                case ("SMS_ST_RecurWeekly"):
-                    ScheduleDecoding.SMS_ST_RecurWeekly oSched = ((ScheduleDecoding.SMS_ST_RecurWeekly)oWin);
+                        //Check if there is a schedule today... (past)
+                        if (oSchedInt.PreviousStartTime.AddDays(oSchedInt.DayDuration).AddHours(oSchedInt.HourDuration).Date == DateTime.Now.Date)
+                            dNextRunInt = oSchedInt.PreviousStartTime;
 
-                    string sDay = new DateTime(2012,7, oSched.Day).DayOfWeek.ToString();
-                    DateTime dNextStartTime = oSched.NextStartTime;
-                    string sRecurText = string.Format("Occours Every ({0})weeks on {1} {2}", oSched.ForNumberOfWeeks, sDay, ServiceWindowID);
-                    DateTime dNextRun = dNextStartTime;
+                        while (dNextRunInt.Date < DateTime.Now.Date + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
+                        {
+                            scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRunInt, new TimeSpan(oSchedInt.DayDuration, oSchedInt.HourDuration, oSchedInt.MinuteDuration, 0), cForeColor, sRecurTextInt + " " + ServiceWindowID, isLocal, ServiceWindowID, SWType));
+                            dNextRunInt = dNextRunInt + new TimeSpan(oSchedInt.DaySpan, oSchedInt.HourSpan, oSchedInt.MinuteSpan, 0);
+                        }
+                        break;
+                    case ("SMS_ST_RecurWeekly"):
+                        ScheduleDecoding.SMS_ST_RecurWeekly oSched = ((ScheduleDecoding.SMS_ST_RecurWeekly)oWin);
 
-                    //Check if there is a schedule today... (past)
-                    //if (oSched.PreviousStartTime.Date == DateTime.Now.Date)
-                    //    dNextRun = oSched.PreviousStartTime;
-                    
-                     if (oSched.PreviousStartTime.AddDays(oSched.DayDuration).AddHours(oSched.HourDuration).Date == DateTime.Now.Date)
-                        dNextRun = oSched.PreviousStartTime;
+                        string sDay = new DateTime(2012, 7, oSched.Day).DayOfWeek.ToString();
+                        DateTime dNextStartTime = oSched.NextStartTime;
+                        string sRecurText = string.Format("Occours Every ({0})weeks on {1} {2}", oSched.ForNumberOfWeeks, sDay, ServiceWindowID);
+                        DateTime dNextRun = dNextStartTime;
 
-                    while (dNextRun.Date < DateTime.Now.Date + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
-                    {
-                        scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRun, new TimeSpan(oSched.DayDuration, oSched.HourDuration, oSched.MinuteDuration, 0), cForeColor, sRecurText, isLocal, ServiceWindowID, SWType));
-                        //add_Appointment(dNextRun, dNextRun + new TimeSpan(oSchedule.DayDuration, oSchedule.HourDuration, oSchedule.MinuteDuration, 0), oSchedule.IsGMT);
-                        dNextRun = dNextRun + new TimeSpan(oSched.ForNumberOfWeeks * 7, 0, 0, 0);
-                    }
-                    break;
-                case ("SMS_ST_RecurMonthlyByWeekday"):
-                    break;
-                case ("SMS_ST_RecurMonthlyByDate"):
-                    break;
+                        if (oSched.PreviousStartTime.AddDays(oSched.DayDuration).AddHours(oSched.HourDuration).Date == DateTime.Now.Date)
+                            dNextRun = oSched.PreviousStartTime;
+
+                        while (dNextRun.Date < DateTime.Now.Date + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
+                        {
+                            scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRun, new TimeSpan(oSched.DayDuration, oSched.HourDuration, oSched.MinuteDuration, 0), cForeColor, sRecurText, isLocal, ServiceWindowID, SWType));
+                            dNextRun = dNextRun + new TimeSpan(oSched.ForNumberOfWeeks * 7, 0, 0, 0);
+                        }
+                        break;
+                    case ("SMS_ST_RecurMonthlyByWeekday"):
+                        ScheduleDecoding.SMS_ST_RecurMonthlyByWeekday oSchedRMBW = ((ScheduleDecoding.SMS_ST_RecurMonthlyByWeekday)oWin);
+
+                        string sDayRMBW = new DateTime(2012, 7, oSchedRMBW.Day).DayOfWeek.ToString();
+                        string sRecure = "";
+                        switch (oSchedRMBW.WeekOrder)
+                        {
+                            case 1:
+                                sRecure = "1st";
+                                break;
+                            case 2:
+                                sRecure = "2nd";
+                                break;
+                            case 3:
+                                sRecure = "3rd";
+                                break;
+                            case 4:
+                                sRecure = "4th";
+                                break;
+                            case 5:
+                                sRecure = "5th";
+                                break;
+                        }
+
+                        string sRecurTextRMBW = string.Format("Occours Every ({0}) Month on the {1} {2}", oSchedRMBW.ForNumberOfMonths, sRecure, sDayRMBW);
+                        DateTime dNextRunRMBW = oSchedRMBW.NextStartTime;
+
+                        while (dNextRunRMBW.Date < DateTime.Now.Date + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
+                        {
+                            scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRunRMBW, new TimeSpan(oSchedRMBW.DayDuration, oSchedRMBW.HourDuration, oSchedRMBW.MinuteDuration, 0), cForeColor, sRecurTextRMBW, isLocal, ServiceWindowID, SWType));
+                            dNextRunRMBW = dNextRunRMBW.AddMonths(oSchedRMBW.ForNumberOfMonths);
+                        }
+                        break;
+                    case ("SMS_ST_RecurMonthlyByDate"):
+                        break;
+                }
             }
+            catch { }
         }
 
         private void bt_Reload_Click(object sender, RoutedEventArgs e)
