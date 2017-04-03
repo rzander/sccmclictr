@@ -10,6 +10,8 @@ Start UWP from PowerShell:
 Start "shell:AppsFolder\$((Get-StartApps -Name "Client Center for Configuration Manager")[0].AppID)" -Args "localhost"
 ```
 
+![sccmclictr](https://cloud.githubusercontent.com/assets/11909453/24622767/71bcbde4-18a6-11e7-8fcd-5c2b4a3703e7.png)
+
 ## Requirements
 * Windows Remote Management (WinRM) must be enabled and configured on all target computers. (Run "winrm quickconfig" in a command prompt.)
 * Microsoft .NET Framework 4 (on the computer running the Tool)
