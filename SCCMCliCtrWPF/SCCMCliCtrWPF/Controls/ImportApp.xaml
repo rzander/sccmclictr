@@ -1,0 +1,16 @@
+﻿<Window x:Class="ClientCenter.ImportApp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientCenter"
+        mc:Ignorable="d"
+        Title="Import Application from Catalog" Height="250" Width="660" Icon="Images/Add.ico" Topmost="True" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Button x:Name="bt_Done" Content="Import" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="bt_Done_Click" IsEnabled="False"/>
+        <ComboBox x:Name="cb_Apps" Margin="26,37,20,0" VerticalAlignment="Top" DisplayMemberPath="Name" SelectedValuePath="ApplicationID" SelectionChanged="cb_Apps_SelectionChanged"/>
+        <Label x:Name="label" Content="Select an Application:" HorizontalAlignment="Left" Margin="26,14,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="ApplicationID:" HorizontalAlignment="Left" Margin="26,79,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbAppID" Height="23" Margin="26,105,20,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="tbAppID_TextChanged" />
+    </Grid>
+</Window>

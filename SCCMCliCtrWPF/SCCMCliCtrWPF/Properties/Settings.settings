@@ -202,14 +202,8 @@ try
     } 
 
 #Cleanup Execution History 
-    Remove-Item -Path 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\SMS\Mobile Client\*' -Recurse -ErrorAction SilentlyContinue 
-    Remove-Item -Path 'HKLM:\SOFTWARE\Microsoft\SMS\Mobile Client\*' -Recurse -ErrorAction SilentlyContinue 
-
-#Cleanup App-V 4.6 Packages 
-    try 
-    { 
-        (get-wmiobject -query "SELECT * FROM Package WHERE SftPath like '%' AND InUse = 'FALSE' " -namespace "root\Microsoft\appvirt\client") | % { start-process -wait sftmime.exe -argumentlist "delete package:$([char]34)$($_.Name)$([char]34) /global" }         
-    } catch {} 
+    #Remove-Item -Path 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\SMS\Mobile Client\*' -Recurse -ErrorAction SilentlyContinue 
+    #Remove-Item -Path 'HKLM:\SOFTWARE\Microsoft\SMS\Mobile Client\*' -Recurse -ErrorAction SilentlyContinue 
 
 #kill existing instances of ccmsetup.exe 
     $ccm = (Get-Process 'ccmsetup' -ErrorAction SilentlyContinue) 

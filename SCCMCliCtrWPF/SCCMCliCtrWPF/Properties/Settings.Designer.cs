@@ -356,21 +356,17 @@ while ($a -ne 1)")]
             "service \'ccmexec\' -ErrorAction SilentlyContinue \r\n\r\n#Cleanup cache \r\n    if($ccm" +
             "cache -ne $null) \r\n    { \r\n        try \r\n        { \r\n        dir $ccmcache \'*\' -" +
             "directory | % { [io.directory]::delete($_.fullname, $true)  } -ErrorAction Silen" +
-            "tlyContinue \r\n        } catch {} \r\n    } \r\n\r\n#Cleanup Execution History \r\n    Re" +
-            "move-Item -Path \'HKLM:\\SOFTWARE\\Wow6432Node\\Microsoft\\SMS\\Mobile Client\\*\' -Recu" +
-            "rse -ErrorAction SilentlyContinue \r\n    Remove-Item -Path \'HKLM:\\SOFTWARE\\Micros" +
-            "oft\\SMS\\Mobile Client\\*\' -Recurse -ErrorAction SilentlyContinue \r\n\r\n#Cleanup App" +
-            "-V 4.6 Packages \r\n    try \r\n    { \r\n        (get-wmiobject -query \"SELECT * FROM" +
-            " Package WHERE SftPath like \'%\' AND InUse = \'FALSE\' \" -namespace \"root\\Microsoft" +
-            "\\appvirt\\client\") | % { start-process -wait sftmime.exe -argumentlist \"delete pa" +
-            "ckage:$([char]34)$($_.Name)$([char]34) /global\" }         \r\n    } catch {} \r\n\r\n#" +
-            "kill existing instances of ccmsetup.exe \r\n    $ccm = (Get-Process \'ccmsetup\' -Er" +
-            "rorAction SilentlyContinue) \r\n    if($ccm -ne $null) \r\n    { \r\n            $ccm." +
-            "kill(); \r\n    } \r\n\r\n#run ccmsetup \r\n    $proc = Start-Process -FilePath \'c:\\wind" +
-            "ows\\temp\\ccmsetup.exe\' -PassThru -Wait -ArgumentList \"/mp:$($CMMP) /source:http:" +
-            "//$($CMMP)/CCM_Client CCMHTTPPORT=80 RESETKEYINFORMATION=TRUE SMSSITECODE=$($CMS" +
-            "iteCode) SMSSLP=$($CMMP) FSP=$($CMMP)\" \r\n   Sleep(5) \r\n   \"ccmsetup started...\" " +
-            "\r\n} \r\n\r\ncatch \r\n{ \r\n        \"an Error occured...\" \r\n        $error[0] \r\n} ")]
+            "tlyContinue \r\n        } catch {} \r\n    } \r\n\r\n#Cleanup Execution History \r\n    #R" +
+            "emove-Item -Path \'HKLM:\\SOFTWARE\\Wow6432Node\\Microsoft\\SMS\\Mobile Client\\*\' -Rec" +
+            "urse -ErrorAction SilentlyContinue \r\n    #Remove-Item -Path \'HKLM:\\SOFTWARE\\Micr" +
+            "osoft\\SMS\\Mobile Client\\*\' -Recurse -ErrorAction SilentlyContinue \r\n\r\n#kill exis" +
+            "ting instances of ccmsetup.exe \r\n    $ccm = (Get-Process \'ccmsetup\' -ErrorAction" +
+            " SilentlyContinue) \r\n    if($ccm -ne $null) \r\n    { \r\n            $ccm.kill(); \r" +
+            "\n    } \r\n\r\n#run ccmsetup \r\n    $proc = Start-Process -FilePath \'c:\\windows\\temp\\" +
+            "ccmsetup.exe\' -PassThru -Wait -ArgumentList \"/mp:$($CMMP) /source:http://$($CMMP" +
+            ")/CCM_Client CCMHTTPPORT=80 RESETKEYINFORMATION=TRUE SMSSITECODE=$($CMSiteCode) " +
+            "SMSSLP=$($CMMP) FSP=$($CMMP)\" \r\n   Sleep(5) \r\n   \"ccmsetup started...\" \r\n} \r\n\r\nc" +
+            "atch \r\n{ \r\n        \"an Error occured...\" \r\n        $error[0] \r\n} ")]
         public string AgentInstallPS {
             get {
                 return ((string)(this["AgentInstallPS"]));
