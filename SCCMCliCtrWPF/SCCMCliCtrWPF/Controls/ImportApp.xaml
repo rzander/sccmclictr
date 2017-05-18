@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientCenter"
         mc:Ignorable="d"
-        Title="Import Application from Catalog" Height="250" Width="660" Icon="Images/Add.ico" Topmost="True" WindowStartupLocation="CenterScreen">
+        Title="Import Application from Catalog" Height="250" Width="660" Icon="/SCCMCliCtrWPF;component/Images/Add.ico" Topmost="True" WindowStartupLocation="CenterScreen">
     <Grid>
         <Button x:Name="bt_Done" Content="Import" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="bt_Done_Click" IsEnabled="False"/>
         <ComboBox x:Name="cb_Apps" Margin="26,37,20,0" VerticalAlignment="Top" DisplayMemberPath="Name" SelectedValuePath="ApplicationID" SelectionChanged="cb_Apps_SelectionChanged"/>
