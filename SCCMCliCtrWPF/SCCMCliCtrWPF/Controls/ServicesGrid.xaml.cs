@@ -124,11 +124,68 @@ namespace ClientCenter
             {
                 try
                 {
-                    Win32_Service WService = oAgent.Client.Services.GetService(oService.Name);
+                    Win32_Service WService = oAgent.Client.Services.GetService(oService.Name, true);
                     iServices[iServices.IndexOf(oService)] = WService;
                     dataGrid1.Items.Refresh();
                     break;
 
+                }
+                catch (Exception ex)
+                {
+                    Listener.WriteError(ex.Message);
+                }
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void miSetManual_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            foreach (sccmclictr.automation.functions.Win32_Service oService in dataGrid1.SelectedItems)
+            {
+                try
+                {
+                    oService.SetStartup_Manual();
+                    oService.StartMode = "Manual";
+                    dataGrid1.Items.Refresh();
+                }
+                catch (Exception ex)
+                {
+                    Listener.WriteError(ex.Message);
+                }
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void miSetDisable_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            foreach (sccmclictr.automation.functions.Win32_Service oService in dataGrid1.SelectedItems)
+            {
+                try
+                {
+                    oService.SetStartup_Disabled();
+                    oService.StartMode = "Disabled";
+                    dataGrid1.Items.Refresh();
+                }
+                catch (Exception ex)
+                {
+                    Listener.WriteError(ex.Message);
+                }
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void miSetAuto_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            foreach (sccmclictr.automation.functions.Win32_Service oService in dataGrid1.SelectedItems)
+            {
+                try
+                {
+                    oService.SetStartup_Auto();
+                    oService.StartMode = "Auto";
+                    dataGrid1.Items.Refresh();
                 }
                 catch (Exception ex)
                 {

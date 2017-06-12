@@ -33,6 +33,21 @@
                             <Image Source="/SCCMCliCtrWPF;component/Images/Stop.ico" Height="24" />
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Name="miSetManual" Header="Set manual Startup" Click="miSetManual_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/SCCMCliCtrWPF;component/Images/ServDeps_103.ico" Height="24" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="miSetAuto" Header="Set auto Startup" Click="miSetAuto_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/SCCMCliCtrWPF;component/Images/ServDeps_103.ico" Height="24" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="miSetDisable" Header="Startup disabled" Click="miSetDisable_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/SCCMCliCtrWPF;component/Images/ServDeps_103.ico" Height="24" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
