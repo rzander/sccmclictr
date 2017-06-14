@@ -1,0 +1,57 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Diagnostics;
+using System.Management.Automation;
+
+using sccmclictr.automation;
+using System.Collections.ObjectModel;
+
+namespace AgentActionTools
+{
+    /// <summary>
+    /// Interaction logic for UserControl1.xaml
+    /// </summary>
+    public partial class CustomTools_EnablePSRemoting : UserControl
+    {
+        public CustomTools_EnablePSRemoting()
+        {
+            InitializeComponent();
+        }
+
+        private void btEnableWinRM_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Type t = System.Reflection.Assembly.GetEntryAssembly().GetType("ClientCenter.Common", false, true);
+                //Get the Hostname
+                System.Reflection.PropertyInfo pInfo = t.GetProperty("Hostname");
+                string sHost = (string)pInfo.GetValue(null, null);
+
+                //Run PS to enable WinRM
+                string sPSCode = "Invoke-WmiMethod -ComputerName " + sHost + " -Namespace root\\cimv2 -Class Win32_Process -Name Create -ArgumentList '\"C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\powershell.exe\" \"Enable-PSRemoting -Force\"';sleep 3";
+                PowerShell PowerShellInstance = PowerShell.Create();
+                PowerShellInstance.AddScript(sPSCode);
+
+                Collection<PSObject> PSOutput = PowerShellInstance.Invoke();
+
+                //MessageBox.Show(sPSCode);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+    }
+}
