@@ -100,5 +100,18 @@ namespace ClientCenter
             catch { }
             Mouse.OverrideCursor = Cursors.Arrow; 
         }
+
+        private void dataGrid1_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.Key == Key.Delete)
+                {
+                    miDeleteItems_Click(sender, null);
+                }
+            }
+
+            catch { }
+        }
     }
 }

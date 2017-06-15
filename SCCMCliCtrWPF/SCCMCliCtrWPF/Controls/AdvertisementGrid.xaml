@@ -45,7 +45,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <ScrollViewer Grid.Row="0" Name="ScrollViewer1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
+                    <!--<ScrollViewer Grid.Row="0" Name="ScrollViewer1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">-->
                         <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" IsReadOnly="True" SelectionChanged="dataGrid1_SelectionChanged" Grid.Row="0">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="AdvID" Binding="{Binding Path=ADV_AdvertisementID}"/>
@@ -96,7 +96,6 @@
                                 </ContextMenu>
                             </DataGrid.ContextMenu>
                         </DataGrid>
-                    </ScrollViewer>
                     <GridSplitter ResizeDirection="Rows" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Width="Auto" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" Background="#FF779CBA" />
                     <!--<ScrollViewer Grid.Row="2" Name="ScrollViewer2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">-->
                     <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid2" VerticalAlignment="Stretch" IsReadOnly="False" SelectionUnit="CellOrRowHeader" Grid.Row="2" CellEditEnding="dataGrid2_CellEditEnding">
