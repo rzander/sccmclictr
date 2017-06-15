@@ -65,8 +65,12 @@ namespace ClientCenter
             {
                 foreach (softwaredistribution.REG_ExecutionHistory oReg in dataGrid1.SelectedItems)
                 {
-                    oReg.Delete();
-                    iHistory.Remove(oReg);
+                    try
+                    {
+                        oReg.Delete();
+                        iHistory.Remove(oReg);
+                    }
+                    catch { }
                 }
 
                 //iHistory = oAgent.Client.SoftwareDistribution.ExecutionHistory.OrderBy(t => t._RunStartTime).ToList();
@@ -101,7 +105,7 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow; 
         }
 
-        private void dataGrid1_KeyDown(object sender, KeyEventArgs e)
+        private void dataGrid1_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             try
             {

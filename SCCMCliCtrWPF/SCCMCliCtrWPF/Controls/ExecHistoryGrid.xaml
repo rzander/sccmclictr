@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" KeyDown="dataGrid1_KeyDown" >
+        <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" PreviewKeyDown="dataGrid1_PreviewKeyDown" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="State" Binding="{Binding Path=_State}" />
                 <DataGridTextColumn Header="User" Binding="{Binding Path=UserID}" SortDirection="Ascending"  />
