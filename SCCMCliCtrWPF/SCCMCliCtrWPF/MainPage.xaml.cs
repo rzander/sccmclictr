@@ -221,12 +221,15 @@ namespace ClientCenter
                 }
                 else
                 {
-                    tb_TargetComputer.Text = Environment.GetCommandLineArgs()[1].Trim();
-                    tb_TargetComputer2.Text = Environment.GetCommandLineArgs()[1].Trim();
-                    tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
-                    tb_TargetComputer2.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
-                    tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-Embedding", "");
-                    tb_TargetComputer2.Text = tb_TargetComputer2.Text.Replace("-Embedding", "");
+                    if (Environment.GetCommandLineArgs().Count() > 0)
+                    {
+                        tb_TargetComputer.Text = Environment.GetCommandLineArgs()[1].Trim();
+                        tb_TargetComputer2.Text = Environment.GetCommandLineArgs()[1].Trim();
+                        tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
+                        tb_TargetComputer2.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
+                        tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-Embedding", "");
+                        tb_TargetComputer2.Text = tb_TargetComputer2.Text.Replace("-Embedding", "");
+                    }
                 }
             }
             catch { }
@@ -236,22 +239,48 @@ namespace ClientCenter
 
             Common.Hostname = tb_TargetComputer.Text.Trim();
 
-            //Not needed, local admin is only required if connecting the local machien...
-            /*if (!Properties.Settings.Default.NoLocalAdminCheck)
-            {
-                //Check if App is running as Admin, otherwise restart App as Admin...
-                Application_Startup(this, tb_TargetComputer.Text);
-            }*/
-
             try
             {
                 if (Environment.GetCommandLineArgs().Count() > 1)
                 {
-                    if (!string.IsNullOrEmpty(tb_TargetComputer.Text))
+                    var Args = Environment.GetCommandLineArgs().ToList();
+                    bool bNoConnect = false;
+                    if (Args.Contains("/RegisterConsole", StringComparer.OrdinalIgnoreCase))
                     {
-                        System.Threading.Tasks.Task.Run(() => { bt_Connect_Click(this, null); });
-                        //bt_Connect_Click(this, null);
+                        try
+                        {
+                            console.registerConsoleExtension();
+                        }
+                        catch { }
+                        bNoConnect = true;
+                        Close();
+                        return;
                     }
+                    if (Args.Contains("/UnRegisterConsole", StringComparer.OrdinalIgnoreCase))
+                    {
+                        try
+                        {
+                            console.unregisterConsoleExtension();
+                        }
+                        catch { }
+                        bNoConnect = true;
+                        Close();
+                        return;
+                    }
+
+                    if (!bNoConnect)
+                    {
+                        if (!string.IsNullOrEmpty(tb_TargetComputer.Text))
+                        {
+                            System.Threading.Tasks.Task.Run(() => { bt_Connect_Click(this, null); });
+                        }
+                    }
+                    else
+                    {
+                        tb_TargetComputer.Text = "";
+                        tb_TargetComputer2.Text = "";
+                    }
+
                 }
             }
             catch { }
