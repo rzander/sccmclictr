@@ -17,7 +17,7 @@ using System.Reflection;
 using Microsoft.Win32;
 using System.IO;
 using System.Threading;
-
+using System.Management;
 
 namespace ClientCenter
 {
@@ -1215,6 +1215,75 @@ namespace ClientCenter
             catch
             {
                 myTrace.WriteError("Unable to RefreshServerComplianceState...");
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void ButtonSCCMLogs_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                Process Explorer = new Process();
+                Explorer.StartInfo.FileName = "Explorer.exe";
+
+                //Connect IPC$ if not already connected (not needed with integrated authentication)
+                if (!oAgent.ConnectIPC)
+                    oAgent.ConnectIPC = true;
+
+
+                string sLogPath = "";
+                try
+                {
+                    sLogPath = oAgent.Client.AgentProperties.LocalSCCMAgentLogPath.Replace(':', '$');
+                }
+                catch { }
+                if (!string.IsNullOrEmpty(sLogPath))
+                {
+                    Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + @"\" + sLogPath;
+                }
+                else
+                {
+                    Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + @"\admin$\CCM\Logs";
+                }
+
+                Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
+                Explorer.Start();
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btSCCMSetupFolder_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                Process Explorer = new Process();
+                Explorer.StartInfo.FileName = "Explorer.exe";
+
+                //Connect IPC$ if not already connected (not needed with integrated authentication)
+                if (!oAgent.ConnectIPC)
+                    oAgent.ConnectIPC = true;
+
+                if (oAgent.Client.AgentProperties.isSCCM2012)
+                {
+                    Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + @"\admin$\ccmsetup";
+                }
+                else
+                {
+                    Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + @"\admin$\ccmsetup";
+                }
+
+                Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
+                Explorer.Start();
+            }
+            catch (Exception ex)
+            {
+                
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
