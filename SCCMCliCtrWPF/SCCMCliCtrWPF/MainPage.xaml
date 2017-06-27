@@ -36,41 +36,50 @@
                         </rib:RibbonQuickAccessToolBar>
                     </rib:Ribbon.QuickAccessToolBar>
                     <rib:Ribbon.ApplicationMenu>
-                        <rib:RibbonApplicationMenu Name="AppMenu" Label="Connection">
+                        <rib:RibbonApplicationMenu Name="AppMenu" Label="Connection" Focusable="False">
+
                             <!--<rib:RibbonApplicationMenu.QuickAccessToolBarControlSizeDefinition>
                                 <rib:RibbonControlSizeDefinition />
                             </rib:RibbonApplicationMenu.QuickAccessToolBarControlSizeDefinition>-->
-                            <rib:RibbonApplicationMenuItem Header="Connection Options...">
-                                <StackPanel Width="310" HorizontalAlignment="Left">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Content="Username:" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70"  />
-                                        <TextBox Height="23" HorizontalAlignment="Left" Name="tb_Username" VerticalAlignment="Top" Width="140" Text="{Binding Source={x:Static p:Settings.Default}, Path=Username, Mode=TwoWay}" />
+
+                            <rib:RibbonApplicationMenuItem Header="Connection Options..." StaysOpenOnClick="True" Focusable="False">
+                                <rib:RibbonGallery>
+                                    <StackPanel Width="310" HorizontalAlignment="Left">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Username:" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70"  />
+                                            <TextBox Height="23" HorizontalAlignment="Left" Name="tb_Username" VerticalAlignment="Top" Width="140" Text="{Binding Source={x:Static p:Settings.Default}, Path=Username, Mode=TwoWay}" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Password:" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" />
+                                            <PasswordBox Height="23" HorizontalAlignment="Left" Name="pb_Password" VerticalAlignment="Top" Width="140" KeyDown="pb_Password_KeyDown" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Port:" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" />
+                                            <TextBox  Height="23" HorizontalAlignment="Left" Name="tb_wsmanport" VerticalAlignment="Top" Width="60" Text="5985" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="HTTPS (SSL):" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" />
+                                            <CheckBox  Height="23" HorizontalAlignment="Left" Name="cb_ssl" VerticalAlignment="Top" IsChecked="True" />
+                                        </StackPanel>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Content="Password:" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" />
-                                        <PasswordBox Height="23" HorizontalAlignment="Left" Name="pb_Password" VerticalAlignment="Top" Width="140" KeyDown="pb_Password_KeyDown" />
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Content="Port:" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" />
-                                        <TextBox  Height="23" HorizontalAlignment="Left" Name="tb_wsmanport" VerticalAlignment="Top" Width="60" Text="5985" />
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Content="HTTPS (SSL):" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" />
-                                        <CheckBox  Height="23" HorizontalAlignment="Left" Name="cb_ssl" VerticalAlignment="Top" IsChecked="True" />
-                                    </StackPanel>
-                                </StackPanel>
+                                </rib:RibbonGallery>
+
                             </rib:RibbonApplicationMenuItem>
-                            <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Center">
+
+                            <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Center" Focusable="false">
                                 <TextBlock Text="Target Computer: " VerticalAlignment="Center"></TextBlock>
-                                <Controls:AutoCompleteBox Name="tb_TargetComputer" Text="127.0.0.1" Width="150" Height="25" Populating="tb_TargetComputer2_Populating" KeyUp="tb_TargetComputer_KeyUp" TextChanged="tb_TargetComputer2_TextChanged"   />
+                                <Controls:AutoCompleteBox Name="tb_TargetComputer" Text="127.0.0.1" Width="150" Height="25" Populating="tb_TargetComputer2_Populating" KeyUp="tb_TargetComputer_KeyUp" TextChanged="tb_TargetComputer2_TextChanged"/>
                                 <rib:RibbonButton Name="bt_Connect" VerticalAlignment="Center" Label="Connect" Height="23" Click="bt_Connect_Click" />
                             </StackPanel>
-                            <rib:RibbonApplicationMenuItem Header="Console extensions...">
-                                <rib:RibbonButton Name="bt_RegConsole" Label="register Console extension" SmallImageSource="Images/setupold.ico" Click="bt_RegConsole_Click"></rib:RibbonButton>
-                                <rib:RibbonButton Name="bt_UnRegConsole" Label="remove Console extension" SmallImageSource="Images/Delete.ico" Click="bt_UnRegConsole_Click"></rib:RibbonButton>
+                            <rib:RibbonApplicationMenuItem Header="Console extensions..." StaysOpenOnClick="True" Focusable="false">
+                                <rib:RibbonGallery>
+                                    <rib:RibbonButton Name="bt_RegConsole" Label="register Console extension" SmallImageSource="Images/setupold.ico" Click="bt_RegConsole_Click"></rib:RibbonButton>
+                                    <rib:RibbonButton Name="bt_UnRegConsole" Label="remove Console extension" SmallImageSource="Images/Delete.ico" Click="bt_UnRegConsole_Click"></rib:RibbonButton>
+                                </rib:RibbonGallery>
                             </rib:RibbonApplicationMenuItem>
-                            <rib:RibbonButton Name="bt_About" Label="About.." Click="bt_About_Click"></rib:RibbonButton>
-                            <Rectangle MinHeight="310"/>
+                            <rib:RibbonApplicationMenuItem Header="About.." Click="bt_About_Click" Focusable="false"/>
+                            <rib:RibbonGallery MinHeight="310" ScrollViewer.VerticalScrollBarVisibility="Hidden" Focusable="false">
+                            </rib:RibbonGallery>
                         </rib:RibbonApplicationMenu>
                     </rib:Ribbon.ApplicationMenu>
                     <rib:RibbonTab Header="Agent Actions" IsEnabled="false" Name="ribAgenTActions">
