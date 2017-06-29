@@ -162,6 +162,11 @@
                             <rib:RibbonSplitButton Name="btTools" Label="..." ToolTip="3rd party Tools" LargeImageSource="Images/Tools.ico" SmallImageSource="Images/Tools.ico">
                             </rib:RibbonSplitButton>
                         </rib:RibbonGroup>
+                        <rib:RibbonGroup Name="rgLogs" Header="SCCM Logs" Visibility="Visible" SmallImageSource="Images/Tools.ico" Width="72">
+                            <rib:RibbonSplitButton Name="btLogs" Label="SCCM Client" ToolTip="Logsfolders" LargeImageSource="Images/Repair.ico" SmallImageSource="Images/Tools.ico" Margin="6,0,-49,0" Click="ButtonSCCMLogs_Click">
+                                <rib:RibbonButton Name="btSCCMSetupFolder" Label="SCCM Setup" Click="btSCCMSetupFolder_Click"/>
+                            </rib:RibbonSplitButton>
+                        </rib:RibbonGroup>
                     </rib:RibbonTab>
                     <rib:RibbonTab Header="Custom Actions" IsEnabled="False" Name="ribCustActions" Visibility="Collapsed">
                     </rib:RibbonTab>
