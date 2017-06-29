@@ -3,6 +3,19 @@
 ## Project Description
 The tool is designed for IT Professionals to troubleshoot ConfigMgr Agent related Issues. The Client Center for Configuration Manager provides a quick and easy overview of client settings, including running services and Agent settings in a good, easy to use user interface.
 
+## Downloads
+### offline Installer
+https://github.com/rzander/sccmclictr/releases
+
+### ClickOnce setup
+http://sccmclictr.azurewebsites.net/ClickOnce/
+
+### Package Manager
+https://RuckZuck.tools  
+https://chocolatey.org/
+
+### Windows 10 Store
+
 <a href="https://www.microsoft.com/store/apps/9NBLGGH5127B?ocid=badge"><img src="https://assets.windowsphone.com/f2f77ec7-9ba9-4850-9ebe-77e366d08adc/English_Get_it_Win_10_InvariantCulture_Default.png" alt="Get it on Windows 10" width="300" /></a>
 
 Start UWP from PowerShell:
@@ -12,8 +25,6 @@ Start "shell:AppsFolder\$((Get-StartApps -Name "Client Center for Configuration 
 
 ![sccmclictr](https://cloud.githubusercontent.com/assets/11909453/24622767/71bcbde4-18a6-11e7-8fcd-5c2b4a3703e7.png)
 
-## ClickOnce setup
-http://sccmclictr.azurewebsites.net/ClickOnce/
 
 ## Requirements
 * Windows Remote Management (WinRM) must be enabled and configured on all target computers. (Run "winrm quickconfig" in a command prompt.)
