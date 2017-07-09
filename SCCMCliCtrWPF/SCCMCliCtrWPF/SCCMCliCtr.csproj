@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ClientCenter</RootNamespace>
     <AssemblyName>SCCMCliCtrWPF</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -17,36 +17,37 @@
     <WarningLevel>4</WarningLevel>
     <EnableSecurityDebugging>true</EnableSecurityDebugging>
     <StartAction>URL</StartAction>
-    <HostInBrowser>true</HostInBrowser>
-    <TargetZone>LocalIntranet</TargetZone>
+    <HostInBrowser>false</HostInBrowser>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
     <PublishUrl>publish\</PublishUrl>
-    <Install>false</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Background</UpdateMode>
+    <UpdateInterval>1</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdatePeriodically>true</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <SupportUrl>https://sccmclictr.codeplex.com</SupportUrl>
-    <ErrorReportUrl>https://sccmclictr.codeplex.com</ErrorReportUrl>
-    <ProductName>Client Center for Configuration Manager 2012</ProductName>
-    <PublisherName>Roger Zander</PublisherName>
+    <InstallUrl>http://sccmclictr.azurewebsites.net/ClickOnce/</InstallUrl>
+    <UpdateUrl>http://sccmclictr.azurewebsites.net/ClickOnce/</UpdateUrl>
+    <SupportUrl>https://github.com/rzander/sccmclictr/</SupportUrl>
+    <ErrorReportUrl>https://github.com/rzander/sccmclictr/clickonce/</ErrorReportUrl>
+    <ProductName>Client Center for Configuration Manager</ProductName>
+    <PublisherName>Zander Tools</PublisherName>
     <SuiteName>SCCM Tools</SuiteName>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>default.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>2</ApplicationRevision>
-    <ApplicationVersion>1.0.2.2</ApplicationVersion>
+    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationVersion>1.0.3.6</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -61,7 +62,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -72,23 +72,26 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <NoStdLib>false</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Accessibility" />
-    <Reference Include="Microsoft.Build" />
+    <Reference Include="Customization, Version=3.0.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Customization\bin\Debug\Customization.dll</HintPath>
+    </Reference>
+    <Reference Include="Fluent">
+      <HintPath>..\Fluent.dll</HintPath>
+    </Reference>
     <Reference Include="NavigationPane, Version=1.0.4317.19063, Culture=neutral, PublicKeyToken=b239f36db07135c1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\NavigationPane.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
-    <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="ReachFramework" />
-    <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\RibbonControlsLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="sccmclictr.automation, Version=0.0.0.57, Culture=neutral, PublicKeyToken=4fdf3a809cf778d4, processorArchitecture=MSIL">
+    <Reference Include="sccmclictr.automation, Version=0.0.0.64, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\sccmclictrlib\sccmclictr.automation\bin\Debug\sccmclictr.automation.dll</HintPath>
     </Reference>
@@ -102,27 +105,25 @@
       <HintPath>..\..\sccmclictrlib\System.Management.Automation.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Printing" />
     <Reference Include="System.Windows.Controls.Input.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\System.Windows.Controls.Input.Toolkit.dll</HintPath>
     </Reference>
-    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="UIAutomationProvider" />
     <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="WPFToolkit">
       <HintPath>..\WPFToolkit.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -140,11 +141,11 @@
     <Compile Include="Controls\CCMEvalGrid.xaml.cs">
       <DependentUpon>CCMEvalGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ApplicationGrid.xaml.cs">
-      <DependentUpon>ApplicationGrid.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\CollectionVariables.xaml.cs">
       <DependentUpon>CollectionVariables.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InstallAgent.xaml.cs">
+      <DependentUpon>InstallAgent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\LogGrid.xaml.cs">
       <DependentUpon>LogGrid.xaml</DependentUpon>
@@ -155,95 +156,77 @@
     <Compile Include="Controls\PowerSettings.xaml.cs">
       <DependentUpon>PowerSettings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SWStatusGrid.xaml.cs">
-      <DependentUpon>SWStatusGrid.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\SettingsMgmt.xaml.cs">
       <DependentUpon>SettingsMgmt.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\InstalledSoftwareGrid.xaml.cs">
-      <DependentUpon>InstalledSoftwareGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\EventMonitoring.xaml.cs">
-      <DependentUpon>EventMonitoring.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\InstallRepair.xaml.cs">
-      <DependentUpon>InstallRepair.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ScheduleControl\CloseButton.xaml.cs">
-      <DependentUpon>CloseButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ScheduleControl\DayControl.xaml.cs">
-      <DependentUpon>DayControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ScheduleControl\ScheduleControl.xaml.cs">
-      <DependentUpon>ScheduleControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ScheduleControl\TimeLine.xaml.cs">
-      <DependentUpon>TimeLine.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ServiceWindowGrid.xaml.cs">
-      <DependentUpon>ServiceWindowGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\SWAllUpdatesGrid.xaml.cs">
-      <DependentUpon>SWAllUpdatesGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ExecHistoryGrid.xaml.cs">
-      <DependentUpon>ExecHistoryGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ProcessGrid.xaml.cs">
-      <DependentUpon>ProcessGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ServicesGrid.xaml.cs">
-      <DependentUpon>ServicesGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\SWUpdatesGrid.xaml.cs">
-      <DependentUpon>SWUpdatesGrid.xaml</DependentUpon>
+    <Compile Include="Controls\SWStatusGrid.xaml.cs">
+      <DependentUpon>SWStatusGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\WMIBrowser.xaml.cs">
       <DependentUpon>WMIBrowser.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\InstallAgent.xaml.cs">
-      <DependentUpon>InstallAgent.xaml</DependentUpon>
+    <Compile Include="Controls\ImportApp.xaml.cs">
+      <DependentUpon>ImportApp.xaml</DependentUpon>
     </Compile>
     <Compile Include="ServiceWindowNew.xaml.cs">
       <DependentUpon>ServiceWindowNew.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Page Include="Controls\About.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\AdvertisementGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\AgentComponents.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\AgentSettingItem.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ApplicationGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CacheGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\CCMEvalGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ApplicationGrid.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\CacheGrid.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\CollectionVariables.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\LogGrid.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Controls\EventMonitoring.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ExecHistoryGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\InstallAgent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\InstalledSoftwareGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\InstallRepair.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\LogGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\LogViewer.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -253,29 +236,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\SWStatusGrid.xaml">
+    <Page Include="Controls\ProcessGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\SettingsMgmt.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\InstalledSoftwareGrid.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\EventMonitoring.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\InstallRepair.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ScheduleControl\CloseButton.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ScheduleControl\DayControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -289,22 +256,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ServiceWindowGrid.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Controls\ServicesGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ServiceWindowGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SettingsMgmt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\SWAllUpdatesGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ExecHistoryGrid.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Controls\SWStatusGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SWUpdatesGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\WMIBrowser.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\InstallAgent.xaml">
+    <Page Include="Controls\ImportApp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -312,38 +292,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Controls\AgentComponents.xaml.cs">
-      <DependentUpon>AgentComponents.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\AgentSettingItem.xaml.cs">
-      <DependentUpon>AgentSettingItem.xaml</DependentUpon>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\CacheGrid.xaml.cs">
-      <DependentUpon>CacheGrid.xaml</DependentUpon>
+    <Compile Include="Controls\AgentComponents.xaml.cs" />
+    <Compile Include="Controls\AgentSettingItem.xaml.cs" />
+    <Compile Include="Controls\ApplicationGrid.xaml.cs" />
+    <Compile Include="Controls\CacheGrid.xaml.cs" />
+    <Compile Include="Controls\EventMonitoring.xaml.cs" />
+    <Compile Include="Controls\ExecHistoryGrid.xaml.cs" />
+    <Compile Include="Controls\InstalledSoftwareGrid.xaml.cs" />
+    <Compile Include="Controls\InstallRepair.xaml.cs" />
+    <Compile Include="Controls\ProcessGrid.xaml.cs" />
+    <Compile Include="Controls\ScheduleControl\CloseButton.xaml.cs">
+      <DependentUpon>CloseButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ScheduleControl\DayControl.xaml.cs" />
+    <Compile Include="Controls\ScheduleControl\ScheduleControl.xaml.cs" />
+    <Compile Include="Controls\ScheduleControl\TimeLine.xaml.cs" />
+    <Compile Include="Controls\ServicesGrid.xaml.cs" />
+    <Compile Include="Controls\ServiceWindowGrid.xaml.cs" />
+    <Compile Include="Controls\SWAllUpdatesGrid.xaml.cs" />
+    <Compile Include="Controls\SWUpdatesGrid.xaml.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Controls\ProcessGrid.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ServicesGrid.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\SWUpdatesGrid.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ServiceWindowNew.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -379,8 +357,8 @@
     <Content Include="Plugin_CompMgmt.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Plugin_CustomToolDEMO.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="Plugin_EnablePSRemoting.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Plugin_Explorer.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -391,7 +369,19 @@
     <Content Include="Plugin_MSInfo32.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Plugin_MSRA.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Plugin_PSScripts.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Plugin_RDP.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Plugin_Regedit.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Plugin_RuckZuck.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Plugin_SelfUpdate.dll">
@@ -400,35 +390,37 @@
     <Content Include="Plugin_StatusMessageViewer.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\On.ico" />
     <Resource Include="Images\Tools.ico" />
-    <Resource Include="Images\Icon012.ico" />
-    <Resource Include="Images\Pack_close.ico" />
+    <Resource Include="Images\Icon16_256.png" />
     <Resource Include="Images\Confirm visible_24.png" />
     <Resource Include="Images\Warning.ico" />
-    <Resource Include="Images\Icon16_256.png" />
-    <None Include="packages.config" />
-    <None Include="Resources\Icon16.ico" />
+    <Resource Include="Images\Pack_close.ico" />
+    <Resource Include="Images\Icon012.ico" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="app.config" />
     <Content Include="Customization.dll.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Properties\app.manifest">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="Properties\app.manifest" />
     <AppDesigner Include="Properties\" />
+    <None Include="SCCMCliCtrWPF.snk" />
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -446,9 +438,6 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\shell32.dll_I0017_0409.ico" />
@@ -491,12 +480,8 @@
     <Resource Include="Images\Delete.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\ServDeps_103.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Play.ico" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="Images\ServDeps_103.ico" />
     <Resource Include="Images\Stop.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -504,29 +489,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Computer_protection.ico" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="Images\Invalid software update.gif" />
     <Resource Include="Images\Software update.gif" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Invalid software update.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Icon140.ico" />
+    <Resource Include="Icon16.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Flag 4.ico" />
+    <Resource Include="Images\Flag.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Flag.ico" />
+    <Resource Include="Images\Icon140.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Important Email.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\msi.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\setupold.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -536,21 +516,38 @@
     <Resource Include="Images\Add.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Customization\Customization.csproj">
-      <Project>{8594ceff-4e26-42b5-8e17-f398dae7f757}</Project>
-      <Name>Customization</Name>
-    </ProjectReference>
+    <PublishFile Include="Plugin_CustomToolDEMO.dll">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Plugin_SelfUpdate.dll">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <PropertyGroup>
-    <StartArguments />
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>
     </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>A3FB346263FF37B085DAF0F3FE2385441520FC72</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>0D26DE891887F16D4BB3BD6481049B84F49F9959</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -560,46 +557,29 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
+    <StartupObject>ClientCenter.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationIcon>Icon16.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>Internet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <DelaySign>false</DelaySign>
-  </PropertyGroup>
-  <PropertyGroup>
-    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestTimestampUrl>http://timestamp.comodoca.com/authenticode</ManifestTimestampUrl>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>ClientCenter.App</StartupObject>
+    <ManifestTimestampUrl>http://timestamp.verisign.com/scripts/timstamp.dll</ManifestTimestampUrl>
   </PropertyGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Bin\SignTool.exe" sign /n "Roger Zander" /t "http://timestamp.comodoca.com/authenticode" /q "$(TargetPath)"</PostBuildEvent>
-  </PropertyGroup>
-  <!--To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.-->
-  <!--<Target Name="BeforeBuild">
-  </Target>-->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
   <Target Name="AfterBuild">
   </Target>
-  <!--<Target Name="PeforePublish">
-    <Exec Command="&quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Bin\SignTool.exe&quot; sign /n &quot;Roger Zander&quot; /t &quot;http://timestamp.comodoca.com/authenticode&quot; /q &quot;C:\Users\Roger\SkyDrive\Dokumente\Visual Studio 2010\Project_ClientCenter\SCCMCliCtr_WPF\SCCMCliCtrWPF\publish\Application Files\SCCMCliCtrWPF_1_0_0_4\SCCMCliCtrWPF.exe&quot;" />
-  </Target>-->
-  <Target Name="SignOutput" AfterTargets="CoreCompile">
-    <PropertyGroup>
-      <TimestampServerUrl>http://timestamp.comodoca.com/authenticode</TimestampServerUrl>
-      <ApplicationDescription>Client Center for Configuration Manager</ApplicationDescription>
-      <SigningCertificateCriteria>/n "Roger Zander"</SigningCertificateCriteria>
-    </PropertyGroup>
-    <ItemGroup>
-      <SignableFiles Include="$(ProjectDir)obj\$(ConfigurationName)\$(TargetName)$(TargetExt)" />
-    </ItemGroup>
-    <GetFrameworkSdkPath>
-      <Output TaskParameter="Path" PropertyName="SdkPath" />
-    </GetFrameworkSdkPath>
-    <Exec Command="&quot;$(SdkPath)bin\signtool&quot; sign $(SigningCertificateCriteria) /d &quot;$(ApplicationDescription)&quot; /t &quot;$(TimestampServerUrl)&quot; &quot;%(SignableFiles.Identity)&quot;" />
-  </Target>
+  -->
 </Project>

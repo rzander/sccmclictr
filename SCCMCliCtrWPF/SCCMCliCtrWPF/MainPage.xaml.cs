@@ -109,7 +109,6 @@ namespace ClientCenter
                                         new Thread(() =>
                                         {
                                             Thread.CurrentThread.IsBackground = true;
-                                            /* run your code here */
                                             try
                                             {
                                                 AnonymousDelegate dUpdate = delegate()
@@ -129,10 +128,41 @@ namespace ClientCenter
                                         new Thread(() =>
                                         {
                                             Thread.CurrentThread.IsBackground = true;
-                                            /* run your code here */
                                             try
                                             {
                                                 AnonymousDelegate dUpdate = delegate()
+                                                {
+                                                    var obj = Activator.CreateInstance(t);
+                                                    var item = ((System.Windows.Controls.ContentControl)(obj)).Content;
+
+                                                    //Get first Child Control
+                                                    var first = ((System.Windows.Controls.Panel)(item)).Children[0];
+
+                                                    //Detach first Control from Grid
+                                                    Grid par = VisualTreeHelper.GetParent(first) as Grid;
+                                                    par.Children.Remove(first);
+
+                                                    //Add Control without binding to Grid
+                                                    ribCustActions.Tag = oAgent;
+                                                    ribCustActions.Items.Add(first);
+                                                    ribCustActions.IsEnabled = true;
+                                                    ribCustActions.Visibility = System.Windows.Visibility.Visible;
+                                                };
+                                                Dispatcher.Invoke(dUpdate);
+                                            }
+                                            catch { }
+
+                                        }).Start();
+                                    }
+
+                                    if (t.Name.StartsWith("MainMenu_"))
+                                    {
+                                        new Thread(() =>
+                                        {
+                                            Thread.CurrentThread.IsBackground = true;
+                                            try
+                                            {
+                                                AnonymousDelegate dUpdate = delegate ()
                                                 {
                                                     var obj = Activator.CreateInstance(t);
                                                     var item = ((System.Windows.Controls.ContentControl)(obj)).Content;
@@ -147,16 +177,15 @@ namespace ClientCenter
                                                     par.Children.Remove(first);
 
                                                     //Add Control without binding to Grid
-                                                    ribCustActions.Items.Add(first);
-                                                    ribCustActions.IsEnabled = true;
-                                                    ribCustActions.Visibility = System.Windows.Visibility.Visible;
+                                                    ribAgentActions.Items.Add(first);
+                                                    ribAgentActions.Visibility = System.Windows.Visibility.Visible;
                                                 };
                                                 Dispatcher.Invoke(dUpdate);
                                             }
                                             catch { }
 
                                         }).Start();
-                                    }
+                                    } 
                                 }
                                 catch { }
                             }
@@ -516,7 +545,7 @@ namespace ClientCenter
                     LogViewPane.Listener = myTrace;
 
                     navigationPane1.IsEnabled = true;
-                    ribAgenTActions.IsEnabled = true;
+                    ribAgentActions.IsEnabled = true;
 
                     ConnectionDock.Visibility = System.Windows.Visibility.Collapsed;
                     ribbon1.IsEnabled = true;
@@ -532,7 +561,7 @@ namespace ClientCenter
                     agentSettingItem1.IsEnabled = false;
                     myTrace.WriteError("Unable to connect: " + sTarget);
                     myTrace.WriteError("Error: " + ex.Message);
-                    ribAgenTActions.IsEnabled = false;
+                    ribAgentActions.IsEnabled = false;
                     ConnectionDock.Visibility = System.Windows.Visibility.Visible;
                     bt_Ping.Visibility = System.Windows.Visibility.Visible;
                     MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
