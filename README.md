@@ -25,6 +25,8 @@ Start "shell:AppsFolder\$((Get-StartApps -Name "Client Center for Configuration 
 
 ![sccmclictr](https://cloud.githubusercontent.com/assets/11909453/24622767/71bcbde4-18a6-11e7-8fcd-5c2b4a3703e7.png)
 
+## Documentation
+https://github.com/rzander/sccmclictr/wiki
 
 ## Requirements
 * Windows Remote Management (WinRM) must be enabled and configured on all target computers. (Run "winrm quickconfig" in a command prompt.)
