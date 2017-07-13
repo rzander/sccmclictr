@@ -6,8 +6,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <RibbonGroup Header="PS" Name="_rgPS" ToolTip="" HorizontalAlignment="Left">
-            <RibbonSplitButton Name="btRunPS" Label="run PS" LargeImageSource="Images/PS.ico" SmallImageSource="Images/PS.ico" ToolTip="">
+        <RibbonGroup Header="PS" Name="_rgPS" HorizontalAlignment="Left" ToolTip="run custom PowerShell scripts">
+            <RibbonSplitButton Name="btRunPS" Label="run PS" LargeImageSource="Images/PS.ico" SmallImageSource="Images/PS.ico" ToolTip="run custom PowerShell scripts" MouseDown="PSFolder_MouseDown" Click="btRunPS_Click">
             </RibbonSplitButton>
         </RibbonGroup>
     </Grid>

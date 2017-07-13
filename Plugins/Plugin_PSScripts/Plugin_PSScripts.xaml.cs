@@ -15,6 +15,7 @@ namespace AgentActionTools
     public partial class MainMenu_PSScripts : UserControl
     {
         internal SCCMAgent oAgent;
+        internal string scriptdir = "";
 
         public MainMenu_PSScripts()
         {
@@ -28,9 +29,14 @@ namespace AgentActionTools
             {
                 string sCurrentDir = Properties.Settings.Default.ScriptPath;
                 if (string.IsNullOrEmpty(sCurrentDir))
+                {
                     sCurrentDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                    sCurrentDir = System.IO.Path.Combine(sCurrentDir, "PSSCripts");
+                }
 
-                LoadPSFolders(new DirectoryInfo(System.IO.Path.Combine(sCurrentDir, "PSSCripts")), btRunPS);
+                scriptdir = sCurrentDir;
+
+                LoadPSFolders(new DirectoryInfo(sCurrentDir), btRunPS);
             }
             catch {}
         }
@@ -48,6 +54,7 @@ namespace AgentActionTools
                     PSItem.ToolTip = sFile;
                     PSItem.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
                     PSItem.Click  += PSItem_Click;
+                    
                     Menu.Items.Add(PSItem);
                 }
                 catch { }
@@ -62,6 +69,9 @@ namespace AgentActionTools
                     PSFolder.SmallImageSource = new BitmapImage(new Uri("/Plugin_PSScripts;component/Images/Folder_16.png", UriKind.Relative));
                     PSFolder.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
                     PSFolder.ToolTip = sDir;
+                    PSFolder.Tag = sDir;
+                    PSFolder.PreviewMouseDown += PSFolder_MouseDown;
+                    PSFolder.MouseDoubleClick += PSFolder_MouseDown;
                     LoadPSFolders(new DirectoryInfo(sDir), PSFolder);
 
                     Menu.Items.Add(PSFolder);
@@ -69,6 +79,28 @@ namespace AgentActionTools
                 catch { }
             }
 
+        }
+
+        private void PSFolder_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            try
+            {
+                string sArg = "";
+                if(sender.GetType() == typeof(RibbonMenuButton))
+                    sArg = (sender as RibbonMenuButton).Tag as string;
+
+                if (sender.GetType() == typeof(RibbonSplitButton))
+                    sArg = (sender as RibbonSplitButton).Tag as string;
+
+                if (string.IsNullOrEmpty(sArg))
+                    sArg = scriptdir;
+
+                System.Diagnostics.Process Explorer = new System.Diagnostics.Process();
+                Explorer.StartInfo.FileName = "Explorer.exe";
+                Explorer.StartInfo.Arguments = "\"" + sArg + "\"" as string;
+                Explorer.Start();
+            }
+            catch { }
         }
 
         void PSItem_Click(object sender, EventArgs e)
@@ -95,6 +127,11 @@ namespace AgentActionTools
 
             }
             catch { }
+        }
+
+        private void btRunPS_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            PSFolder_MouseDown(sender, null);
         }
     }
 }
