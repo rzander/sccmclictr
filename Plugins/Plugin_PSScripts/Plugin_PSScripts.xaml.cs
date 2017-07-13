@@ -133,5 +133,14 @@ namespace AgentActionTools
         {
             PSFolder_MouseDown(sender, null);
         }
+
+        private void btRunPS_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if(e.Key == System.Windows.Input.Key.F5)
+            {
+                btRunPS.Items.Clear();
+                LoadScripts();
+            }
+        }
     }
 }
