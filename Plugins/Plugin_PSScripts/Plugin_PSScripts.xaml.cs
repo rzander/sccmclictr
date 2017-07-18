@@ -31,7 +31,11 @@ namespace AgentActionTools
                 if (string.IsNullOrEmpty(sCurrentDir))
                 {
                     sCurrentDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                    sCurrentDir = System.IO.Path.Combine(sCurrentDir, "PSSCripts");
+                    sCurrentDir = System.IO.Path.Combine(sCurrentDir, "PSScripts");
+                    if(!Directory.Exists(sCurrentDir))
+                    {
+                        Directory.CreateDirectory(sCurrentDir);
+                    }
                 }
 
                 scriptdir = sCurrentDir;
@@ -70,8 +74,6 @@ namespace AgentActionTools
                     PSFolder.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
                     PSFolder.ToolTip = sDir;
                     PSFolder.Tag = sDir;
-                    PSFolder.PreviewMouseDown += PSFolder_MouseDown;
-                    PSFolder.MouseDoubleClick += PSFolder_MouseDown;
                     LoadPSFolders(new DirectoryInfo(sDir), PSFolder);
 
                     Menu.Items.Add(PSFolder);
