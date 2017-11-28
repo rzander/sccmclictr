@@ -12,7 +12,7 @@ namespace ClientCenter.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.3.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -115,31 +115,28 @@ while ($a -ne 1)")]
             "\n  <string>%systemroot%\\system32\\jscript.dll</string>\r\n  <string>%systemroot%\\sy" +
             "stem32\\mshtml.dll</string>\r\n  <string>%systemroot%\\system32\\msi.dll</string>\r\n  " +
             "<string>%systemroot%\\system32\\mssip32.dll</string>\r\n  <string>%systemroot%\\syste" +
-            "m32\\msxml.dll</string>\r\n  <string>%systemroot%\\system32\\msxml3.dll</string>\r\n  <" +
-            "string>%systemroot%\\system32\\msxml3a.dll</string>\r\n  <string>%systemroot%\\system" +
-            "32\\msxml3r.dll</string>\r\n  <string>%systemroot%\\system32\\msxml4.dll</string>\r\n  " +
-            "<string>%systemroot%\\system32\\msxml4a.dll</string>\r\n  <string>%systemroot%\\syste" +
-            "m32\\msxml4r.dll</string>\r\n  <string>%systemroot%\\system32\\msxml6.dll</string>\r\n " +
-            " <string>%systemroot%\\system32\\msxml6r.dll</string>\r\n  <string>%systemroot%\\syst" +
-            "em32\\muweb.dll</string>\r\n  <string>%systemroot%\\system32\\ole32.dll</string>\r\n  <" +
-            "string>%systemroot%\\system32\\oleaut32.dll</string>\r\n  <string>%systemroot%\\syste" +
-            "m32\\Qmgr.dll</string>\r\n  <string>%systemroot%\\system32\\Qmgrprxy.dll</string>\r\n  " +
-            "<string>%systemroot%\\system32\\rsaenh.dll</string>\r\n  <string>%systemroot%\\system" +
-            "32\\sccbase.dll</string>\r\n  <string>%systemroot%\\system32\\scrrun.dll</string>\r\n  " +
-            "<string>%systemroot%\\system32\\shdocvw.dll</string>\r\n  <string>%systemroot%\\syste" +
-            "m32\\shell32.dll</string>\r\n  <string>%systemroot%\\system32\\slbcsp.dll</string>\r\n " +
-            " <string>%systemroot%\\system32\\softpub.dll</string>\r\n  <string>%systemroot%\\syst" +
-            "em32\\urlmon.dll</string>\r\n  <string>%systemroot%\\system32\\userenv.dll</string>\r\n" +
-            "  <string>%systemroot%\\system32\\vbscript.dll</string>\r\n  <string>%systemroot%\\sy" +
-            "stem32\\Winhttp.dll</string>\r\n  <string>%systemroot%\\system32\\wintrust.dll</strin" +
-            "g>\r\n  <string>%systemroot%\\system32\\wuapi.dll</string>\r\n  <string>%systemroot%\\s" +
-            "ystem32\\wuaueng.dll</string>\r\n  <string>%systemroot%\\system32\\wuaueng1.dll</stri" +
-            "ng>\r\n  <string>%systemroot%\\system32\\wucltui.dll</string>\r\n  <string>%systemroot" +
-            "%\\system32\\wucltux.dll</string>\r\n  <string>%systemroot%\\system32\\wups.dll</strin" +
-            "g>\r\n  <string>%systemroot%\\system32\\wups2.dll</string>\r\n  <string>%systemroot%\\s" +
-            "ystem32\\wuweb.dll</string>\r\n  <string>%systemroot%\\system32\\wuwebv.dll</string>\r" +
-            "\n  <string>%systemroot%\\system32\\wbem\\wmisvc.dll</string>\r\n  <string>%systemroot" +
-            "%\\system32\\Xpob2res.dll</string>\r\n</ArrayOfString>")]
+            "m32\\msxml3.dll</string>\r\n  <string>%systemroot%\\system32\\msxml3r.dll</string>\r\n " +
+            " <string>%systemroot%\\system32\\msxml6.dll</string>\r\n  <string>%systemroot%\\syste" +
+            "m32\\msxml6r.dll</string>\r\n  <string>%systemroot%\\system32\\muweb.dll</string>\r\n  " +
+            "<string>%systemroot%\\system32\\ole32.dll</string>\r\n  <string>%systemroot%\\system3" +
+            "2\\oleaut32.dll</string>\r\n  <string>%systemroot%\\system32\\Qmgr.dll</string>\r\n  <s" +
+            "tring>%systemroot%\\system32\\Qmgrprxy.dll</string>\r\n  <string>%systemroot%\\system" +
+            "32\\rsaenh.dll</string>\r\n  <string>%systemroot%\\system32\\sccbase.dll</string>\r\n  " +
+            "<string>%systemroot%\\system32\\scrrun.dll</string>\r\n  <string>%systemroot%\\system" +
+            "32\\shdocvw.dll</string>\r\n  <string>%systemroot%\\system32\\shell32.dll</string>\r\n " +
+            " <string>%systemroot%\\system32\\slbcsp.dll</string>\r\n  <string>%systemroot%\\syste" +
+            "m32\\softpub.dll</string>\r\n  <string>%systemroot%\\system32\\urlmon.dll</string>\r\n " +
+            " <string>%systemroot%\\system32\\userenv.dll</string>\r\n  <string>%systemroot%\\syst" +
+            "em32\\vbscript.dll</string>\r\n  <string>%systemroot%\\system32\\Winhttp.dll</string>" +
+            "\r\n  <string>%systemroot%\\system32\\wintrust.dll</string>\r\n  <string>%systemroot%\\" +
+            "system32\\wuapi.dll</string>\r\n  <string>%systemroot%\\system32\\wuaueng.dll</string" +
+            ">\r\n  <string>%systemroot%\\system32\\wuaueng1.dll</string>\r\n  <string>%systemroot%" +
+            "\\system32\\wucltui.dll</string>\r\n  <string>%systemroot%\\system32\\wucltux.dll</str" +
+            "ing>\r\n  <string>%systemroot%\\system32\\wups.dll</string>\r\n  <string>%systemroot%\\" +
+            "system32\\wups2.dll</string>\r\n  <string>%systemroot%\\system32\\wuweb.dll</string>\r" +
+            "\n  <string>%systemroot%\\system32\\wuwebv.dll</string>\r\n  <string>%systemroot%\\sys" +
+            "tem32\\wbem\\wmisvc.dll</string>\r\n  <string>%systemroot%\\system32\\Xpob2res.dll</st" +
+            "ring>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection RegisterDLLs {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["RegisterDLLs"]));

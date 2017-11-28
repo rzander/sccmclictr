@@ -58,13 +58,8 @@ while ($a -ne 1)</Value>
   &lt;string&gt;%systemroot%\system32\mshtml.dll&lt;/string&gt;
   &lt;string&gt;%systemroot%\system32\msi.dll&lt;/string&gt;
   &lt;string&gt;%systemroot%\system32\mssip32.dll&lt;/string&gt;
-  &lt;string&gt;%systemroot%\system32\msxml.dll&lt;/string&gt;
   &lt;string&gt;%systemroot%\system32\msxml3.dll&lt;/string&gt;
-  &lt;string&gt;%systemroot%\system32\msxml3a.dll&lt;/string&gt;
   &lt;string&gt;%systemroot%\system32\msxml3r.dll&lt;/string&gt;
-  &lt;string&gt;%systemroot%\system32\msxml4.dll&lt;/string&gt;
-  &lt;string&gt;%systemroot%\system32\msxml4a.dll&lt;/string&gt;
-  &lt;string&gt;%systemroot%\system32\msxml4r.dll&lt;/string&gt;
   &lt;string&gt;%systemroot%\system32\msxml6.dll&lt;/string&gt;
   &lt;string&gt;%systemroot%\system32\msxml6r.dll&lt;/string&gt;
   &lt;string&gt;%systemroot%\system32\muweb.dll&lt;/string&gt;

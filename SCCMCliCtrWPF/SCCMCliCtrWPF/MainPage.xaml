@@ -1,4 +1,4 @@
-﻿<Window xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent"  xmlns:s="NavigationPane"  xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"  x:Class="ClientCenter.MainPage"
+﻿<Window xmlns:s="NavigationPane"  xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"  x:Class="ClientCenter.MainPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -158,7 +158,7 @@
                                 <RibbonButton Name="btAppManGlobalEvaluation" Label="Application manager global evaluation action" SmallImageSource="Images/Pack_close.ico" Click="btAppManGlobalEvaluation_Click" ToolTip="Application Global Evaluation Task (COM)"/>
                             </RibbonSplitButton>
                         </RibbonGroup>
-                        <RibbonGroup Name="rgTools" Header="Tools" Visibility="Hidden" SmallImageSource="Images/Tools.ico">
+                        <RibbonGroup Name="rgTools" Header="Tools" Visibility="Hidden" SmallImageSource="Images/Tools.ico" ToolTip="">
                             <RibbonSplitButton Name="btTools" Label="..." ToolTip="3rd party Tools" LargeImageSource="Images/Tools.ico" SmallImageSource="Images/Tools.ico">
                             </RibbonSplitButton>
                         </RibbonGroup>

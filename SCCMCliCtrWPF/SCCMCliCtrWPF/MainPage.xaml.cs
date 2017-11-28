@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-
 using Stema.Controls;
 using sccmclictr.automation;
 using System.Diagnostics;
