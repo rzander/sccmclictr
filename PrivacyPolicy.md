@@ -9,4 +9,4 @@ The tool contains links and functions that are connecting to sources outside of 
 
 ## Contact
 For further questions, feel free to contact the product owner: 
-https://www.codeplex.com/site/users/view/rzander
+https://github.com/rzander
