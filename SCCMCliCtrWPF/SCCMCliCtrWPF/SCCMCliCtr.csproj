@@ -91,9 +91,8 @@
       <HintPath>..\NavigationPane.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
-    <Reference Include="sccmclictr.automation, Version=0.0.0.64, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\sccmclictrlib\sccmclictr.automation\bin\Debug\sccmclictr.automation.dll</HintPath>
+    <Reference Include="sccmclictr.automation">
+      <HintPath>..\packages\sccmclictrlib.0.0.0.41\lib\net40\sccmclictr.automation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
