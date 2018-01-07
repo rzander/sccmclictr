@@ -173,7 +173,7 @@
     <Compile Include="Controls\ImportApp.xaml.cs">
       <DependentUpon>ImportApp.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Customization_Placeholder.cs" />
+    <Compile Condition="!Exists('Customization.dll')" Include="Customization_Placeholder.cs" />
     <Compile Include="ServiceWindowNew.xaml.cs">
       <DependentUpon>ServiceWindowNew.xaml</DependentUpon>
     </Compile>
@@ -582,7 +582,7 @@
     <ManifestTimestampUrl>http://timestamp.verisign.com/scripts/timstamp.dll</ManifestTimestampUrl>
   </PropertyGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
