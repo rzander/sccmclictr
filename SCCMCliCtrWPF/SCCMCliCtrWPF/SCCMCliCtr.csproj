@@ -86,9 +86,9 @@
     <Reference Include="Fluent">
       <HintPath>..\Fluent.dll</HintPath>
     </Reference>
-    <Reference Include="NavigationPane, Version=1.0.4317.19063, Culture=neutral, PublicKeyToken=b239f36db07135c1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\NavigationPane.dll</HintPath>
+    <Reference Include="NavigationPane, Version=1.0.5988.20744, Culture=neutral, PublicKeyToken=b239f36db07135c1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NavigationPane.2.1.0.0\lib\net40\NavigationPane.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="sccmclictr.automation, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
