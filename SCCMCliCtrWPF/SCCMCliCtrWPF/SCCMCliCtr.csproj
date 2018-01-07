@@ -173,6 +173,7 @@
     <Compile Include="Controls\ImportApp.xaml.cs">
       <DependentUpon>ImportApp.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Customization_Placeholder.cs" />
     <Compile Include="ServiceWindowNew.xaml.cs">
       <DependentUpon>ServiceWindowNew.xaml</DependentUpon>
     </Compile>
