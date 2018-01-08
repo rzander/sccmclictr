@@ -129,7 +129,10 @@ namespace ClientCenter.Controls
                                         string sComp = parts.First(p => p.StartsWith("component")).Split('=')[1].Replace("\"", "");
                                         string sDate = parts.First(p => p.StartsWith("date")).Split('=')[1].Replace("\"", ""); ;
                                         string sTime = parts.First(p => p.StartsWith("time")).Split('=')[1].Replace("\"", "").Split('-')[0];
-                                        DateTime logdate = DateTime.ParseExact(sDate + " " + sTime, "MM-dd-yyyy HH:mm:ss.fff", CultureInfo.InvariantCulture);
+
+                                        //Drop the UTC offset CM provides in minutes from the end of the time
+                                        DateTime logdate = DateTime.ParseExact(sDate + " " + sTime.Substring(0, 12), "MM-dd-yyyy HH:mm:ss.fff", CultureInfo.InvariantCulture);
+
                                         LastDT = logdate;
                                         LG.LogLines.Add(new LogGrid.LogEntry() { LogText = sText, Component = sComp, Date = logdate });
                                         continue;
