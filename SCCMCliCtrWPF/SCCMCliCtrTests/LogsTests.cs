@@ -20,7 +20,11 @@ namespace ClientCenter.Tests
         [TestMethod()]
         public void TestWULogParsing()
         {
-            Assert.Inconclusive();
+            string wuLogLine = "2017-12-04\t08:08:48:990\t488\tf48\tAU\tWARNING: There are no approved updates to install";
+            LogEntry wuParsingResult = LogEntry.ParseLogLine(wuLogLine);
+            Assert.AreEqual("WARNING: There are no approved updates to install", wuParsingResult.LogText);
+            Assert.AreEqual("AU", wuParsingResult.Component);
+            Assert.AreEqual(new DateTime(2017, 12, 04, 08, 08, 48, 990), wuParsingResult.Date);
         }
     }
 }
