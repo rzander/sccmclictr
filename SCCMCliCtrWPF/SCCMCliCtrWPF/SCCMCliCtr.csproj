@@ -83,9 +83,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Customization\bin\Debug\Customization.dll</HintPath>
     </Reference>
-    <Reference Include="Fluent">
-      <HintPath>..\Fluent.dll</HintPath>
-    </Reference>
     <Reference Include="NavigationPane, Version=1.0.5988.20744, Culture=neutral, PublicKeyToken=b239f36db07135c1, processorArchitecture=MSIL">
       <HintPath>..\packages\NavigationPane.2.1.0.0\lib\net40\NavigationPane.dll</HintPath>
       <Private>True</Private>
