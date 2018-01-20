@@ -1,0 +1,7 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+before_build:
+- ps: nuget restore SCCMCliCtrWPF\SCCMCliCtrWPF.sln
+build:
+  project: SCCMCliCtrWPF\SCCMCliCtrWPF.sln
+  verbosity: minimal
