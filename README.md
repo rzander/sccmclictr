@@ -32,7 +32,7 @@ https://github.com/rzander/sccmclictr/wiki
 
 ## Requirements
 * Windows Remote Management (WinRM) must be enabled and configured on all target computers. (Run "winrm quickconfig" in a command prompt.)
-* Microsoft .NET Framework 4.5 (on the computer running the Tool)
+* **Microsoft .NET Framework 4.5** (on the computer running the Tool)
 * Configuration Manager Agent on the target computer
 * Admin rights on the target computer.
 * Windows Management Framework 4.0 (PowerShell 4) on the Host and on the target Computer.
