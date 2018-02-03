@@ -1245,6 +1245,23 @@ namespace ClientCenter
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
+
+        private void btDeleteBoundaryGroupCache_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                foreach(var oBGC in oAgent.Client.LocationServices.BoundaryGroupCacheList)
+                {
+                    oBGC.Delete();
+                }
+            }
+            catch
+            {
+                myTrace.WriteError("Unable to delete BoundaryGroupCache...");
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
     }
 
     public class MyTraceListener : TraceListener, INotifyPropertyChanged
