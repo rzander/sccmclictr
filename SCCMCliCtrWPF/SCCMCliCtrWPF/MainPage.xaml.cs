@@ -205,7 +205,7 @@ namespace ClientCenter
             if (Properties.Settings.Default.showPingButton)
                 bt_Ping.Visibility = System.Windows.Visibility.Visible;
 
-
+            bool bNoConnect = true;
             try
             {
                 if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
@@ -250,12 +250,16 @@ namespace ClientCenter
                 {
                     if (Environment.GetCommandLineArgs().Count() > 0)
                     {
-                        tb_TargetComputer.Text = Environment.GetCommandLineArgs()[1].Trim();
-                        tb_TargetComputer2.Text = Environment.GetCommandLineArgs()[1].Trim();
-                        tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
-                        tb_TargetComputer2.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
-                        tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-Embedding", "");
-                        tb_TargetComputer2.Text = tb_TargetComputer2.Text.Replace("-Embedding", "");
+                        if (!Environment.GetCommandLineArgs()[1].StartsWith("/"))
+                        {
+                            tb_TargetComputer.Text = Environment.GetCommandLineArgs()[1].Trim();
+                            tb_TargetComputer2.Text = Environment.GetCommandLineArgs()[1].Trim();
+                            tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
+                            tb_TargetComputer2.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
+                            tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-Embedding", "");
+                            tb_TargetComputer2.Text = tb_TargetComputer2.Text.Replace("-Embedding", "");
+                            bNoConnect = false;
+                        }
                     }
                 }
             }
@@ -271,7 +275,7 @@ namespace ClientCenter
                 if (Environment.GetCommandLineArgs().Count() > 1)
                 {
                     var Args = Environment.GetCommandLineArgs().ToList();
-                    bool bNoConnect = false;
+                    
                     if (Args.Contains("/RegisterConsole", StringComparer.OrdinalIgnoreCase))
                     {
                         try
@@ -294,6 +298,23 @@ namespace ClientCenter
                         Close();
                         return;
                     }
+
+                    string sUser = Args.FirstOrDefault(t => t.StartsWith("/Username:", StringComparison.CurrentCultureIgnoreCase));
+                    string sPW = Args.FirstOrDefault(t => t.StartsWith("/Password:", StringComparison.CurrentCultureIgnoreCase));
+
+                    if (sUser != null && sPW != null)
+                    {
+                        sUser = sUser.Substring(10);
+                        sPW = sPW.Substring(10);
+                        if (!string.IsNullOrEmpty(sUser) && !string.IsNullOrEmpty(sPW))
+                        {
+                            tb_Username.Text = sUser;
+                            pb_Password.Password = common.Encrypt(sPW, Application.ResourceAssembly.ManifestModule.Name);
+                            sUser = "";
+                            sPW = "";
+                        }
+                    }
+
 
                     if (!bNoConnect)
                     {
@@ -498,6 +519,7 @@ namespace ClientCenter
                         }
                         string sPW = common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
                         oAgent = new SCCMAgent(sTarget, tb_Username.Text, sPW, int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
+                        sPW = "";
                     }
 
                     oAgent.PSCode.Listeners.Add(myTrace);
