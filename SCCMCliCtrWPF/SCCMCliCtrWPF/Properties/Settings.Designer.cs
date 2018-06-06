@@ -12,7 +12,7 @@ namespace ClientCenter.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.6.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -298,31 +298,30 @@ while ($a -ne 1)")]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
             "tring>Operating System|root\\cimv2|SELECT Caption FROM Win32_OperatingSystem</str" +
-            "ing>\r\n  <string>OS Build|root\\cimv2|SELECT BuildNumber FROM Win32_OperatingSyste" +
-            "m</string>\r\n  <string>OS Architecture|root\\cimv2|SELECT VariableValue FROM  Win3" +
-            "2_Environment WHERE Name=\'PROCESSOR_ARCHITECTURE\' AND UserName=\'&lt;SYSTEM&gt;\'<" +
-            "/string>\r\n  <string>PC Manufacturer|root\\cimv2|SELECT Manufacturer FROM Win32_Co" +
-            "mputerSystem</string>\r\n  <string>LastHWInv|Root\\CCM\\Scheduler|SELECT LastTrigger" +
-            "Time FROM CCM_Scheduler_History WHERE ScheduleID=\'{00000000-0000-0000-0000-00000" +
-            "0000001}\' and UserSID=\'Machine\'</string>\r\n  <string>LastSWInv|Root\\CCM\\Scheduler" +
-            "|SELECT LastTriggerTime FROM CCM_Scheduler_History WHERE ScheduleID=\'{00000000-0" +
-            "000-0000-0000-000000000002}\' and UserSID=\'Machine\'</string>\r\n  <string>LastDDR|R" +
-            "oot\\CCM\\Scheduler|SELECT LastTriggerTime FROM CCM_Scheduler_History WHERE Schedu" +
-            "leID=\'{00000000-0000-0000-0000-000000000003}\' and UserSID=\'Machine\'</string>\r\n  " +
-            "<string>LastMachinePolicyRequest|Root\\CCM\\Scheduler|SELECT LastTriggerTime FROM " +
-            "CCM_Scheduler_History WHERE ScheduleID=\'{00000000-0000-0000-0000-000000000021}\' " +
-            "and UserSID=\'Machine\'</string>\r\n  <string>LastReboot|root\\cimv2|SELECT LastBootU" +
-            "pTime FROM Win32_OperatingSystem</string>\r\n  <string>InstallDate|root\\cimv2|SELE" +
-            "CT InstallDate FROM Win32_OperatingSystem</string>\r\n  <string>CurrentUser|root\\c" +
-            "imv2|SELECT Username FROM Win32_ComputerSystem</string>\r\n  <string>PrimaryUsers|" +
-            "ROOT\\ccm\\Policy\\Machine\\ActualConfig|SELECT * FROM CCM_UserAffinity WHERE IsUser" +
-            "AffinitySet = \'True\'</string>\r\n  <string>FreeDiskSpace on C: (Bytes)|ROOT\\cimv2|" +
-            "SELECT FreeSpace FROM Win32_LogicalDisk WHERE DeviceID=\'C:\'</string>\r\n  <string>" +
-            "DiskSpace on C: (Bytes)|ROOT\\cimv2|SELECT Size FROM Win32_LogicalDisk WHERE Devi" +
-            "ceID=\'C:\'</string>\r\n  <string>Running Executions|root\\CCM\\SoftMgmtAgent|select M" +
-            "IFPackageName, RequestID, programID, ReceivedTime, SuspendReboot, advertid, cont" +
-            "entid, RunningState, State from ccm_executionrequestex</string>\r\n</ArrayOfString" +
-            ">")]
+            "ing>\r\n  <string>OS Version|root\\cimv2|SELECT Version FROM Win32_OperatingSystem<" +
+            "/string>\r\n  <string>OS Architecture|root\\cimv2|SELECT VariableValue FROM  Win32_" +
+            "Environment WHERE Name=\'PROCESSOR_ARCHITECTURE\' AND UserName=\'&lt;SYSTEM&gt;\'</s" +
+            "tring>\r\n  <string>PC Manufacturer|root\\cimv2|SELECT Manufacturer FROM Win32_Comp" +
+            "uterSystem</string>\r\n  <string>LastHWInv|Root\\CCM\\Scheduler|SELECT LastTriggerTi" +
+            "me FROM CCM_Scheduler_History WHERE ScheduleID=\'{00000000-0000-0000-0000-0000000" +
+            "00001}\' and UserSID=\'Machine\'</string>\r\n  <string>LastSWInv|Root\\CCM\\Scheduler|S" +
+            "ELECT LastTriggerTime FROM CCM_Scheduler_History WHERE ScheduleID=\'{00000000-000" +
+            "0-0000-0000-000000000002}\' and UserSID=\'Machine\'</string>\r\n  <string>LastDDR|Roo" +
+            "t\\CCM\\Scheduler|SELECT LastTriggerTime FROM CCM_Scheduler_History WHERE Schedule" +
+            "ID=\'{00000000-0000-0000-0000-000000000003}\' and UserSID=\'Machine\'</string>\r\n  <s" +
+            "tring>LastMachinePolicyRequest|Root\\CCM\\Scheduler|SELECT LastTriggerTime FROM CC" +
+            "M_Scheduler_History WHERE ScheduleID=\'{00000000-0000-0000-0000-000000000021}\' an" +
+            "d UserSID=\'Machine\'</string>\r\n  <string>LastReboot|root\\cimv2|SELECT LastBootUpT" +
+            "ime FROM Win32_OperatingSystem</string>\r\n  <string>InstallDate|root\\cimv2|SELECT" +
+            " InstallDate FROM Win32_OperatingSystem</string>\r\n  <string>CurrentUser|root\\cim" +
+            "v2|SELECT Username FROM Win32_ComputerSystem</string>\r\n  <string>PrimaryUsers|RO" +
+            "OT\\ccm\\Policy\\Machine\\ActualConfig|SELECT * FROM CCM_UserAffinity WHERE IsUserAf" +
+            "finitySet = \'True\'</string>\r\n  <string>FreeDiskSpace on C: (Bytes)|ROOT\\cimv2|SE" +
+            "LECT FreeSpace FROM Win32_LogicalDisk WHERE DeviceID=\'C:\'</string>\r\n  <string>Di" +
+            "skSpace on C: (Bytes)|ROOT\\cimv2|SELECT Size FROM Win32_LogicalDisk WHERE Device" +
+            "ID=\'C:\'</string>\r\n  <string>Running Executions|root\\CCM\\SoftMgmtAgent|select MIF" +
+            "PackageName, RequestID, programID, ReceivedTime, SuspendReboot, advertid, conten" +
+            "tid, RunningState, State from ccm_executionrequestex</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection AdhocInv {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["AdhocInv"]));
