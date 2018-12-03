@@ -1,5 +1,4 @@
 ﻿<UserControl x:Class="AgentActionTools.CustomTools_MSRA"
-             xmlns:rib="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,8 +6,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100">
     <Grid>
-        <rib:RibbonGroup Header="MSRA" Name="_rgSelfUpdate">
-            <rib:RibbonButton Name="btOpenMSRA" Label="MSRA" ToolTip="Remote Assistance..." SmallImageSource="Images/msra.ico" LargeImageSource="Images/msra.ico" Click="btOpenMSRA_Click"/>
-        </rib:RibbonGroup>
+        <RibbonGroup Header="MSRA" Name="_rgSelfUpdate">
+            <RibbonButton Name="btOpenMSRA" Label="MSRA" ToolTip="Remote Assistance..." SmallImageSource="Images/msra.ico" LargeImageSource="Images/msra.ico" Click="btOpenMSRA_Click"/>
+        </RibbonGroup>
     </Grid>
 </UserControl>

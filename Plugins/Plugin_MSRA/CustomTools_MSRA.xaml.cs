@@ -30,6 +30,10 @@ namespace AgentActionTools
         {
             InitializeComponent();
             btOpenMSRA.IsEnabled = SCCMCliCtr.Customization.CheckLicense();
+            if (!btOpenMSRA.IsEnabled)
+            {
+                btOpenMSRA.ToolTip = "Please make a donation to get access to this feature !";
+            }
         }
 
         private void btOpenMSRA_Click(object sender, RoutedEventArgs e)

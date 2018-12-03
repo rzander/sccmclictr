@@ -1,5 +1,4 @@
 ﻿<UserControl x:Class="AgentActionTools.AgentActionTool_MSRA"
-             xmlns:rib="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,6 +6,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100">
     <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
-        <rib:RibbonButton Name="btOpenMSRA" Label="MSRA" ToolTip="Remote Assitance..." SmallImageSource="Images/msra.ico" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Click="btOpenMSRA_Click" />
+        <RibbonButton Name="btOpenMSRA" Label="MSRA" ToolTip="Remote Assitance..." SmallImageSource="Images/msra.ico" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Click="btOpenMSRA_Click" />
     </Grid>
 </UserControl>
