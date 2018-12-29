@@ -87,8 +87,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
-    <Reference Include="sccmclictr.automation, Version=1.0.0.18, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\sccmclictrlib.1.0.0.18\lib\net46\sccmclictr.automation.dll</HintPath>
+    <Reference Include="sccmclictr.automation, Version=1.0.0.19, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sccmclictrlib.1.0.0.19\lib\net46\sccmclictr.automation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -347,20 +347,6 @@
     <Content Include="Plugin_*.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Plugin_AMTTools.dll" />
-    <Content Include="Plugin_CMRemote.dll" />
-    <Content Include="Plugin_CMResourceExplorer.dll" />
-    <Content Include="Plugin_CompMgmt.dll" />
-    <Content Include="Plugin_EnablePSRemoting.dll" />
-    <Content Include="Plugin_Explorer.dll" />
-    <Content Include="Plugin_FEP.dll" />
-    <Content Include="Plugin_MSInfo32.dll" />
-    <Content Include="Plugin_MSRA.dll" />
-    <Content Include="Plugin_PSScripts.dll" />
-    <Content Include="Plugin_RDP.dll" />
-    <Content Include="Plugin_Regedit.dll" />
-    <Content Include="Plugin_RuckZuck.dll" />
-    <Content Include="Plugin_StatusMessageViewer.dll" />
     <Resource Include="Images\On.ico" />
     <Resource Include="Images\Tools.ico" />
     <Resource Include="Images\Icon16_256.png" />
