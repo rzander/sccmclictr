@@ -54,6 +54,11 @@
                                     <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
                                 </MenuItem.Icon>
                             </MenuItem>
+                            <MenuItem Name="miRepairApp" Header="Repair" Click="MiRepairApp_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="/SCCMCliCtrWPF;component/Images/Repair.ico" Height="24" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                             <MenuItem Name="miUnInstallApp" Header="Uninstall" Click="miUnInstallApp_Click">
                                 <MenuItem.Icon>
                                     <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />

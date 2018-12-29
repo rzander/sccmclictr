@@ -136,6 +136,27 @@ namespace ClientCenter.Controls
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
+        private void MiRepairApp_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                //Install all selected Updates;
+                List<softwaredistribution.CCM_Application> lApps = new List<softwaredistribution.CCM_Application>();
+                foreach (softwaredistribution.CCM_Application cApp in dataGrid1.SelectedItems)
+                {
+                    lApps.Add(cApp);
+                    cApp.Repair(softwaredistribution.AppPriority.Normal, false);
+                }
+                //oAgent.Client.SoftwareUpdates.InstallUpdates(lUpdates);
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
         private void miUnInstallApp_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
@@ -283,6 +304,8 @@ namespace ClientCenter.Controls
             public string DisplayValue { get; set; }
             public string InternalValue { get; set; }
         }
+
+
     }
     public class ImageConverter : IValueConverter
     {
