@@ -12,7 +12,7 @@ namespace ClientCenter.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.6.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -73,7 +73,7 @@ namespace ClientCenter.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string DefaultHostName {
             get {
                 return ((string)(this["DefaultHostName"]));
@@ -232,7 +232,7 @@ while ($a -ne 1)")]
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool showPingButton {
             get {
                 return ((bool)(this["showPingButton"]));
@@ -330,7 +330,8 @@ while ($a -ne 1)")]
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Enter-PSSession {0}  -port {1}")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Enter-PSSession {0}  -port {1} -SessionOption (New-PSSessionOption -NoMachineProf" +
+            "ile)")]
         public string OpenPSConsoleCommand {
             get {
                 return ((string)(this["OpenPSConsoleCommand"]));
