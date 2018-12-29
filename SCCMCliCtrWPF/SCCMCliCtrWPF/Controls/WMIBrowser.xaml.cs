@@ -253,13 +253,14 @@ namespace ClientCenter.Controls
                         tvMain.Items.Clear();
                     }
 
-                    List<PSObject> oObj = oAgent.Client.GetObjects(sNamespace, sQuery, false);
-
+                    //List<PSObject> oObj = oAgent.Client.GetObjects(sNamespace, sQuery, false);
+                    List<PSObject> oObj = oAgent.Client.GetCimObjects(sNamespace, sQuery, true); //use CIMObject to get a valid date format
 
                     foreach (PSObject PSObj in oObj)
                     {
                         System.Collections.ObjectModel.ObservableCollection<wmiProp> oColl = new System.Collections.ObjectModel.ObservableCollection<wmiProp>();
-                        PSObj.Properties.Where(w => w.GetType() == typeof(PSProperty) & !w.Name.StartsWith("_")).ToList().ForEach(x => oColl.Add(new wmiProp(x.Name, x.Value)));
+                        //PSObj.Properties.Where(w => w.GetType() == typeof(PSProperty) & !w.Name.StartsWith("_")).ToList().ForEach(x => oColl.Add(new wmiProp(x.Name, x.Value)));
+                        PSObj.Properties.Where(w => w.Value != null & !w.Name.StartsWith("Cim")).ToList().ForEach(x => oColl.Add(new wmiProp(x.Name, x.Value)));
 
                         DataGrid dg = new DataGrid();
                         dg.CanUserSortColumns = true;
