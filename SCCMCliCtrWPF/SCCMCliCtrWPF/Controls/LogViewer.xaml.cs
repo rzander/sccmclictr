@@ -20,6 +20,8 @@ using System.Management.Automation;
 using System.Globalization;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
+using System.Collections;
+using ClientCenter.Logs;
 
 namespace ClientCenter.Controls
 {
@@ -90,57 +92,12 @@ namespace ClientCenter.Controls
                             string sName = cb.Content as string;
                             TabItem ti = new TabItem();
                             LogGrid LG = new LogGrid();
-                            DateTime LastDT = new DateTime();
 
                             List<PSObject> lRes = oAgent.Client.GetObjectsFromPS(string.Format("Get-Content '{0}' -Tail {1}", sFile, iLines));
                             foreach (PSObject oLine in lRes)
                             {
-
                                 string sOrg = oLine.ToString();
-
-                                //Check if Line has at least 5 Tabs (e.g. WindowsUpdate.log)
-                                if (sOrg.Count(f => f == '\t') > 4)
-                                {
-                                    try
-                                    {
-                                        string sText = sOrg.Split('\t')[5];
-                                        string sComp = sOrg.Split('\t')[4];
-                                        string sDate = sOrg.Split('\t')[0];
-                                        string sTime = sOrg.Split('\t')[1];
-
-                                        DateTime logdate = DateTime.ParseExact(sDate + " " + sTime, "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
-                                        LastDT = logdate;
-                                        LG.LogLines.Add(new LogGrid.LogEntry() { LogText = sText, Component = sComp, Date = logdate });
-                                        continue;
-                                    }
-                                    catch { }
-                                }
-
-                                //Check for SCCM Log format
-                                if (sOrg.StartsWith("<![LOG["))
-                                {
-                                    try
-                                    {
-                                        string sText = sOrg.Substring(7, sOrg.IndexOf("]LOG]!>") - 7);
-                                        string sTemp = sOrg.Substring(sOrg.IndexOf("LOG]!>") + 7);
-
-                                        List<string> parts = Regex.Matches(sTemp, @"[\""].+?[\""]|[^ ]+").Cast<Match>().Select(m => m.Value).ToList();
-
-                                        string sComp = parts.First(p => p.StartsWith("component")).Split('=')[1].Replace("\"", "");
-                                        string sDate = parts.First(p => p.StartsWith("date")).Split('=')[1].Replace("\"", ""); ;
-                                        string sTime = parts.First(p => p.StartsWith("time")).Split('=')[1].Replace("\"", "").Split('-')[0];
-                                        DateTime logdate = DateTime.ParseExact(sDate + " " + sTime, "MM-dd-yyyy HH:mm:ss.fff", CultureInfo.InvariantCulture);
-                                        LastDT = logdate;
-                                        LG.LogLines.Add(new LogGrid.LogEntry() { LogText = sText, Component = sComp, Date = logdate });
-                                        continue;
-                                    }
-                                    catch { }
-                                }
-
-                                if (!string.IsNullOrEmpty(sOrg))
-                                {
-                                    LG.LogLines.Add(new LogGrid.LogEntry() { LogText = sOrg, Component = "", Date = LastDT});
-                                }
+                                LG.LogLines.Add(LogEntry.ParseLogLine(sOrg));
                             }
 
                             ti.Header = sName;

@@ -45,7 +45,7 @@
                         <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
                         <DataGridTextColumn Header="ArticleID" Binding="{Binding Path=ArticleID}" SortDirection="Ascending"  />
                         <DataGridTextColumn Header="BulletinID" Binding="{Binding Path=BulletinID}" />
-                        <DataGridTextColumn Header="Deadline" Binding="{Binding Path=Deadline}"/>
+                        <DataGridTextColumn Header="Deadline" Binding="{Binding Path=Deadline,  StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
                         <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}"/>
                         <DataGridTextColumn Header="PercentComplete" Binding="{Binding Path=PercentComplete}"/>
                         <!--<DataGridTextColumn Header="EvaluationState" Binding="{Binding Path=EvaluationState}"/>-->

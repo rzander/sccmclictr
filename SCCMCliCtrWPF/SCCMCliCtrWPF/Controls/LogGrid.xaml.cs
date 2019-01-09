@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ClientCenter;
 
 namespace ClientCenter.Controls
 {
@@ -22,19 +23,12 @@ namespace ClientCenter.Controls
         public LogGrid()
         {
             InitializeComponent();
-            LogLines = new List<LogEntry>();
+            LogLines = new List<Logs.LogEntry>();
         }
 
-        public class LogEntry
+        public List<Logs.LogEntry> LogLines
         {
-            public string LogText { get; set; }
-            public string Component { get; set; }
-            public DateTime Date { get; set; }
-        }
-
-        public List<LogEntry> LogLines
-        {
-            get { return LogGridList.ItemsSource as List<LogEntry>; }
+            get { return LogGridList.ItemsSource as List<Logs.LogEntry>; }
             set { LogGridList.ItemsSource  = value; }
         }
 
@@ -42,7 +36,7 @@ namespace ClientCenter.Controls
         {
             try
             {
-                string sText = (e.Row.Item as LogEntry).LogText;
+                string sText = (e.Row.Item as Logs.LogEntry).LogText;
                 if (sText.IndexOf("failed", StringComparison.CurrentCultureIgnoreCase) > -1 | 
                     sText.IndexOf("error", StringComparison.CurrentCultureIgnoreCase) > -1 )
                 {

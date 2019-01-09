@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="AgentActionTools.MainMenu_PSScripts"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <RibbonGroup Header="PS" Name="_rgPS" HorizontalAlignment="Left" ToolTip="run custom PowerShell scripts">
+            <RibbonSplitButton Name="btRunPS" Label="run PS" LargeImageSource="Images/PS.ico" SmallImageSource="Images/PS.ico" ToolTip="run custom PowerShell scripts" MouseDown="PSFolder_MouseDown" Click="btRunPS_Click" KeyDown="btRunPS_KeyDown">
+            </RibbonSplitButton>
+        </RibbonGroup>
+    </Grid>
+</UserControl>

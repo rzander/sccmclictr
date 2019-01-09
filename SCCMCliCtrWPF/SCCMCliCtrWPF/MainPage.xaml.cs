@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-
 using Stema.Controls;
 using sccmclictr.automation;
 using System.Diagnostics;
@@ -50,11 +49,10 @@ namespace ClientCenter
             try
             {
                 this.Title = SCCMCliCtr.Customization.Title;
-                rStatus.AppendText("Client Center for Configuration Manager (c) 2017 by Roger Zander\n");
+                rStatus.AppendText("Client Center for Configuration Manager (c) 2018 by Roger Zander\n");
                 rStatus.AppendText("Project-Page: https://github.com/rzander/sccmclictr\n");
                 rStatus.AppendText("Current Version: " + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n");
                 rStatus.AppendText("Assembly Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString() + "\n");
-
 
                 if (!SCCMCliCtr.Customization.CheckLicense() | SCCMCliCtr.Customization.isOpenSource)
                 {
@@ -109,7 +107,6 @@ namespace ClientCenter
                                         new Thread(() =>
                                         {
                                             Thread.CurrentThread.IsBackground = true;
-                                            /* run your code here */
                                             try
                                             {
                                                 AnonymousDelegate dUpdate = delegate()
@@ -129,10 +126,41 @@ namespace ClientCenter
                                         new Thread(() =>
                                         {
                                             Thread.CurrentThread.IsBackground = true;
-                                            /* run your code here */
                                             try
                                             {
                                                 AnonymousDelegate dUpdate = delegate()
+                                                {
+                                                    var obj = Activator.CreateInstance(t);
+                                                    var item = ((System.Windows.Controls.ContentControl)(obj)).Content;
+
+                                                    //Get first Child Control
+                                                    var first = ((System.Windows.Controls.Panel)(item)).Children[0];
+
+                                                    //Detach first Control from Grid
+                                                    Grid par = VisualTreeHelper.GetParent(first) as Grid;
+                                                    par.Children.Remove(first);
+
+                                                    //Add Control without binding to Grid
+                                                    ribCustActions.Tag = oAgent;
+                                                    ribCustActions.Items.Add(first);
+                                                    ribCustActions.IsEnabled = true;
+                                                    ribCustActions.Visibility = System.Windows.Visibility.Visible;
+                                                };
+                                                Dispatcher.Invoke(dUpdate);
+                                            }
+                                            catch { }
+
+                                        }).Start();
+                                    }
+
+                                    if (t.Name.StartsWith("MainMenu_"))
+                                    {
+                                        new Thread(() =>
+                                        {
+                                            Thread.CurrentThread.IsBackground = true;
+                                            try
+                                            {
+                                                AnonymousDelegate dUpdate = delegate ()
                                                 {
                                                     var obj = Activator.CreateInstance(t);
                                                     var item = ((System.Windows.Controls.ContentControl)(obj)).Content;
@@ -147,16 +175,15 @@ namespace ClientCenter
                                                     par.Children.Remove(first);
 
                                                     //Add Control without binding to Grid
-                                                    ribCustActions.Items.Add(first);
-                                                    ribCustActions.IsEnabled = true;
-                                                    ribCustActions.Visibility = System.Windows.Visibility.Visible;
+                                                    ribAgentActions.Items.Add(first);
+                                                    ribAgentActions.Visibility = System.Windows.Visibility.Visible;
                                                 };
                                                 Dispatcher.Invoke(dUpdate);
                                             }
                                             catch { }
 
                                         }).Start();
-                                    }
+                                    } 
                                 }
                                 catch { }
                             }
@@ -178,7 +205,7 @@ namespace ClientCenter
             if (Properties.Settings.Default.showPingButton)
                 bt_Ping.Visibility = System.Windows.Visibility.Visible;
 
-
+            bool bNoConnect = true;
             try
             {
                 if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
@@ -223,12 +250,16 @@ namespace ClientCenter
                 {
                     if (Environment.GetCommandLineArgs().Count() > 0)
                     {
-                        tb_TargetComputer.Text = Environment.GetCommandLineArgs()[1].Trim();
-                        tb_TargetComputer2.Text = Environment.GetCommandLineArgs()[1].Trim();
-                        tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
-                        tb_TargetComputer2.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
-                        tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-Embedding", "");
-                        tb_TargetComputer2.Text = tb_TargetComputer2.Text.Replace("-Embedding", "");
+                        if (!Environment.GetCommandLineArgs()[1].StartsWith("/"))
+                        {
+                            tb_TargetComputer.Text = Environment.GetCommandLineArgs()[1].Trim();
+                            tb_TargetComputer2.Text = Environment.GetCommandLineArgs()[1].Trim();
+                            tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
+                            tb_TargetComputer2.Text = tb_TargetComputer.Text.Replace("-debug", "127.0.0.1");
+                            tb_TargetComputer.Text = tb_TargetComputer.Text.Replace("-Embedding", "");
+                            tb_TargetComputer2.Text = tb_TargetComputer2.Text.Replace("-Embedding", "");
+                            bNoConnect = false;
+                        }
                     }
                 }
             }
@@ -244,7 +275,7 @@ namespace ClientCenter
                 if (Environment.GetCommandLineArgs().Count() > 1)
                 {
                     var Args = Environment.GetCommandLineArgs().ToList();
-                    bool bNoConnect = false;
+                    
                     if (Args.Contains("/RegisterConsole", StringComparer.OrdinalIgnoreCase))
                     {
                         try
@@ -267,6 +298,23 @@ namespace ClientCenter
                         Close();
                         return;
                     }
+
+                    string sUser = Args.FirstOrDefault(t => t.StartsWith("/Username:", StringComparison.CurrentCultureIgnoreCase));
+                    string sPW = Args.FirstOrDefault(t => t.StartsWith("/Password:", StringComparison.CurrentCultureIgnoreCase));
+
+                    if (sUser != null && sPW != null)
+                    {
+                        sUser = sUser.Substring(10);
+                        sPW = sPW.Substring(10);
+                        if (!string.IsNullOrEmpty(sUser) && !string.IsNullOrEmpty(sPW))
+                        {
+                            tb_Username.Text = sUser;
+                            pb_Password.Password = common.Encrypt(sPW, Application.ResourceAssembly.ManifestModule.Name);
+                            sUser = "";
+                            sPW = "";
+                        }
+                    }
+
 
                     if (!bNoConnect)
                     {
@@ -443,8 +491,8 @@ namespace ClientCenter
                             MessageBox.Show("Sorry, connecting the local machine requires administrative permissions. Please start the Tool as Administrator.");
                         }
                     }
-
-                    if (System.Text.RegularExpressions.Regex.Match(sTarget, "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$", System.Text.RegularExpressions.RegexOptions.CultureInvariant).Success)
+                    //if (System.Text.RegularExpressions.Regex.Match(sTarget, "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$", System.Text.RegularExpressions.RegexOptions.CultureInvariant).Success)
+                    if (System.Text.RegularExpressions.Regex.Match(sTarget, @"^(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]))$", System.Text.RegularExpressions.RegexOptions.CultureInvariant).Success)
                     {
                         if (sTarget != "127.0.0.1")
                         {
@@ -471,6 +519,7 @@ namespace ClientCenter
                         }
                         string sPW = common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
                         oAgent = new SCCMAgent(sTarget, tb_Username.Text, sPW, int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
+                        sPW = "";
                     }
 
                     oAgent.PSCode.Listeners.Add(myTrace);
@@ -516,7 +565,7 @@ namespace ClientCenter
                     LogViewPane.Listener = myTrace;
 
                     navigationPane1.IsEnabled = true;
-                    ribAgenTActions.IsEnabled = true;
+                    ribAgentActions.IsEnabled = true;
 
                     ConnectionDock.Visibility = System.Windows.Visibility.Collapsed;
                     ribbon1.IsEnabled = true;
@@ -532,7 +581,7 @@ namespace ClientCenter
                     agentSettingItem1.IsEnabled = false;
                     myTrace.WriteError("Unable to connect: " + sTarget);
                     myTrace.WriteError("Error: " + ex.Message);
-                    ribAgenTActions.IsEnabled = false;
+                    ribAgentActions.IsEnabled = false;
                     ConnectionDock.Visibility = System.Windows.Visibility.Visible;
                     bt_Ping.Visibility = System.Windows.Visibility.Visible;
                     MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -753,17 +802,17 @@ namespace ClientCenter
 
 
                     if ((bool)cb_ssl.IsChecked)
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + sPS + " -UseSSL -Credential $creds -SessionOption (New-PSSessionOption -NoMachineProfile)";
+                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + sPS + " -UseSSL -Credential $creds)";
                     else
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + sPS + " -Credential $creds -SessionOption (New-PSSessionOption -NoMachineProfile)";
+                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + sPS + " -Credential $creds";
 
                 }
                 else
                 {
                     if ((bool)cb_ssl.IsChecked)
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sPS + " -UseSSL -SessionOption (New-PSSessionOption -NoMachineProfile)";
+                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sPS + " -UseSSL";
                     else
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sPS + " -SessionOption (New-PSSessionOption -NoMachineProfile)";
+                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sPS;
                 }
                 Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
                 
@@ -1215,6 +1264,23 @@ namespace ClientCenter
             catch
             {
                 myTrace.WriteError("Unable to RefreshServerComplianceState...");
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void btDeleteBoundaryGroupCache_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                foreach(var oBGC in oAgent.Client.LocationServices.BoundaryGroupCacheList)
+                {
+                    oBGC.Delete();
+                }
+            }
+            catch
+            {
+                myTrace.WriteError("Unable to delete BoundaryGroupCache...");
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }

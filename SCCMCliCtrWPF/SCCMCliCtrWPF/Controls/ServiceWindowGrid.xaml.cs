@@ -205,10 +205,10 @@ namespace ClientCenter.Controls
                         string sRecurText = string.Format("Occours Every ({0})weeks on {1} {2}", oSched.ForNumberOfWeeks, sDay, ServiceWindowID);
                         DateTime dNextRun = dNextStartTime;
 
-                        if (oSched.PreviousStartTime.AddDays(oSched.DayDuration).AddHours(oSched.HourDuration).Date == DateTime.Now.Date)
+                        if (oSched.PreviousStartTime.AddDays(oSched.DayDuration).AddHours(oSched.HourDuration).AddSeconds(-1).Date == DateTime.Now.Date)
                             dNextRun = oSched.PreviousStartTime;
 
-                        while (dNextRun.Date < DateTime.Now.Date + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
+                        while (dNextRun.Date <= DateTime.Now.Date + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
                         {
                             scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRun, new TimeSpan(oSched.DayDuration, oSched.HourDuration, oSched.MinuteDuration, 0), cForeColor, sRecurText, isLocal, ServiceWindowID, SWType));
                             dNextRun = dNextRun + new TimeSpan(oSched.ForNumberOfWeeks * 7, 0, 0, 0);
