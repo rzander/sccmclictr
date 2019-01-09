@@ -298,6 +298,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helper\Converter.cs" />
     <Compile Include="Controls\AgentComponents.xaml.cs" />
     <Compile Include="Controls\AgentSettingItem.xaml.cs" />
     <Compile Include="Controls\ApplicationGrid.xaml.cs" />
