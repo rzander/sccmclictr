@@ -5,9 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="400"
-             xmlns:custom="clr-namespace:ClientCenter.Controls">
+             xmlns:custom="clr-namespace:ClientCenter.Controls"
+             xmlns:helper="clr-namespace:ClientCenter.Helper">
     <UserControl.Resources>
         <custom:ImageConverter x:Key="ImageConverter" />
+        <helper:BooleanToImageConverter x:Key="BooleanToImageConverter" />
     </UserControl.Resources>
     <Grid>
         <DockPanel>
@@ -31,6 +33,26 @@
             <DockPanel>
                 <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" IsReadOnly="True">
                     <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="UI" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="true" SortMemberPath="UserUIExperience" DisplayIndex="1"  MaxWidth="24">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Path=UserUIExperience, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/Flag 4.ico|pack://application:,,,/SCCMCliCtrWPF;component/Images/Flag.ico'}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Simulated" IsReadOnly="True" CanUserReorder="True" CanUserResize="true" CanUserSort="true" SortMemberPath="IsPreflightOnly" DisplayIndex="2" MaxWidth="30">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Path=IsPreflightOnly, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/Flag 4.ico|pack://application:,,,/SCCMCliCtrWPF;component/Images/Flag.ico'}"  Height="20" Width="20"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Maschine" IsReadOnly="True" CanUserReorder="True" CanUserResize="true" CanUserSort="true" SortMemberPath="IsMachineTarget" DisplayIndex="3" MaxWidth="60">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Path=IsMachineTarget, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/Flag 4.ico|pack://application:,,,/SCCMCliCtrWPF;component/Images/Flag.ico'}"  Height="20" Width="20"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
                         <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" SortDirection="Ascending"/>
                         <DataGridTextColumn Header="Version" Binding="{Binding Path=SoftwareVersion}"/>
                         <DataGridTextColumn Header="Rev" Binding="{Binding Path=Revision}"/>
