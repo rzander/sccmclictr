@@ -93,11 +93,6 @@
                                     <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Name="miDeploymentReport" Header="DeploymentReport" Click="miDeploymentReport_Click">
-                                <MenuItem.Icon>
-                                    <Image Source="/SCCMCliCtrWPF;component/Images/Repair.ico" Height="24" />
-                                </MenuItem.Icon>
-                            </MenuItem>
                             <!--<MenuItem Name="miDownloadContent" Header="DownloadContent" Click="miDownloadContent_Click">
                                 <MenuItem.Icon>
                                     <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
