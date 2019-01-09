@@ -5,9 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="400"
-             xmlns:custom="clr-namespace:ClientCenter.Controls">
+             xmlns:custom="clr-namespace:ClientCenter.Controls"
+             xmlns:helper="clr-namespace:ClientCenter.Helper">
     <UserControl.Resources>
         <custom:ImageConverter x:Key="ImageConverter" />
+        <helper:BooleanToImageConverter x:Key="BooleanToImageConverter" />
     </UserControl.Resources>
     <Grid>
         <DockPanel>
@@ -25,12 +27,38 @@
                             <TextBlock Margin="2,0,0,0">Import App from Catalog</TextBlock>
                         </StackPanel>
                     </Button>
+                    <Button Name="bt_HideNonUIEApps">
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox Name="cb_OnlyUIEApps" Checked="cb_OnlyUIEApps_Changed" Unchecked="cb_OnlyUIEApps_Changed">Hide non UserUIExperience apps</CheckBox>
+                        </StackPanel>
+                    </Button>
                     <Separator />
                 </ToolBar>
             </DockPanel>
             <DockPanel>
                 <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" IsReadOnly="True">
                     <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="UI" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="true" SortMemberPath="UserUIExperience" DisplayIndex="1"  MaxWidth="24">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Path=UserUIExperience, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/UserPolicy.ico|'}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Simulated" IsReadOnly="True" CanUserReorder="True" CanUserResize="true" CanUserSort="true" SortMemberPath="IsPreflightOnly" DisplayIndex="2" MaxWidth="30">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Path=IsPreflightOnly, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/Setting.ico|pack://application:,,,/SCCMCliCtrWPF;component/Images/Software update.gif'}"  Height="20" Width="20"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Target" IsReadOnly="True" CanUserReorder="True" CanUserResize="true" CanUserSort="true" SortMemberPath="IsMachineTarget" DisplayIndex="3" MaxWidth="60">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Path=IsMachineTarget, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/ComputerPolicy.ico|pack://application:,,,/SCCMCliCtrWPF;component/Images/UserPolicy.ico'}" Width="24"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" SortDirection="Ascending"/>
                         <DataGridTextColumn Header="Version" Binding="{Binding Path=SoftwareVersion}"/>
                         <DataGridTextColumn Header="Rev" Binding="{Binding Path=Revision}"/>
@@ -39,6 +67,7 @@
                         <DataGridTextColumn Header="InstallState" Binding="{Binding Path=InstallState}"/>
                         <DataGridTextColumn Header="InstallTime" Binding="{Binding Path=LastInstallTime, StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
                         <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" CanUserResize="True" />
+                        
                         <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0" MaxWidth="24">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

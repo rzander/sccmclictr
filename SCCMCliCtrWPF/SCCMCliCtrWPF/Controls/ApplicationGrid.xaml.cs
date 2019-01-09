@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data;
 
 using System.Diagnostics;
 using sccmclictr.automation;
@@ -33,6 +34,7 @@ namespace ClientCenter.Controls
         public ApplicationGrid()
         {
             InitializeComponent();
+            cb_OnlyUIEApps.IsChecked = Properties.Settings.Default.HideNonUserUIExperienceApplicattions;
         }
 
         public SCCMAgent SCCMAgentConnection
@@ -57,16 +59,23 @@ namespace ClientCenter.Controls
                             oAgent = value;
                             try
                             {
-                                if (Properties.Settings.Default.HideNonUserUIExperienceApplicattions)
+                                List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications_(false).ToList();
+                                iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
+
+                                if (cb_OnlyUIEApps.IsChecked == true)
                                 {
-                                    List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications_(false).Where(t => t.UserUIExperience == true).ToList();
-                                    iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
+                                    dataGrid1.Items.Filter = (d) =>
+                                    {
+                                        if (((softwaredistribution.CCM_Application)d).UserUIExperience == true)
+                                            return true; //if want to show in grid
+                                        return false;    //if don't want to show in grid
+                                    };
                                 }
                                 else
                                 {
-                                    List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications_(false).ToList();
-                                    iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
+                                    dataGrid1.Items.Filter = null;
                                 }
+
                                 //TEST.Source = BitMapConvert.ToBitmapImage(iApplications[0].IconAsImage);
 
                                 dataGrid1.BeginInit();
@@ -94,16 +103,8 @@ namespace ClientCenter.Controls
             {
                 List<SortDescription> ssort = GetSortInfo(dataGrid1);
 
-                if (Properties.Settings.Default.HideNonUserUIExperienceApplicattions)
-                {
-                    List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications_(true).Where(t => t.UserUIExperience == true).ToList();
-                    iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
-                }
-                else
-                {
-                    List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications_(true).ToList();
-                    iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
-                }
+                List<softwaredistribution.CCM_Application> oList = oAgent.Client.SoftwareDistribution.Applications_(true).ToList();
+                iApplications = oList.GroupBy(t => t.Id).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.FullName).ToList();
 
                 dataGrid1.BeginInit();
                 dataGrid1.ItemsSource = iApplications;
@@ -304,7 +305,26 @@ namespace ClientCenter.Controls
             public string DisplayValue { get; set; }
             public string InternalValue { get; set; }
         }
-
+        
+        private void cb_OnlyUIEApps_Changed(object sender, RoutedEventArgs e)
+        {
+            if (cb_OnlyUIEApps.IsFocused)
+            {
+                if (cb_OnlyUIEApps.IsChecked == true)
+                {
+                    dataGrid1.Items.Filter = (d) =>
+                    {
+                        if (((softwaredistribution.CCM_Application)d).UserUIExperience == true)
+                            return true; //if want to show in grid
+                        return false;    //if don't want to show in grid
+                    };
+                }
+                else
+                {
+                    dataGrid1.Items.Filter = null;
+                }
+            }
+        }
 
     }
     public class ImageConverter : IValueConverter
