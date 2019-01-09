@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace ClientCenter.Helper
@@ -26,9 +27,31 @@ namespace ClientCenter.Helper
             String[] Images = ((String)parameter).Split('|');
 
             if(bval)
-                return new BitmapImage(new Uri(Images[0]));
+                if(Images[0] == "")
+                    return BitmapImage.Create(
+                                                2,
+                                                2,
+                                                96,
+                                                96,
+                                                PixelFormats.Indexed1,
+                                                new BitmapPalette(new List<Color> { Colors.Transparent }),
+                                                new byte[] { 0, 0, 0, 0 },
+                                                1);
+                else
+                    return new BitmapImage(new Uri(Images[0]));
             else
-                return new BitmapImage(new Uri(Images[1]));
+                if (Images.Length == 1 || Images[1] == "")
+                    return BitmapImage.Create(
+                                            2,
+                                            2,
+                                            96,
+                                            96,
+                                            PixelFormats.Indexed1,
+                                            new BitmapPalette(new List<Color> { Colors.Transparent }),
+                                            new byte[] { 0, 0, 0, 0 },
+                                            1);
+                else
+                    return new BitmapImage(new Uri(Images[1]));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

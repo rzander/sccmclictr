@@ -41,23 +41,24 @@
                         <DataGridTemplateColumn Header="UI" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="true" SortMemberPath="UserUIExperience" DisplayIndex="1"  MaxWidth="24">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Source="{Binding Path=UserUIExperience, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/Flag 4.ico|pack://application:,,,/SCCMCliCtrWPF;component/Images/Flag.ico'}"/>
+                                    <Image Source="{Binding Path=UserUIExperience, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/UserPolicy.ico|'}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Header="Simulated" IsReadOnly="True" CanUserReorder="True" CanUserResize="true" CanUserSort="true" SortMemberPath="IsPreflightOnly" DisplayIndex="2" MaxWidth="30">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Source="{Binding Path=IsPreflightOnly, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/Flag 4.ico|pack://application:,,,/SCCMCliCtrWPF;component/Images/Flag.ico'}"  Height="20" Width="20"/>
+                                    <Image Source="{Binding Path=IsPreflightOnly, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/Setting.ico|pack://application:,,,/SCCMCliCtrWPF;component/Images/Software update.gif'}"  Height="20" Width="20"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Maschine" IsReadOnly="True" CanUserReorder="True" CanUserResize="true" CanUserSort="true" SortMemberPath="IsMachineTarget" DisplayIndex="3" MaxWidth="60">
+                        <DataGridTemplateColumn Header="Target" IsReadOnly="True" CanUserReorder="True" CanUserResize="true" CanUserSort="true" SortMemberPath="IsMachineTarget" DisplayIndex="3" MaxWidth="60">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Source="{Binding Path=IsMachineTarget, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/Flag 4.ico|pack://application:,,,/SCCMCliCtrWPF;component/Images/Flag.ico'}"  Height="20" Width="20"/>
+                                    <Image Source="{Binding Path=IsMachineTarget, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/ComputerPolicy.ico|pack://application:,,,/SCCMCliCtrWPF;component/Images/UserPolicy.ico'}" Width="24"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" SortDirection="Ascending"/>
                         <DataGridTextColumn Header="Version" Binding="{Binding Path=SoftwareVersion}"/>
                         <DataGridTextColumn Header="Rev" Binding="{Binding Path=Revision}"/>
@@ -66,6 +67,7 @@
                         <DataGridTextColumn Header="InstallState" Binding="{Binding Path=InstallState}"/>
                         <DataGridTextColumn Header="InstallTime" Binding="{Binding Path=LastInstallTime, StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
                         <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" CanUserResize="True" />
+                        
                         <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0" MaxWidth="24">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -89,6 +91,11 @@
                             <MenuItem Name="miUnInstallApp" Header="Uninstall" Click="miUnInstallApp_Click">
                                 <MenuItem.Icon>
                                     <Image Source="/SCCMCliCtrWPF;component/Images/Play.ico" Height="24" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Name="miDeploymentReport" Header="DeploymentReport" Click="miDeploymentReport_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="/SCCMCliCtrWPF;component/Images/Repair.ico" Height="24" />
                                 </MenuItem.Icon>
                             </MenuItem>
                             <!--<MenuItem Name="miDownloadContent" Header="DownloadContent" Click="miDownloadContent_Click">
