@@ -1,0 +1,1 @@
+"User:" + (Get-WMIObject -query "SELECT * FROM win32_Process WHERE Name ='explorer.exe'" | Foreach {  $owner = $_.GetOwner();  $_ | Add-Member -MemberType "Noteproperty" -name "Owner" -value $("{0}\{1}" -f $owner.Domain, $owner.User) -passthru }).Owner
