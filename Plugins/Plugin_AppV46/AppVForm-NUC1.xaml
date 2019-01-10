@@ -1,0 +1,145 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon" x:Class="AgentActionTools.AppVForm"
+        Title="App-V 4.x plugin for Client Center" Height="500" Width="800" Icon="Images/AppvInfo.ico">
+    <Grid>
+        <DockPanel LastChildFill="True">
+            <DockPanel DockPanel.Dock="Top">
+                <Ribbon ShowQuickAccessToolBarOnTop="False" Height="92">
+                    <Ribbon.ApplicationMenu>
+                        <RibbonApplicationMenu Visibility="Hidden" />
+                    </Ribbon.ApplicationMenu>
+                    <RibbonMenuButton>
+                        <RibbonButton Name="btCache"  Label="Cache" LargeImageSource="Images/Setting.ico" Click="bt_Click" ToolTip="App-V 4.x Cache Settings"/>
+                        <RibbonButton Name="btApplications" Label="Applications" LargeImageSource="Images/Pack_close.ico" Click="bt_Click" ToolTip="App-V 4.x Applications" />
+                        <RibbonButton Name="btPackages" Label="Packages" LargeImageSource="Images/Icon065.ico" Click="bt_Click" ToolTip="App-V 4.x Packages" />
+                    </RibbonMenuButton>
+                </Ribbon>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <TabControl Name="tabNavigationPanels">
+                    <TabItem Header="Cache" IsSelected="False">
+                        <Grid>
+                            <StackPanel HorizontalAlignment="Center">
+                                <StackPanel Height="32" HorizontalAlignment="Left" Name="stackPanel2" VerticalAlignment="Top" Orientation="Horizontal">
+                                    <Label Content="Cache Size (MB):" Height="28" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
+                                    <TextBox Height="23" Name="tbCacheSize" Width="75" Margin="0,0,10,0" IsReadOnly="True" IsReadOnlyCaretVisible="True" Background="#FFF4F4F4" />
+                                </StackPanel>
+                                <StackPanel Height="32" HorizontalAlignment="Left" Name="stackPanel3" VerticalAlignment="Top" Orientation="Horizontal">
+                                    <Label Content="DriveLetter:" Height="28" Width="200" Margin="2,0,10,0" HorizontalContentAlignment="Right" />
+                                    <TextBox Height="23" Name="tbDrive" Width="75"  IsReadOnly="True" IsReadOnlyCaretVisible="True" Background="#FFF4F4F4" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Applications" IsSelected="False">
+                        <DockPanel>
+                            <DockPanel DockPanel.Dock="Top" Height="32">
+                                <ToolBar Name="ApptoolBar1">
+                                    <Button ToolTip="Reload App-V Applications" Name="bt_AppReload" Click="bt_AppReload_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="Images/shell32.dll_I0017_0409.ico"/>
+                                            <TextBlock Margin="2,0,0,0">Reload Applications</TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                </ToolBar>
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="AppGrid1" VerticalAlignment="Stretch" IsReadOnly="True">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" SortDirection="Ascending"/>
+                                        <DataGridTextColumn Header="Version" Binding="{Binding Path=Version}" SortDirection="Ascending"/>
+                                        <DataGridTextColumn Header="Last Launch" Binding="{Binding Path=LastLaunchOnSystem, StringFormat=\{0:yyyy.MM.dd HH:mm:ss\}}"/>
+                                        <DataGridTextColumn Header="Loading" Binding="{Binding Path=Loading}"/>
+                                        <DataGridTextColumn Header="Running count" Binding="{Binding Path=GlobalRunningCount}"/>
+                                        <DataGridTextColumn Header="PackageGUID" Binding="{Binding Path=PackageGUID}"/>
+                                        <DataGridTextColumn Header="Cached OSD Path" Binding="{Binding Path=CachedOsdPath}" Width="200"/>
+                                        <DataGridTextColumn Header="Original OSD Path" Binding="{Binding Path=OriginalOsdPath}" Width="200"/>
+                                    </DataGrid.Columns>
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Name="miDeleteApp" Header="Delete Application" Click="miDeleteApp_Click">
+                                                <MenuItem.Icon>
+                                                    <Image Source="Images/Delete.ico" Height="24" />
+                                                </MenuItem.Icon>
+                                            </MenuItem>
+                                            <MenuItem Name="miUnloadApp" Header="Unload Application" Click="miUnloadApp_Click">
+                                                <MenuItem.Icon>
+                                                    <Image Source="Images/Icon065.ico" Height="24" />
+                                                </MenuItem.Icon>
+                                            </MenuItem>
+                                            <MenuItem Name="miLoadApp" Header="Load Application" Click="miLoadApp_Click">
+                                                <MenuItem.Icon>
+                                                    <Image Source="Images/Icon065.ico" Height="24" />
+                                                </MenuItem.Icon>
+                                            </MenuItem>
+                                            <MenuItem Name="miRepairApp" Header="Repair Application" Click="miRepairApp_Click">
+                                                <MenuItem.Icon>
+                                                    <Image Source="Images/Icon065.ico" Height="24" />
+                                                </MenuItem.Icon>
+                                            </MenuItem>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
+                            </DockPanel>
+                        </DockPanel>
+                    </TabItem>
+                    <TabItem Header="Packages" IsSelected="False">
+                        <DockPanel>
+                            <DockPanel DockPanel.Dock="Top" Height="32">
+                                <ToolBar Name="PkgtoolBar1">
+                                    <Button ToolTip="Reload App-V Packages" Name="bt_PkgReload" Click="bt_PkgReload_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="Images/shell32.dll_I0017_0409.ico"/>
+                                            <TextBlock Margin="2,0,0,0">Reload Packages</TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                </ToolBar>
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="PkgGrid1" VerticalAlignment="Stretch" IsReadOnly="True">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" SortDirection="Ascending"/>
+                                        <DataGridTextColumn Header="Version" Binding="{Binding Path=Version}" SortDirection="Ascending"/>
+                                        <DataGridTextColumn Header="In Use" Binding="{Binding Path=InUse}"/>
+                                        <DataGridTextColumn Header="Locked" Binding="{Binding Path=Locked}"/>
+                                        <DataGridTextColumn Header="Total Size" Binding="{Binding Path=TotalSize}"/>
+                                        <DataGridTextColumn Header="Launch Size" Binding="{Binding Path=LaunchSize}"/>
+                                        <DataGridTextColumn Header="Cached Size" Binding="{Binding Path=CachedSize}" Width="200"/>
+                                        <DataGridTextColumn Header="Package GUID" Binding="{Binding Path=PackageGUID}" Width="200"/>
+                                        <DataGridTextColumn Header="Version GUID" Binding="{Binding Path=VersionGUID}" Width="200"/>
+                                        <DataGridTextColumn Header="Launch Size" Binding="{Binding Path=CachedLaunchSize}"/>
+                                        <DataGridTextColumn Header="Cached %" Binding="{Binding Path=CachedPercentage}"/>
+                                        <DataGridTextColumn Header="SFT Path" Binding="{Binding Path=SftPath}" Width="200"/>
+                                    </DataGrid.Columns>
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Name="miDeletePackage" Header="Delete Package" Click="miDeletePackage_Click">
+                                                <MenuItem.Icon>
+                                                    <Image Source="Images/Delete.ico" Height="24" />
+                                                </MenuItem.Icon>
+                                            </MenuItem>
+                                            <MenuItem Name="miUnloadPackage" Header="Unload Package" Click="miUnloadPackage_Click">
+                                                <MenuItem.Icon>
+                                                    <Image Source="Images/Icon065.ico" Height="24" />
+                                                </MenuItem.Icon>
+                                            </MenuItem>
+                                            <MenuItem Name="miLoadPackage" Header="Load Package" Click="miLoadPackage_Click">
+                                                <MenuItem.Icon>
+                                                    <Image Source="Images/Icon065.ico" Height="24" />
+                                                </MenuItem.Icon>
+                                            </MenuItem>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
+                            </DockPanel>
+                        </DockPanel>
+                    </TabItem>
+                    <TabItem IsSelected="True">
+
+                    </TabItem>
+                </TabControl>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</Window>

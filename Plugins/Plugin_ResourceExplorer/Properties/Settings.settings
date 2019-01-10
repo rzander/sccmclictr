@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AgentActionTools.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="RemoteCommand" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ResourceExplorer.exe</Value>
+    </Setting>
+    <Setting Name="RemoteArgument" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">-s -sms:ResExplrQuery="SELECT ResourceID FROM SMS_R_SYSTEM WHERE Name = '{0}'" -sms:Connection=\\{1}\root\sms\site_{2}</Value>
+    </Setting>
+    <Setting Name="RequireAdminConsole" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

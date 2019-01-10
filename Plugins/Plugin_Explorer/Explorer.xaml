@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="AgentActionTools.AgentActionTool_FEPFullScan"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="120">
+    <Grid x:Name="gExplore" VerticalAlignment="Top" HorizontalAlignment="Left" ToolTip="Explore shares">
+        <RibbonSplitButton Label="Explore Shares..." Name="btExplore" SmallImageSource="Images/shell32.dll_I010b_0409.ico" >
+            <RibbonButton Name="btC" Label="C$" ToolTip="C$ Share" SmallImageSource="Images/shell32.dll_I010b_0409.ico" Click="btC_Click" Tag="C" />
+            <RibbonButton Name="btAdmin" Label="Admin$" ToolTip="Admin$ Share" SmallImageSource="Images/shell32.dll_I010b_0409.ico" Click="btC_Click" Tag="Admin" />
+            <RibbonButton Name="btWBEM" Label="WBEM" ToolTip="Admin$\Wbem Share" SmallImageSource="Images/shell32.dll_I010b_0409.ico" Click="btC_Click" Tag="WBEM"/>
+            <RibbonButton Name="btCCM" Label="CCM Logs" ToolTip="CCM Agent Logs" SmallImageSource="Images/shell32.dll_I010b_0409.ico" Click="btC_Click" Tag="CCMLOGS" />
+            <RibbonButton Name="btccmsetup" Label="ccmsetup Logs" ToolTip="Admin$\ccmsetup\logs Share" SmallImageSource="Images/shell32.dll_I010b_0409.ico" Click="btC_Click" Tag="ccmsetup"/>
+        </RibbonSplitButton>
+        <!--<rib:RibbonButton Name="btFullScan" Label="Explore Shares..." ToolTip="Quick Scan" SmallImageSource="Images/shell32.dll_I010b_0409.ico" />-->
+    </Grid>
+</UserControl>

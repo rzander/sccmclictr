@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="AgentActionTools.AgentActionTool_Regedit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="100">
+    <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
+            <RibbonButton Name="btOpenRegedit" Label="Regedit" ToolTip="Start Regedit" SmallImageSource="Images/regedit.ico" Click="btOpenPSConsole_Click" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Center" />
+    </Grid>
+</UserControl>

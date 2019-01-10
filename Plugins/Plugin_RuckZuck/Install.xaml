@@ -1,0 +1,12 @@
+﻿<Window x:Name="InstallWindow" x:Class="AgentActionTools.Install"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AgentActionTools"
+        mc:Ignorable="d"
+        Title="Install Software from the RuckZuck.tools repository" Height="620" Width="620" WindowStartupLocation="CenterOwner" Icon="Images/Icon096.ico">
+    <Grid>
+        <local:InstallSwPanel x:Name="InstPanel" Margin="5" IsTabStop="True"/>
+    </Grid>
+</Window>

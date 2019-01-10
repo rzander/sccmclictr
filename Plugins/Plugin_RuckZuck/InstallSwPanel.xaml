@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="AgentActionTools.InstallSwPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="500">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="32"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" Margin="5,0,0,0">
+            <StackPanel Orientation="Horizontal" >
+                <TextBox x:Name="tbSearch" DockPanel.Dock="Right" Height="24" Width="150" Text="Search..." Foreground="#FFAEACAC" Tag="Search" GotFocus="tbSearch_GotFocus" LostFocus="tbSearch_LostFocus" KeyDown="tbSearch_KeyDown" MouseDoubleClick="tbSearch_MouseDoubleClick"/>
+                <Image Width="24" Height="24" Source="Images/Search_24.png" Margin="1,0,0,0" />
+
+            </StackPanel>
+            <TextBlock HorizontalAlignment="Right" Margin="0,5,10,0">           
+                <Hyperlink NavigateUri="https://RuckZuck.tools" RequestNavigate="Hyperlink_RequestNavigate">
+                    https://RuckZuck.tools
+                </Hyperlink>
+            </TextBlock>
+        </DockPanel>
+        <ListView Name="lvSW" Grid.Row="1" SelectionChanged="lvSW_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <DockPanel DockPanel.Dock="Left">
+                            <TextBlock>
+                                <Hyperlink NavigateUri="{Binding ProductURL}" RequestNavigate="Hyperlink_RequestNavigate" OverridesDefaultStyle="True" TextDecorations="">
+                                    <Image Height="24" Width="24" ToolTip="{Binding ProductName}" Source="{Binding IconURL}" />
+                                </Hyperlink>
+                            </TextBlock>
+                        </DockPanel>
+                        <DockPanel DockPanel.Dock="Right" Margin="5,0,0,0">
+                            <DockPanel DockPanel.Dock="Top">
+                                <TextBlock DockPanel.Dock="Right" Text="{Binding Shortname}" FontWeight="Bold"/>
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top" MaxWidth="500">
+                                <TextBlock DockPanel.Dock="Right" Text="{Binding Description}" TextWrapping="Wrap"/>
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                                    <Label Content="Version:" FontWeight="Light" VerticalContentAlignment="Bottom"/>
+                                    <Label Content="{Binding ProductVersion}" FontWeight="Bold" FontSize="11" Margin="-5,0,0,0" VerticalContentAlignment="Bottom" />
+                                    <Label Content="Manufacturer:" FontWeight="Light" Margin="15,0,0,0" VerticalContentAlignment="Bottom" />
+                                    <Label Content="{Binding Manufacturer}" FontWeight="Bold" FontSize="11" Margin="-5,0,0,0" VerticalContentAlignment="Bottom" />
+                                    <Label Content="Downloads:" FontWeight="Light" Margin="15,0,0,0" VerticalContentAlignment="Bottom" />
+                                    <Label Content="{Binding Downloads}" FontWeight="Bold" FontSize="11" Margin="-5,0,0,0" VerticalContentAlignment="Bottom" />
+                                </StackPanel>
+                            </DockPanel>
+                        </DockPanel>
+                    </DockPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=isInstalled}" Value="true">
+                            <Setter Property="Background" Value="#4C5DC92A" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander IsExpanded="False">
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Gray" FontSize="22" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text="(" FontSize="18" Foreground="Silver"  VerticalAlignment="Bottom" Margin="10,0,0,0" />
+                                                    <TextBlock Text="{Binding ItemCount}" FontSize="18" Foreground="Silver" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text=" Items)" FontSize="18" Foreground="Silver"  VerticalAlignment="Bottom" />
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListView.GroupStyle>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Name="miOpenPage" Header="Open Web-Site..." Click="miOpenPage_Click" ToolTip="Open the original product page...">
+                        <MenuItem.Icon>
+                            <Image Source="Images/shell32_1001.ico" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+                    <MenuItem Name="miInstall" Header="Install" IsEnabled="True" ToolTip="Install the selcted Application..." Click="miInstall_Click">
+                        <MenuItem.Icon>
+                            <Image Source="Images/Icon096.ico" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
+
+        <DockPanel Grid.Row="2">
+            <Button DockPanel.Dock="Top" x:Name="btInstall" Content="Start Installation..." IsEnabled="false" BorderBrush="#FF1B491D" Click="btInstall_Click" Width="200" Margin="0,5">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFAFF06E" Offset="0.356"/>
+                        <GradientStop Color="#FF58C725" Offset="1"/>
+                        <GradientStop Color="White"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </DockPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="AgentActionTools.AgentActionTool_CMRemote"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="100">
+    <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
+        <RibbonButton Name="btOpenCMRemote" Label="CM remote Tool" ToolTip="Start CM Remote Tool" SmallImageSource="Images/CmRcViewer_IDR_RCVIEWER.ico" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Click="btOpenCMRemote_Click" />
+    </Grid>
+</UserControl>
