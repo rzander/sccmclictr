@@ -38,24 +38,24 @@
             <DockPanel>
                 <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" IsReadOnly="True">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="UI" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="true" SortMemberPath="UserUIExperience" DisplayIndex="1"  MaxWidth="24">
+                        <DataGridTemplateColumn Header="UI" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="true" SortMemberPath="UserUIExperience" DisplayIndex="1"  MaxWidth="30">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Source="{Binding Path=UserUIExperience, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/UserPolicy.ico|'}"/>
+                                    <Image Source="{Binding Path=UserUIExperience, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/Favorites.ico| pack://application:,,,/SCCMCliCtrWPF;component/Images/Favorites visible.ico'}" Height="20" Width="24"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Header="Simulated" IsReadOnly="True" CanUserReorder="True" CanUserResize="true" CanUserSort="true" SortMemberPath="IsPreflightOnly" DisplayIndex="2" MaxWidth="30">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Source="{Binding Path=IsPreflightOnly, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/Setting.ico|pack://application:,,,/SCCMCliCtrWPF;component/Images/Software update.gif'}"  Height="20" Width="20"/>
+                                    <Image Source="{Binding Path=IsPreflightOnly, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/SPY.ico|pack://application:,,,/SCCMCliCtrWPF;component/Images/Flag 4.ico'}"  Height="20" Width="24"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Target" IsReadOnly="True" CanUserReorder="True" CanUserResize="true" CanUserSort="true" SortMemberPath="IsMachineTarget" DisplayIndex="3" MaxWidth="60">
+                        <DataGridTemplateColumn Header="Target" IsReadOnly="True" CanUserReorder="True" CanUserResize="true" CanUserSort="true" SortMemberPath="IsMachineTarget" DisplayIndex="3" MaxWidth="30">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Source="{Binding Path=IsMachineTarget, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/ComputerPolicy.ico|pack://application:,,,/SCCMCliCtrWPF;component/Images/UserPolicy.ico'}" Width="24"/>
+                                    <Image Source="{Binding Path=IsMachineTarget, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/Computer.ico|pack://application:,,,/SCCMCliCtrWPF;component/Images/User.ico'}" Height="20" Width="24"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -68,10 +68,10 @@
                         <DataGridTextColumn Header="InstallTime" Binding="{Binding Path=LastInstallTime, StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
                         <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" CanUserResize="True" />
                         
-                        <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0" MaxWidth="24">
+                        <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0" MaxWidth="30">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Source="{Binding Path=Icon, Converter={StaticResource ImageConverter}}"/>
+                                    <Image Source="{Binding Path=Icon, Converter={StaticResource ImageConverter}}" Height="24"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
