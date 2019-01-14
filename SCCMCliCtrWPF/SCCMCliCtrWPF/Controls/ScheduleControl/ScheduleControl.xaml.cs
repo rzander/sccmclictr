@@ -39,6 +39,7 @@ namespace ClientCenter.Controls
                 UserControl_Loaded(this, null);
             }
         }
+
         public DateTime Startdate = DateTime.Now;
         public ScheduleControl()
         {
@@ -114,6 +115,7 @@ namespace ClientCenter.Controls
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             stackPanel2.Children.Clear();
+            HeaderStack1.Children.Clear();
             for (int iDay = 1; iDay <= DaysVisible; iDay++)
             {
                 DayControl DC = new DayControl();
@@ -125,7 +127,8 @@ namespace ClientCenter.Controls
                 stackPanel2.Children.Add(DC);
                 
                 Label lDay = new Label();
-                lDay.Content = Startdate.AddDays(iDay - 1).ToString("dddd", System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat);
+                lDay.Content = Startdate.AddDays(iDay - 1).ToString("dd.MM.yy", System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat);
+                lDay.ToolTip = Startdate.AddDays(iDay - 1).ToString("dddd", System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat);
 
                 lDay.Width = DaysDock1.ActualWidth / DaysVisible;
                 lDay.Margin = new Thickness(0, -2, 0, 0);
@@ -147,16 +150,17 @@ namespace ClientCenter.Controls
         public void AddSchedule(ScheduledTime oTime)
         {
             //int iDay = (DateTime.Now.Date - oTime.StartDateTime).Days;
-            int iDay = (oTime.StartDateTime.Date - DateTime.Now.Date).Days;
+            int iDay = (oTime.StartDateTime.Date - Startdate).Days;
             
-            //Check if startTime is in the past
-            if (oTime.StartDateTime.Date < DateTime.Now.Date)
+            //Check if startTime is one day in the past
+            if (oTime.StartDateTime.Date < Startdate && oTime.StartDateTime.Date > Startdate.AddDays(-1))
             {
                 //Show only the hours that are visible today
-                oTime.Duration = (oTime.StartDateTime + oTime.Duration) - DateTime.Now.Date;
-                oTime.StartDateTime = DateTime.Now.Date;
+                oTime.Duration = (oTime.StartDateTime + oTime.Duration) - Startdate;
+                oTime.StartDateTime = Startdate;
                 iDay = 0;
             }
+
             if (iDay < DaysVisible & iDay >= 0)
             {
 
@@ -172,7 +176,7 @@ namespace ClientCenter.Controls
                     AddSchedule(new ScheduledTime(new DateTime(oTime.StartDateTime.Year, oTime.StartDateTime.Month, oTime.StartDateTime.Day, 0, 0, 0).AddDays(1), (oTime.StartDateTime.TimeOfDay + oTime.Duration).Subtract(new TimeSpan(24, 0, 0)), oTime.color, oTime.Title, oTime.isLocal, oTime.ServiceWindowID, oTime.ServiceWindowType)); ;
                 }
 
-                if ((oTime.StartDateTime.Date - DateTime.Now.Date) <= new TimeSpan(DaysVisible, 0, 0, 0))
+                if ((oTime.StartDateTime.Date - Startdate) <= new TimeSpan(DaysVisible, 0, 0, 0))
                 {
                     DC.timeList.Add(new DayControl.timeRange(startTime, endTime, oTime.color, oTime.Title, oTime.isLocal, oTime.ServiceWindowID, oTime.ServiceWindowType));
                 }
