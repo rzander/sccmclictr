@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SCCM Tools")]
 [assembly: AssemblyProduct("SCCMCliCtr")]
-[assembly: AssemblyCopyright("Copyright ©  2018 by Roger Zander")]
+[assembly: AssemblyCopyright("Copyright ©  2019 by Roger Zander")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

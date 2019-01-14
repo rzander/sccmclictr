@@ -31,7 +31,7 @@ namespace ClientCenter
         {
             InitializeComponent();
         }
-                
+
         public SCCMAgent SCCMAgentConnection
         {
             get
@@ -117,7 +117,7 @@ namespace ClientCenter
                 dataGrid1.ItemsSource = iUpdates;
                 dataGrid1.EndInit();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Listener.WriteError(ex.Message);
             }
@@ -152,6 +152,31 @@ namespace ClientCenter
 
                 string LogPath = oAgent.Client.AgentProperties.LocalSCCMAgentLogPath.Replace(':', '$');
                 Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + "\\" + LogPath + "\\" + "UpdatesHandler.log";
+
+                Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
+                Explorer.Start();
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void Bt_OpenWUALog_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                Process Explorer = new Process();
+                Explorer.StartInfo.FileName = "Explorer.exe";
+
+                //Connect IPC$ if not already connected (not needed with integrated authentication)
+                if (!oAgent.ConnectIPC)
+                    oAgent.ConnectIPC = true;
+
+                string LogPath = oAgent.Client.AgentProperties.LocalSCCMAgentLogPath.Replace(':', '$');
+                Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + "\\" + LogPath + "\\" + "WUAHandler.log";
 
                 Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
                 Explorer.Start();
