@@ -298,6 +298,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helper\Converter.cs" />
     <Compile Include="Controls\AgentComponents.xaml.cs" />
     <Compile Include="Controls\AgentSettingItem.xaml.cs" />
     <Compile Include="Controls\ApplicationGrid.xaml.cs" />
@@ -344,6 +345,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Images\Favorites visible.ico" />
+    <Resource Include="Images\Favorites.ico" />
+    <Resource Include="Images\SPY.ico" />
+    <Resource Include="Images\User.ico" />
+    <Resource Include="Images\Computer.ico" />
     <Content Include="Plugin_*.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="AgentActionTools.AgentActionTool_RuckZuck"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="300" ToolTip="http://ruckzuck.tools">
+    <Grid VerticalAlignment="Top" HorizontalAlignment="Left" ToolTip="http://ruckzuck.tools">
+        <RibbonSplitButton Label="RuckZuck.tools" Name="btRZ" SmallImageSource="Images/Icon096.ico" IsTabStop="True" ToolTip="http://ruckzuck.tools" Click="btRZ_Click">
+            <!--<rib:RibbonButton Name="rb_Check" Label="check for updates..." ToolTip="Check for Software-Updates" SmallImageSource="Images/Icon096.ico" />-->
+            <RibbonButton Name="rb_Inst" Label="install new SW..." ToolTip="Install Software from the RuckZuck repository" SmallImageSource="Images/Icon096.ico" Click="rb_Inst_Click"></RibbonButton>
+        </RibbonSplitButton>
+    </Grid>
+
+</UserControl>
