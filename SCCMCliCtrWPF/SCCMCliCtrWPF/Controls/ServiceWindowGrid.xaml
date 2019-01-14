@@ -29,6 +29,12 @@
                             <TextBlock Margin="2,0,0,0">Del all local SW</TextBlock>
                         </StackPanel>
                     </Button>
+                    <Button Name="bt_HideBusinessHours">
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox Name="cb_HideBusinessHours" Checked="cb_HideBusinessHours_Changed" Unchecked="cb_HideBusinessHours_Changed">Hide business hours</CheckBox>
+                        </StackPanel>
+                    </Button>
+                    <DatePicker Name="dp_Date" SelectedDateChanged="dp_Date_SelectedDatesChanged"/>
                     <Separator />
                 </ToolBar>
             </DockPanel>

@@ -169,7 +169,8 @@ namespace ClientCenter.Controls
                 TB.BTClose.ID = tr.ServiceWindowID;
                 TB.BlockHeight = BlockHeight;
                 TB.Position = tr.offset;
-                TB.Width = (e.NewSize.Width / (iMaxCount + 1)) - 10;
+                double width = (e.NewSize.Width / (iMaxCount + 1)) - 10;
+                TB.Width = width > 2 ? width : 2;
                 TB.xMargin = ((e.NewSize.Width / (iMaxCount + 1)) * TB.Position) + 5;
                 
                 //Show close button on local policies
