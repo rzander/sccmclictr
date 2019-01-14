@@ -17,6 +17,7 @@ namespace RZUpdate
     public class RZScan
     {
         internal bool bCheckUpdates = false;
+        internal bool bRunScan = false;
         internal bool bInitialScan = true;
         delegate void AnonymousDelegate();
 
@@ -61,16 +62,27 @@ namespace RZUpdate
 
             OnSWScanCompleted += RZScan_OnSWScanCompleted;
             OnUpdScanCompleted += RZScan_OnUpdScanCompleted;
+            OnSWRepoLoaded += RZScan_OnSWRepoLoaded;
 
             if (RunScan)
             {
-                SWScan();
+                bRunScan = true;
+                //SWScan();
+                GetSWRepository().ConfigureAwait(false); //Scan Runs when Repo is loaded
             }
 
             //Check every 60s
             tRegCheck.Interval = 60000;
             tRegCheck.Elapsed += TRegCheck_Elapsed;
 
+        }
+
+        private void RZScan_OnSWRepoLoaded(object sender, EventArgs e)
+        {
+            if (bRunScan)
+            {
+                SWScan();
+            }
         }
 
         public Task SWScan()
@@ -104,21 +116,21 @@ namespace RZUpdate
                 else
                 {
                     //Detect added SW
-                    foreach (AddSoftware oSW in TempInstalledSoftware.Where(x => !InstalledSoftware.Any(y => y.ProductName == x.ProductName & y.ProductVersion == x.ProductVersion)))
+                    foreach (AddSoftware oSW in TempInstalledSoftware.Where(x => !InstalledSoftware.Any(y => y.ProductName == x.ProductName && y.ProductVersion == x.ProductVersion)))
                     {
                         OnInstalledSWAdded(oSW, new EventArgs());
                     }
 
                     bool bUpdateRemoved = false;
                     //Detect removed SW
-                    foreach (AddSoftware oSW in InstalledSoftware.Where(x => !TempInstalledSoftware.Any(y => y.ProductName == x.ProductName & y.ProductVersion == x.ProductVersion)))
+                    foreach (AddSoftware oSW in InstalledSoftware.Where(x => !TempInstalledSoftware.Any(y => y.ProductName == x.ProductName && y.ProductVersion == x.ProductVersion)))
                     {
                         try
                         {
                             lock (NewSoftwareVersions)
                             {
                                 int iCount = NewSoftwareVersions.RemoveAll(t => t.ProductName == oSW.ProductName);
-                                iCount = iCount + NewSoftwareVersions.RemoveAll(t => t.MSIProductID == oSW.ProductVersion & t.Manufacturer == oSW.Manufacturer);
+                                iCount = iCount + NewSoftwareVersions.RemoveAll(t => t.MSIProductID == oSW.ProductVersion && t.Manufacturer == oSW.Manufacturer);
                                 if (iCount > 0)
                                     bUpdateRemoved = true;
                             }
@@ -153,17 +165,18 @@ namespace RZUpdate
                     {
                         SoftwareRepository = oDB.Select(item => new GetSoftware()
                         {
-                            Categories = item.Categories.ToList(),
+                            Categories = item.Categories ?? new List<string>(),
                             Description = item.Description,
                             Downloads = item.Downloads,
                             IconId = item.IconId,
+                            SWId = item.SWId,
                             Image = item.Image,
                             Manufacturer = item.Manufacturer,
                             ProductName = item.ProductName,
                             ProductURL = item.ProductURL,
                             ProductVersion = item.ProductVersion,
-                            Quality = item.Quality,
-                            Shortname = item.Shortname
+                            Shortname = item.Shortname,
+                            IconHash = item.IconHash
                         }).ToList();
                     }
                 }
@@ -180,7 +193,7 @@ namespace RZUpdate
             return bResult;
         }
 
-        public async Task<bool> GetSWRepository(string RepositoryPath)
+        /*       public async Task<bool> GetSWRepository(string RepositoryPath)
         {
             //var tGetSWRepo =
             bool bResult = await Task.Run(() =>
@@ -211,25 +224,6 @@ namespace RZUpdate
                         }
                         catch { }
                     }
-
-
-                    /*lock (SoftwareRepository)
-                    {
-                        SoftwareRepository = oDB.Select(item => new GetSoftware()
-                        {
-                            Categories = item.Categories.ToList(),
-                            Description = item.Description,
-                            Downloads = item.Downloads,
-                            IconId = item.IconId,
-                            Image = item.Image,
-                            Manufacturer = item.Manufacturer,
-                            ProductName = item.ProductName,
-                            ProductURL = item.ProductURL,
-                            ProductVersion = item.ProductVersion,
-                            Quality = item.Quality,
-                            Shortname = item.Shortname
-                        }).ToList();
-                    }*/
                 }
                 catch (Exception ex)
                 {
@@ -243,8 +237,9 @@ namespace RZUpdate
 
             return bResult;
         }
+*/
 
-        public bool CheckForUpdates
+        /*public bool CheckForUpdates
         {
             get { return bCheckUpdates; }
             set
@@ -252,7 +247,7 @@ namespace RZUpdate
                 bCheckUpdates = value;
                 bInitialScan = value;
             }
-        }
+        }*/
 
         private void RZScan_OnUpdScanCompleted(object sender, EventArgs e)
         {
@@ -272,7 +267,9 @@ namespace RZUpdate
         {
             if (bCheckUpdates)
             {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 CheckUpdates(null);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             }
         }
 
@@ -295,9 +292,13 @@ namespace RZUpdate
                 var vSWCheck = aSWCheck.Select(t => new AddSoftware() { ProductName = t.ProductName, ProductVersion = t.ProductVersion, Manufacturer = t.Manufacturer }).ToList();
 
                 //we do not have to check for updates if it's in the Catalog
-                List<AddSoftware> tRes = vSWCheck.Where(t => SoftwareRepository.FirstOrDefault(r => r.ProductName == t.ProductName & r.ProductVersion == t.ProductVersion & r.Manufacturer == t.Manufacturer) == null).ToList();
+                //List<AddSoftware> tRes = vSWCheck.Where(t => SoftwareRepository.Count(r => r.ProductName.ToLower().Trim() == t.ProductName.ToLower().Trim() && r.ProductVersion.ToLower().Trim() == t.ProductVersion.ToLower().Trim() && r.Manufacturer.ToLower().Trim() == t.Manufacturer.ToLower().Trim()) == 0).ToList();
+                foreach (var oSW in SoftwareRepository)
+                {
+                    vSWCheck.RemoveAll(t => t.ProductName.ToLower().Trim() == oSW.ProductName.ToLower().Trim() && t.Manufacturer.ToLower().Trim() == oSW.Manufacturer.ToLower().Trim() && t.ProductVersion.ToLower().Trim() == oSW.ProductVersion.ToLower().Trim());
+                }
 
-                List<AddSoftware> lCheckResult = RZRestAPI.CheckForUpdate(tRes).ToList();
+                List<AddSoftware> lCheckResult = RZRestAPI.CheckForUpdate(vSWCheck).ToList();
 
                 var lResult = lCheckResult.Select(item => new AddSoftware()
                 {
@@ -311,7 +312,9 @@ namespace RZUpdate
                     ProductVersion = item.ProductVersion,
                     MSIProductID = item.MSIProductID,
                     Shortname = item.Shortname,
-                    SWId = item.SWId
+                    SWId = item.SWId,
+                    IconId = item.IconId,
+                    IconHash = item.IconHash
                 }).ToList();
 
                 //Only take updated Versions
@@ -402,6 +405,8 @@ namespace RZUpdate
         internal AddSoftware GetSWProperties(RegistryKey oRegkey)
         {
             AddSoftware oResult = new AddSoftware();
+            Version oVer = null;
+            bool bVersion = false;
 
             oResult.PSPreReq = "$true";
 
@@ -418,7 +423,7 @@ namespace RZUpdate
             string sMSI = oRegkey.Name.Split('\\').Last();
 
             string EncKey = "";
-            if (sMSI.StartsWith("{") & sMSI.EndsWith("}"))
+            if (sMSI.StartsWith("{") && sMSI.EndsWith("}"))
             {
                 bool bIsMSI = true;
                 EncKey = descramble(sMSI.Substring(1, 36).Replace("-", ""));
@@ -434,7 +439,7 @@ namespace RZUpdate
                 if (bIsMSI)
                 {
                     oResult.MSIProductID = sMSI;
-                    oResult.PSUninstall = "$proc = (Start-Process -FilePath \"msiexec.exe\" -ArgumentList \"/x " + sMSI + " /qb! REBOOT=REALLYSUPPRESS \" -Wait -PassThru);$proc.WaitForExit();$ExitCode = $proc.ExitCode";
+                    oResult.PSUninstall = "$proc = (Start-Process -FilePath \"msiexec.exe\" -ArgumentList \"/x " + sMSI + " /qn REBOOT=REALLYSUPPRESS \" -Wait -PassThru);$proc.WaitForExit();$ExitCode = $proc.ExitCode";
 
 
                     oResult.PSDetection = @"Test-Path 'HKLM:\SOFTWARE\Classes\Installer\Products\" + EncKey + "'";
@@ -451,7 +456,11 @@ namespace RZUpdate
                     {
                         try
                         {
-                            oResult.PSDetection = @"if((Get-ItemProperty -path '" + oRegkey.Name.Replace("HKEY_LOCAL_MACHINE", "HKLM:") + "' -Name DisplayVersion -ea SilentlyContinue | select -exp DisplayVersion) -eq '" + oRegkey.GetValue("DisplayVersion", "").ToString() + "') { $true } else { $false }";
+                            string sVer = oRegkey.GetValue("DisplayVersion", "").ToString();
+                            if (Version.TryParse(sVer, out oVer))
+                                oResult.PSDetection = @"if(([version](Get-ItemPropertyValue -path '" + oRegkey.Name.Replace("HKEY_LOCAL_MACHINE", "HKLM:") + "' -Name DisplayVersion -ea SilentlyContinue)) -ge '" + sVer + "') { $true } else { $false }";
+                            else
+                                oResult.PSDetection = @"if((Get-ItemPropertyValue -path '" + oRegkey.Name.Replace("HKEY_LOCAL_MACHINE", "HKLM:") + "' -Name DisplayVersion -ea SilentlyContinue) -eq '" + sVer + "') { $true } else { $false }";
                         }
                         catch { }
 
@@ -461,26 +470,48 @@ namespace RZUpdate
                 else
                 {
                     oResult.PSInstall = "$proc = (Start-Process -FilePath \"setup.exe\" -ArgumentList \"/?\" -Wait -PassThru);$proc.WaitForExit();$ExitCode = $proc.ExitCode";
-                    if (Environment.Is64BitOperatingSystem & oRegkey.View == RegistryView.Registry32)
+
+                    string sVer = oRegkey.GetValue("DisplayVersion", "").ToString();
+                    if (Version.TryParse(sVer, out oVer)) //check if its a Version
+                        bVersion = true;
+
+                    if (Environment.Is64BitOperatingSystem && oRegkey.View == RegistryView.Registry32)
                     {
-                        oResult.PSDetection = @"if((Get-ItemProperty -path '" + oRegkey.Name.ToUpper().Replace("HKEY_LOCAL_MACHINE", "HKLM:").Replace("SOFTWARE\\", "SOFTWARE\\WOW6432NODE\\") + "' -Name DisplayVersion -ea SilentlyContinue | select -exp DisplayVersion) -eq '" + oRegkey.GetValue("DisplayVersion", "").ToString() + "') { $true } else { $false }";
+                        if (bVersion)
+                            oResult.PSDetection = @"if(([version](Get-ItemPropertyValue -path '" + oRegkey.Name.ToUpper().Replace("HKEY_LOCAL_MACHINE", "HKLM:").Replace("SOFTWARE\\", "SOFTWARE\\WOW6432NODE\\") + "' -Name DisplayVersion -ea SilentlyContinue)) -ge '" + sVer + "') { $true } else { $false }";
+                        else
+                            oResult.PSDetection = @"if((Get-ItemPropertyValue -path '" + oRegkey.Name.ToUpper().Replace("HKEY_LOCAL_MACHINE", "HKLM:").Replace("SOFTWARE\\", "SOFTWARE\\WOW6432NODE\\") + "' -Name DisplayVersion -ea SilentlyContinue) -eq '" + sVer + "') { $true } else { $false }";
                     }
                     else
                     {
-                        oResult.PSDetection = @"if((Get-ItemProperty -path '" + oRegkey.Name.ToUpper().Replace("HKEY_LOCAL_MACHINE", "HKLM:") + "' -Name DisplayVersion -ea SilentlyContinue | select -exp DisplayVersion) -eq '" + oRegkey.GetValue("DisplayVersion", "").ToString() + "') { $true } else { $false }";
+                        if (bVersion)
+                            oResult.PSDetection = @"if(([version](Get-ItemPropertyValue -path '" + oRegkey.Name.ToUpper().Replace("HKEY_LOCAL_MACHINE", "HKLM:") + "' -Name DisplayVersion -ea SilentlyContinue)) -ge '" + sVer + "') { $true } else { $false }";
+                        else
+                            oResult.PSDetection = @"if((Get-ItemPropertyValue -path '" + oRegkey.Name.ToUpper().Replace("HKEY_LOCAL_MACHINE", "HKLM:") + "' -Name DisplayVersion -ea SilentlyContinue) -eq '" + sVer + "') { $true } else { $false }";
+
                     }
                 }
             }
             else
             {
+                string sVer = oRegkey.GetValue("DisplayVersion", "").ToString();
+                if (Version.TryParse(sVer, out oVer)) //check if its a Version
+                    bVersion = true;
+
                 oResult.PSInstall = "$proc = (Start-Process -FilePath \"setup.exe\" -ArgumentList \"/?\" -Wait -PassThru);$proc.WaitForExit();$ExitCode = $proc.ExitCode";
-                if (Environment.Is64BitOperatingSystem & oRegkey.View == RegistryView.Registry32)
+                if (Environment.Is64BitOperatingSystem && oRegkey.View == RegistryView.Registry32)
                 {
-                    oResult.PSDetection = @"if((Get-ItemProperty -path '" + oRegkey.Name.ToUpper().Replace("HKEY_LOCAL_MACHINE", "HKLM:").Replace("SOFTWARE\\", "SOFTWARE\\WOW6432NODE\\") + "' -Name DisplayVersion -ea SilentlyContinue | select -exp DisplayVersion) -eq '" + oRegkey.GetValue("DisplayVersion", "").ToString() + "') { $true } else { $false }";
+                    if (bVersion)
+                        oResult.PSDetection = @"if(([version](Get-ItemPropertyValue -path '" + oRegkey.Name.ToUpper().Replace("HKEY_LOCAL_MACHINE", "HKLM:").Replace("SOFTWARE\\", "SOFTWARE\\WOW6432NODE\\") + "' -Name DisplayVersion -ea SilentlyContinue)) -ge '" + sVer + "') { $true } else { $false }";
+                    else
+                        oResult.PSDetection = @"if((Get-ItemPropertyValue -path '" + oRegkey.Name.ToUpper().Replace("HKEY_LOCAL_MACHINE", "HKLM:").Replace("SOFTWARE\\", "SOFTWARE\\WOW6432NODE\\") + "' -Name DisplayVersion -ea SilentlyContinue) -eq '" + sVer + "') { $true } else { $false }";
                 }
                 else
                 {
-                    oResult.PSDetection = @"if((Get-ItemProperty -path '" + oRegkey.Name.ToUpper().Replace("HKEY_LOCAL_MACHINE", "HKLM:") + "' -Name DisplayVersion -ea SilentlyContinue | select -exp DisplayVersion) -eq '" + oRegkey.GetValue("DisplayVersion", "").ToString() + "') { $true } else { $false }";
+                    if (bVersion)
+                        oResult.PSDetection = @"if(([version](Get-ItemPropertyValue -path '" + oRegkey.Name.ToUpper().Replace("HKEY_LOCAL_MACHINE", "HKLM:") + "' -Name DisplayVersion -ea SilentlyContinue)) -ge '" + sVer + "') { $true } else { $false }";
+                    else
+                        oResult.PSDetection = @"if((Get-ItemPropertyValue -path '" + oRegkey.Name.ToUpper().Replace("HKEY_LOCAL_MACHINE", "HKLM:") + "' -Name DisplayVersion -ea SilentlyContinue) -eq '" + sVer + "') { $true } else { $false }";
                 }
 
             }
@@ -627,27 +658,25 @@ namespace RZUpdate
         {
             try
             {
-                //Bitmap bResult = new Bitmap(GetIconForFile(Filename, ShellIconSize.LargeIcon).ToBitmap(), new Size(128, 128));
-                //Bitmap bResult = System.Drawing.Icon.ExtractAssociatedIcon(Filename).ToBitmap();
+                Bitmap bResult = System.Drawing.Icon.ExtractAssociatedIcon(Filename).ToBitmap();
 
                 try
                 {
-                    /*TsudaKageyu.IconExtractor iE = new TsudaKageyu.IconExtractor(Filename);
-                    if (iE.FileName != null)
-                    {
-                        List<Icon> lIcons = TsudaKageyu.IconUtil.Split(iE.GetIcon(0)).ToList();
-                        //Max Size 64px...
-                        var ico = lIcons.Where(t => t.Height <= 64 & t.ToBitmap().PixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppArgb).OrderByDescending(t => t.Height).FirstOrDefault();
-                        if (ico != null)
-                            return ico.ToBitmap();
-                        else
-                            return bResult;
-                    }*/
+                    //TsudaKageyu.IconExtractor iE = new TsudaKageyu.IconExtractor(Filename);
+                    //if (iE.FileName != null)
+                    //{
+                    //    List<Icon> lIcons = TsudaKageyu.IconUtil.Split(iE.GetIcon(0)).ToList();
+                    //    //Max Size 128px...
+                    //    var ico = lIcons.Where(t => t.Height <= 128 && t.ToBitmap().PixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppArgb).OrderByDescending(t => t.Height).FirstOrDefault();
+                    //    if (ico != null)
+                    //        return ico.ToBitmap();
+                    //    else
+                    //        return bResult;
+                    //}
                 }
                 catch { }
 
-                return null;
-                //return System.Drawing.Icon.ExtractAssociatedIcon(Filename).ToBitmap();
+                return bResult;
             }
             catch
             {
