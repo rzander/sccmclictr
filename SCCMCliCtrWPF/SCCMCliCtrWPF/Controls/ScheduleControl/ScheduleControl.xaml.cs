@@ -22,14 +22,14 @@ namespace ClientCenter.Controls
     /// </summary>
     public partial class ScheduleControl : UserControl
     {
-        private int daysVisible;
+        private int daysVisible = 14;
 
         public int DaysVisible
         {
             get 
             {
                 if (daysVisible == 0)
-                    return 7;
+                    return 14;
                 else
                     return daysVisible; 
             }

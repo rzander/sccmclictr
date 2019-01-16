@@ -92,7 +92,7 @@ namespace ClientCenter.Controls
                     try
                     {
                         oAgent = value;
-                        scheduleControl1.DaysVisible = 31;
+                        scheduleControl1.DaysVisible = Convert.ToInt32(SliderMWScale.Value);
                         if (oAgent.isConnected)
                         {
                             scheduleControl1.ScheduledTimes.Clear();
@@ -381,7 +381,17 @@ namespace ClientCenter.Controls
         private void dp_Date_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             scheduleControl1.Startdate = dp_Date.SelectedDate ?? DateTime.Now;
+            scheduleControl1.DaysVisible = Convert.ToInt32(SliderMWScale.Value);
             bt_Reload_Click(sender, e);
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (scheduleControl1 != null)
+            {
+                scheduleControl1.DaysVisible = Convert.ToInt32(e.NewValue);
+                bt_Reload_Click(sender, e);
+            }
         }
     }
 }
