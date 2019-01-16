@@ -33,7 +33,7 @@
                     <Button ToolTip="Open C:\Windows\ccm\logs\UpdatesHandler.log" Name="bt_OpenUpdateLog" Click="bt_OpenUpdateLog_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/SCCMCliCtrWPF;component/Images/Search File.ico"/>
-                            <TextBlock Margin="2,0,0,0">Open UpdatesHandler.log</TextBlock>
+                            <TextBlock Margin="2,0,0,0">Open UpdatesDeployment.log</TextBlock>
                         </StackPanel>
                     </Button>
                     <Button ToolTip="Open C:\windows\ccm\logs\WUAHandler.log" Name="bt_OpenWUALog" Click="Bt_OpenWUALog_Click">
