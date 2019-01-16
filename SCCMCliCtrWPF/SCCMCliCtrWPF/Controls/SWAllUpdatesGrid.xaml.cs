@@ -185,7 +185,7 @@ namespace ClientCenter
                     oAgent.ConnectIPC = true;
 
                 string LogPath = oAgent.Client.AgentProperties.LocalSCCMAgentLogPath.Replace(':', '$');
-                Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + "\\" + LogPath + "\\" + "UpdatesHandler.log";
+                Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + "\\" + LogPath + "\\" + "UpdatesDeployment.log";
 
 
                 Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
