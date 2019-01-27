@@ -4,6 +4,8 @@ using System.Diagnostics;
 
 using sccmclictr.automation;
 using System.Windows.Controls.Ribbon;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
 
 namespace AgentActionTools
 {
@@ -21,6 +23,22 @@ namespace AgentActionTools
             {
                 gExplore.ToolTip = "Please make a donation to get access to this feature !";
             }
+
+            foreach(string sPath in Properties.Settings.Default.Folders)
+            {
+                try
+                {
+                    RibbonButton bR = new RibbonButton();
+                    bR.Label = sPath;
+                    bR.Tag = sPath;
+                    bR.SmallImageSource = new BitmapImage(new Uri(@"/Plugin_Explorer;component/Images/shell32.dll_I010b_0409.ico", UriKind.Relative));
+                    bR.ToolTip = sPath;
+                    bR.Click += btC_Click;
+                    btExplore.Items.Add(bR);
+                }
+                catch { }
+            }
+            
         }
 
         private void btC_Click(object sender, RoutedEventArgs e)
@@ -56,6 +74,10 @@ namespace AgentActionTools
                             else
                                 sShare = @"Admin$\ccm\logs";
                             break;
+                        default:
+                            sShare = sTag;
+                            break;
+
                     }
 
 

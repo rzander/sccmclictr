@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Diagnostics;
 using System.Windows.Controls.Ribbon;
+using System.Windows.Media.Imaging;
 
 namespace AgentActionTools
 {
@@ -13,6 +14,21 @@ namespace AgentActionTools
         public CustomTools_Explorer()
         {
             InitializeComponent();
+
+            foreach (string sPath in Properties.Settings.Default.Folders)
+            {
+                try
+                {
+                    RibbonButton bR = new RibbonButton();
+                    bR.Label = sPath;
+                    bR.Tag = sPath;
+                    bR.SmallImageSource = new BitmapImage(new Uri(@"/Plugin_Explorer;component/Images/shell32.dll_I010b_0409.ico", UriKind.Relative));
+                    bR.ToolTip = sPath;
+                    bR.Click += btC_Click;
+                    btExplore.Items.Add(bR);
+                }
+                catch { }
+            }
         }
 
         private void btC_Click(object sender, RoutedEventArgs e)
@@ -40,6 +56,9 @@ namespace AgentActionTools
                             break;
                         case "CCMLOGS":
                             sShare = @"Admin$\ccm\logs";
+                            break;
+                        default:
+                            sShare = sTag;
                             break;
                     }
                     Type t = System.Reflection.Assembly.GetEntryAssembly().GetType("ClientCenter.Common", false, true);
