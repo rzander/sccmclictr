@@ -36,6 +36,7 @@ namespace ClientCenter.Controls
             scheduleControl1.DeleteClick += scheduleControl1_DeleteClick;
             dp_Date.SelectedDate = DateTime.Now;
             dp_Date.DisplayDate = DateTime.Now;
+            cb_HideBusinessHours.IsChecked = Properties.Settings.Default.HideBusinessHours;
         }
 
         void scheduleControl1_DeleteClick(object sender, EventArgs e)
@@ -375,6 +376,8 @@ namespace ClientCenter.Controls
         private void cb_HideBusinessHours_Changed(object sender, RoutedEventArgs e)
         {
             bt_Reload_Click(sender, e);
+            Properties.Settings.Default.HideBusinessHours = cb_HideBusinessHours.IsChecked ?? true;
+            Properties.Settings.Default.Save();
         }
 
 

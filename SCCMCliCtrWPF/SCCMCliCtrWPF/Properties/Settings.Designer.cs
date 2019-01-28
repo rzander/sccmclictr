@@ -369,5 +369,17 @@ while ($a -ne 1)")]
                 return ((string)(this["AgentInstallPS"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool HideBusinessHours {
+            get {
+                return ((bool)(this["HideBusinessHours"]));
+            }
+            set {
+                this["HideBusinessHours"] = value;
+            }
+        }
     }
 }
