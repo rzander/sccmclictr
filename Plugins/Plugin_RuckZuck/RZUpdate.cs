@@ -779,10 +779,7 @@ namespace RZUpdate
 
                     if (SendFeedback && bDLSuccess)
                     {
-                        if (SW.SWId > 0)
-                        {
-                            RZRestAPI.TrackDownloads2(SW.SWId, SW.Architecture, SW.Shortname);
-                        }
+                        RZRestAPI.TrackDownloads2(SW.SWId, SW.Architecture, SW.Shortname);
                     }
                 }
 

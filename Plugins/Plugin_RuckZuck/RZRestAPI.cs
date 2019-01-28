@@ -32,7 +32,7 @@ namespace RuckZuck_WCF
                 {
                     if (sWebSVC.StartsWith("http", StringComparison.CurrentCultureIgnoreCase))
                     {
-                        RZRestAPI._sURL = sWebSVC;
+                        RZRestAPI._sURL = sWebSVC.TrimEnd('/');
                     }
                 }
 
@@ -313,7 +313,11 @@ namespace RuckZuck_WCF
         {
             try
             {
-                await oClient.GetStringAsync(sURL + "/rest/TrackDownloadsNew?SWId=" + SWId.ToString() + "&arch=" + WebUtility.UrlEncode(Architecture) + "&shortname=" + Shortname);
+                string sID = SWId.ToString();
+                if (SWId == 0)
+                    sID = "";
+
+                await oClient.GetStringAsync(sURL + "/rest/TrackDownloadsNew?SWId=" + sID + "&arch=" + WebUtility.UrlEncode(Architecture) + "&shortname=" + WebUtility.UrlEncode(Shortname));
             }
             catch { }
         }

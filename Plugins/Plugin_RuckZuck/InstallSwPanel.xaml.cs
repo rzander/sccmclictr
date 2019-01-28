@@ -75,12 +75,12 @@ namespace AgentActionTools
                                     //Check if SW is already installed
                                     if (lSoftware.FirstOrDefault(t => t.ProductName == oSW.ProductName & t.ProductVersion == oSW.ProductVersion) != null)
                                     {
-                                        GetSoftware oNew = new GetSoftware() { Categories = new List<string> { sCAT }, Description = oSW.Description, Downloads = oSW.Downloads, IconId = oSW.IconId, Manufacturer = oSW.Manufacturer, ProductName = oSW.ProductName, ProductURL = oSW.ProductURL, ProductVersion = oSW.ProductVersion, Quality = oSW.Quality, Shortname = oSW.Shortname, isInstalled = true };
+                                        GetSoftware oNew = new GetSoftware() { Categories = new List<string> { sCAT }, Description = oSW.Description, Downloads = oSW.Downloads, IconHash = oSW.IconHash, SWId = oSW.SWId, IconId = oSW.IconId, Manufacturer = oSW.Manufacturer, ProductName = oSW.ProductName, ProductURL = oSW.ProductURL, ProductVersion = oSW.ProductVersion, Quality = oSW.Quality, Shortname = oSW.Shortname, isInstalled = true };
                                         oDBCat.Add(oNew);
                                     }
                                     else
                                     {
-                                        GetSoftware oNew = new GetSoftware() { Categories = new List<string> { sCAT }, Description = oSW.Description, Downloads = oSW.Downloads, IconId = oSW.IconId, Manufacturer = oSW.Manufacturer, ProductName = oSW.ProductName, ProductURL = oSW.ProductURL, ProductVersion = oSW.ProductVersion, Quality = oSW.Quality, Shortname = oSW.Shortname, isInstalled = false };
+                                        GetSoftware oNew = new GetSoftware() { Categories = new List<string> { sCAT }, Description = oSW.Description, Downloads = oSW.Downloads, IconHash = oSW.IconHash, SWId = oSW.SWId, IconId = oSW.IconId, Manufacturer = oSW.Manufacturer, ProductName = oSW.ProductName, ProductURL = oSW.ProductURL, ProductVersion = oSW.ProductVersion, Quality = oSW.Quality, Shortname = oSW.Shortname, isInstalled = false };
                                         oDBCat.Add(oNew);
                                     }
                                 }
@@ -92,11 +92,11 @@ namespace AgentActionTools
                             //Check if SW is already installed
                             if (lSoftware.FirstOrDefault(t => t.ProductName == oSW.ProductName & t.ProductVersion == oSW.ProductVersion) != null)
                             {
-                                oDBCat.Add(new GetSoftware() { Categories = oSW.Categories, Description = oSW.Description, Downloads = oSW.Downloads, IconId = oSW.IconId, Manufacturer = oSW.Manufacturer, ProductName = oSW.ProductName, ProductURL = oSW.ProductURL, ProductVersion = oSW.ProductVersion, Quality = oSW.Quality, Shortname = oSW.Shortname, isInstalled = true });
+                                oDBCat.Add(new GetSoftware() { Categories = oSW.Categories, Description = oSW.Description, Downloads = oSW.Downloads, IconHash = oSW.IconHash, SWId = oSW.SWId, IconId = oSW.IconId, Manufacturer = oSW.Manufacturer, ProductName = oSW.ProductName, ProductURL = oSW.ProductURL, ProductVersion = oSW.ProductVersion, Quality = oSW.Quality, Shortname = oSW.Shortname, isInstalled = true });
                             }
                             else
                             {
-                                oDBCat.Add(new GetSoftware() { Categories = oSW.Categories, Description = oSW.Description, Downloads = oSW.Downloads, IconId = oSW.IconId, Manufacturer = oSW.Manufacturer, ProductName = oSW.ProductName, ProductURL = oSW.ProductURL, ProductVersion = oSW.ProductVersion, Quality = oSW.Quality, Shortname = oSW.Shortname, isInstalled = false });
+                                oDBCat.Add(new GetSoftware() { Categories = oSW.Categories, Description = oSW.Description, Downloads = oSW.Downloads, IconHash = oSW.IconHash, SWId = oSW.SWId, IconId = oSW.IconId, Manufacturer = oSW.Manufacturer, ProductName = oSW.ProductName, ProductURL = oSW.ProductURL, ProductVersion = oSW.ProductVersion, Quality = oSW.Quality, Shortname = oSW.Shortname, isInstalled = false });
                             }
                         }
                     }
