@@ -6,6 +6,9 @@ using sccmclictr.automation;
 using System.Windows.Controls.Ribbon;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using System.Collections.Specialized;
+using System.Xml;
+using System.Reflection;
 
 namespace AgentActionTools
 {
@@ -24,7 +27,7 @@ namespace AgentActionTools
                 gExplore.ToolTip = "Please make a donation to get access to this feature !";
             }
 
-            foreach(string sPath in Properties.Settings.Default.Folders)
+            foreach(string sPath in xmlFolders)
             {
                 try
                 {
@@ -94,6 +97,37 @@ namespace AgentActionTools
             catch{}
         }
 
+        public static string ConfigPath
+        {
+            get
+            {
+                //Get XML Settings
+                return Assembly.GetExecutingAssembly().Location + ".config";
+            }
+        }
+
+        internal static StringCollection xmlFolders
+        {
+            get
+            {
+                try
+                {
+                    StringCollection sResults = new StringCollection();
+                    XmlDocument xDoc = new XmlDocument();
+                    xDoc.Load(ConfigPath);
+                    var xNodes = xDoc.SelectNodes("//configuration/applicationSettings/AgentActionTools.Properties.Settings/setting[@name='Folders']/value/ArrayOfString/string");
+                    foreach (XmlNode xNode in xNodes)
+                    {
+                        sResults.Add(xNode.InnerText.ToString());
+                    }
+
+                    return sResults;
+                }
+                catch { }
+
+                return Properties.Settings.Default.Folders;
+            }
+        }
 
     }
 }

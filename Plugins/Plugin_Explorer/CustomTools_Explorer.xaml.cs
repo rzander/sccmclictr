@@ -3,6 +3,10 @@ using System.Windows;
 using System.Diagnostics;
 using System.Windows.Controls.Ribbon;
 using System.Windows.Media.Imaging;
+using System.Reflection;
+using System.Xml;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 
 namespace AgentActionTools
 {
@@ -15,7 +19,7 @@ namespace AgentActionTools
         {
             InitializeComponent();
 
-            foreach (string sPath in Properties.Settings.Default.Folders)
+            foreach (string sPath in xmlFolders)
             {
                 try
                 {
@@ -73,6 +77,38 @@ namespace AgentActionTools
                 }
             }
             catch { }
+        }
+
+        public static string ConfigPath
+        {
+            get
+            {
+                //Get XML Settings
+                return Assembly.GetExecutingAssembly().Location + ".config";
+            }
+        }
+
+        internal static StringCollection xmlFolders
+        {
+            get
+            {
+                try
+                {
+                    StringCollection sResults = new StringCollection();
+                    XmlDocument xDoc = new XmlDocument();
+                    xDoc.Load(ConfigPath);
+                    var xNodes = xDoc.SelectNodes("//configuration/applicationSettings/AgentActionTools.Properties.Settings/setting[@name='Folders']/value/ArrayOfString/string");
+                    foreach(XmlNode xNode in xNodes)
+                    {
+                        sResults.Add(xNode.InnerText.ToString());
+                    }
+
+                    return sResults;
+                }
+                catch { }
+
+                return Properties.Settings.Default.Folders;
+            }
         }
     }
 }
