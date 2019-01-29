@@ -350,8 +350,12 @@
     <Resource Include="Images\SPY.ico" />
     <Resource Include="Images\User.ico" />
     <Resource Include="Images\Computer.ico" />
-    <Content Include="Plugin_*.dll" />
-    <Content Include="Plugin_Explorer*.config" />
+    <Content Include="Plugin_*.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Plugin_Explorer*.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Images\On.ico" />
     <Resource Include="Images\Tools.ico" />
     <Resource Include="Images\Icon16_256.png" />
