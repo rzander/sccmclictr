@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SCCM Tools")]
 [assembly: AssemblyProduct("SCCMCliCtrWPF")]
-[assembly: AssemblyCopyright("Copyright ©  2018 by Roger Zander")]
+[assembly: AssemblyCopyright("Copyright ©  2019 by Roger Zander")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -52,4 +52,4 @@ using System.Windows;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyFileVersion("1.0.0.2")]
+[assembly: AssemblyFileVersion("1.0.0.4")]

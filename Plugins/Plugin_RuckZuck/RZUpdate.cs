@@ -338,6 +338,7 @@ namespace RZUpdate
                 if (SW.Image == null)
                 {
                     SW.Image = RZRestAPI.GetIcon(SW.SWId);
+                    downloadTask.Image = SW.Image;
                 }
             }
             catch { }
@@ -407,6 +408,9 @@ namespace RZUpdate
                 }
             }
 
+            if (SW.PreRequisites == null)
+                SW.PreRequisites = new string[0];
+
 
         }
 
@@ -468,10 +472,6 @@ namespace RZUpdate
 
                 }
 
-
-
-
-
                 downloadTask = new DLTask() { ProductName = SW.ProductName, ProductVersion = SW.ProductVersion, Manufacturer = SW.Manufacturer, Shortname = SW.Shortname, Image = SW.Image, Files = SW.Files };
 
                 foreach (contentFiles vFile in SW.Files)
@@ -479,6 +479,9 @@ namespace RZUpdate
                     if (string.IsNullOrEmpty(vFile.HashType))
                         vFile.HashType = "MD5";
                 }
+
+                if (SW.PreRequisites == null)
+                    SW.PreRequisites = new string[0];
             }
             catch { }
         }
