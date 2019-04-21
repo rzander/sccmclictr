@@ -78,6 +78,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\ruckzuck\RZ.Base\RZRestAPIv2.cs">
+      <Link>RZRestAPIv2.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ruckzuck\RZ.Base\RZScan.cs">
+      <Link>RZScan.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ruckzuck\RZ.Base\RZUpdate.cs">
+      <Link>RZUpdate.cs</Link>
+    </Compile>
     <Compile Include="AgentActionTool_CheckUpdate.xaml.cs">
       <DependentUpon>AgentActionTool_CheckUpdate.xaml</DependentUpon>
     </Compile>
@@ -90,9 +99,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="RZRestAPI.cs" />
-    <Compile Include="RZScan.cs" />
-    <Compile Include="RZUpdate.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

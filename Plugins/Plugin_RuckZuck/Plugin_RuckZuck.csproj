@@ -79,6 +79,15 @@
     <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\ruckzuck\RZ.Base\RZRestAPIv2.cs">
+      <Link>RZRestAPIv2.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ruckzuck\RZ.Base\RZScan.cs">
+      <Link>RZScan.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ruckzuck\RZ.Base\RZUpdate.cs">
+      <Link>RZUpdate.cs</Link>
+    </Compile>
     <Compile Include="Install.xaml.cs">
       <DependentUpon>Install.xaml</DependentUpon>
     </Compile>
@@ -87,9 +96,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="RZRestAPI.cs" />
-    <Compile Include="RZScan.cs" />
-    <Compile Include="RZUpdate.cs" />
     <Page Include="AgentActionTool_RZ.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
