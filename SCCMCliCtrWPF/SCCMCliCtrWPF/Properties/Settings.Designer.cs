@@ -381,5 +381,24 @@ while ($a -ne 1)")]
                 this["HideBusinessHours"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>2b646eff-442b-410e-adf3-d4ec699e0ab4</string>
+  <string>3dde85c4-ce0e-4999-ab84-698a569dfcac</string>
+  <string>3fd01cd1-9e01-461e-92cd-94866b8d1f39</string>
+  <string>9b73a906-6908-4316-b61e-cbab300c9791</string>
+  <string>64db983c-10bc-4b47-8f2d-cfff48f34faf</string>
+  <string>ed9dee86-eadd-4ac8-82a1-7234a4646e62</string>
+  <string>f7cc4bbb-e70e-43e1-978c-1c263d946fff</string>
+  <string>fb04b7a5-bc4c-4468-8eb8-937d8eb90efb</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection ConsoleExtensionGUIDs {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["ConsoleExtensionGUIDs"]));
+            }
+        }
     }
 }

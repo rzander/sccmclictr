@@ -1409,20 +1409,30 @@ namespace ClientCenter
                 string sUIPath = rAdminUI.GetValue("UI Installation Directory", "").ToString();
                 if (Directory.Exists(sUIPath))
                 {
-                    Directory.CreateDirectory(sUIPath + @"\XmlStorage\Extensions\Actions\3fd01cd1-9e01-461e-92cd-94866b8d1f39");
-                    TextWriter tw1 = new StreamWriter(sUIPath + @"\XmlStorage\Extensions\Actions\3fd01cd1-9e01-461e-92cd-94866b8d1f39\sccmclictr.xml");
-                    tw1.WriteLine(string.Format(Properties.Resources.ConsoleExtension, System.Reflection.Assembly.GetExecutingAssembly().Location));
-                    tw1.Close();
+                    foreach (string sGUID in Properties.Settings.Default.ConsoleExtensionGUIDs)
+                    {
+                        Directory.CreateDirectory(sUIPath + @"\XmlStorage\Extensions\Actions\" + sGUID);
+                        TextWriter tw1 = new StreamWriter(sUIPath + @"\XmlStorage\Extensions\Actions\" + sGUID + "\\sccmclictr.xml");
+                        tw1.WriteLine(string.Format(Properties.Resources.ConsoleExtension, System.Reflection.Assembly.GetExecutingAssembly().Location));
+                        tw1.Close();
+                    }
 
-                    Directory.CreateDirectory(sUIPath + @"\XmlStorage\Extensions\Actions\ed9dee86-eadd-4ac8-82a1-7234a4646e62");
-                    tw1 = new StreamWriter(sUIPath + @"\XmlStorage\Extensions\Actions\ed9dee86-eadd-4ac8-82a1-7234a4646e62\sccmclictr.xml");
-                    tw1.WriteLine(string.Format(Properties.Resources.ConsoleExtension, System.Reflection.Assembly.GetExecutingAssembly().Location));
-                    tw1.Close();
+                    //Directory.CreateDirectory(sUIPath + @"\XmlStorage\Extensions\Actions\3fd01cd1-9e01-461e-92cd-94866b8d1f39");
+                    //TextWriter tw1 = new StreamWriter(sUIPath + @"\XmlStorage\Extensions\Actions\3fd01cd1-9e01-461e-92cd-94866b8d1f39\sccmclictr.xml");
+                    //tw1.WriteLine(string.Format(Properties.Resources.ConsoleExtension, System.Reflection.Assembly.GetExecutingAssembly().Location));
+                    //tw1.Close();
 
-                    Directory.CreateDirectory(sUIPath + @"\XmlStorage\Extensions\Actions\0770186d-ea57-4276-a46b-7344ae081b58");
-                    tw1 = new StreamWriter(sUIPath + @"\XmlStorage\Extensions\Actions\0770186d-ea57-4276-a46b-7344ae081b58\sccmclictr.xml");
-                    tw1.WriteLine(string.Format(Properties.Resources.ConsoleExtension, System.Reflection.Assembly.GetExecutingAssembly().Location));
-                    tw1.Close();
+                    //Directory.CreateDirectory(sUIPath + @"\XmlStorage\Extensions\Actions\ed9dee86-eadd-4ac8-82a1-7234a4646e62");
+                    //tw1 = new StreamWriter(sUIPath + @"\XmlStorage\Extensions\Actions\ed9dee86-eadd-4ac8-82a1-7234a4646e62\sccmclictr.xml");
+                    //tw1.WriteLine(string.Format(Properties.Resources.ConsoleExtension, System.Reflection.Assembly.GetExecutingAssembly().Location));
+                    //tw1.Close();
+
+
+
+                    //Directory.CreateDirectory(sUIPath + @"\XmlStorage\Extensions\Actions\0770186d-ea57-4276-a46b-7344ae081b58");
+                    //tw1 = new StreamWriter(sUIPath + @"\XmlStorage\Extensions\Actions\0770186d-ea57-4276-a46b-7344ae081b58\sccmclictr.xml");
+                    //tw1.WriteLine(string.Format(Properties.Resources.ConsoleExtension, System.Reflection.Assembly.GetExecutingAssembly().Location));
+                    //tw1.Close();
                 }
             }
             else
@@ -1457,33 +1467,17 @@ namespace ClientCenter
             {
                 string sUIPath = rAdminUI.GetValue("UI Installation Directory", "").ToString();
 
-                if (File.Exists(sUIPath + @"\XmlStorage\Extensions\Actions\3fd01cd1-9e01-461e-92cd-94866b8d1f39\sccmclictr.xml"))
+                foreach (string sGUID in Properties.Settings.Default.ConsoleExtensionGUIDs)
                 {
-                    try
+                    if (File.Exists(sUIPath + @"\XmlStorage\Extensions\Actions\" + sGUID + "\\sccmclictr.xml"))
                     {
-                        File.Delete(sUIPath + @"\XmlStorage\Extensions\Actions\3fd01cd1-9e01-461e-92cd-94866b8d1f39\sccmclictr.xml");
+                        try
+                        {
+                            File.Delete(sUIPath + @"\XmlStorage\Extensions\Actions\" + sGUID + "\\sccmclictr.xml");
+                        }
+                        catch { }
                     }
-                    catch { }
                 }
-
-                if (File.Exists(sUIPath + @"\XmlStorage\Extensions\Actions\ed9dee86-eadd-4ac8-82a1-7234a4646e62\sccmclictr.xml"))
-                {
-                    try
-                    {
-                        File.Delete(sUIPath + @"\XmlStorage\Extensions\Actions\ed9dee86-eadd-4ac8-82a1-7234a4646e62\sccmclictr.xml");
-                    }
-                    catch { }
-                }
-
-                if (File.Exists(sUIPath + @"\XmlStorage\Extensions\Actions\0770186d-ea57-4276-a46b-7344ae081b58\sccmclictr.xml"))
-                {
-                    try
-                    {
-                        File.Delete(sUIPath + @"\XmlStorage\Extensions\Actions\0770186d-ea57-4276-a46b-7344ae081b58\sccmclictr.xml");
-                    }
-                    catch { }
-                }
-
             }
             else
             {

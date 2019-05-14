@@ -222,5 +222,18 @@ catch
     <Setting Name="HideBusinessHours" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="ConsoleExtensionGUIDs" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;2b646eff-442b-410e-adf3-d4ec699e0ab4&lt;/string&gt;
+  &lt;string&gt;3dde85c4-ce0e-4999-ab84-698a569dfcac&lt;/string&gt;
+  &lt;string&gt;3fd01cd1-9e01-461e-92cd-94866b8d1f39&lt;/string&gt;
+  &lt;string&gt;9b73a906-6908-4316-b61e-cbab300c9791&lt;/string&gt;
+  &lt;string&gt;64db983c-10bc-4b47-8f2d-cfff48f34faf&lt;/string&gt;
+  &lt;string&gt;ed9dee86-eadd-4ac8-82a1-7234a4646e62&lt;/string&gt;
+  &lt;string&gt;f7cc4bbb-e70e-43e1-978c-1c263d946fff&lt;/string&gt;
+  &lt;string&gt;fb04b7a5-bc4c-4468-8eb8-937d8eb90efb&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
