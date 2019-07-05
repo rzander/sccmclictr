@@ -31,7 +31,8 @@
                         <DockPanel DockPanel.Dock="Left">
                             <TextBlock>
                                 <Hyperlink NavigateUri="{Binding ProductURL}" RequestNavigate="Hyperlink_RequestNavigate" OverridesDefaultStyle="True" TextDecorations="">
-                                    <Image Height="24" Width="24" ToolTip="{Binding ProductName}" Source="{Binding IconURL}" />
+                                    <Image Height="32" Width="32" ToolTip="{Binding ProductName}" Source="{Binding IconURL, IsAsync=True, Mode=OneTime, UpdateSourceTrigger=PropertyChanged}" >
+                                    </Image>
                                 </Hyperlink>
                             </TextBlock>
                         </DockPanel>

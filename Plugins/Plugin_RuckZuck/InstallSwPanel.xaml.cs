@@ -107,6 +107,7 @@ namespace AgentActionTools
                 lcv.GroupDescriptions.Add(PGD);
 
                 lvSW.ItemsSource = lcv;
+
             }
             catch { }
             Mouse.OverrideCursor = null;
@@ -165,23 +166,6 @@ namespace AgentActionTools
                 tbSearch.Foreground = new SolidColorBrush(Colors.LightGray);
                 tbSearch.Tag = "Search";
                 tbSearch.Text = "Search...";
-
-
-                ListCollectionView lcv = new ListCollectionView(lAllSoftware.Distinct().OrderBy(t => t.ShortName).ThenByDescending(t => t.ProductVersion).ThenByDescending(t => t.ProductName).ToList());
-
-                //ListCollectionView lcv = new ListCollectionView(oAPI.SWResults("", "").Distinct().OrderBy(t => t.Shortname).ThenByDescending(t => t.ProductVersion).ThenByDescending(t => t.ProductName).ToList());
-                PropertyGroupDescription PGD = new PropertyGroupDescription("", new ShortnameToCategory());
-
-                //PGD.GroupNames.Add(RZRestAPI.GetCategories(lAllSoftware));
-                foreach (var o in RZRestAPIv2.GetCategories(lAllSoftware))
-                {
-                    PGD.GroupNames.Add(o);
-                }
-
-
-                lcv.GroupDescriptions.Add(PGD);
-
-                lvSW.ItemsSource = lcv;
             }
             else
             {
@@ -203,6 +187,51 @@ namespace AgentActionTools
                 catch { }
             }
             Mouse.OverrideCursor = null;
+
+            //Mouse.OverrideCursor = Cursors.Wait;
+            //if (string.IsNullOrEmpty(tbSearch.Text))
+            //{
+            //    tbSearch.Foreground = new SolidColorBrush(Colors.LightGray);
+            //    tbSearch.Tag = "Search";
+            //    tbSearch.Text = "Search...";
+
+
+            //    ListCollectionView lcv = new ListCollectionView(lAllSoftware.Distinct().OrderBy(t => t.ShortName).ThenByDescending(t => t.ProductVersion).ThenByDescending(t => t.ProductName).ToList());
+
+            //    //ListCollectionView lcv = new ListCollectionView(oAPI.SWResults("", "").Distinct().OrderBy(t => t.Shortname).ThenByDescending(t => t.ProductVersion).ThenByDescending(t => t.ProductName).ToList());
+            //    PropertyGroupDescription PGD = new PropertyGroupDescription("", new ShortnameToCategory());
+
+            //    //PGD.GroupNames.Add(RZRestAPI.GetCategories(lAllSoftware));
+            //    foreach (var o in RZRestAPIv2.GetCategories(lAllSoftware))
+            //    {
+            //        PGD.GroupNames.Add(o);
+            //    }
+
+
+            //    lcv.GroupDescriptions.Add(PGD);
+
+            //    lvSW.ItemsSource = lcv;
+            //}
+            //else
+            //{
+            //    tbSearch.Foreground = new SolidColorBrush(Colors.Black);
+            //    tbSearch.Tag = null;
+
+            //    try
+            //    {
+            //        var vResult = lAllSoftware.FindAll(t => t.ShortName.IndexOf(tbSearch.Text, 0, StringComparison.InvariantCultureIgnoreCase) >= 0).ToList();
+            //        vResult.AddRange(lAllSoftware.FindAll(t => t.ProductName.IndexOf(tbSearch.Text, 0, StringComparison.InvariantCultureIgnoreCase) >= 0).ToList());
+            //        vResult.AddRange(lAllSoftware.FindAll(t => t.Manufacturer.IndexOf(tbSearch.Text, 0, StringComparison.InvariantCultureIgnoreCase) >= 0).ToList());
+            //        if (vResult.Count <= 15)
+            //        {
+            //            vResult.AddRange(lAllSoftware.FindAll(t => (t.Description ?? "").IndexOf(tbSearch.Text, 0, StringComparison.InvariantCultureIgnoreCase) >= 0).ToList());
+            //        }
+
+            //        lvSW.ItemsSource = vResult.Distinct().OrderBy(t => t.ShortName).ThenByDescending(t => t.ProductVersion).ThenByDescending(t => t.ProductName);
+            //    }
+            //    catch { }
+            //}
+            //Mouse.OverrideCursor = null;
         }
 
         public class ShortnameToCategory : IValueConverter

@@ -567,7 +567,9 @@ namespace ClientCenter
                     navigationPane1.IsEnabled = true;
                     ribAgentActions.IsEnabled = true;
 
-                    ConnectionDock.Visibility = System.Windows.Visibility.Collapsed;
+                    if (!Properties.Settings.Default.showPingButton)
+                        ConnectionDock.Visibility = System.Windows.Visibility.Collapsed;
+
                     ribbon1.IsEnabled = true;
                     agentSettingItem1.IsEnabled = true;
 
