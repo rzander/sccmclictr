@@ -47,7 +47,7 @@
             <DockPanel DockPanel.Dock="Top">
                 <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" LoadingRow="dataGrid1_LoadingRow">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="EvaluationState" Binding="{Binding Path=EvaluationState}"/>
+                        <DataGridTextColumn Header="EvaluationState" Binding="{Binding Path=EvaluationStateText}"/>
                         <DataGridTextColumn Header="Publisher" Binding="{Binding Path=Publisher}" SortDirection="Ascending"  />
                         <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
                         <DataGridTextColumn Header="ArticleID" Binding="{Binding Path=ArticleID}" SortDirection="Ascending"  />
