@@ -45,7 +45,7 @@
                 </ToolBar>
              </DockPanel>
             <DockPanel DockPanel.Dock="Top">
-                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" LoadingRow="dataGrid1_LoadingRow">
+                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" LoadingRow="dataGrid1_LoadingRow" ClipboardCopyMode="IncludeHeader">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="EvaluationState" Binding="{Binding Path=EvaluationStateText}"/>
                         <DataGridTextColumn Header="Publisher" Binding="{Binding Path=Publisher}" SortDirection="Ascending"  />
@@ -55,6 +55,7 @@
                         <DataGridTextColumn Header="Deadline" Binding="{Binding Path=Deadline,  StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
                         <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}"/>
                         <DataGridTextColumn Header="PercentComplete" Binding="{Binding Path=PercentComplete}"/>
+                        <DataGridTextColumn Header="ErrorCode" Binding="{Binding Path=ErrorCode}"/>
                     </DataGrid.Columns>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
