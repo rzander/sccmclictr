@@ -46,8 +46,8 @@
     <WebPage>default.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.5.0</ApplicationVersion>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.5.2</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -87,8 +87,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
-    <Reference Include="sccmclictr.automation, Version=1.0.0.23, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\sccmclictrlib.1.0.0.23\lib\net46\sccmclictr.automation.dll</HintPath>
+    <Reference Include="sccmclictr.automation, Version=1.0.0.27, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sccmclictrlib.1.0.0.27\lib\net46\sccmclictr.automation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -375,7 +375,9 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Condition="Exists('Customization.dll.config')" Include="Customization.dll.config" />
+    <Content Condition="Exists('Customization.dll.config')" Include="Customization.dll.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
