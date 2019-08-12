@@ -38,7 +38,7 @@
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Right" Margin="5,0,0,0">
                             <DockPanel DockPanel.Dock="Top">
-                                <TextBlock DockPanel.Dock="Right" Text="{Binding Shortname}" FontWeight="Bold"/>
+                                <TextBlock DockPanel.Dock="Right" Text="{Binding ShortName}" FontWeight="Bold"/>
                             </DockPanel>
                             <DockPanel DockPanel.Dock="Top" MaxWidth="500">
                                 <TextBlock DockPanel.Dock="Right" Text="{Binding Description}" TextWrapping="Wrap"/>
