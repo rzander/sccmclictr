@@ -50,12 +50,12 @@
                         <DataGridTextColumn Header="EvaluationState" Binding="{Binding Path=EvaluationStateText}"/>
                         <DataGridTextColumn Header="Publisher" Binding="{Binding Path=Publisher}" SortDirection="Ascending"  />
                         <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
+                        <DataGridTextColumn Header="Deadline" Binding="{Binding Path=Deadline,  StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
+                        <DataGridTextColumn Header="PercentComplete" Binding="{Binding Path=PercentComplete}"/>
+                        <DataGridTextColumn Header="ErrorCode" Binding="{Binding Path=ErrorCode, StringFormat={}0x{0:X8}}"/>
                         <DataGridTextColumn Header="ArticleID" Binding="{Binding Path=ArticleID}" SortDirection="Ascending"  />
                         <DataGridTextColumn Header="BulletinID" Binding="{Binding Path=BulletinID}" />
-                        <DataGridTextColumn Header="Deadline" Binding="{Binding Path=Deadline,  StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
                         <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}"/>
-                        <DataGridTextColumn Header="PercentComplete" Binding="{Binding Path=PercentComplete}"/>
-                        <DataGridTextColumn Header="ErrorCode" Binding="{Binding Path=ErrorCode}"/>
                     </DataGrid.Columns>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
