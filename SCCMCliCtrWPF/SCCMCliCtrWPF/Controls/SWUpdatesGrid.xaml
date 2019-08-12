@@ -45,61 +45,17 @@
                 </ToolBar>
              </DockPanel>
             <DockPanel DockPanel.Dock="Top">
-                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" LoadingRow="dataGrid1_LoadingRow">
+                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" LoadingRow="dataGrid1_LoadingRow" ClipboardCopyMode="IncludeHeader">
                     <DataGrid.Columns>
+                        <DataGridTextColumn Header="EvaluationState" Binding="{Binding Path=EvaluationStateText}"/>
                         <DataGridTextColumn Header="Publisher" Binding="{Binding Path=Publisher}" SortDirection="Ascending"  />
                         <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
+                        <DataGridTextColumn Header="Deadline" Binding="{Binding Path=Deadline,  StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
+                        <DataGridTextColumn Header="PercentComplete" Binding="{Binding Path=PercentComplete}"/>
+                        <DataGridTextColumn Header="ErrorCode" Binding="{Binding Path=ErrorCode, StringFormat={}0x{0:X8}}"/>
                         <DataGridTextColumn Header="ArticleID" Binding="{Binding Path=ArticleID}" SortDirection="Ascending"  />
                         <DataGridTextColumn Header="BulletinID" Binding="{Binding Path=BulletinID}" />
-                        <DataGridTextColumn Header="Deadline" Binding="{Binding Path=Deadline,  StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
                         <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}"/>
-                        <DataGridTextColumn Header="PercentComplete" Binding="{Binding Path=PercentComplete}"/>
-                        <!--<DataGridTextColumn Header="EvaluationState" Binding="{Binding Path=EvaluationState}"/>-->
-                        <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Image Name="img" Source="/SCCMCliCtrWPF;component/Images/Invalid software update.gif" Height="16"></Image>
-                                    <DataTemplate.Triggers>
-                                        <DataTrigger Binding="{Binding EvaluationState}" Value="13">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Warning.ico"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding EvaluationState}" Value="21">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Warning.ico"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding EvaluationState}" Value="3">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Icon140.ico"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding EvaluationState}" Value="4">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Send Receive.ico"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding EvaluationState}" Value="5">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Send Receive.ico"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding EvaluationState}" Value="6">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Icon140.ico"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding EvaluationState}" Value="7">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Icon140.ico"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding EvaluationState}" Value="11">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Icon140.ico"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding EvaluationState}" Value="8">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Flag.ico"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding EvaluationState}" Value="9">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Flag.ico"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding EvaluationState}" Value="10">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Flag.ico"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding EvaluationState}" Value="16">
-                                            <Setter TargetName="img" Property="Source" Value="/SCCMCliCtrWPF;component/Images/Flag.ico"/>
-                                        </DataTrigger>
-                                    </DataTemplate.Triggers>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
