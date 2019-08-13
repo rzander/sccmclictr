@@ -275,8 +275,18 @@ namespace ClientCenter
                 if (Environment.GetCommandLineArgs().Count() > 1)
                 {
                     var Args = Environment.GetCommandLineArgs().ToList();
-                    
-                    if (Args.Contains("/RegisterConsole", StringComparer.OrdinalIgnoreCase))
+
+                    if (Args.Contains("/?"))
+                    {
+                        System.Console.WriteLine("Usage:");
+                        System.Console.WriteLine("\tSCCMCliCtrWPF.exe <Hostname> [/Username:xxxx] [/Password:xxxxxx] ");
+                        System.Console.WriteLine("\tSCCMCliCtrWPF.exe [/RegisterConsole] [/UnRegisterConsole]");
+                        MessageBox.Show("SCCMCliCtrWPF.exe <Hostname> [/Username:xxxx] [/Password:xxxxxx]" + Environment.NewLine +
+                            "SCCMCliCtrWPF.exe [/RegisterConsole | /UnRegisterConsole]", "SCCMCliCtr Usage", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Close();
+                        return;
+                    }
+                    else if (Args.Contains("/RegisterConsole", StringComparer.OrdinalIgnoreCase))
                     {
                         try
                         {
@@ -287,7 +297,7 @@ namespace ClientCenter
                         Close();
                         return;
                     }
-                    if (Args.Contains("/UnRegisterConsole", StringComparer.OrdinalIgnoreCase))
+                    else if (Args.Contains("/UnRegisterConsole", StringComparer.OrdinalIgnoreCase))
                     {
                         try
                         {
