@@ -70,6 +70,8 @@
                         <DataGridTextColumn Header="Version" Binding="{Binding Path=SoftwareVersion}"/>
                         <DataGridTextColumn Header="Rev" Binding="{Binding Path=Revision}"/>
                         <DataGridTextColumn Header="Status" Binding="{Binding Path=EvaluationStateText}"/>
+                        <DataGridTextColumn Header="ErrorCode" Binding="{Binding Path=ErrorCode, StringFormat={}0x{0:X8}}"/>
+                        <DataGridTextColumn Header="Error Message" Binding="{Binding Path=ErrorCodeText}"/>
                         <DataGridTextColumn Header="InstallState" Binding="{Binding Path=InstallState}"/>
                         <DataGridTextColumn Header="InstallTime" Binding="{Binding Path=LastInstallTime, StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
                         <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" CanUserResize="True" />
