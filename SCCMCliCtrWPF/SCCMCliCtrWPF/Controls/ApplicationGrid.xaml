@@ -33,6 +33,24 @@
                         </StackPanel>
                     </Button>
                     <Separator />
+                    <Button ToolTip="Open AppEnforce.log" Name="bt_OpenAppEnforce" Click="Bt_OpenAppEnforce_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/Search File.ico"/>
+                            <TextBlock Margin="2,0,0,0">AppEnforce.log</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button ToolTip="Open AppDiscovery.log" Name="bt_OpenAppDiscovery" Click="Bt_OpenAppDiscovery_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/Search File.ico"/>
+                            <TextBlock Margin="2,0,0,0">AppDiscovery.log</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button ToolTip="Open AppIntentEval.log" Name="bt_OpenAppIntentEval" Click="Bt_OpenAppIntentEval_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/Search File.ico"/>
+                            <TextBlock Margin="2,0,0,0">AppIntentEval.log</TextBlock>
+                        </StackPanel>
+                    </Button>
                 </ToolBar>
             </DockPanel>
             <DockPanel>

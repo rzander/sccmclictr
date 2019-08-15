@@ -326,7 +326,36 @@ namespace ClientCenter.Controls
             }
         }
 
+
+        private void OpenCCMLog(string LogFile)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                Process Explorer = new Process();
+                Explorer.StartInfo.FileName = "Explorer.exe";
+
+                //Connect IPC$ if not already connected (not needed with integrated authentication)
+                if (!oAgent.ConnectIPC) oAgent.ConnectIPC = true;
+
+                string LogPath = oAgent.Client.AgentProperties.LocalSCCMAgentLogPath.Replace(':', '$');
+                Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + "\\" + LogPath + "\\" + LogFile;
+
+                Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
+                Explorer.Start();
+            }
+            catch (Exception ex) { Listener.WriteError(ex.Message); }
+
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void Bt_OpenAppEnforce_Click(object sender, RoutedEventArgs e) { OpenCCMLog("AppEnforce.log"); }
+
+        private void Bt_OpenAppDiscovery_Click(object sender, RoutedEventArgs e) { OpenCCMLog("AppDiscovery.log"); }
+
+        private void Bt_OpenAppIntentEval_Click(object sender, RoutedEventArgs e) { OpenCCMLog("AppIntentEval.log"); }
     }
+
     public class ImageConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
