@@ -335,9 +335,19 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Wait;
             try
             {
-                if (MessageBox.Show("Warning: All users will logoff immediately without a Warning and computer gets restarted !", "Restart Computer", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
+                if (CB_Force.IsChecked.GetValueOrDefault(false))
                 {
-                    oAgent.Client.GetStringFromPS("Restart-Computer -Force");
+                    if (MessageBox.Show("Warning: All users will logoff immediately without a Warning and computer gets restarted !", "Force Restart Computer?", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
+                    {
+                        oAgent.Client.GetStringFromPS("Restart-Computer -Force");
+                    }
+                }
+                else
+                {
+                    if (MessageBox.Show("Restart computer if no users are logged in?", "Restart Computer?", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
+                    {
+                        oAgent.Client.GetStringFromPS("Restart-Computer");
+                    }
                 }
             }
             catch (Exception ex)
@@ -352,9 +362,19 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Wait;
             try
             {
-                if (MessageBox.Show("Warning: All users will logoff immediately without a Warning and the computer shuts down !", "Logoff all Users", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
+                if (CB_Force.IsChecked.GetValueOrDefault(false))
                 {
-                    oAgent.Client.GetStringFromPS("Stop-Computer -Force");
+                    if (MessageBox.Show("Warning: All users will logoff immediately without a Warning and the computer shuts down!", "Force Shut Down?", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
+                    {
+                        oAgent.Client.GetStringFromPS("Stop-Computer -Force");
+                    }
+                }
+                else
+                {
+                    if (MessageBox.Show("Shut down computer if no users are logged in?", "Shut Down Computer?", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
+                    {
+                        oAgent.Client.GetStringFromPS("Stop-Computer");
+                    }
                 }
             }
             catch (Exception ex)

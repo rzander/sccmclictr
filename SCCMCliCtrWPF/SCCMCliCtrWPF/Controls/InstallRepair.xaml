@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="520" d:DesignWidth="350">
+             mc:Ignorable="d" d:DesignWidth="350">
     <Grid>
         <ScrollViewer CanContentScroll="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <DockPanel>
@@ -71,10 +70,13 @@
                 </DockPanel>
                 <DockPanel DockPanel.Dock="Top">
                     <GroupBox Header="Shutdown / Restart" HorizontalAlignment="Stretch" Name="gbRestart" VerticalAlignment="Top" >
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                            <Button Name="btLogoff" Content="Logoff" Height="23" Width="100" HorizontalAlignment="Center" Margin="0,5,10,0" Click="btLogoff_Click" ToolTip="Logoff all Users"/>
-                            <Button Name="btRestart" Content="Restart" Height="23" Width="100" HorizontalAlignment="Center" Margin="0,5,10,0" Click="btRestart_Click" ToolTip="Enforce a restart (no Warning !)"/>
-                            <Button Name="btShutdown" Content="Shutdown" Height="23" Width="100" HorizontalAlignment="Center" Margin="0,5,10,0" Click="btShutdown_Click" ToolTip="Shutdown the computer (no Warning !)"/>
+                        <StackPanel>
+                            <CheckBox Name="CB_Force" HorizontalAlignment="Center">Force</CheckBox>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+                                    <Button Name="btLogoff" Content="Logoff" Height="23" Width="100" HorizontalAlignment="Center" Margin="0,5,10,0" Click="btLogoff_Click" ToolTip="Logoff all Users"/>
+                                    <Button Name="btRestart" Content="Restart" Height="23" Width="100" HorizontalAlignment="Center" Margin="0,5,10,0" Click="btRestart_Click" ToolTip="Restart the computer"/>
+                                <Button Name="btShutdown" Content="Shutdown" Height="23" Width="100" HorizontalAlignment="Center" Margin="0,5,10,0" Click="btShutdown_Click" ToolTip="Shutdown the computer"/>
+                            </StackPanel>
                         </StackPanel>
                     </GroupBox>
                 </DockPanel>
