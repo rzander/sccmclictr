@@ -328,19 +328,6 @@ while ($a -ne 1)")]
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Enter-PSSession {0}  -port {1} -SessionOption (New-PSSessionOption -NoMachineProf" +
-            "ile)")]
-        public string OpenPSConsoleCommand {
-            get {
-                return ((string)(this["OpenPSConsoleCommand"]));
-            }
-            set {
-                this["OpenPSConsoleCommand"] = value;
-            }
-        }
-        
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("$CMMP = \'Management Point FQDN\' \r\n$CMSiteCode = \'xxx\'  \r\n\r\n$ErrorActionPreference" +
@@ -398,6 +385,19 @@ while ($a -ne 1)")]
         public global::System.Collections.Specialized.StringCollection ConsoleExtensionGUIDs {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["ConsoleExtensionGUIDs"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Enter-PSSession {0}  -port {1} -SessionOption (New-PSSessionOption -NoMachineProf" +
+            "ile:$true)")]
+        public string OpenPSConsoleCommand {
+            get {
+                return ((string)(this["OpenPSConsoleCommand"]));
+            }
+            set {
+                this["OpenPSConsoleCommand"] = value;
             }
         }
     }

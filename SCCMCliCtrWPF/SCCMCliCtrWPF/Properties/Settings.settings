@@ -161,9 +161,6 @@ while ($a -ne 1)</Value>
   &lt;string&gt;Running Executions|root\CCM\SoftMgmtAgent|select MIFPackageName, RequestID, programID, ReceivedTime, SuspendReboot, advertid, contentid, RunningState, State from ccm_executionrequestex&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="OpenPSConsoleCommand" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Enter-PSSession {0}  -port {1} -SessionOption (New-PSSessionOption -NoMachineProfile)</Value>
-    </Setting>
     <Setting Name="AgentInstallPS" Type="System.String" Scope="Application">
       <Value Profile="(Default)">$CMMP = 'Management Point FQDN' 
 $CMSiteCode = 'xxx'  
@@ -234,6 +231,9 @@ catch
   &lt;string&gt;f7cc4bbb-e70e-43e1-978c-1c263d946fff&lt;/string&gt;
   &lt;string&gt;fb04b7a5-bc4c-4468-8eb8-937d8eb90efb&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="OpenPSConsoleCommand" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Enter-PSSession {0}  -port {1} -SessionOption (New-PSSessionOption -NoMachineProfile:$true)</Value>
     </Setting>
   </Settings>
 </SettingsFile>
