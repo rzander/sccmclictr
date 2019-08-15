@@ -810,13 +810,23 @@ namespace ClientCenter
                 string sPS = string.Format(Properties.Settings.Default.OpenPSConsoleCommand, oAgent.TargetHostname, tb_wsmanport.Text);
                 if (!string.IsNullOrEmpty(tb_Username.Text))
                 {
-                    sCred = string.Format("$creds = New-Object System.Management.Automation.PSCredential ('{0}', (ConvertTo-SecureString '{1}' -AsPlainText -Force))", tb_Username.Text, common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name)) + ";";
+                    System.Security.SecureString passwordString = new System.Security.SecureString();
+                    foreach (char c in common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name).ToCharArray())
+                    {
+                        passwordString.AppendChar(c);
+                    }
+                    System.Management.Automation.PSCredential credential = new System.Management.Automation.PSCredential(tb_Username.Text, passwordString);
+                    sCred = System.Management.Automation.PSSerializer.Serialize(credential);
+                    string filename = System.IO.Path.GetTempFileName();
+                    File.WriteAllText(filename, sCred);
+                    string creds = "(Import-Clixml " + filename + ")";
+                    //creds += "; rm " + filename;
 
 
                     if ((bool)cb_ssl.IsChecked)
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + sPS + " -UseSSL -Credential $creds)";
+                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sPS + " -UseSSL -Credential " + creds;
                     else
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + sPS + " -Credential $creds";
+                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sPS + " -Credential " + creds;
 
                 }
                 else
