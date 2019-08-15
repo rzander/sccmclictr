@@ -596,7 +596,7 @@ namespace ClientCenter
                     ribAgentActions.IsEnabled = false;
                     ConnectionDock.Visibility = System.Windows.Visibility.Visible;
                     bt_Ping.Visibility = System.Windows.Visibility.Visible;
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(Application.Current.MainWindow,ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
                 Mouse.OverrideCursor = Cursors.Arrow;
