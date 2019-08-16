@@ -265,9 +265,6 @@ namespace ClientCenter
             }
             catch { }
 
-            pb_Password.Password = Properties.Settings.Default.Password;
-            tb_Username.Text = Properties.Settings.Default.Username;
-
             Common.Hostname = tb_TargetComputer.Text.Trim();
 
             try
@@ -319,7 +316,9 @@ namespace ClientCenter
                         if (!string.IsNullOrEmpty(sUser) && !string.IsNullOrEmpty(sPW))
                         {
                             tb_Username.Text = sUser;
-                            pb_Password.Password = common.Encrypt(sPW, Application.ResourceAssembly.ManifestModule.Name);
+                            Properties.Settings.Default.Username = tb_Username.Text;    //Binding is not yet syncing these, so do it manually.
+                            pb_Password.Password = sPW; //Not ideal but works
+                            //pb_Password.SecurePassword is read-only so another variable with one-way binding is required.
                             sUser = "";
                             sPW = "";
                         }
@@ -477,7 +476,7 @@ namespace ClientCenter
                 {
                     Properties.Settings.Default.Password = common.Encrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
                     Properties.Settings.Default.Save();
-                    pb_Password.Password = Properties.Settings.Default.Password;
+                    //pb_Password.Password = Properties.Settings.Default.Password;
                     bPasswordChanged = false;
                 }
 
@@ -506,7 +505,7 @@ namespace ClientCenter
                     {
                         if (sTarget != "127.0.0.1")
                         {
-                            if (string.IsNullOrEmpty(tb_Username.Text) | string.IsNullOrEmpty(pb_Password.Password))
+                            if (string.IsNullOrEmpty(tb_Username.Text) | pb_Password.SecurePassword.Length == 0)
                             {
                                 MessageBox.Show("connecting an IP Address requires Username and Password", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
@@ -527,7 +526,8 @@ namespace ClientCenter
                         {
                             tb_Username.Text = Environment.UserDomainName + @"\" + tb_Username.Text;
                         }
-                        string sPW = common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
+                        //Hack to handle switing over to securestrings while sccmclictrlib only takes strings. Obviously this defeats the point of SecureStrings.
+                        string sPW = new System.Net.NetworkCredential(string.Empty, pb_Password.SecurePassword).Password;
                         oAgent = new SCCMAgent(sTarget, tb_Username.Text, sPW, int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
                         sPW = "";
                     }
@@ -810,12 +810,7 @@ namespace ClientCenter
                 string sPS = string.Format(Properties.Settings.Default.OpenPSConsoleCommand, oAgent.TargetHostname, tb_wsmanport.Text);
                 if (!string.IsNullOrEmpty(tb_Username.Text))
                 {
-                    System.Security.SecureString passwordString = new System.Security.SecureString();
-                    foreach (char c in common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name).ToCharArray())
-                    {
-                        passwordString.AppendChar(c);
-                    }
-                    System.Management.Automation.PSCredential credential = new System.Management.Automation.PSCredential(tb_Username.Text, passwordString);
+                    System.Management.Automation.PSCredential credential = new System.Management.Automation.PSCredential(tb_Username.Text, pb_Password.SecurePassword);
                     sCred = System.Management.Automation.PSSerializer.Serialize(credential);
                     string filename = System.IO.Path.GetTempFileName();
                     File.WriteAllText(filename, sCred);
