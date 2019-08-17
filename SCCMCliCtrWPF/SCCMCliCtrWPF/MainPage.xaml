@@ -51,7 +51,7 @@
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
                                             <Label Content="Password:" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" />
-                                            <PasswordBox Height="23" HorizontalAlignment="Left" Name="pb_Password" VerticalAlignment="Top" Width="140" KeyDown="pb_Password_KeyDown" />
+                                            <PasswordBox Height="23" HorizontalAlignment="Left" Name="pb_Password" VerticalAlignment="Top" Width="140"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
                                             <Label Content="Port:" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" />

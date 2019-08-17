@@ -27,7 +27,6 @@ namespace ClientCenter
     {
         public SCCMAgent oAgent;
         public MyTraceListener myTrace;
-        private bool bPasswordChanged = false;
         delegate void AnonymousDelegate();
 
         public MainPage()
@@ -471,15 +470,7 @@ namespace ClientCenter
                     PageReset();
 
                 }
-
-                if (bPasswordChanged)
-                {
-                    Properties.Settings.Default.Password = common.Encrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
-                    Properties.Settings.Default.Save();
-                    //pb_Password.Password = Properties.Settings.Default.Password;
-                    bPasswordChanged = false;
-                }
-
+                
                 tb_TargetComputer.Text = tb_TargetComputer.Text.Trim();
                 tb_TargetComputer2.Text = tb_TargetComputer2.Text.Trim();
 
@@ -872,11 +863,6 @@ namespace ClientCenter
         private void tvSWDist_Loaded(object sender, RoutedEventArgs e)
         {
             tviSWDistOverview.IsSelected = true;
-        }
-
-        private void pb_Password_KeyDown(object sender, KeyEventArgs e)
-        {
-            bPasswordChanged = true;
         }
 
         private void btClientMachineAuthentication_Click(object sender, RoutedEventArgs e)
