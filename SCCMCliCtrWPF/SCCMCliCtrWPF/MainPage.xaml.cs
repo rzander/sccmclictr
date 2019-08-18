@@ -1090,22 +1090,6 @@ namespace ClientCenter
             Common.Hostname = ((AutoCompleteBox)sender).Text;
         }
 
-        private void tb_TargetComputer2_KeyUp(object sender, KeyEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            if (e.Key == Key.Enter)
-            {
-                tb_TargetComputer2.Text = tb_TargetComputer2.Text.Trim();
-                tb_TargetComputer.Text = tb_TargetComputer2.Text;
-                bt_Connect_Click(sender, null);
-            }
-
-            Common.Hostname = ((AutoCompleteBox)sender).Text;
-
-            Mouse.OverrideCursor = Cursors.Arrow;
-
-        }
-
         private void tb_TargetComputer2_Populating(object sender, PopulatingEventArgs e)
         {
             try
@@ -1116,21 +1100,6 @@ namespace ClientCenter
                 oSender.PopulateComplete();
             }
             catch { }
-        }
-
-        private void tb_TargetComputer_KeyUp(object sender, KeyEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            if (e.Key == Key.Enter)
-            {
-                tb_TargetComputer.Text = tb_TargetComputer.Text.Trim();
-                tb_TargetComputer2.Text = tb_TargetComputer.Text;
-                bt_Connect_Click(sender, null);
-            }
-
-            Common.Hostname = ((AutoCompleteBox)sender).Text;
-
-            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void bt_Ping_Click(object sender, RoutedEventArgs e)
