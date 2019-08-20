@@ -27,7 +27,6 @@ namespace ClientCenter
     {
         public SCCMAgent oAgent;
         public MyTraceListener myTrace;
-        private bool bPasswordChanged = false;
         delegate void AnonymousDelegate();
 
         public MainPage()
@@ -265,9 +264,6 @@ namespace ClientCenter
             }
             catch { }
 
-            pb_Password.Password = Properties.Settings.Default.Password;
-            tb_Username.Text = Properties.Settings.Default.Username;
-
             Common.Hostname = tb_TargetComputer.Text.Trim();
 
             try
@@ -319,7 +315,9 @@ namespace ClientCenter
                         if (!string.IsNullOrEmpty(sUser) && !string.IsNullOrEmpty(sPW))
                         {
                             tb_Username.Text = sUser;
-                            pb_Password.Password = common.Encrypt(sPW, Application.ResourceAssembly.ManifestModule.Name);
+                            Properties.Settings.Default.Username = tb_Username.Text;    //Binding is not yet syncing these, so do it manually.
+                            pb_Password.Password = sPW; //Not ideal but works
+                            //pb_Password.SecurePassword is read-only so another variable with one-way binding is required.
                             sUser = "";
                             sPW = "";
                         }
@@ -472,15 +470,7 @@ namespace ClientCenter
                     PageReset();
 
                 }
-
-                if (bPasswordChanged)
-                {
-                    Properties.Settings.Default.Password = common.Encrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
-                    Properties.Settings.Default.Save();
-                    pb_Password.Password = Properties.Settings.Default.Password;
-                    bPasswordChanged = false;
-                }
-
+                
                 tb_TargetComputer.Text = tb_TargetComputer.Text.Trim();
                 tb_TargetComputer2.Text = tb_TargetComputer2.Text.Trim();
 
@@ -506,7 +496,7 @@ namespace ClientCenter
                     {
                         if (sTarget != "127.0.0.1")
                         {
-                            if (string.IsNullOrEmpty(tb_Username.Text) | string.IsNullOrEmpty(pb_Password.Password))
+                            if (string.IsNullOrEmpty(tb_Username.Text) | pb_Password.SecurePassword.Length == 0)
                             {
                                 MessageBox.Show("connecting an IP Address requires Username and Password", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
@@ -527,7 +517,8 @@ namespace ClientCenter
                         {
                             tb_Username.Text = Environment.UserDomainName + @"\" + tb_Username.Text;
                         }
-                        string sPW = common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
+                        //Hack to handle switing over to securestrings while sccmclictrlib only takes strings. Obviously this defeats the point of SecureStrings.
+                        string sPW = new System.Net.NetworkCredential(string.Empty, pb_Password.SecurePassword).Password;
                         oAgent = new SCCMAgent(sTarget, tb_Username.Text, sPW, int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
                         sPW = "";
                     }
@@ -806,26 +797,22 @@ namespace ClientCenter
             {
                 Process Explorer = new Process();
                 Explorer.StartInfo.FileName = "powershell.exe";
-                string sCred = "";
                 string sPS = string.Format(Properties.Settings.Default.OpenPSConsoleCommand, oAgent.TargetHostname, tb_wsmanport.Text);
+                if ((bool)cb_ssl.IsChecked) sPS += " -UseSSL";
+                Explorer.StartInfo.Arguments = @"-NoExit -Command " + sPS;
+
                 if (!string.IsNullOrEmpty(tb_Username.Text))
                 {
-                    sCred = string.Format("$creds = New-Object System.Management.Automation.PSCredential ('{0}', (ConvertTo-SecureString '{1}' -AsPlainText -Force))", tb_Username.Text, common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name)) + ";";
-
-
-                    if ((bool)cb_ssl.IsChecked)
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + sPS + " -UseSSL -Credential $creds)";
-                    else
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + sPS + " -Credential $creds";
-
+                    System.Management.Automation.PSCredential credential = new System.Management.Automation.PSCredential(tb_Username.Text, pb_Password.SecurePassword);
+                    string serializedCred = System.Management.Automation.PSSerializer.Serialize(credential);
+                    string filename = System.IO.Path.GetTempFileName();
+                    File.WriteAllText(filename, serializedCred);
+                    string creds = "(Import-Clixml " + filename + ")";
+                    //creds += "; rm " + filename;
+                    
+                    Explorer.StartInfo.Arguments += " -Credential " + creds;
                 }
-                else
-                {
-                    if ((bool)cb_ssl.IsChecked)
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sPS + " -UseSSL";
-                    else
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sPS;
-                }
+
                 Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
                 
                 Explorer.Start();
@@ -867,11 +854,6 @@ namespace ClientCenter
         private void tvSWDist_Loaded(object sender, RoutedEventArgs e)
         {
             tviSWDistOverview.IsSelected = true;
-        }
-
-        private void pb_Password_KeyDown(object sender, KeyEventArgs e)
-        {
-            bPasswordChanged = true;
         }
 
         private void btClientMachineAuthentication_Click(object sender, RoutedEventArgs e)
@@ -1108,22 +1090,6 @@ namespace ClientCenter
             Common.Hostname = ((AutoCompleteBox)sender).Text;
         }
 
-        private void tb_TargetComputer2_KeyUp(object sender, KeyEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            if (e.Key == Key.Enter)
-            {
-                tb_TargetComputer2.Text = tb_TargetComputer2.Text.Trim();
-                tb_TargetComputer.Text = tb_TargetComputer2.Text;
-                bt_Connect_Click(sender, null);
-            }
-
-            Common.Hostname = ((AutoCompleteBox)sender).Text;
-
-            Mouse.OverrideCursor = Cursors.Arrow;
-
-        }
-
         private void tb_TargetComputer2_Populating(object sender, PopulatingEventArgs e)
         {
             try
@@ -1134,21 +1100,6 @@ namespace ClientCenter
                 oSender.PopulateComplete();
             }
             catch { }
-        }
-
-        private void tb_TargetComputer_KeyUp(object sender, KeyEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            if (e.Key == Key.Enter)
-            {
-                tb_TargetComputer.Text = tb_TargetComputer.Text.Trim();
-                tb_TargetComputer2.Text = tb_TargetComputer.Text;
-                bt_Connect_Click(sender, null);
-            }
-
-            Common.Hostname = ((AutoCompleteBox)sender).Text;
-
-            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void bt_Ping_Click(object sender, RoutedEventArgs e)

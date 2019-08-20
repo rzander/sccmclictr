@@ -20,7 +20,7 @@
                     </LinearGradientBrush>
                 </DockPanel.Background>
                 <TextBlock Text="Target Computer: " VerticalAlignment="Center" Margin="15,0,0,0"></TextBlock>
-                <Controls:AutoCompleteBox Name="tb_TargetComputer2" Width="150" Height="25" Text="{Binding Source={x:Static p:Settings.Default}, Path=DefaultHostName, Mode=TwoWay}" KeyUp="tb_TargetComputer2_KeyUp" Populating="tb_TargetComputer2_Populating" TextChanged="tb_TargetComputer_TextChanged" />
+                <Controls:AutoCompleteBox Name="tb_TargetComputer2" Width="150" Height="25" Text="{Binding Source={x:Static p:Settings.Default}, Path=DefaultHostName, Mode=TwoWay}" Populating="tb_TargetComputer2_Populating" TextChanged="tb_TargetComputer_TextChanged" />
                 <Button Name="bt_Ping" Width="20" Height="20" Visibility="Hidden" Click="bt_Ping_Click" ToolTip="Ping the device...">
                     <StackPanel>
                         <Image Source="Images/Play.ico" />
@@ -51,7 +51,7 @@
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
                                             <Label Content="Password:" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" />
-                                            <PasswordBox Height="23" HorizontalAlignment="Left" Name="pb_Password" VerticalAlignment="Top" Width="140" KeyDown="pb_Password_KeyDown" />
+                                            <PasswordBox Height="23" HorizontalAlignment="Left" Name="pb_Password" VerticalAlignment="Top" Width="140"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
                                             <Label Content="Port:" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" />
@@ -68,7 +68,7 @@
 
                             <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Center" Focusable="false">
                                 <TextBlock Text="Target Computer: " VerticalAlignment="Center"></TextBlock>
-                                <Controls:AutoCompleteBox Name="tb_TargetComputer" Text="127.0.0.1" Width="150" Height="25" Populating="tb_TargetComputer2_Populating" KeyUp="tb_TargetComputer_KeyUp" TextChanged="tb_TargetComputer2_TextChanged"/>
+                                <Controls:AutoCompleteBox Name="tb_TargetComputer" Width="150" Height="25" Populating="tb_TargetComputer2_Populating" TextChanged="tb_TargetComputer2_TextChanged"  Text="{Binding Source={x:Static p:Settings.Default}, Path=DefaultHostName, Mode=TwoWay}"/>
                                 <RibbonButton Name="bt_Connect" VerticalAlignment="Center" Label="Connect" Height="23" Click="bt_Connect_Click" />
                             </StackPanel>
                             <RibbonApplicationMenuItem Header="Console extensions..." StaysOpenOnClick="True" Focusable="false">
