@@ -19,12 +19,6 @@ https://chocolatey.org/
 ### Windows 10 Store
 <a href="https://www.microsoft.com/store/apps/9NBLGGH5127B?ocid=badge"><img src="https://assets.windowsphone.com/f2f77ec7-9ba9-4850-9ebe-77e366d08adc/English_Get_it_Win_10_InvariantCulture_Default.png" alt="Get it on Windows 10" width="300" /></a>
 
-
-Start UWP from PowerShell:
-``` 
-Start "shell:AppsFolder\$((Get-StartApps -Name "Client Center for Configuration Manager" | ? { $_.AppId -like "*Manager" }).AppID)" -Args "localhost"
-```
-
 ![sccmclictr](https://cloud.githubusercontent.com/assets/11909453/24622767/71bcbde4-18a6-11e7-8fcd-5c2b4a3703e7.png)
 
 ## Documentation
