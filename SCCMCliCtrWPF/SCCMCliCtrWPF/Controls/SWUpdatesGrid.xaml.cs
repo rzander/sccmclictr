@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using sccmclictr.automation;
 using sccmclictr.automation.functions;
+using System.Globalization;
 
 namespace ClientCenter
 {
@@ -186,6 +187,19 @@ namespace ClientCenter
                 Listener.WriteError(ex.Message);
             }
             Mouse.OverrideCursor = Cursors.Arrow;
+        }
+    }
+
+    public class RemoveCIJobStateConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value.ToString().Replace("ciJobState", "");
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return "ciJobState" + value.ToString();
         }
     }
 }
