@@ -20,7 +20,7 @@
                     </LinearGradientBrush>
                 </DockPanel.Background>
                 <TextBlock Text="Target Computer: " VerticalAlignment="Center" Margin="15,0,0,0"></TextBlock>
-                <Controls:AutoCompleteBox Name="tb_TargetComputer2" Width="150" Height="25" Text="{Binding Source={x:Static p:Settings.Default}, Path=DefaultHostName, Mode=TwoWay}" Populating="tb_TargetComputer2_Populating" TextChanged="tb_TargetComputer_TextChanged" />
+                <Controls:AutoCompleteBox Name="tb_TargetComputer2" Width="150" Height="25" Text="{Binding Source={x:Static p:Settings.Default}, Path=DefaultHostName, Mode=TwoWay}" Populating="tb_TargetComputer2_Populating" TextChanged="tb_TargetComputer_TextChanged" KeyUp="Tb_TargetComputer2_KeyUp" />
                 <Button Name="bt_Ping" Width="20" Height="20" Visibility="Hidden" Click="bt_Ping_Click" ToolTip="Ping the device...">
                     <StackPanel>
                         <Image Source="Images/Play.ico" />

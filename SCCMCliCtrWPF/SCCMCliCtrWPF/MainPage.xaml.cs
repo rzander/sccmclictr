@@ -1247,6 +1247,15 @@ namespace ClientCenter
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
+
+        private void Tb_TargetComputer2_KeyUp(object sender, KeyEventArgs e)
+        {
+            
+            if (e.Key == Key.Enter)
+                bt_Connect_Click(sender, new RoutedEventArgs());
+
+            e.Handled = true;
+        }
     }
 
     public class MyTraceListener : TraceListener, INotifyPropertyChanged
