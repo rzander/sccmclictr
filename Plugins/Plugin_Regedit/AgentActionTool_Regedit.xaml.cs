@@ -43,11 +43,11 @@ namespace AgentActionTools
                 pRegedit.Start();
                 int pID = pRegedit.Id;
 
-                System.Threading.Thread.Sleep(500);
+                System.Threading.Thread.Sleep(1000);
                 System.IntPtr MainHandle = Process.GetProcessById(pID).MainWindowHandle;
                 SetForegroundWindow(MainHandle);
                 System.Threading.Thread.Sleep(100);
-                SendKeys.SendWait("{home}{left}");
+                //SendKeys.SendWait("{home}{left}");
                 SendKeys.SendWait("%fc");
                 System.Threading.Thread.Sleep(600);
                 SendKeys.SendWait(string.Format("{0}~", sHost));
