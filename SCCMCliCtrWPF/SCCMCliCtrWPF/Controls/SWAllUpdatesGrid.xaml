@@ -60,8 +60,8 @@
                         <DataGridTextColumn Header="SourceVersion" Binding="{Binding Path=SourceVersion}"/>
                         <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}"/>
                         <DataGridTextColumn Header="Title" Binding="{Binding Path=Title}"/>
-                        <DataGridTextColumn Header="UniqueID" Binding="{Binding Path=UniqueId}" DisplayIndex="9" Visibility="Hidden"/>
-                        <DataGridTextColumn Header="ProductID" Binding="{Binding Path=ProductID}" DisplayIndex="10" Visibility="Hidden"/>
+                        <DataGridTextColumn Header="UniqueID" Binding="{Binding Path=UniqueId}"  Visibility="Hidden"/>
+                        <DataGridTextColumn Header="ProductID" Binding="{Binding Path=ProductID}"  Visibility="Hidden"/>
                         <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

@@ -83,8 +83,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
-    <Reference Include="sccmclictr.automation, Version=1.0.0.31, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\sccmclictrlib.1.0.0.31\lib\net46\sccmclictr.automation.dll</HintPath>
+    <Reference Include="sccmclictr.automation, Version=1.0.0.32, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sccmclictrlib.1.0.0.32\lib\net46\sccmclictr.automation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -547,6 +547,7 @@
     <ProjectReference Include="..\..\Customization\Customization.csproj">
       <Project>{2956a544-f6d5-4799-899f-583ee5f2df58}</Project>
       <Name>Customization</Name>
+      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

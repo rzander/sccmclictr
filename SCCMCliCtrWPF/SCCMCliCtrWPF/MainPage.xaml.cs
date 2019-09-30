@@ -509,7 +509,7 @@ namespace ClientCenter
 
                     if (string.IsNullOrEmpty(tb_Username.Text))
                     {
-                        oAgent = new SCCMAgent(sTarget, null, null, int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
+                        oAgent = new SCCMAgent(sTarget, null, int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
                     }
                     else
                     {
