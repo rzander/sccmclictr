@@ -78,10 +78,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Customization, Version=3.0.0.5, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Customization\bin\Debug\Customization.dll</HintPath>
-    </Reference>
     <Reference Include="NavigationPane, Version=1.0.5988.20744, Culture=neutral, PublicKeyToken=b239f36db07135c1, processorArchitecture=MSIL">
       <HintPath>..\packages\NavigationPane.2.1.0.0\lib\net40\NavigationPane.dll</HintPath>
       <Private>True</Private>
@@ -169,7 +165,6 @@
     <Compile Include="Controls\ImportApp.xaml.cs">
       <DependentUpon>ImportApp.xaml</DependentUpon>
     </Compile>
-    <Compile Condition="!Exists('Customization.dll')" Include="Customization_Placeholder.cs" />
     <Compile Include="ServiceWindowNew.xaml.cs">
       <DependentUpon>ServiceWindowNew.xaml</DependentUpon>
     </Compile>
@@ -368,16 +363,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Content Condition="Exists('Customization.dll')" Include="Customization.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Condition="Exists('Customization.dll.config')" Include="Customization.dll.config">
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -554,6 +542,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Customization\Customization.csproj">
+      <Project>{2956a544-f6d5-4799-899f-583ee5f2df58}</Project>
+      <Name>Customization</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
   </PropertyGroup>
