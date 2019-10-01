@@ -48,14 +48,14 @@ namespace AgentActionTools
         {
             try{
 
-                if (((RibbonButton)sender).Tag != null)
+                if (((FrameworkElement)sender).Tag != null)
                 {
                     Type t = System.Reflection.Assembly.GetEntryAssembly().GetType("ClientCenter.Common", false, true);
                     System.Reflection.PropertyInfo pInfo = t.GetProperty("Agent");
                     oAgent = (SCCMAgent)pInfo.GetValue(null, null);
                     string sHost = oAgent.TargetHostname;
 
-                    string sTag = ((RibbonButton)sender).Tag.ToString();
+                    string sTag = ((FrameworkElement)sender).Tag.ToString();
                     string sShare = "";
                     switch(sTag)
                     {

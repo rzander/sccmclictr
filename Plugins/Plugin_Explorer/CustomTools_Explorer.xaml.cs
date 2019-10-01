@@ -40,9 +40,9 @@ namespace AgentActionTools
             try
             {
 
-                if (((RibbonButton)sender).Tag != null)
+                if (((FrameworkElement)sender).Tag != null)
                 {
-                    string sTag = ((RibbonButton)sender).Tag.ToString();
+                    string sTag = ((FrameworkElement)sender).Tag.ToString();
                     string sShare = "";
                     switch (sTag)
                     {
