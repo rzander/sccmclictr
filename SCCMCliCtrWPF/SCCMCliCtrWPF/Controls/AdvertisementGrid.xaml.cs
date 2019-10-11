@@ -60,7 +60,7 @@ namespace ClientCenter.Controls
                                 if (Properties.Settings.Default.HideTSAdvertisements)
                                 {
                                     List<softwaredistribution.CCM_SoftwareDistribution> oList = oAgent.Client.SoftwareDistribution.Advertisements.OrderBy(o => o.PRG_ProgramID).ThenBy(o => o.PKG_Name).ToList();
-                                    iAdvertisements = oList.GroupBy(t => t.ADV_AdvertisementID).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.PKG_Name).ToList();
+                                    iAdvertisements = oList.GroupBy(t => new { t.ADV_AdvertisementID }).Select(grp => grp.OrderBy(t => t.PRG_DependentPolicy).FirstOrDefault()).OrderBy(t => t.PKG_Name).ToList();
                                 }
                                 else
                                 {
@@ -97,7 +97,7 @@ namespace ClientCenter.Controls
                 if (cb_TSAdv.IsChecked == true)
                 {
                     List<softwaredistribution.CCM_SoftwareDistribution> oList = oAgent.Client.SoftwareDistribution.Advertisements_(true).OrderBy(o => o.PRG_ProgramID).ThenBy(o => o.PKG_Name).ToList();
-                    iAdvertisements = oList.GroupBy(t => t.ADV_AdvertisementID).Select(grp => grp.FirstOrDefault()).OrderBy(o => o.PKG_Name).ToList();
+                    iAdvertisements = oList.GroupBy(t => new { t.ADV_AdvertisementID }).Select(grp => grp.OrderBy(t=>t.PRG_DependentPolicy).FirstOrDefault()).OrderBy(t=>t.PKG_Name).ToList();
                 }
                 else
                 {
