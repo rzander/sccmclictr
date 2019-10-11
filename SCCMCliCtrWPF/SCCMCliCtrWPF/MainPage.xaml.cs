@@ -264,6 +264,7 @@ namespace ClientCenter
             }
             catch { }
 
+            pb_Password.Password = common.Decrypt(Properties.Settings.Default.Password, Application.ResourceAssembly.ManifestModule.Name);
             Common.Hostname = tb_TargetComputer.Text.Trim();
 
             try
@@ -518,9 +519,9 @@ namespace ClientCenter
                             tb_Username.Text = Environment.UserDomainName + @"\" + tb_Username.Text;
                         }
                         //Hack to handle switing over to securestrings while sccmclictrlib only takes strings. Obviously this defeats the point of SecureStrings.
-                        string sPW = new System.Net.NetworkCredential(string.Empty, pb_Password.SecurePassword).Password;
-                        oAgent = new SCCMAgent(sTarget, tb_Username.Text, sPW, int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
-                        sPW = "";
+                        //string sPW = new System.Net.NetworkCredential(string.Empty, pb_Password.SecurePassword).Password;
+                        oAgent = new SCCMAgent(sTarget, tb_Username.Text, pb_Password.SecurePassword, int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
+                        //sPW = "";
                     }
 
                     oAgent.PSCode.Listeners.Add(myTrace);
@@ -541,6 +542,12 @@ namespace ClientCenter
                         if (Properties.Settings.Default.recentlyUsedComputers.Count > 10)
                         {
                             Properties.Settings.Default.recentlyUsedComputers.RemoveAt(10);
+                        }
+
+                        //save password
+                        if (!string.IsNullOrEmpty(tb_Username.Text))
+                        {
+                            Properties.Settings.Default.Password = common.Encrypt(new System.Net.NetworkCredential(string.Empty, pb_Password.SecurePassword).Password, Application.ResourceAssembly.ManifestModule.Name);
                         }
 
                         Properties.Settings.Default.Save();
