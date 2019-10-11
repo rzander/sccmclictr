@@ -30,33 +30,6 @@ namespace AgentActionTools
             //rb_DEMO.IsEnabled = SCCMCliCtr.Customization.CheckLicense();
         }
 
-        private void rb_DEMO_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Type t = System.Reflection.Assembly.GetEntryAssembly().GetType("ClientCenter.Common", false, true);
-                //Get the Hostname
-                System.Reflection.PropertyInfo pInfo = t.GetProperty("Hostname");
-
-                //System.Reflection.PropertyInfo pInfo = t.GetProperty("Agent");
-                //SCCMAgent oAgent = (SCCMAgent)pInfo.GetValue(null, null);
-                //string sHost = oAgent.TargetHostname;
-
-                string sHost = (string)pInfo.GetValue(null, null);
-
-                //Custom Code here...
-                
-                MessageBox.Show(sHost);
-                
-                //...
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
-            }
-        }
-
         private void rb_Inst_Click(object sender, RoutedEventArgs e)
         {
             Type t = System.Reflection.Assembly.GetEntryAssembly().GetType("ClientCenter.Common", false, true);

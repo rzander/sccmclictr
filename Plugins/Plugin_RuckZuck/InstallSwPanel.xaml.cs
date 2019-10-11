@@ -47,7 +47,7 @@ namespace AgentActionTools
             try
             {
                 RZScan oSCAN = new RZScan(false, false);
-
+                
                 Task.Run(() => oSCAN.GetSWRepository()).Wait();
 
                 lAllSoftware = oSCAN.SoftwareRepository;

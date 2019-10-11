@@ -1,6 +1,7 @@
-Set-Location $env:windir\CCM
-c:\windows\ccm\SCToastNotification.exe "Notice: Pending Reboot Needed" "Your PC Needs to restart as soon as you can."
-#msg * "Notice: Pending Reboot Needed...." "Your PC Needs to restart as soon as you can."
+Set-Location (Get-ItemProperty("HKLM:\SOFTWARE\Microsoft\SMS\Client\Configuration\Client Properties")).$("Local SMS Path")
+.\SCToastNotification.exe "Notice: Pending Reboot Needed" "Your PC Needs to restart as soon as you can."
+msg * "Notice: Pending Reboot Needed...." "Your PC Needs to restart as soon as you can."
+<#
 [void][System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
 [void][System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")
 [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | out-null
@@ -60,3 +61,4 @@ else
 }
 }
 Until ($TimeNow -ge $TimeEnd)
+#>
