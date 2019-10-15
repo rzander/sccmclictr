@@ -111,9 +111,6 @@
                                 <RibbonButton Name="btPolicyAgentValidateUserPolicy" Label="Policy Agent Validate User Policy" ToolTip="Policy Agent Validate User Policy" SmallImageSource="/SCCMCliCtrWPF;component/Images/UserPolicy.ico" Click="btPolicyAgentValidateUserPolicy_Click"></RibbonButton>
                             </RibbonSplitButton>
                         </RibbonGroup>
-                        <RibbonGroup Header="DCM" ToolTip="Settings Management (DCM)" SmallImageSource="Images/Search File.ico">
-                            <RibbonButton Name="ButtonDCMEval" Label="DCM Check" ToolTip="Desired Configuration Monitoring (DCM) Evaluation cycle." LargeImageSource="/SCCMCliCtrWPF;component/Images/Search%20File.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Search%20File.ico" Click="ButtonDCMEval_Click" />
-                        </RibbonGroup>
                         <RibbonGroup Header="Updates" ToolTip="Update management" SmallImageSource="Images/SWUpdate.png">
                             <RibbonSplitButton Name="ButtonEvaluateUpdates1" Label="Update Evaluation" ToolTip="Software Update Assignment and Evaluation cycle." LargeImageSource="Images/SWUpdate.png" SmallImageSource="Images/SWUpdate.png" Click="ButtonEvaluateUpdates_Click">
                                 <RibbonButton Name="ButtonScanUpdates" Label="Update Scan" ToolTip="Force a Software Update Scan cycle."  SmallImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png" Click="ButtonScanUpdates_Click" />
@@ -141,7 +138,6 @@
                                 <RibbonButton Name="btExternaleventdetection" Label="External event detection" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btExternaleventdetection_Click" />
                                 <RibbonButton Name="btSWMeteringUsageRport" Label="Software Metering Generating Usage Report" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btSWMeteringUsageRport_Click" ToolTip="Generate SoftwareMetering usage report" />
                                 <RibbonButton Name="btMSISourceListUpdate" Label="Windows Installer Source List Update Cycle" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btMSISourceListUpdate_Click" ToolTip="Update MSI Source List" />
-                                <RibbonButton Name="btDCMPolicyAction" Label="DCM Policy Action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btDCMPolicyAction_Click" />
                                 <RibbonButton Name="btATMStatusCheckPolicy" Label="AMT Status Check Policy" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btATMStatusCheckPolicy_Click" />
                                 <RibbonButton Name="btPowerManagerSummarizer" Label="Power management start summarizer" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btPowerManagerSummarizer_Click" />
                                 <RibbonButton Name="btResetPausedSWDist" Label="Reset Paused Software Distribution" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btResetPausedSWDist_Click" ToolTip="Reset the Pause SoftwareDistribution Flag" />

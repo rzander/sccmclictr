@@ -758,13 +758,6 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
-        private void ButtonDCMEval_Click(object sender, RoutedEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            oAgent.Client.AgentActions.DCMPolicy();
-            Mouse.OverrideCursor = Cursors.Arrow;
-        }
-
         private void btResetPolicy_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
@@ -1042,13 +1035,6 @@ namespace ClientCenter
         {
             Mouse.OverrideCursor = Cursors.Wait;
             oAgent.Client.AgentActions.MSISourceListUpdate();
-            Mouse.OverrideCursor = Cursors.Arrow;
-        }
-
-        private void btDCMPolicyAction_Click(object sender, RoutedEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            oAgent.Client.AgentActions.DCMPolicy();
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
