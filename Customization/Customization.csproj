@@ -30,9 +30,19 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="*.cs" />
     <Compile Condition="Exists('Customization.cs')" Remove="Customization_Placeholder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>cd $(ProjectDir)
+set realcustomization="..\..\..\Visual Studio 2010\Project_ClientCenter\SCCMCliCtr_WPF\Customization\bin\Release\Customization.dll"
+IF EXIST %25realcustomization%25 (
+xcopy /y %25realcustomization%25 $(TargetDir)
+)</PostBuildEvent>
+  </PropertyGroup>
 </Project>
