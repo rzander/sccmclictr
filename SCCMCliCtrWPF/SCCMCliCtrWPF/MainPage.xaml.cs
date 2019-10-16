@@ -884,13 +884,6 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
-        private void btNAPaction_Click(object sender, RoutedEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            oAgent.Client.AgentActions.NAPIntervalEnforcement();
-            Mouse.OverrideCursor = Cursors.Arrow;
-        }
-
         private void btPeerDPStatusreporting_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;

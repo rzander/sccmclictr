@@ -126,7 +126,6 @@
                                 <RibbonButton Name="btClearingproxysettingscache" Label="Clearing proxy settings cache" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btClearingproxysettingscache_Click" />
                                 <RibbonButton Name="btLSRefreshLocationsTask" Label="Location Service Refresh Locations Task" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btLSRefreshLocationsTask_Click" />
                                 <RibbonButton Name="btLSTimeoutRefreshTask" Label="Location Service Timeout Refresh Task" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btLSTimeoutRefreshTask_Click" />
-                                <RibbonButton Name="btNAPaction" Label="NAP evaluation" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btNAPaction_Click" />
                                 <RibbonButton Name="btPeerDPStatusreporting" Label="Peer DP Status reporting" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btPeerDPStatusreporting_Click" />
                                 <RibbonButton Name="btPeerDPPendingpackagecheckschedule" Label="Peer DP Pending package check schedule" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btPeerDPPendingpackagecheckschedule_Click" />
                                 <RibbonButton Name="btRefreshDefaultMPTask" Label="Refresh Default MP Task" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btRefreshDefaultMPTask_Click" />
