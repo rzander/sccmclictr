@@ -78,10 +78,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Customization, Version=3.0.0.9, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Visual Studio 2010\Project_ClientCenter\SCCMCliCtr_WPF\Customization\bin\Release\Customization.dll</HintPath>
-    </Reference>
     <Reference Include="NavigationPane, Version=1.0.5988.20744, Culture=neutral, PublicKeyToken=b239f36db07135c1, processorArchitecture=MSIL">
       <HintPath>..\packages\NavigationPane.2.1.0.0\lib\net40\NavigationPane.dll</HintPath>
       <Private>True</Private>
@@ -546,6 +542,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Customization\Customization.csproj">
+      <Project>{2956a544-f6d5-4799-899f-583ee5f2df58}</Project>
+      <Name>Customization</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
   </PropertyGroup>
