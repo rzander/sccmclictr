@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Diagnostics;
+using sccmclictr.automation;
 using System.Windows.Controls.Ribbon;
 using System.Windows.Media.Imaging;
 using System.Reflection;
@@ -15,6 +16,7 @@ namespace AgentActionTools
     /// </summary>
     public partial class CustomTools_Explorer : System.Windows.Controls.UserControl
     {
+        public SCCMAgent oAgent;
         public CustomTools_Explorer()
         {
             InitializeComponent();
@@ -42,6 +44,11 @@ namespace AgentActionTools
 
                 if (((FrameworkElement)sender).Tag != null)
                 {
+                    Type t = System.Reflection.Assembly.GetEntryAssembly().GetType("ClientCenter.Common", false, true);
+                    System.Reflection.PropertyInfo pInfo = t.GetProperty("Agent");
+                    oAgent = (SCCMAgent)pInfo.GetValue(null, null);
+                    string sHost = oAgent.TargetHostname;
+
                     string sTag = ((FrameworkElement)sender).Tag.ToString();
                     string sShare = "";
                     switch (sTag)
@@ -59,16 +66,22 @@ namespace AgentActionTools
                             sShare = @"Admin$\ccmsetup\logs";
                             break;
                         case "CCMLOGS":
-                            sShare = @"Admin$\ccm\logs";
+                            if (oAgent.isConnected)
+                                sShare = oAgent.Client.AgentProperties.LocalSCCMAgentLogPath.Replace(':', '$');
+                            else
+                                sShare = @"Admin$\ccm\logs";
                             break;
                         default:
                             sShare = sTag;
                             break;
                     }
-                    Type t = System.Reflection.Assembly.GetEntryAssembly().GetType("ClientCenter.Common", false, true);
-                    //Get the Hostname
-                    System.Reflection.PropertyInfo pInfo = t.GetProperty("Hostname");
-                    string sHost = (string)pInfo.GetValue(null, null);
+
+                    if (!oAgent.isConnected)
+                    {
+                        //Get the Hostname
+                        System.Reflection.PropertyInfo pInfoHostname = t.GetProperty("Hostname");
+                        sHost = (string)pInfoHostname.GetValue(null, null);
+                    }
 
                     Process Explorer = new Process();
                     Explorer.StartInfo.FileName = "Explorer.exe";
