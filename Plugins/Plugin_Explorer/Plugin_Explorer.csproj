@@ -47,9 +47,6 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Customization">
-      <HintPath>..\Customization\bin\Debug\Customization.dll</HintPath>
-    </Reference>
     <Reference Include="sccmclictr.automation, Version=1.0.0.18, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\sccmclictrlib.1.0.0.18\lib\net46\sccmclictr.automation.dll</HintPath>
     </Reference>
@@ -107,6 +104,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Customization\Customization.csproj">
+      <Project>{2956a544-f6d5-4799-899f-583ee5f2df58}</Project>
+      <Name>Customization</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
