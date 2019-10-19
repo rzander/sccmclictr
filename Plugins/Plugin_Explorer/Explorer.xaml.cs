@@ -15,10 +15,10 @@ namespace AgentActionTools
     /// <summary>
     /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class AgentActionTool_FEPFullScan : System.Windows.Controls.UserControl
+    public partial class AgentActionTool_Explorer : System.Windows.Controls.UserControl
     {
         public SCCMAgent oAgent;
-        public AgentActionTool_FEPFullScan()
+        public AgentActionTool_Explorer()
         {
             InitializeComponent();
             btExplore.IsEnabled = SCCMCliCtr.Customization.CheckLicense();
