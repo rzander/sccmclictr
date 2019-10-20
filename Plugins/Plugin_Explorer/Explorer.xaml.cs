@@ -15,10 +15,10 @@ namespace AgentActionTools
     /// <summary>
     /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class AgentActionTool_FEPFullScan : System.Windows.Controls.UserControl
+    public partial class AgentActionTool_Explorer : System.Windows.Controls.UserControl
     {
         public SCCMAgent oAgent;
-        public AgentActionTool_FEPFullScan()
+        public AgentActionTool_Explorer()
         {
             InitializeComponent();
             btExplore.IsEnabled = SCCMCliCtr.Customization.CheckLicense();
@@ -48,14 +48,14 @@ namespace AgentActionTools
         {
             try{
 
-                if (((RibbonButton)sender).Tag != null)
+                if (((FrameworkElement)sender).Tag != null)
                 {
                     Type t = System.Reflection.Assembly.GetEntryAssembly().GetType("ClientCenter.Common", false, true);
                     System.Reflection.PropertyInfo pInfo = t.GetProperty("Agent");
                     oAgent = (SCCMAgent)pInfo.GetValue(null, null);
                     string sHost = oAgent.TargetHostname;
 
-                    string sTag = ((RibbonButton)sender).Tag.ToString();
+                    string sTag = ((FrameworkElement)sender).Tag.ToString();
                     string sShare = "";
                     switch(sTag)
                     {
