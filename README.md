@@ -12,6 +12,9 @@ https://github.com/rzander/sccmclictr/releases
 ### ClickOnce setup
 http://sccmclictr.azurewebsites.net/ClickOnce/
 
+### MSIX setup
+http://sccmclictr.azurewebsites.net/Client Center for Configuration Manager-x64.appinstaller
+
 ### Package Manager
 https://RuckZuck.tools  
 https://chocolatey.org/
