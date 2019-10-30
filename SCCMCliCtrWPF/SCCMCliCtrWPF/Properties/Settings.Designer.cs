@@ -12,7 +12,7 @@ namespace ClientCenter.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.3.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -321,7 +321,9 @@ while ($a -ne 1)")]
             "skSpace on C: (Bytes)|ROOT\\cimv2|SELECT Size FROM Win32_LogicalDisk WHERE Device" +
             "ID=\'C:\'</string>\r\n  <string>Running Executions|root\\CCM\\SoftMgmtAgent|select MIF" +
             "PackageName, RequestID, programID, ReceivedTime, SuspendReboot, advertid, conten" +
-            "tid, RunningState, State from ccm_executionrequestex</string>\r\n</ArrayOfString>")]
+            "tid, RunningState, State from ccm_executionrequestex</string>\r\n  <string>BIOS Ve" +
+            "rsion|root\\cimv2|SELECT SMBIOSBIOSVersion from Win32_Bios</string>\r\n</ArrayOfStr" +
+            "ing>")]
         public global::System.Collections.Specialized.StringCollection AdhocInv {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["AdhocInv"]));

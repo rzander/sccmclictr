@@ -159,6 +159,7 @@ while ($a -ne 1)</Value>
   &lt;string&gt;FreeDiskSpace on C: (Bytes)|ROOT\cimv2|SELECT FreeSpace FROM Win32_LogicalDisk WHERE DeviceID='C:'&lt;/string&gt;
   &lt;string&gt;DiskSpace on C: (Bytes)|ROOT\cimv2|SELECT Size FROM Win32_LogicalDisk WHERE DeviceID='C:'&lt;/string&gt;
   &lt;string&gt;Running Executions|root\CCM\SoftMgmtAgent|select MIFPackageName, RequestID, programID, ReceivedTime, SuspendReboot, advertid, contentid, RunningState, State from ccm_executionrequestex&lt;/string&gt;
+  &lt;string&gt;BIOS Version|root\cimv2|SELECT SMBIOSBIOSVersion from Win32_Bios&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="AgentInstallPS" Type="System.String" Scope="Application">
