@@ -521,6 +521,7 @@ namespace ClientCenter
                         //Hack to handle switing over to securestrings while sccmclictrlib only takes strings. Obviously this defeats the point of SecureStrings.
                         //string sPW = new System.Net.NetworkCredential(string.Empty, pb_Password.SecurePassword).Password;
                         oAgent = new SCCMAgent(sTarget, tb_Username.Text, pb_Password.SecurePassword, int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
+                        oAgent.ConnectIPC(tb_Username.Text, pb_Password.Password);
                         //sPW = "";
                     }
 
