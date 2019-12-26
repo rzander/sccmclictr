@@ -336,7 +336,8 @@ namespace ClientCenter.Controls
                 Explorer.StartInfo.FileName = "Explorer.exe";
 
                 //Connect IPC$ if not already connected (not needed with integrated authentication)
-                if (!oAgent.ConnectIPC) oAgent.ConnectIPC = true;
+                if (!oAgent.ConnectIPC_) 
+                    oAgent.ConnectIPC_ = true;
 
                 string LogPath = oAgent.Client.AgentProperties.LocalSCCMAgentLogPath.Replace(':', '$');
                 Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + "\\" + LogPath + "\\" + LogFile;
