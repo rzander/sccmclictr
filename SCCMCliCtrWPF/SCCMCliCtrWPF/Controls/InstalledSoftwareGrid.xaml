@@ -23,7 +23,7 @@
                 </ToolBar>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top" >
-                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" IsReadOnly="True">
+                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" IsReadOnly="True" KeyDown="dataGrid1_KeyDown">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Product Name" Binding="{Binding Path=ProductName}" SortDirection="Ascending"/>
                         <DataGridTextColumn Header="Publisher" Binding="{Binding Path=Publisher}"/>

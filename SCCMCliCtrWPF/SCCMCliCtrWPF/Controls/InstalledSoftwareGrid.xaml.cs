@@ -132,6 +132,25 @@ namespace ClientCenter.Controls
                 }
             }
         }
+
+        private void dataGrid1_KeyDown(object sender, KeyEventArgs e)
+        {
+            DataGrid dataGrid = sender as DataGrid;
+            if (dataGrid.Items.Count == 0 || e.Key < Key.A || e.Key > Key.Z)
+            {
+                return;
+            }
+
+            foreach(sccmclictr.automation.functions.inventory.AI_InstalledSoftwareCache oItem in dataGrid.Items)
+            {
+                if (oItem.ARPDisplayName.StartsWith(e.Key.ToString(), StringComparison.CurrentCultureIgnoreCase))
+                {
+                    dataGrid.SelectedItem = oItem;
+                    dataGrid.ScrollIntoView(dataGrid.SelectedItem);
+                    return;
+                }
+            }
+        }
     }
 
     public class SWListConverter : IValueConverter
