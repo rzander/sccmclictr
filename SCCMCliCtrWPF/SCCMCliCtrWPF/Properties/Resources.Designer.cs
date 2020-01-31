@@ -77,14 +77,14 @@ namespace ClientCenter.Properties {
         ///	&lt;/ShowOn&gt;
         ///	&lt;ResourceAssembly&gt;
         ///		&lt;Assembly&gt;{0}&lt;/Assembly&gt;
-        ///		&lt;Type&gt;SCS_Extensions.Properties.Resources.resources&lt;/Type&gt;
+        ///		&lt;Type&gt;ClientCenter.Properties.Resources.resources&lt;/Type&gt;
         ///	&lt;/ResourceAssembly&gt;
         ///	&lt;ImagesDescription&gt;
         ///		&lt;ResourceAssembly&gt;
         ///			&lt;Assembly&gt;{0}&lt;/Assembly&gt;
         ///			&lt;Type&gt;ClientCenter.Properties.Resources.resources&lt;/Type&gt;
         ///		&lt;/ResourceAssembly&gt;
-        ///		&lt; [rest of string was truncated]&quot;;.
+        ///		&lt;Im [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ConsoleExtension {
             get {
