@@ -148,10 +148,10 @@
                             </RibbonSplitButton>
                         </RibbonGroup>
                         <RibbonGroup Header="App.Mgmt." ToolTip="Application related actions" SmallImageSource="Images/Pack_close.ico">
-                            <RibbonSplitButton Name="btAppMgmt" ToolTip="Application Management" LargeImageSource="Images/Pack_close.ico" SmallImageSource="Images/Pack_close.ico" Label="...">
+                            <RibbonSplitButton Name="btAppMgmt" ToolTip="Application Management" LargeImageSource="Images/Pack_close.ico" SmallImageSource="Images/Pack_close.ico" Label="..." Click="btAppManGlobalEvaluation_Click">
                                 <RibbonButton Name="btAppManUserPolicyAction" Label="Application manager user policy action" SmallImageSource="Images/Pack_close.ico" Click="btAppManUserPolicyAction_Click" />
                                 <RibbonButton Name="btAppManMachinePolicyAction" Label="Application manager machine policy action" SmallImageSource="Images/Pack_close.ico" Click="btAppManMachinePolicyAction_Click" />
-                                <RibbonButton Name="btAppManGlobalEvaluation" Label="Application manager global evaluation action" SmallImageSource="Images/Pack_close.ico" Click="btAppManGlobalEvaluation_Click" ToolTip="Application Global Evaluation Task (COM)"/>
+                                <RibbonButton Name="btAppManGlobalEvaluation" Label="Application manager global evaluation action" SmallImageSource="Images/Pack_close.ico" Click="btAppManGlobalEvaluation_Click" ToolTip="Application Global Evaluation Task (COM)" FontWeight="Bold"/>
                             </RibbonSplitButton>
                         </RibbonGroup>
                         <RibbonGroup Name="rgTools" Header="Tools" Visibility="Hidden" SmallImageSource="Images/Tools.ico" ToolTip="">
