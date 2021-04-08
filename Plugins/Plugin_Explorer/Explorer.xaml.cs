@@ -85,8 +85,8 @@ namespace AgentActionTools
 
 
                     //Connect IPC$ if not already connected (not needed with integrated authentication)
-                    if (!oAgent.ConnectIPC_)
-                        oAgent.ConnectIPC_ = true;
+                    if (!oAgent.ConnectIPC)
+                        oAgent.ConnectIPC = true;
 
                     Process Explorer = new Process();
                     Explorer.StartInfo.FileName = "Explorer.exe";
