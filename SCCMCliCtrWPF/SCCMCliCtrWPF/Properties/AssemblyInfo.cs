@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("SCCMCliCtr")]
 [assembly: AssemblyDescription("Client Center for Configurtaion Manager")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("SCCM Tools")]
+[assembly: AssemblyCompany("Zander - Tools")]
 [assembly: AssemblyProduct("SCCMCliCtr")]
-[assembly: AssemblyCopyright("Copyright ©  2020 by Roger Zander")]
+[assembly: AssemblyCopyright("Copyright ©  2021 by Roger Zander")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
