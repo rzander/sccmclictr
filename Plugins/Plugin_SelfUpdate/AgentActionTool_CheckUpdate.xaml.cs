@@ -40,7 +40,7 @@ namespace AgentActionTools
                     string sVersion = FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetEntryAssembly().Location).FileVersion; ;
 
                     RZUpdater oRZUpdate = new RZUpdater();
-                    var oUpdate = oRZUpdate.CheckForUpdate("Client Center for Configuration Manager", sVersion, "Zander Tools" );
+                    var oUpdate = oRZUpdate.CheckForUpdateAsync("Client Center for Configuration Manager", sVersion, "Zander Tools" ).Result;
 
                     try
                     {
@@ -127,7 +127,7 @@ namespace AgentActionTools
                 string sVersion = FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetEntryAssembly().Location).FileVersion; ;
 
                 RZUpdater oRZUpdate = new RZUpdater();
-                var oUpdate = oRZUpdate.CheckForUpdate("Client Center for Configuration Manager", sVersion, "Zander Tools");
+                var oUpdate = oRZUpdate.CheckForUpdateAsync("Client Center for Configuration Manager", sVersion, "Zander Tools").Result;
 
                 try
                 {
