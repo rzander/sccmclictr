@@ -332,6 +332,39 @@ namespace ClientCenter.Controls
                 Properties.Settings.Default.Save();
             }
         }
+
+        private void Bt_OpenExecmgr_Click(object sender, RoutedEventArgs e)
+        {
+            OpenCCMLog("execmgr.log");
+        }
+
+        private void Bt_OpenSMSTS_Click(object sender, RoutedEventArgs e)
+        {
+            OpenCCMLog("smsts.log");
+        }
+
+        private void OpenCCMLog(string LogFile)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                Process Explorer = new Process();
+                Explorer.StartInfo.FileName = "Explorer.exe";
+
+                //Connect IPC$ if not already connected (not needed with integrated authentication)
+                if (!oAgent.ConnectIPC_)
+                    oAgent.ConnectIPC_ = true;
+
+                string LogPath = oAgent.Client.AgentProperties.LocalSCCMAgentLogPath.Replace(':', '$');
+                Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + "\\" + LogPath + "\\" + LogFile;
+
+                Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
+                Explorer.Start();
+            }
+            catch (Exception ex) { Listener.WriteError(ex.Message); }
+
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
     }
 
     public class StatusConverter : IMultiValueConverter

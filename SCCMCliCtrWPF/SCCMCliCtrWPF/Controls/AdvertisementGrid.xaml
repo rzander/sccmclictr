@@ -33,6 +33,19 @@
                             <CheckBox Name="cb_TSAdv" IsChecked="True" Checked="cb_TSAdv_Checked" Unchecked="cb_TSAdv_Unchecked">Hide TS Advertisements</CheckBox>
                         </StackPanel>
                     </Button>
+                    <Separator />
+                    <Button ToolTip="Open execmgr.log" Name="bt_OpenExecmgr" Click="Bt_OpenExecmgr_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/Search File.ico"/>
+                            <TextBlock Margin="2,0,0,0">execmgr.log</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button ToolTip="Open smsts.log" Name="bt_OpenExecmg" Click="Bt_OpenSMSTS_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/Search File.ico"/>
+                            <TextBlock Margin="2,0,0,0">smsts.log</TextBlock>
+                        </StackPanel>
+                    </Button>
                 </ToolBar>
             </DockPanel>
             <DockPanel>
