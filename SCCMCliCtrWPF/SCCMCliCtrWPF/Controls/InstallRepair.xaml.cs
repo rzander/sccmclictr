@@ -364,5 +364,21 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
+        private void btLock_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                if (MessageBox.Show("Warning: All user sessions will be locked immediately without a Warning !", "Lock all Users", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
+                {
+                    oAgent.Client.GetStringFromPS("((Get-Process).SessionID | select -Unique) | foreach {tsdiscon.exe $_}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
     }
 }
