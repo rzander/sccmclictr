@@ -72,7 +72,7 @@
                 <DockPanel DockPanel.Dock="Top">
                     <GroupBox Header="Shutdown / Restart" HorizontalAlignment="Stretch" Name="gbRestart" VerticalAlignment="Top" >
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                            <Button Name="btLock" Content="Lock" Height="23" Width="80" HorizontalAlignment="Center" Margin="0,5,10,0" Click="btLogoff_Click" ToolTip="Lock all user sessions"/>
+                            <Button Name="btLock" Content="Lock" Height="23" Width="80" HorizontalAlignment="Center" Margin="0,5,10,0" ToolTip="Lock all user sessions" Click="btLock_Click"/>
                             <Button Name="btLogoff" Content="Logoff" Height="23" Width="80" HorizontalAlignment="Center" Margin="0,5,10,0" Click="btLogoff_Click" ToolTip="Logoff all Users"/>
                             <Button Name="btRestart" Content="Restart" Height="23" Width="80" HorizontalAlignment="Center" Margin="0,5,10,0" Click="btRestart_Click" ToolTip="Enforce a restart (no Warning !)"/>
                             <Button Name="btShutdown" Content="Shutdown" Height="23" Width="80" HorizontalAlignment="Center" Margin="0,5,10,0" Click="btShutdown_Click" ToolTip="Shutdown the computer (no Warning !)"/>
