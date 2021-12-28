@@ -12,7 +12,7 @@ namespace ClientCenter.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.6.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.0.3.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -20,30 +20,6 @@ namespace ClientCenter.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>CcmExec</string>
-  <string>WinRM</string>
-  <string>wuauserv</string>
-  <string>LanmanWorkstation</string>
-  <string>LanmanServer</string>
-  <string>RemoteRegistry</string>
-  <string>BITS</string>
-  <string>CmRcService</string>
-  <string>Winmgmt</string>
-  <string>PeerDistSvc</string>
-  <string>smstsmgr</string>
-  <string>RpcSs</string>
-  <string>ccmsetup</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection ServicesHighlited {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["ServicesHighlited"]));
             }
         }
         
@@ -99,47 +75,6 @@ while ($a -ne 1)")]
         public string PSEventQuery {
             get {
                 return ((string)(this["PSEventQuery"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>%systemroot%\\system32\\actxprxy.dll</string>\r\n  <string>%systemroot%\\system" +
-            "32\\atl.dll</string>\r\n  <string>%systemroot%\\system32\\Bitsprx2.dll</string>\r\n  <s" +
-            "tring>%systemroot%\\system32\\Bitsprx3.dll</string>\r\n  <string>%systemroot%\\system" +
-            "32\\browseui.dll</string>\r\n  <string>%systemroot%\\system32\\cryptdlg.dll</string>\r" +
-            "\n  <string>%systemroot%\\system32\\dssenh.dll</string>\r\n  <string>%systemroot%\\sys" +
-            "tem32\\gpkcsp.dll</string>\r\n  <string>%systemroot%\\system32\\initpki.dll</string>\r" +
-            "\n  <string>%systemroot%\\system32\\jscript.dll</string>\r\n  <string>%systemroot%\\sy" +
-            "stem32\\mshtml.dll</string>\r\n  <string>%systemroot%\\system32\\msi.dll</string>\r\n  " +
-            "<string>%systemroot%\\system32\\mssip32.dll</string>\r\n  <string>%systemroot%\\syste" +
-            "m32\\msxml3.dll</string>\r\n  <string>%systemroot%\\system32\\msxml3r.dll</string>\r\n " +
-            " <string>%systemroot%\\system32\\msxml6.dll</string>\r\n  <string>%systemroot%\\syste" +
-            "m32\\msxml6r.dll</string>\r\n  <string>%systemroot%\\system32\\muweb.dll</string>\r\n  " +
-            "<string>%systemroot%\\system32\\ole32.dll</string>\r\n  <string>%systemroot%\\system3" +
-            "2\\oleaut32.dll</string>\r\n  <string>%systemroot%\\system32\\Qmgr.dll</string>\r\n  <s" +
-            "tring>%systemroot%\\system32\\Qmgrprxy.dll</string>\r\n  <string>%systemroot%\\system" +
-            "32\\rsaenh.dll</string>\r\n  <string>%systemroot%\\system32\\sccbase.dll</string>\r\n  " +
-            "<string>%systemroot%\\system32\\scrrun.dll</string>\r\n  <string>%systemroot%\\system" +
-            "32\\shdocvw.dll</string>\r\n  <string>%systemroot%\\system32\\shell32.dll</string>\r\n " +
-            " <string>%systemroot%\\system32\\slbcsp.dll</string>\r\n  <string>%systemroot%\\syste" +
-            "m32\\softpub.dll</string>\r\n  <string>%systemroot%\\system32\\urlmon.dll</string>\r\n " +
-            " <string>%systemroot%\\system32\\userenv.dll</string>\r\n  <string>%systemroot%\\syst" +
-            "em32\\vbscript.dll</string>\r\n  <string>%systemroot%\\system32\\Winhttp.dll</string>" +
-            "\r\n  <string>%systemroot%\\system32\\wintrust.dll</string>\r\n  <string>%systemroot%\\" +
-            "system32\\wuapi.dll</string>\r\n  <string>%systemroot%\\system32\\wuaueng.dll</string" +
-            ">\r\n  <string>%systemroot%\\system32\\wuaueng1.dll</string>\r\n  <string>%systemroot%" +
-            "\\system32\\wucltui.dll</string>\r\n  <string>%systemroot%\\system32\\wucltux.dll</str" +
-            "ing>\r\n  <string>%systemroot%\\system32\\wups.dll</string>\r\n  <string>%systemroot%\\" +
-            "system32\\wups2.dll</string>\r\n  <string>%systemroot%\\system32\\wuweb.dll</string>\r" +
-            "\n  <string>%systemroot%\\system32\\wuwebv.dll</string>\r\n  <string>%systemroot%\\sys" +
-            "tem32\\wbem\\wmisvc.dll</string>\r\n  <string>%systemroot%\\system32\\Xpob2res.dll</st" +
-            "ring>\r\n</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection RegisterDLLs {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["RegisterDLLs"]));
             }
         }
         
@@ -202,31 +137,6 @@ while ($a -ne 1)")]
             }
             set {
                 this["WinRMSSL"] = value;
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>Password</string>\r\n  <string>PWD</string>\r\n</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection CollectionVariablesFilter {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["CollectionVariablesFilter"]));
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>127.0.0.1</string>\r\n</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection recentlyUsedComputers {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["recentlyUsedComputers"]));
-            }
-            set {
-                this["recentlyUsedComputers"] = value;
             }
         }
         
@@ -295,43 +205,6 @@ while ($a -ne 1)")]
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>Operating System|root\\cimv2|SELECT Caption FROM Win32_OperatingSystem</str" +
-            "ing>\r\n  <string>OS Version|root\\cimv2|SELECT Version FROM Win32_OperatingSystem<" +
-            "/string>\r\n  <string>OS Architecture|root\\cimv2|SELECT VariableValue FROM  Win32_" +
-            "Environment WHERE Name=\'PROCESSOR_ARCHITECTURE\' AND UserName=\'&lt;SYSTEM&gt;\'</s" +
-            "tring>\r\n  <string>PC Manufacturer|root\\cimv2|SELECT Manufacturer FROM Win32_Comp" +
-            "uterSystem</string>\r\n  <string>LastHWInv|Root\\CCM\\Scheduler|SELECT LastTriggerTi" +
-            "me FROM CCM_Scheduler_History WHERE ScheduleID=\'{00000000-0000-0000-0000-0000000" +
-            "00001}\' and UserSID=\'Machine\'</string>\r\n  <string>LastSWInv|Root\\CCM\\Scheduler|S" +
-            "ELECT LastTriggerTime FROM CCM_Scheduler_History WHERE ScheduleID=\'{00000000-000" +
-            "0-0000-0000-000000000002}\' and UserSID=\'Machine\'</string>\r\n  <string>LastDDR|Roo" +
-            "t\\CCM\\Scheduler|SELECT LastTriggerTime FROM CCM_Scheduler_History WHERE Schedule" +
-            "ID=\'{00000000-0000-0000-0000-000000000003}\' and UserSID=\'Machine\'</string>\r\n  <s" +
-            "tring>LastMachinePolicyRequest|Root\\CCM\\Scheduler|SELECT LastTriggerTime FROM CC" +
-            "M_Scheduler_History WHERE ScheduleID=\'{00000000-0000-0000-0000-000000000021}\' an" +
-            "d UserSID=\'Machine\'</string>\r\n  <string>LastReboot|root\\cimv2|SELECT LastBootUpT" +
-            "ime FROM Win32_OperatingSystem</string>\r\n  <string>InstallDate|root\\cimv2|SELECT" +
-            " InstallDate FROM Win32_OperatingSystem</string>\r\n  <string>CurrentUser|root\\cim" +
-            "v2|SELECT Username FROM Win32_ComputerSystem</string>\r\n  <string>PrimaryUsers|RO" +
-            "OT\\ccm\\Policy\\Machine\\ActualConfig|SELECT * FROM CCM_UserAffinity WHERE IsUserAf" +
-            "finitySet = \'True\'</string>\r\n  <string>FreeDiskSpace on C: (Bytes)|ROOT\\cimv2|SE" +
-            "LECT FreeSpace FROM Win32_LogicalDisk WHERE DeviceID=\'C:\'</string>\r\n  <string>Di" +
-            "skSpace on C: (Bytes)|ROOT\\cimv2|SELECT Size FROM Win32_LogicalDisk WHERE Device" +
-            "ID=\'C:\'</string>\r\n  <string>Running Executions|root\\CCM\\SoftMgmtAgent|select MIF" +
-            "PackageName, RequestID, programID, ReceivedTime, SuspendReboot, advertid, conten" +
-            "tid, RunningState, State from ccm_executionrequestex</string>\r\n  <string>BIOS Ve" +
-            "rsion|root\\cimv2|SELECT SMBIOSBIOSVersion from Win32_Bios</string>\r\n</ArrayOfStr" +
-            "ing>")]
-        public global::System.Collections.Specialized.StringCollection AdhocInv {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["AdhocInv"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("$CMMP = \'Management Point FQDN\' \r\n$CMSiteCode = \'xxx\'  \r\n\r\n$ErrorActionPreference" +
             " = \"SilentlyContinue\" \r\n\r\ntry \r\n{ \r\n#Get ccm cache path for later cleanup... \r\n " +
             "   try \r\n    { \r\n        $ccmcache = ([wmi]\"ROOT\\ccm\\SoftMgmtAgent:CacheConfig.C" +
@@ -371,10 +244,136 @@ while ($a -ne 1)")]
             }
         }
         
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Enter-PSSession {0}  -port {1} -SessionOption (New-PSSessionOption -NoMachineProf" +
+            "ile:$true)")]
+        public string OpenPSConsoleCommand {
+            get {
+                return ((string)(this["OpenPSConsoleCommand"]));
+            }
+            set {
+                this["OpenPSConsoleCommand"] = value;
+            }
+        }
+        
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+<ArrayOfString xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
+  <string>CcmExec</string>
+  <string>WinRM</string>
+  <string>wuauserv</string>
+  <string>LanmanWorkstation</string>
+  <string>LanmanServer</string>
+  <string>RemoteRegistry</string>
+  <string>BITS</string>
+  <string>CmRcService</string>
+  <string>Winmgmt</string>
+  <string>PeerDistSvc</string>
+  <string>smstsmgr</string>
+  <string>RpcSs</string>
+  <string>ccmsetup</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection ServicesHighlited {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["ServicesHighlited"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsd=\"http://www.w3." +
+            "org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n  <s" +
+            "tring>%systemroot%\\system32\\actxprxy.dll</string>\r\n  <string>%systemroot%\\system" +
+            "32\\atl.dll</string>\r\n  <string>%systemroot%\\system32\\Bitsprx2.dll</string>\r\n  <s" +
+            "tring>%systemroot%\\system32\\Bitsprx3.dll</string>\r\n  <string>%systemroot%\\system" +
+            "32\\browseui.dll</string>\r\n  <string>%systemroot%\\system32\\cryptdlg.dll</string>\r" +
+            "\n  <string>%systemroot%\\system32\\dssenh.dll</string>\r\n  <string>%systemroot%\\sys" +
+            "tem32\\gpkcsp.dll</string>\r\n  <string>%systemroot%\\system32\\initpki.dll</string>\r" +
+            "\n  <string>%systemroot%\\system32\\jscript.dll</string>\r\n  <string>%systemroot%\\sy" +
+            "stem32\\mshtml.dll</string>\r\n  <string>%systemroot%\\system32\\msi.dll</string>\r\n  " +
+            "<string>%systemroot%\\system32\\mssip32.dll</string>\r\n  <string>%systemroot%\\syste" +
+            "m32\\msxml3.dll</string>\r\n  <string>%systemroot%\\system32\\msxml3r.dll</string>\r\n " +
+            " <string>%systemroot%\\system32\\msxml6.dll</string>\r\n  <string>%systemroot%\\syste" +
+            "m32\\msxml6r.dll</string>\r\n  <string>%systemroot%\\system32\\muweb.dll</string>\r\n  " +
+            "<string>%systemroot%\\system32\\ole32.dll</string>\r\n  <string>%systemroot%\\system3" +
+            "2\\oleaut32.dll</string>\r\n  <string>%systemroot%\\system32\\Qmgr.dll</string>\r\n  <s" +
+            "tring>%systemroot%\\system32\\Qmgrprxy.dll</string>\r\n  <string>%systemroot%\\system" +
+            "32\\rsaenh.dll</string>\r\n  <string>%systemroot%\\system32\\sccbase.dll</string>\r\n  " +
+            "<string>%systemroot%\\system32\\scrrun.dll</string>\r\n  <string>%systemroot%\\system" +
+            "32\\shdocvw.dll</string>\r\n  <string>%systemroot%\\system32\\shell32.dll</string>\r\n " +
+            " <string>%systemroot%\\system32\\slbcsp.dll</string>\r\n  <string>%systemroot%\\syste" +
+            "m32\\softpub.dll</string>\r\n  <string>%systemroot%\\system32\\urlmon.dll</string>\r\n " +
+            " <string>%systemroot%\\system32\\userenv.dll</string>\r\n  <string>%systemroot%\\syst" +
+            "em32\\vbscript.dll</string>\r\n  <string>%systemroot%\\system32\\Winhttp.dll</string>" +
+            "\r\n  <string>%systemroot%\\system32\\wintrust.dll</string>\r\n  <string>%systemroot%\\" +
+            "system32\\wuapi.dll</string>\r\n  <string>%systemroot%\\system32\\wuaueng.dll</string" +
+            ">\r\n  <string>%systemroot%\\system32\\wuaueng1.dll</string>\r\n  <string>%systemroot%" +
+            "\\system32\\wucltui.dll</string>\r\n  <string>%systemroot%\\system32\\wucltux.dll</str" +
+            "ing>\r\n  <string>%systemroot%\\system32\\wups.dll</string>\r\n  <string>%systemroot%\\" +
+            "system32\\wups2.dll</string>\r\n  <string>%systemroot%\\system32\\wuweb.dll</string>\r" +
+            "\n  <string>%systemroot%\\system32\\wuwebv.dll</string>\r\n  <string>%systemroot%\\sys" +
+            "tem32\\wbem\\wmisvc.dll</string>\r\n  <string>%systemroot%\\system32\\Xpob2res.dll</st" +
+            "ring>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection RegisterDLLs {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["RegisterDLLs"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsd=\"http://www.w3." +
+            "org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n  <s" +
+            "tring>Password</string>\r\n  <string>PWD</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection CollectionVariablesFilter {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["CollectionVariablesFilter"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsd=\"http://www.w3." +
+            "org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n  <s" +
+            "tring>Operating System|root\\cimv2|SELECT Caption FROM Win32_OperatingSystem</str" +
+            "ing>\r\n  <string>OS Version|root\\cimv2|SELECT Version FROM Win32_OperatingSystem<" +
+            "/string>\r\n  <string>OS Architecture|root\\cimv2|SELECT VariableValue FROM  Win32_" +
+            "Environment WHERE Name=\'PROCESSOR_ARCHITECTURE\' AND UserName=\'&lt;SYSTEM&gt;\'</s" +
+            "tring>\r\n  <string>PC Manufacturer|root\\cimv2|SELECT Manufacturer FROM Win32_Comp" +
+            "uterSystem</string>\r\n  <string>LastHWInv|Root\\CCM\\Scheduler|SELECT LastTriggerTi" +
+            "me FROM CCM_Scheduler_History WHERE ScheduleID=\'{00000000-0000-0000-0000-0000000" +
+            "00001}\' and UserSID=\'Machine\'</string>\r\n  <string>LastSWInv|Root\\CCM\\Scheduler|S" +
+            "ELECT LastTriggerTime FROM CCM_Scheduler_History WHERE ScheduleID=\'{00000000-000" +
+            "0-0000-0000-000000000002}\' and UserSID=\'Machine\'</string>\r\n  <string>LastDDR|Roo" +
+            "t\\CCM\\Scheduler|SELECT LastTriggerTime FROM CCM_Scheduler_History WHERE Schedule" +
+            "ID=\'{00000000-0000-0000-0000-000000000003}\' and UserSID=\'Machine\'</string>\r\n  <s" +
+            "tring>LastMachinePolicyRequest|Root\\CCM\\Scheduler|SELECT LastTriggerTime FROM CC" +
+            "M_Scheduler_History WHERE ScheduleID=\'{00000000-0000-0000-0000-000000000021}\' an" +
+            "d UserSID=\'Machine\'</string>\r\n  <string>LastReboot|root\\cimv2|SELECT LastBootUpT" +
+            "ime FROM Win32_OperatingSystem</string>\r\n  <string>InstallDate|root\\cimv2|SELECT" +
+            " InstallDate FROM Win32_OperatingSystem</string>\r\n  <string>CurrentUser|root\\cim" +
+            "v2|SELECT Username FROM Win32_ComputerSystem</string>\r\n  <string>PrimaryUsers|RO" +
+            "OT\\ccm\\Policy\\Machine\\ActualConfig|SELECT * FROM CCM_UserAffinity WHERE IsUserAf" +
+            "finitySet = \'True\'</string>\r\n  <string>FreeDiskSpace on C: (Bytes)|ROOT\\cimv2|SE" +
+            "LECT FreeSpace FROM Win32_LogicalDisk WHERE DeviceID=\'C:\'</string>\r\n  <string>Di" +
+            "skSpace on C: (Bytes)|ROOT\\cimv2|SELECT Size FROM Win32_LogicalDisk WHERE Device" +
+            "ID=\'C:\'</string>\r\n  <string>Running Executions|root\\CCM\\SoftMgmtAgent|select MIF" +
+            "PackageName, RequestID, programID, ReceivedTime, SuspendReboot, advertid, conten" +
+            "tid, RunningState, State from ccm_executionrequestex</string>\r\n  <string>BIOS Ve" +
+            "rsion|root\\cimv2|SELECT SMBIOSBIOSVersion from Win32_Bios</string>\r\n</ArrayOfStr" +
+            "ing>")]
+        public global::System.Collections.Specialized.StringCollection AdhocInv {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["AdhocInv"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
   <string>2b646eff-442b-410e-adf3-d4ec699e0ab4</string>
   <string>3dde85c4-ce0e-4999-ab84-698a569dfcac</string>
   <string>3fd01cd1-9e01-461e-92cd-94866b8d1f39</string>
@@ -392,14 +391,15 @@ while ($a -ne 1)")]
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Enter-PSSession {0}  -port {1} -SessionOption (New-PSSessionOption -NoMachineProf" +
-            "ile:$true)")]
-        public string OpenPSConsoleCommand {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsd=\"http://www.w3." +
+            "org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n  <s" +
+            "tring>127.0.0.1</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection recentlyUsedComputers {
             get {
-                return ((string)(this["OpenPSConsoleCommand"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["recentlyUsedComputers"]));
             }
             set {
-                this["OpenPSConsoleCommand"] = value;
+                this["recentlyUsedComputers"] = value;
             }
         }
     }

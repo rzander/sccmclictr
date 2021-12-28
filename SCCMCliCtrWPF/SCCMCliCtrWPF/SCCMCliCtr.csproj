@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ClientCenter</RootNamespace>
     <AssemblyName>SCCMCliCtrWPF</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -78,6 +78,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Customization, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Customization\bin\Debug\Customization.dll</HintPath>
+    </Reference>
     <Reference Include="NavigationPane, Version=1.0.5988.20744, Culture=neutral, PublicKeyToken=b239f36db07135c1, processorArchitecture=MSIL">
       <HintPath>..\packages\NavigationPane.2.1.0.0\lib\net40\NavigationPane.dll</HintPath>
       <Private>True</Private>
@@ -593,10 +597,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Customization\Customization.csproj">
-      <Project>{2956a544-f6d5-4799-899f-583ee5f2df58}</Project>
-      <Name>Customization</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Plugins\Plugin_Explorer\Plugin_Explorer.csproj">
       <Project>{32500cfb-9311-4590-aa83-fb5a1f4dbcf3}</Project>
       <Name>Plugin_Explorer</Name>

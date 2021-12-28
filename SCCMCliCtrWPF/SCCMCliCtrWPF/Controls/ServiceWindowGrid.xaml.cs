@@ -65,7 +65,7 @@ namespace ClientCenter.Controls
 
             try
             {
-                if (oAgent.isConnected)
+                if (oAgent != null && oAgent.isConnected)
                 {
                     scheduleControl1.ScheduledTimes.Clear();
                     SCCMAgentConnection = oAgent;

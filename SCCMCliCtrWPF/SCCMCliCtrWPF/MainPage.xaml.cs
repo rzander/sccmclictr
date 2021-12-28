@@ -48,7 +48,7 @@ namespace ClientCenter
             try
             {
                 this.Title = SCCMCliCtr.Customization.Title;
-                rStatus.AppendText("Client Center for Configuration Manager (c) 2020 by Roger Zander\n");
+                rStatus.AppendText("Client Center for Configuration Manager (c) 2022 by Roger Zander\n");
                 rStatus.AppendText("Project-Page: https://github.com/rzander/sccmclictr\n");
                 rStatus.AppendText("Current Version: " + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n");
                 rStatus.AppendText("Assembly Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString() + "\n");
@@ -434,12 +434,14 @@ namespace ClientCenter
         {
             try
             {
-                oAgent.Client.Monitoring.AsynchronousScript.Close();
+                if (oAgent != null)
+                    oAgent.Client.Monitoring.AsynchronousScript.Close();
             }
             catch { }
             try
             {
-                oAgent.disconnect();
+                if(oAgent != null && oAgent.isConnected)
+                    oAgent.disconnect();
             }
             catch { }
         }
