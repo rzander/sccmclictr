@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AgentActionTools</RootNamespace>
     <AssemblyName>Plugin_Explorer</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -47,6 +47,10 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Customization, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Customization\bin\Release\Customization.dll</HintPath>
+    </Reference>
     <Reference Include="sccmclictr.automation, Version=1.0.0.34, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\SCCMCliCtrWPF\packages\sccmclictrlib.1.0.0.34\lib\net46\sccmclictr.automation.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
@@ -104,12 +108,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Customization\Customization.csproj">
-      <Project>{2956a544-f6d5-4799-899f-583ee5f2df58}</Project>
-      <Name>Customization</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
