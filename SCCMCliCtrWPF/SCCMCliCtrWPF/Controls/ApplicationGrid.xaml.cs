@@ -264,41 +264,41 @@ namespace ClientCenter.Controls
             }
         }
 
-        private void bt_ImportApp_Click(object sender, RoutedEventArgs e)
-        {
+        //private void bt_ImportApp_Click(object sender, RoutedEventArgs e)
+        //{
             
-            try
-            {
-                ImportApp oSWForm = new ImportApp();
-                List<ComboboxItem> cbItems = new List<ComboboxItem>();
-                foreach (var oApp in oAgent.Client.SoftwareDistribution.ApplicationCatalog("", ""))
-                {
-                    ComboboxItem cbItem = new ComboboxItem();
-                    cbItem.DisplayValue = oApp.Name;
-                    cbItem.InternalValue = oApp.ApplicationId;
+        //    try
+        //    {
+        //        ImportApp oSWForm = new ImportApp();
+        //        List<ComboboxItem> cbItems = new List<ComboboxItem>();
+        //        foreach (var oApp in oAgent.Client.SoftwareDistribution.ApplicationCatalog("", ""))
+        //        {
+        //            ComboboxItem cbItem = new ComboboxItem();
+        //            cbItem.DisplayValue = oApp.Name;
+        //            cbItem.InternalValue = oApp.ApplicationId;
 
-                    cbItems.Add(cbItem);
-                }
+        //            cbItems.Add(cbItem);
+        //        }
 
-                oSWForm.cb_Apps.ItemsSource = cbItems;
-                oSWForm.cb_Apps.DisplayMemberPath = "DisplayValue";
-                oSWForm.cb_Apps.SelectedValuePath = "InternalValue";
+        //        oSWForm.cb_Apps.ItemsSource = cbItems;
+        //        oSWForm.cb_Apps.DisplayMemberPath = "DisplayValue";
+        //        oSWForm.cb_Apps.SelectedValuePath = "InternalValue";
 
-                oSWForm.ShowDialog();
+        //        oSWForm.ShowDialog();
 
-                if (oSWForm.DialogResult.HasValue && oSWForm.DialogResult.Value)
-                {
-                    Mouse.OverrideCursor = Cursors.Wait;
-                    string sAppID = oSWForm.tbAppID.Text;
-                    oAgent.Client.AgentActions.ImportApplicationPolicy(sAppID);
-                }
-            }
-            catch (Exception ex)
-            {
-                Listener.WriteError(ex.Message);
-            }
-            Mouse.OverrideCursor = Cursors.Arrow;
-        }
+        //        if (oSWForm.DialogResult.HasValue && oSWForm.DialogResult.Value)
+        //        {
+        //            Mouse.OverrideCursor = Cursors.Wait;
+        //            string sAppID = oSWForm.tbAppID.Text;
+        //            oAgent.Client.AgentActions.ImportApplicationPolicy(sAppID);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Listener.WriteError(ex.Message);
+        //    }
+        //    Mouse.OverrideCursor = Cursors.Arrow;
+        //}
 
         public class ComboboxItem
         {
