@@ -51,9 +51,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Customization\bin\Release\Customization.dll</HintPath>
     </Reference>
-    <Reference Include="sccmclictr.automation, Version=1.0.0.34, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\SCCMCliCtrWPF\packages\sccmclictrlib.1.0.0.34\lib\net46\sccmclictr.automation.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="sccmclictr.automation, Version=1.0.0.36, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\SCCMCliCtrWPF\packages\sccmclictrlib.1.0.0.36\lib\net47\sccmclictr.automation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
