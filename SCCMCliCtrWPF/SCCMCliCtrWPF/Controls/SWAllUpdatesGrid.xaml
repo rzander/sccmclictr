@@ -30,10 +30,16 @@
                         </StackPanel>
                     </Button>
                     <Separator />
-                    <Button ToolTip="Open C:\Windows\WindowsUpdate.log" Name="bt_OpenUpdateLog" Click="bt_OpenUpdateLog_Click">
+                    <Button ToolTip="Open C:\Windows\ccm\logs\UpdatesHandler.log" Name="bt_OpenUpdateLog" Click="bt_OpenUpdateLog_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/SCCMCliCtrWPF;component/Images/Search File.ico"/>
-                            <TextBlock Margin="2,0,0,0">Open UpdatesHandler.log</TextBlock>
+                            <TextBlock Margin="2,0,0,0">Open UpdatesDeployment.log</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button ToolTip="Open C:\Windows\ccm\logs\WUAHandler.log" Name="bt_OpenWUALog" Click="Bt_OpenWUALog_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/Search File.ico"/>
+                            <TextBlock Margin="2,0,0,0">Open WUAHandler.log</TextBlock>
                         </StackPanel>
                     </Button>
                     <Button ToolTip="Hide duplicates" Name="bt_Filter">
@@ -54,8 +60,8 @@
                         <DataGridTextColumn Header="SourceVersion" Binding="{Binding Path=SourceVersion}"/>
                         <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}"/>
                         <DataGridTextColumn Header="Title" Binding="{Binding Path=Title}"/>
-                        <DataGridTextColumn Header="UniqueID" Binding="{Binding Path=UniqueId}" DisplayIndex="9" Visibility="Hidden"/>
-                        <DataGridTextColumn Header="ProductID" Binding="{Binding Path=ProductID}" DisplayIndex="10" Visibility="Hidden"/>
+                        <DataGridTextColumn Header="UniqueID" Binding="{Binding Path=UniqueId}"  Visibility="Hidden"/>
+                        <DataGridTextColumn Header="ProductID" Binding="{Binding Path=ProductID}"  Visibility="Hidden"/>
                         <DataGridTemplateColumn Header="" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="False" DisplayIndex="0">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

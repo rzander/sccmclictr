@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AgentActionTools</RootNamespace>
     <AssemblyName>Plugin_StatusMessageViewer</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -48,10 +48,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Customization">
-      <HintPath>..\..\SCCMCliCtrWPF\SCCMCliCtrWPF\Customization.dll</HintPath>
+      <HintPath>..\..\Customization\bin\Debug\Customization.dll</HintPath>
     </Reference>
-    <Reference Include="sccmclictr.automation, Version=1.0.0.18, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\sccmclictrlib.1.0.0.18\lib\net46\sccmclictr.automation.dll</HintPath>
+    <Reference Include="sccmclictr.automation, Version=1.0.0.36, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\sccmclictrlib.1.0.0.36\lib\net47\sccmclictr.automation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -111,7 +111,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if "$(ConfigurationName)"=="Debug" GOTO  end
- "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\Bin\SignTool.exe" sign /i "COMODO RSA Code Signing CA" /n "Roger Zander" /t "http://timestamp.comodoca.com/authenticode" /q "$(TargetPath)" 
+ "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\Bin\SignTool.exe" sign /i "Sectigo RSA Code Signing CA" /n "Zander - Tools" /t "http://timestamp.comodoca.com/authenticode" /q "$(TargetPath)" 
 :end</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

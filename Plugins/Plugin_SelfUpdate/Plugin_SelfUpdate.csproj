@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AgentActionTools</RootNamespace>
     <AssemblyName>Plugin_SelfUpdate</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -78,6 +78,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\ruckzuck\RZ.Base\RZRestAPIv2.cs">
+      <Link>RZRestAPIv2.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ruckzuck\RZ.Base\RZScan.cs">
+      <Link>RZScan.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ruckzuck\RZ.Base\RZUpdate.cs">
+      <Link>RZUpdate.cs</Link>
+    </Compile>
     <Compile Include="AgentActionTool_CheckUpdate.xaml.cs">
       <DependentUpon>AgentActionTool_CheckUpdate.xaml</DependentUpon>
     </Compile>
@@ -90,9 +99,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="RZRestAPI.cs" />
-    <Compile Include="RZScan.cs" />
-    <Compile Include="RZUpdate.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -116,7 +122,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if "$(ConfigurationName)"=="Debug" GOTO  end
- "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\Bin\SignTool.exe" sign /i "COMODO RSA Code Signing CA" /n "Roger Zander" /t "http://timestamp.comodoca.com/authenticode" /q "$(TargetPath)" 
+ "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\Bin\SignTool.exe" sign /i "Sectigo RSA Code Signing CA" /n "Zander - Tools" /t "http://timestamp.comodoca.com/authenticode" /q "$(TargetPath)" 
 :end
 </PostBuildEvent>
   </PropertyGroup>

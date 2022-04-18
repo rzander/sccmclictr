@@ -34,6 +34,9 @@ namespace ClientCenter.Controls
         {
             InitializeComponent();
             scheduleControl1.DeleteClick += scheduleControl1_DeleteClick;
+            dp_Date.SelectedDate = DateTime.Now;
+            dp_Date.DisplayDate = DateTime.Now;
+            cb_HideBusinessHours.IsChecked = Properties.Settings.Default.HideBusinessHours;
         }
 
         void scheduleControl1_DeleteClick(object sender, EventArgs e)
@@ -62,10 +65,11 @@ namespace ClientCenter.Controls
 
             try
             {
-                if (oAgent.isConnected)
+                if (oAgent != null && oAgent.isConnected)
                 {
                     scheduleControl1.ScheduledTimes.Clear();
                     SCCMAgentConnection = oAgent;
+
                     scheduleControl1.Refresh();
                 }
             }
@@ -89,7 +93,7 @@ namespace ClientCenter.Controls
                     try
                     {
                         oAgent = value;
-                        scheduleControl1.DaysVisible = 7;
+                        scheduleControl1.DaysVisible = Convert.ToInt32(SliderMWScale.Value);
                         if (oAgent.isConnected)
                         {
                             scheduleControl1.ScheduledTimes.Clear();
@@ -143,6 +147,10 @@ namespace ClientCenter.Controls
                     cForeColor = Colors.Orange;
                     break;
                 case 6:
+
+                    if (cb_HideBusinessHours.IsChecked is true)
+                        return;
+
                     cForeColor = Colors.Green;
                     break;
 
@@ -171,7 +179,7 @@ namespace ClientCenter.Controls
                         string sDayNonRec = new DateTime(2012, 7, oSchedNonRec.StartTime.Day).DayOfWeek.ToString();
 
                         DateTime dNextRunNonRec = oSchedNonRec.NextStartTime;
-                        if (oSchedNonRec.StartTime + new TimeSpan(oSchedNonRec.DayDuration, oSchedNonRec.HourDuration, 0, 0) >= DateTime.Now.Date)
+                        if (oSchedNonRec.StartTime + new TimeSpan(oSchedNonRec.DayDuration, oSchedNonRec.HourDuration, 0, 0) >= scheduleControl1.Startdate)
                         {
 
                             ScheduleControl.ScheduledTime oControl = new ScheduleControl.ScheduledTime(dNextRunNonRec, new TimeSpan(oSchedNonRec.DayDuration, oSchedNonRec.HourDuration, oSchedNonRec.MinuteDuration, 0), cForeColor, "Non Recuring", isLocal, ServiceWindowID, SWType);
@@ -188,10 +196,10 @@ namespace ClientCenter.Controls
                             sRecurTextInt = string.Format("Occours Every ({0})Hour(s)", oSchedInt.HourSpan);
 
                         //Check if there is a schedule today... (past)
-                        if (oSchedInt.PreviousStartTime.AddDays(oSchedInt.DayDuration).AddHours(oSchedInt.HourDuration).Date == DateTime.Now.Date)
+                        if (oSchedInt.PreviousStartTime.AddDays(oSchedInt.DayDuration).AddHours(oSchedInt.HourDuration).Date == scheduleControl1.Startdate)
                             dNextRunInt = oSchedInt.PreviousStartTime;
 
-                        while (dNextRunInt.Date < DateTime.Now.Date + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
+                        while (dNextRunInt.Date < scheduleControl1.Startdate + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
                         {
                             scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRunInt, new TimeSpan(oSchedInt.DayDuration, oSchedInt.HourDuration, oSchedInt.MinuteDuration, 0), cForeColor, sRecurTextInt + " " + ServiceWindowID, isLocal, ServiceWindowID, SWType));
                             dNextRunInt = dNextRunInt + new TimeSpan(oSchedInt.DaySpan, oSchedInt.HourSpan, oSchedInt.MinuteSpan, 0);
@@ -205,10 +213,10 @@ namespace ClientCenter.Controls
                         string sRecurText = string.Format("Occours Every ({0})weeks on {1} {2}", oSched.ForNumberOfWeeks, sDay, ServiceWindowID);
                         DateTime dNextRun = dNextStartTime;
 
-                        if (oSched.PreviousStartTime.AddDays(oSched.DayDuration).AddHours(oSched.HourDuration).AddSeconds(-1).Date == DateTime.Now.Date)
+                        if (oSched.PreviousStartTime.AddDays(oSched.DayDuration).AddHours(oSched.HourDuration).AddSeconds(-1).Date == scheduleControl1.Startdate)
                             dNextRun = oSched.PreviousStartTime;
 
-                        while (dNextRun.Date <= DateTime.Now.Date + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
+                        while (dNextRun.Date <= scheduleControl1.Startdate + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
                         {
                             scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRun, new TimeSpan(oSched.DayDuration, oSched.HourDuration, oSched.MinuteDuration, 0), cForeColor, sRecurText, isLocal, ServiceWindowID, SWType));
                             dNextRun = dNextRun + new TimeSpan(oSched.ForNumberOfWeeks * 7, 0, 0, 0);
@@ -241,13 +249,46 @@ namespace ClientCenter.Controls
                         string sRecurTextRMBW = string.Format("Occours Every ({0}) Month on the {1} {2}", oSchedRMBW.ForNumberOfMonths, sRecure, sDayRMBW);
                         DateTime dNextRunRMBW = oSchedRMBW.NextStartTime;
 
-                        while (dNextRunRMBW.Date < DateTime.Now.Date + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
+                        while (dNextRunRMBW.Date < scheduleControl1.Startdate + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
                         {
+                            dNextRunRMBW = ScheduleDecoding.GetNthWeekdayOfMonth(dNextRunRMBW, oSchedRMBW.WeekOrder, ((DayOfWeek)((oSchedRMBW.Day - 1) % 7)));
+                            dNextRunRMBW = dNextRunRMBW.AddHours(oSchedRMBW.NextStartTime.Hour);
+                            dNextRunRMBW = dNextRunRMBW.AddMinutes(oSchedRMBW.NextStartTime.Minute);
+
                             scheduleControl1.ScheduledTimes.Add(new ScheduleControl.ScheduledTime(dNextRunRMBW, new TimeSpan(oSchedRMBW.DayDuration, oSchedRMBW.HourDuration, oSchedRMBW.MinuteDuration, 0), cForeColor, sRecurTextRMBW, isLocal, ServiceWindowID, SWType));
                             dNextRunRMBW = dNextRunRMBW.AddMonths(oSchedRMBW.ForNumberOfMonths);
                         }
                         break;
                     case ("SMS_ST_RecurMonthlyByDate"):
+                        ScheduleDecoding.SMS_ST_RecurMonthlyByDate oSchedRMBD = ((ScheduleDecoding.SMS_ST_RecurMonthlyByDate)oWin);
+
+                        string sDayRMBD = new DateTime(2012, 7, oSchedRMBD.StartTime.Day).DayOfWeek.ToString();
+
+                        string sRecurTextRMBD;
+
+                        if (oSchedRMBD.MonthDay == 0)
+                            sRecurTextRMBD = string.Format("Occours Every ({0}) Month on the last day of the month", oSchedRMBD.ForNumberOfMonths);
+                        else
+                            sRecurTextRMBD = string.Format("Occours Every ({0}) Month on the {1}. day", oSchedRMBD.ForNumberOfMonths, oSchedRMBD.NextStartTime.Day);
+
+                        DateTime dNextRunRMBD = oSchedRMBD.NextStartTime;
+                        while (dNextRunRMBD.Date < scheduleControl1.Startdate + new TimeSpan(scheduleControl1.DaysVisible, 0, 0, 0))
+                        {
+                            // check if days exists in this month
+                            if (DateTime.DaysInMonth(dNextRunRMBD.Year, dNextRunRMBD.Month) >= oSchedRMBD.MonthDay)
+                            { 
+                                ScheduleControl.ScheduledTime oControl = new ScheduleControl.ScheduledTime(dNextRunRMBD, new TimeSpan(oSchedRMBD.DayDuration, oSchedRMBD.HourDuration, oSchedRMBD.MinuteDuration, 0), cForeColor, sRecurTextRMBD, isLocal, ServiceWindowID, SWType);
+                                scheduleControl1.ScheduledTimes.Add(oControl);                          
+                            }
+
+                            dNextRunRMBD = dNextRunRMBD.AddMonths(oSchedRMBD.ForNumberOfMonths);
+
+                            // get last day of the next month
+                            if (oSchedRMBD.MonthDay == 0)
+                            {
+                                dNextRunRMBD = new DateTime(dNextRunRMBD.Year, dNextRunRMBD.Month, DateTime.DaysInMonth(dNextRunRMBD.Year, dNextRunRMBD.Month), dNextRunRMBD.Hour, dNextRunRMBD.Minute, dNextRunRMBD.Second);
+                            }
+                        }
                         break;
                 }
             }
@@ -330,6 +371,30 @@ namespace ClientCenter.Controls
 
             catch { }
             Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void cb_HideBusinessHours_Changed(object sender, RoutedEventArgs e)
+        {
+            bt_Reload_Click(sender, e);
+            Properties.Settings.Default.HideBusinessHours = cb_HideBusinessHours.IsChecked ?? true;
+            Properties.Settings.Default.Save();
+        }
+
+
+        private void dp_Date_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            scheduleControl1.Startdate = dp_Date.SelectedDate ?? DateTime.Now;
+            scheduleControl1.DaysVisible = Convert.ToInt32(SliderMWScale.Value);
+            bt_Reload_Click(sender, e);
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (scheduleControl1 != null)
+            {
+                scheduleControl1.DaysVisible = Convert.ToInt32(e.NewValue);
+                bt_Reload_Click(sender, e);
+            }
         }
     }
 }

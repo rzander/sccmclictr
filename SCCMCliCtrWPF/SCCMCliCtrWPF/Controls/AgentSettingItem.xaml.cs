@@ -273,8 +273,8 @@ namespace ClientCenter
                 Explorer.StartInfo.FileName = "Explorer.exe";
                 
                 //Connect IPC$ if not already connected (not needed with integrated authentication)
-                if (!oAgent.ConnectIPC)
-                    oAgent.ConnectIPC = true;
+                if (!oAgent.ConnectIPC_)
+                    oAgent.ConnectIPC_ = true;
 
 
                 string sLogPath = "";
@@ -311,8 +311,8 @@ namespace ClientCenter
                 Explorer.StartInfo.FileName = "Explorer.exe";
 
                 //Connect IPC$ if not already connected (not needed with integrated authentication)
-                if (!oAgent.ConnectIPC)
-                    oAgent.ConnectIPC = true;
+                if (!oAgent.ConnectIPC_)
+                    oAgent.ConnectIPC_ = true;
 
                 if (oAgent.Client.AgentProperties.isSCCM2012)
                 {
@@ -368,8 +368,8 @@ namespace ClientCenter
                 Explorer.StartInfo.FileName = "Explorer.exe";
                 
                 //Connect IPC$ if not already connected (not needed with integrated authentication)
-                if (!oAgent.ConnectIPC)
-                    oAgent.ConnectIPC = true;
+                if (!oAgent.ConnectIPC_)
+                    oAgent.ConnectIPC_ = true;
 
                 string sCachePath = "";
                 try

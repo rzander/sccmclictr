@@ -30,6 +30,16 @@
                         </StackPanel>
                     </Button>
                     <Separator />
+                    <Button Name="bt_HideBusinessHours">
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox Name="cb_HideBusinessHours" Checked="cb_HideBusinessHours_Changed" Unchecked="cb_HideBusinessHours_Changed">Hide business hours</CheckBox>
+                        </StackPanel>
+                    </Button>
+                    <DatePicker Name="dp_Date" SelectedDateChanged="dp_Date_SelectedDatesChanged"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Slider x:Name="SliderMWScale" Width="200" Value="14" TickFrequency="7" Maximum="31" Minimum="5" TickPlacement="TopLeft" ValueChanged="Slider_ValueChanged" Ticks="5,7,14,21,28,31" Delay="1000" IsSnapToTickEnabled="True" AutoToolTipPlacement="TopLeft"/>
+                    </StackPanel>
+                    <Separator />
                 </ToolBar>
             </DockPanel>
             <Grid>

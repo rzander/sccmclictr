@@ -31,13 +31,14 @@
                         <DockPanel DockPanel.Dock="Left">
                             <TextBlock>
                                 <Hyperlink NavigateUri="{Binding ProductURL}" RequestNavigate="Hyperlink_RequestNavigate" OverridesDefaultStyle="True" TextDecorations="">
-                                    <Image Height="24" Width="24" ToolTip="{Binding ProductName}" Source="{Binding IconURL}" />
+                                    <Image Height="32" Width="32" ToolTip="{Binding ProductName}" Source="{Binding IconURL, IsAsync=True, Mode=OneTime, UpdateSourceTrigger=PropertyChanged}" >
+                                    </Image>
                                 </Hyperlink>
                             </TextBlock>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Right" Margin="5,0,0,0">
                             <DockPanel DockPanel.Dock="Top">
-                                <TextBlock DockPanel.Dock="Right" Text="{Binding Shortname}" FontWeight="Bold"/>
+                                <TextBlock DockPanel.Dock="Right" Text="{Binding ShortName}" FontWeight="Bold"/>
                             </DockPanel>
                             <DockPanel DockPanel.Dock="Top" MaxWidth="500">
                                 <TextBlock DockPanel.Dock="Right" Text="{Binding Description}" TextWrapping="Wrap"/>

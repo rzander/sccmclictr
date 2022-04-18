@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("AMT Plugin for Client Center")]
 [assembly: AssemblyDescription("Intel AMT vPro Plugin for Client Center")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("SCCM Tools")]
+[assembly: AssemblyCompany("Zander - Tools")]
 [assembly: AssemblyProduct("SCCMCliCtr AMT Plugin")]
 [assembly: AssemblyCopyright("Copyright ©  2015 by Mattias Benninge")]
 [assembly: AssemblyTrademark("")]
@@ -52,4 +52,4 @@ using System.Windows;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.*")]
-[assembly: AssemblyFileVersion("1.0.0.2")]
+[assembly: AssemblyFileVersion("1.0.0.3")]

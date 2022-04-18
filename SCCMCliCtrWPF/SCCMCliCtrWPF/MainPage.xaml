@@ -20,7 +20,7 @@
                     </LinearGradientBrush>
                 </DockPanel.Background>
                 <TextBlock Text="Target Computer: " VerticalAlignment="Center" Margin="15,0,0,0"></TextBlock>
-                <Controls:AutoCompleteBox Name="tb_TargetComputer2" Width="150" Height="25" Text="{Binding Source={x:Static p:Settings.Default}, Path=DefaultHostName, Mode=TwoWay}" KeyUp="tb_TargetComputer2_KeyUp" Populating="tb_TargetComputer2_Populating" TextChanged="tb_TargetComputer_TextChanged" />
+                <Controls:AutoCompleteBox Name="tb_TargetComputer2" Width="150" Height="25" Text="{Binding Source={x:Static p:Settings.Default}, Path=DefaultHostName, Mode=TwoWay}" Populating="tb_TargetComputer2_Populating" TextChanged="tb_TargetComputer_TextChanged" KeyUp="Tb_TargetComputer2_KeyUp" />
                 <Button Name="bt_Ping" Width="20" Height="20" Visibility="Hidden" Click="bt_Ping_Click" ToolTip="Ping the device...">
                     <StackPanel>
                         <Image Source="Images/Play.ico" />
@@ -51,7 +51,7 @@
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
                                             <Label Content="Password:" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" />
-                                            <PasswordBox Height="23" HorizontalAlignment="Left" Name="pb_Password" VerticalAlignment="Top" Width="140" KeyDown="pb_Password_KeyDown" />
+                                            <PasswordBox Height="23" HorizontalAlignment="Left" Name="pb_Password" VerticalAlignment="Top" Width="140"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
                                             <Label Content="Port:" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" />
@@ -68,7 +68,7 @@
 
                             <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Center" Focusable="false">
                                 <TextBlock Text="Target Computer: " VerticalAlignment="Center"></TextBlock>
-                                <Controls:AutoCompleteBox Name="tb_TargetComputer" Text="127.0.0.1" Width="150" Height="25" Populating="tb_TargetComputer2_Populating" KeyUp="tb_TargetComputer_KeyUp" TextChanged="tb_TargetComputer2_TextChanged"/>
+                                <Controls:AutoCompleteBox Name="tb_TargetComputer" Width="150" Height="25" Populating="tb_TargetComputer2_Populating" TextChanged="tb_TargetComputer2_TextChanged"  Text="{Binding Source={x:Static p:Settings.Default}, Path=DefaultHostName, Mode=TwoWay}"/>
                                 <RibbonButton Name="bt_Connect" VerticalAlignment="Center" Label="Connect" Height="23" Click="bt_Connect_Click" />
                             </StackPanel>
                             <RibbonApplicationMenuItem Header="Console extensions..." StaysOpenOnClick="True" Focusable="false">
@@ -111,9 +111,6 @@
                                 <RibbonButton Name="btPolicyAgentValidateUserPolicy" Label="Policy Agent Validate User Policy" ToolTip="Policy Agent Validate User Policy" SmallImageSource="/SCCMCliCtrWPF;component/Images/UserPolicy.ico" Click="btPolicyAgentValidateUserPolicy_Click"></RibbonButton>
                             </RibbonSplitButton>
                         </RibbonGroup>
-                        <RibbonGroup Header="DCM" ToolTip="Settings Management (DCM)" SmallImageSource="Images/Search File.ico">
-                            <RibbonButton Name="ButtonDCMEval" Label="DCM Check" ToolTip="Desired Configuration Monitoring (DCM) Evaluation cycle." LargeImageSource="/SCCMCliCtrWPF;component/Images/Search%20File.ico" SmallImageSource="/SCCMCliCtrWPF;component/Images/Search%20File.ico" Click="ButtonDCMEval_Click" />
-                        </RibbonGroup>
                         <RibbonGroup Header="Updates" ToolTip="Update management" SmallImageSource="Images/SWUpdate.png">
                             <RibbonSplitButton Name="ButtonEvaluateUpdates1" Label="Update Evaluation" ToolTip="Software Update Assignment and Evaluation cycle." LargeImageSource="Images/SWUpdate.png" SmallImageSource="Images/SWUpdate.png" Click="ButtonEvaluateUpdates_Click">
                                 <RibbonButton Name="ButtonScanUpdates" Label="Update Scan" ToolTip="Force a Software Update Scan cycle."  SmallImageSource="/SCCMCliCtrWPF;component/Images/SWUpdate.png" Click="ButtonScanUpdates_Click" />
@@ -129,7 +126,6 @@
                                 <RibbonButton Name="btClearingproxysettingscache" Label="Clearing proxy settings cache" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btClearingproxysettingscache_Click" />
                                 <RibbonButton Name="btLSRefreshLocationsTask" Label="Location Service Refresh Locations Task" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btLSRefreshLocationsTask_Click" />
                                 <RibbonButton Name="btLSTimeoutRefreshTask" Label="Location Service Timeout Refresh Task" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btLSTimeoutRefreshTask_Click" />
-                                <RibbonButton Name="btNAPaction" Label="NAP evaluation" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btNAPaction_Click" />
                                 <RibbonButton Name="btPeerDPStatusreporting" Label="Peer DP Status reporting" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btPeerDPStatusreporting_Click" />
                                 <RibbonButton Name="btPeerDPPendingpackagecheckschedule" Label="Peer DP Pending package check schedule" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btPeerDPPendingpackagecheckschedule_Click" />
                                 <RibbonButton Name="btRefreshDefaultMPTask" Label="Refresh Default MP Task" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btRefreshDefaultMPTask_Click" />
@@ -141,7 +137,6 @@
                                 <RibbonButton Name="btExternaleventdetection" Label="External event detection" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btExternaleventdetection_Click" />
                                 <RibbonButton Name="btSWMeteringUsageRport" Label="Software Metering Generating Usage Report" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btSWMeteringUsageRport_Click" ToolTip="Generate SoftwareMetering usage report" />
                                 <RibbonButton Name="btMSISourceListUpdate" Label="Windows Installer Source List Update Cycle" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btMSISourceListUpdate_Click" ToolTip="Update MSI Source List" />
-                                <RibbonButton Name="btDCMPolicyAction" Label="DCM Policy Action" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btDCMPolicyAction_Click" />
                                 <RibbonButton Name="btATMStatusCheckPolicy" Label="AMT Status Check Policy" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btATMStatusCheckPolicy_Click" />
                                 <RibbonButton Name="btPowerManagerSummarizer" Label="Power management start summarizer" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btPowerManagerSummarizer_Click" />
                                 <RibbonButton Name="btResetPausedSWDist" Label="Reset Paused Software Distribution" SmallImageSource="/SCCMCliCtrWPF;component/Images/Repair.ico" Click="btResetPausedSWDist_Click" ToolTip="Reset the Pause SoftwareDistribution Flag" />
@@ -153,10 +148,10 @@
                             </RibbonSplitButton>
                         </RibbonGroup>
                         <RibbonGroup Header="App.Mgmt." ToolTip="Application related actions" SmallImageSource="Images/Pack_close.ico">
-                            <RibbonSplitButton Name="btAppMgmt" ToolTip="Application Management" LargeImageSource="Images/Pack_close.ico" SmallImageSource="Images/Pack_close.ico" Label="...">
+                            <RibbonSplitButton Name="btAppMgmt" ToolTip="Application Management" LargeImageSource="Images/Pack_close.ico" SmallImageSource="Images/Pack_close.ico" Label="..." Click="btAppManGlobalEvaluation_Click">
                                 <RibbonButton Name="btAppManUserPolicyAction" Label="Application manager user policy action" SmallImageSource="Images/Pack_close.ico" Click="btAppManUserPolicyAction_Click" />
                                 <RibbonButton Name="btAppManMachinePolicyAction" Label="Application manager machine policy action" SmallImageSource="Images/Pack_close.ico" Click="btAppManMachinePolicyAction_Click" />
-                                <RibbonButton Name="btAppManGlobalEvaluation" Label="Application manager global evaluation action" SmallImageSource="Images/Pack_close.ico" Click="btAppManGlobalEvaluation_Click" ToolTip="Application Global Evaluation Task (COM)"/>
+                                <RibbonButton Name="btAppManGlobalEvaluation" Label="Application manager global evaluation action" SmallImageSource="Images/Pack_close.ico" Click="btAppManGlobalEvaluation_Click" ToolTip="Application Global Evaluation Task (COM)" FontWeight="Bold"/>
                             </RibbonSplitButton>
                         </RibbonGroup>
                         <RibbonGroup Name="rgTools" Header="Tools" Visibility="Hidden" SmallImageSource="Images/Tools.ico" ToolTip="">

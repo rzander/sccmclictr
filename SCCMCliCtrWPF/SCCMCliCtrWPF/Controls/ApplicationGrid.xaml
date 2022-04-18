@@ -21,37 +21,55 @@
                             <TextBlock Margin="2,0,0,0">Reload Applications</TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button ToolTip="Import an Application from ApplicationCatalog" Name="bt_ImportApp" Click="bt_ImportApp_Click">
+                    <!--<Button ToolTip="Import an Application from ApplicationCatalog" Name="bt_ImportApp" Click="bt_ImportApp_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/SCCMCliCtrWPF;component/Images/Add.ico"/>
                             <TextBlock Margin="2,0,0,0">Import App from Catalog</TextBlock>
                         </StackPanel>
-                    </Button>
+                    </Button>-->
                     <Button Name="bt_HideNonUIEApps">
                         <StackPanel Orientation="Horizontal">
                             <CheckBox Name="cb_OnlyUIEApps" Checked="cb_OnlyUIEApps_Changed" Unchecked="cb_OnlyUIEApps_Changed">Hide non UserUIExperience apps</CheckBox>
                         </StackPanel>
                     </Button>
                     <Separator />
+                    <Button ToolTip="Open AppEnforce.log" Name="bt_OpenAppEnforce" Click="Bt_OpenAppEnforce_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/Search File.ico"/>
+                            <TextBlock Margin="2,0,0,0">AppEnforce.log</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button ToolTip="Open AppDiscovery.log" Name="bt_OpenAppDiscovery" Click="Bt_OpenAppDiscovery_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/Search File.ico"/>
+                            <TextBlock Margin="2,0,0,0">AppDiscovery.log</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button ToolTip="Open AppIntentEval.log" Name="bt_OpenAppIntentEval" Click="Bt_OpenAppIntentEval_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/SCCMCliCtrWPF;component/Images/Search File.ico"/>
+                            <TextBlock Margin="2,0,0,0">AppIntentEval.log</TextBlock>
+                        </StackPanel>
+                    </Button>
                 </ToolBar>
             </DockPanel>
             <DockPanel>
-                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" IsReadOnly="True">
+                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" IsReadOnly="True" ClipboardCopyMode="IncludeHeader">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="UI" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="true" SortMemberPath="UserUIExperience" DisplayIndex="1"  MaxWidth="30">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Image Source="{Binding Path=UserUIExperience, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/Favorites.ico| pack://application:,,,/SCCMCliCtrWPF;component/Images/Favorites visible.ico'}" Height="20" Width="24"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Simulated" IsReadOnly="True" CanUserReorder="True" CanUserResize="true" CanUserSort="true" SortMemberPath="IsPreflightOnly" DisplayIndex="2" MaxWidth="30">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Image Source="{Binding Path=IsPreflightOnly, Converter={StaticResource BooleanToImageConverter},  ConverterParameter='pack://application:,,,/SCCMCliCtrWPF;component/Images/SPY.ico|pack://application:,,,/SCCMCliCtrWPF;component/Images/Flag 4.ico'}"  Height="20" Width="24"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                        <DataGridCheckBoxColumn Header="UI" Binding="{Binding Path=UserUIExperience}">
+                            <DataGridCheckBoxColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="ToolTip" Value="True to show a reboot notification. When set to false, no reboot notification will be shown." />
+                                </Style>
+                            </DataGridCheckBoxColumn.HeaderStyle>
+                        </DataGridCheckBoxColumn>
+                        <DataGridCheckBoxColumn Header="Simulate" Binding="{Binding Path=IsPreflightOnly}">
+                            <DataGridCheckBoxColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="ToolTip" Value="True if this is a simulated deployment."/>
+                                </Style>
+                            </DataGridCheckBoxColumn.HeaderStyle>
+                        </DataGridCheckBoxColumn>
                         <DataGridTemplateColumn Header="Target" IsReadOnly="True" CanUserReorder="True" CanUserResize="true" CanUserSort="true" SortMemberPath="IsMachineTarget" DisplayIndex="3" MaxWidth="30">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -59,11 +77,19 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
+                        <!--<DataGridCheckBoxColumn Header="Machine?" Binding="{Binding Path=IsMachineTarget}">
+                            <DataGridCheckBoxColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="ToolTip" Value="True if this is a device targeted application." />
+                                </Style>
+                            </DataGridCheckBoxColumn.HeaderStyle>
+                        </DataGridCheckBoxColumn>-->
                         <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" SortDirection="Ascending"/>
                         <DataGridTextColumn Header="Version" Binding="{Binding Path=SoftwareVersion}"/>
                         <DataGridTextColumn Header="Rev" Binding="{Binding Path=Revision}"/>
-                        <DataGridTextColumn Header="EvaluationState" Binding="{Binding Path=EvaluationState}"/>
                         <DataGridTextColumn Header="Status" Binding="{Binding Path=EvaluationStateText}"/>
+                        <DataGridTextColumn Header="ErrorCode" Binding="{Binding Path=ErrorCode, StringFormat={}0x{0:X8}}"/>
+                        <DataGridTextColumn Header="Error Message" Binding="{Binding Path=ErrorCodeText}"/>
                         <DataGridTextColumn Header="InstallState" Binding="{Binding Path=InstallState}"/>
                         <DataGridTextColumn Header="InstallTime" Binding="{Binding Path=LastInstallTime, StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
                         <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" CanUserResize="True" />

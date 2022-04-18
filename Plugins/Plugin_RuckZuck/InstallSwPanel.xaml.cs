@@ -14,9 +14,8 @@ using System.Management.Automation;
 using System.Globalization;
 using System.Collections.ObjectModel;
 using sccmclictr.automation;
-using RuckZuck_WCF;
-using RZUpdate;
 using System.Threading.Tasks;
+using RuckZuck.Base;
 
 namespace AgentActionTools
 {
@@ -47,13 +46,8 @@ namespace AgentActionTools
             Mouse.OverrideCursor = Cursors.Wait;
             try
             {
-                if (string.IsNullOrEmpty(sAuthToken))
-                    sAuthToken = RZRestAPI.GetAuthToken("FreeRZ", GetTimeToken());
-
-                RZRestAPI.Token = sAuthToken;
-
                 RZScan oSCAN = new RZScan(false, false);
-
+                
                 Task.Run(() => oSCAN.GetSWRepository()).Wait();
 
                 lAllSoftware = oSCAN.SoftwareRepository;
@@ -75,12 +69,12 @@ namespace AgentActionTools
                                     //Check if SW is already installed
                                     if (lSoftware.FirstOrDefault(t => t.ProductName == oSW.ProductName & t.ProductVersion == oSW.ProductVersion) != null)
                                     {
-                                        GetSoftware oNew = new GetSoftware() { Categories = new List<string> { sCAT }, Description = oSW.Description, Downloads = oSW.Downloads, IconId = oSW.IconId, Manufacturer = oSW.Manufacturer, ProductName = oSW.ProductName, ProductURL = oSW.ProductURL, ProductVersion = oSW.ProductVersion, Quality = oSW.Quality, Shortname = oSW.Shortname, isInstalled = true };
+                                        GetSoftware oNew = new GetSoftware() { Categories = new List<string> { sCAT }, Description = oSW.Description, Downloads = oSW.Downloads, IconHash = oSW.IconHash, SWId = oSW.SWId, Manufacturer = oSW.Manufacturer, ProductName = oSW.ProductName, ProductURL = oSW.ProductURL, ProductVersion = oSW.ProductVersion,  ShortName = oSW.ShortName, isInstalled = true };
                                         oDBCat.Add(oNew);
                                     }
                                     else
                                     {
-                                        GetSoftware oNew = new GetSoftware() { Categories = new List<string> { sCAT }, Description = oSW.Description, Downloads = oSW.Downloads, IconId = oSW.IconId, Manufacturer = oSW.Manufacturer, ProductName = oSW.ProductName, ProductURL = oSW.ProductURL, ProductVersion = oSW.ProductVersion, Quality = oSW.Quality, Shortname = oSW.Shortname, isInstalled = false };
+                                        GetSoftware oNew = new GetSoftware() { Categories = new List<string> { sCAT }, Description = oSW.Description, Downloads = oSW.Downloads, IconHash = oSW.IconHash, SWId = oSW.SWId, Manufacturer = oSW.Manufacturer, ProductName = oSW.ProductName, ProductURL = oSW.ProductURL, ProductVersion = oSW.ProductVersion, ShortName = oSW.ShortName, isInstalled = false };
                                         oDBCat.Add(oNew);
                                     }
                                 }
@@ -92,11 +86,11 @@ namespace AgentActionTools
                             //Check if SW is already installed
                             if (lSoftware.FirstOrDefault(t => t.ProductName == oSW.ProductName & t.ProductVersion == oSW.ProductVersion) != null)
                             {
-                                oDBCat.Add(new GetSoftware() { Categories = oSW.Categories, Description = oSW.Description, Downloads = oSW.Downloads, IconId = oSW.IconId, Manufacturer = oSW.Manufacturer, ProductName = oSW.ProductName, ProductURL = oSW.ProductURL, ProductVersion = oSW.ProductVersion, Quality = oSW.Quality, Shortname = oSW.Shortname, isInstalled = true });
+                                oDBCat.Add(new GetSoftware() { Categories = oSW.Categories, Description = oSW.Description, Downloads = oSW.Downloads, IconHash = oSW.IconHash, SWId = oSW.SWId, Manufacturer = oSW.Manufacturer, ProductName = oSW.ProductName, ProductURL = oSW.ProductURL, ProductVersion = oSW.ProductVersion, ShortName = oSW.ShortName, isInstalled = true });
                             }
                             else
                             {
-                                oDBCat.Add(new GetSoftware() { Categories = oSW.Categories, Description = oSW.Description, Downloads = oSW.Downloads, IconId = oSW.IconId, Manufacturer = oSW.Manufacturer, ProductName = oSW.ProductName, ProductURL = oSW.ProductURL, ProductVersion = oSW.ProductVersion, Quality = oSW.Quality, Shortname = oSW.Shortname, isInstalled = false });
+                                oDBCat.Add(new GetSoftware() { Categories = oSW.Categories, Description = oSW.Description, Downloads = oSW.Downloads, IconHash = oSW.IconHash, SWId = oSW.SWId, Manufacturer = oSW.Manufacturer, ProductName = oSW.ProductName, ProductURL = oSW.ProductURL, ProductVersion = oSW.ProductVersion, ShortName = oSW.ShortName, isInstalled = false });
                             }
                         }
                     }
@@ -105,7 +99,7 @@ namespace AgentActionTools
 
                 ListCollectionView lcv = new ListCollectionView(oDBCat.ToList());
 
-                foreach (var o in RZRestAPI.GetCategories(oSCAN.SoftwareRepository))
+                foreach (var o in RZRestAPIv2.GetCategories(oSCAN.SoftwareRepository))
                 {
                     PGD.GroupNames.Add(o);
                 }
@@ -113,6 +107,7 @@ namespace AgentActionTools
                 lcv.GroupDescriptions.Add(PGD);
 
                 lvSW.ItemsSource = lcv;
+
             }
             catch { }
             Mouse.OverrideCursor = null;
@@ -171,23 +166,6 @@ namespace AgentActionTools
                 tbSearch.Foreground = new SolidColorBrush(Colors.LightGray);
                 tbSearch.Tag = "Search";
                 tbSearch.Text = "Search...";
-
-
-                ListCollectionView lcv = new ListCollectionView(lAllSoftware.Distinct().OrderBy(t => t.Shortname).ThenByDescending(t => t.ProductVersion).ThenByDescending(t => t.ProductName).ToList());
-
-                //ListCollectionView lcv = new ListCollectionView(oAPI.SWResults("", "").Distinct().OrderBy(t => t.Shortname).ThenByDescending(t => t.ProductVersion).ThenByDescending(t => t.ProductName).ToList());
-                PropertyGroupDescription PGD = new PropertyGroupDescription("", new ShortnameToCategory());
-
-                //PGD.GroupNames.Add(RZRestAPI.GetCategories(lAllSoftware));
-                foreach (var o in RZRestAPI.GetCategories(lAllSoftware))
-                {
-                    PGD.GroupNames.Add(o);
-                }
-
-
-                lcv.GroupDescriptions.Add(PGD);
-
-                lvSW.ItemsSource = lcv;
             }
             else
             {
@@ -196,7 +174,7 @@ namespace AgentActionTools
 
                 try
                 {
-                    var vResult = lAllSoftware.FindAll(t => t.Shortname.IndexOf(tbSearch.Text, 0, StringComparison.InvariantCultureIgnoreCase) >= 0).ToList();
+                    var vResult = lAllSoftware.FindAll(t => t.ShortName.IndexOf(tbSearch.Text, 0, StringComparison.InvariantCultureIgnoreCase) >= 0).ToList();
                     vResult.AddRange(lAllSoftware.FindAll(t => t.ProductName.IndexOf(tbSearch.Text, 0, StringComparison.InvariantCultureIgnoreCase) >= 0).ToList());
                     vResult.AddRange(lAllSoftware.FindAll(t => t.Manufacturer.IndexOf(tbSearch.Text, 0, StringComparison.InvariantCultureIgnoreCase) >= 0).ToList());
                     if (vResult.Count <= 15)
@@ -204,11 +182,56 @@ namespace AgentActionTools
                         vResult.AddRange(lAllSoftware.FindAll(t => (t.Description ?? "").IndexOf(tbSearch.Text, 0, StringComparison.InvariantCultureIgnoreCase) >= 0).ToList());
                     }
 
-                    lvSW.ItemsSource = vResult.Distinct().OrderBy(t => t.Shortname).ThenByDescending(t => t.ProductVersion).ThenByDescending(t => t.ProductName);
+                    lvSW.ItemsSource = vResult.Distinct().OrderBy(t => t.ShortName).ThenByDescending(t => t.ProductVersion).ThenByDescending(t => t.ProductName);
                 }
                 catch { }
             }
             Mouse.OverrideCursor = null;
+
+            //Mouse.OverrideCursor = Cursors.Wait;
+            //if (string.IsNullOrEmpty(tbSearch.Text))
+            //{
+            //    tbSearch.Foreground = new SolidColorBrush(Colors.LightGray);
+            //    tbSearch.Tag = "Search";
+            //    tbSearch.Text = "Search...";
+
+
+            //    ListCollectionView lcv = new ListCollectionView(lAllSoftware.Distinct().OrderBy(t => t.ShortName).ThenByDescending(t => t.ProductVersion).ThenByDescending(t => t.ProductName).ToList());
+
+            //    //ListCollectionView lcv = new ListCollectionView(oAPI.SWResults("", "").Distinct().OrderBy(t => t.Shortname).ThenByDescending(t => t.ProductVersion).ThenByDescending(t => t.ProductName).ToList());
+            //    PropertyGroupDescription PGD = new PropertyGroupDescription("", new ShortnameToCategory());
+
+            //    //PGD.GroupNames.Add(RZRestAPI.GetCategories(lAllSoftware));
+            //    foreach (var o in RZRestAPIv2.GetCategories(lAllSoftware))
+            //    {
+            //        PGD.GroupNames.Add(o);
+            //    }
+
+
+            //    lcv.GroupDescriptions.Add(PGD);
+
+            //    lvSW.ItemsSource = lcv;
+            //}
+            //else
+            //{
+            //    tbSearch.Foreground = new SolidColorBrush(Colors.Black);
+            //    tbSearch.Tag = null;
+
+            //    try
+            //    {
+            //        var vResult = lAllSoftware.FindAll(t => t.ShortName.IndexOf(tbSearch.Text, 0, StringComparison.InvariantCultureIgnoreCase) >= 0).ToList();
+            //        vResult.AddRange(lAllSoftware.FindAll(t => t.ProductName.IndexOf(tbSearch.Text, 0, StringComparison.InvariantCultureIgnoreCase) >= 0).ToList());
+            //        vResult.AddRange(lAllSoftware.FindAll(t => t.Manufacturer.IndexOf(tbSearch.Text, 0, StringComparison.InvariantCultureIgnoreCase) >= 0).ToList());
+            //        if (vResult.Count <= 15)
+            //        {
+            //            vResult.AddRange(lAllSoftware.FindAll(t => (t.Description ?? "").IndexOf(tbSearch.Text, 0, StringComparison.InvariantCultureIgnoreCase) >= 0).ToList());
+            //        }
+
+            //        lvSW.ItemsSource = vResult.Distinct().OrderBy(t => t.ShortName).ThenByDescending(t => t.ProductVersion).ThenByDescending(t => t.ProductName);
+            //    }
+            //    catch { }
+            //}
+            //Mouse.OverrideCursor = null;
         }
 
         public class ShortnameToCategory : IValueConverter
@@ -269,7 +292,7 @@ namespace AgentActionTools
                             }
 
                             bool bInstalled = false;
-                            foreach (var DT in RZRestAPI.GetSWDefinitions(sProdName, sProdVersion, sManuf))
+                            foreach (var DT in RZRestAPIv2.GetSoftwares(sProdName, sProdVersion, sManuf))
                             {
                                 //Check PreReqs
                                 try
@@ -321,7 +344,7 @@ namespace AgentActionTools
                                             //Check if installed
                                             if ((bool)oAgent.Client.GetObjectsFromPS(DT.PSDetection, true, new TimeSpan(0, 0, 0))[0].BaseObject)
                                             {
-                                                RZRestAPI.Feedback(DT.ProductName, DT.ProductVersion, DT.Manufacturer, DT.Architecture, "true", "SCCMCliCtr", "Ok...").ConfigureAwait(false);
+                                                RZRestAPIv2.Feedback(DT.ProductName, DT.ProductVersion, DT.Manufacturer, DT.Architecture, "true", "SCCMCliCtr", "Ok...").ConfigureAwait(false);
                                                 MessageBox.Show("Software installed successfully.", "Installation Status:", MessageBoxButton.OK, MessageBoxImage.Information);
                                                 bInstalled = true;
                                                 continue;

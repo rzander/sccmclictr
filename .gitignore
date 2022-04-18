@@ -321,9 +321,9 @@ ASALocalRun/
 # MSBuild Binary and Structured Log
 *.binlog
 
-#SCCCliCtr Files
+#SCCMCliCtr Files
 Customization.dll
 Customization.dll.config
 Plugin_*.dll
-Customization/
+Customization/*.cs
 MSI_Setup/

@@ -24,6 +24,7 @@
                         <ListBoxItem Content="root\ccm\SoftMgmtAgent"/>
                         <ListBoxItem Content="root\cimv2\Security\MicrosoftTpm"/>
                         <ListBoxItem Content="root\cimv2\Security\MicrosoftVolumeEncryption"/>
+                        <ListBoxItem Content="root\wmi"/>
                     </ComboBox>
                     <Separator />
                     <ComboBox x:Name="cb_Classes" Width="163" SelectionChanged="cb_Classes_SelectionChanged"/>

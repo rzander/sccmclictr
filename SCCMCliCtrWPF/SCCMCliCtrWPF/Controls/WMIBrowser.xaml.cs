@@ -68,7 +68,7 @@ namespace ClientCenter.Controls
             Mouse.OverrideCursor = Cursors.Wait;
             try
             {
-                if (oAgent.isConnected)
+                if (oAgent != null && oAgent.isConnected)
                 {
                     lClasses.Clear();
 

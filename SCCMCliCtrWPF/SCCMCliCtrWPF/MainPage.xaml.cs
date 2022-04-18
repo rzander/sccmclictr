@@ -27,7 +27,6 @@ namespace ClientCenter
     {
         public SCCMAgent oAgent;
         public MyTraceListener myTrace;
-        private bool bPasswordChanged = false;
         delegate void AnonymousDelegate();
 
         public MainPage()
@@ -49,7 +48,7 @@ namespace ClientCenter
             try
             {
                 this.Title = SCCMCliCtr.Customization.Title;
-                rStatus.AppendText("Client Center for Configuration Manager (c) 2018 by Roger Zander\n");
+                rStatus.AppendText("Client Center for Configuration Manager (c) 2022 by Roger Zander\n");
                 rStatus.AppendText("Project-Page: https://github.com/rzander/sccmclictr\n");
                 rStatus.AppendText("Current Version: " + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n");
                 rStatus.AppendText("Assembly Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString() + "\n");
@@ -265,9 +264,7 @@ namespace ClientCenter
             }
             catch { }
 
-            pb_Password.Password = Properties.Settings.Default.Password;
-            tb_Username.Text = Properties.Settings.Default.Username;
-
+            pb_Password.Password = common.Decrypt(Properties.Settings.Default.Password, Application.ResourceAssembly.ManifestModule.Name);
             Common.Hostname = tb_TargetComputer.Text.Trim();
 
             try
@@ -275,8 +272,18 @@ namespace ClientCenter
                 if (Environment.GetCommandLineArgs().Count() > 1)
                 {
                     var Args = Environment.GetCommandLineArgs().ToList();
-                    
-                    if (Args.Contains("/RegisterConsole", StringComparer.OrdinalIgnoreCase))
+
+                    if (Args.Contains("/?"))
+                    {
+                        System.Console.WriteLine("Usage:");
+                        System.Console.WriteLine("\tSCCMCliCtrWPF.exe <Hostname> [/Username:xxxx] [/Password:xxxxxx] ");
+                        System.Console.WriteLine("\tSCCMCliCtrWPF.exe [/RegisterConsole] [/UnRegisterConsole]");
+                        MessageBox.Show("SCCMCliCtrWPF.exe <Hostname> [/Username:xxxx] [/Password:xxxxxx]" + Environment.NewLine +
+                            "SCCMCliCtrWPF.exe [/RegisterConsole | /UnRegisterConsole]", "SCCMCliCtr Usage", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Close();
+                        return;
+                    }
+                    else if (Args.Contains("/RegisterConsole", StringComparer.OrdinalIgnoreCase))
                     {
                         try
                         {
@@ -287,7 +294,7 @@ namespace ClientCenter
                         Close();
                         return;
                     }
-                    if (Args.Contains("/UnRegisterConsole", StringComparer.OrdinalIgnoreCase))
+                    else if (Args.Contains("/UnRegisterConsole", StringComparer.OrdinalIgnoreCase))
                     {
                         try
                         {
@@ -309,7 +316,9 @@ namespace ClientCenter
                         if (!string.IsNullOrEmpty(sUser) && !string.IsNullOrEmpty(sPW))
                         {
                             tb_Username.Text = sUser;
-                            pb_Password.Password = common.Encrypt(sPW, Application.ResourceAssembly.ManifestModule.Name);
+                            Properties.Settings.Default.Username = tb_Username.Text;    //Binding is not yet syncing these, so do it manually.
+                            pb_Password.Password = sPW; //Not ideal but works
+                            //pb_Password.SecurePassword is read-only so another variable with one-way binding is required.
                             sUser = "";
                             sPW = "";
                         }
@@ -425,12 +434,14 @@ namespace ClientCenter
         {
             try
             {
-                oAgent.Client.Monitoring.AsynchronousScript.Close();
+                if (oAgent != null)
+                    oAgent.Client.Monitoring.AsynchronousScript.Close();
             }
             catch { }
             try
             {
-                oAgent.disconnect();
+                if(oAgent != null && oAgent.isConnected)
+                    oAgent.disconnect();
             }
             catch { }
         }
@@ -462,15 +473,7 @@ namespace ClientCenter
                     PageReset();
 
                 }
-
-                if (bPasswordChanged)
-                {
-                    Properties.Settings.Default.Password = common.Encrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
-                    Properties.Settings.Default.Save();
-                    pb_Password.Password = Properties.Settings.Default.Password;
-                    bPasswordChanged = false;
-                }
-
+                
                 tb_TargetComputer.Text = tb_TargetComputer.Text.Trim();
                 tb_TargetComputer2.Text = tb_TargetComputer2.Text.Trim();
 
@@ -496,7 +499,7 @@ namespace ClientCenter
                     {
                         if (sTarget != "127.0.0.1")
                         {
-                            if (string.IsNullOrEmpty(tb_Username.Text) | string.IsNullOrEmpty(pb_Password.Password))
+                            if (string.IsNullOrEmpty(tb_Username.Text) | pb_Password.SecurePassword.Length == 0)
                             {
                                 MessageBox.Show("connecting an IP Address requires Username and Password", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
@@ -509,7 +512,7 @@ namespace ClientCenter
 
                     if (string.IsNullOrEmpty(tb_Username.Text))
                     {
-                        oAgent = new SCCMAgent(sTarget, null, null, int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
+                        oAgent = new SCCMAgent(sTarget, null, int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
                     }
                     else
                     {
@@ -517,9 +520,11 @@ namespace ClientCenter
                         {
                             tb_Username.Text = Environment.UserDomainName + @"\" + tb_Username.Text;
                         }
-                        string sPW = common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name);
-                        oAgent = new SCCMAgent(sTarget, tb_Username.Text, sPW, int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
-                        sPW = "";
+                        //Hack to handle switing over to securestrings while sccmclictrlib only takes strings. Obviously this defeats the point of SecureStrings.
+                        //string sPW = new System.Net.NetworkCredential(string.Empty, pb_Password.SecurePassword).Password;
+                        oAgent = new SCCMAgent(sTarget, tb_Username.Text, pb_Password.SecurePassword, int.Parse(tb_wsmanport.Text), false, cb_ssl.IsChecked ?? false);
+                        oAgent.ConnectIPC(tb_Username.Text, pb_Password.Password);
+                        //sPW = "";
                     }
 
                     oAgent.PSCode.Listeners.Add(myTrace);
@@ -540,6 +545,12 @@ namespace ClientCenter
                         if (Properties.Settings.Default.recentlyUsedComputers.Count > 10)
                         {
                             Properties.Settings.Default.recentlyUsedComputers.RemoveAt(10);
+                        }
+
+                        //save password
+                        if (!string.IsNullOrEmpty(tb_Username.Text))
+                        {
+                            Properties.Settings.Default.Password = common.Encrypt(new System.Net.NetworkCredential(string.Empty, pb_Password.SecurePassword).Password, Application.ResourceAssembly.ManifestModule.Name);
                         }
 
                         Properties.Settings.Default.Save();
@@ -567,7 +578,9 @@ namespace ClientCenter
                     navigationPane1.IsEnabled = true;
                     ribAgentActions.IsEnabled = true;
 
-                    ConnectionDock.Visibility = System.Windows.Visibility.Collapsed;
+                    if (!Properties.Settings.Default.showPingButton)
+                        ConnectionDock.Visibility = System.Windows.Visibility.Collapsed;
+
                     ribbon1.IsEnabled = true;
                     agentSettingItem1.IsEnabled = true;
 
@@ -584,7 +597,7 @@ namespace ClientCenter
                     ribAgentActions.IsEnabled = false;
                     ConnectionDock.Visibility = System.Windows.Visibility.Visible;
                     bt_Ping.Visibility = System.Windows.Visibility.Visible;
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(Application.Current.MainWindow,ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
                 Mouse.OverrideCursor = Cursors.Arrow;
@@ -748,13 +761,6 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
-        private void ButtonDCMEval_Click(object sender, RoutedEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            oAgent.Client.AgentActions.DCMPolicy();
-            Mouse.OverrideCursor = Cursors.Arrow;
-        }
-
         private void btResetPolicy_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
@@ -794,26 +800,22 @@ namespace ClientCenter
             {
                 Process Explorer = new Process();
                 Explorer.StartInfo.FileName = "powershell.exe";
-                string sCred = "";
                 string sPS = string.Format(Properties.Settings.Default.OpenPSConsoleCommand, oAgent.TargetHostname, tb_wsmanport.Text);
+                if ((bool)cb_ssl.IsChecked) sPS += " -UseSSL";
+                Explorer.StartInfo.Arguments = @"-NoExit -Command " + sPS;
+
                 if (!string.IsNullOrEmpty(tb_Username.Text))
                 {
-                    sCred = string.Format("$creds = New-Object System.Management.Automation.PSCredential ('{0}', (ConvertTo-SecureString '{1}' -AsPlainText -Force))", tb_Username.Text, common.Decrypt(pb_Password.Password, Application.ResourceAssembly.ManifestModule.Name)) + ";";
-
-
-                    if ((bool)cb_ssl.IsChecked)
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + sPS + " -UseSSL -Credential $creds)";
-                    else
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sCred + sPS + " -Credential $creds";
-
+                    System.Management.Automation.PSCredential credential = new System.Management.Automation.PSCredential(tb_Username.Text, pb_Password.SecurePassword);
+                    string serializedCred = System.Management.Automation.PSSerializer.Serialize(credential);
+                    string filename = System.IO.Path.GetTempFileName();
+                    File.WriteAllText(filename, serializedCred);
+                    string creds = "(Import-Clixml " + filename + ")";
+                    //creds += "; rm " + filename;
+                    
+                    Explorer.StartInfo.Arguments += " -Credential " + creds;
                 }
-                else
-                {
-                    if ((bool)cb_ssl.IsChecked)
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sPS + " -UseSSL";
-                    else
-                        Explorer.StartInfo.Arguments = @"-NoExit -Command " + sPS;
-                }
+
                 Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
                 
                 Explorer.Start();
@@ -857,11 +859,6 @@ namespace ClientCenter
             tviSWDistOverview.IsSelected = true;
         }
 
-        private void pb_Password_KeyDown(object sender, KeyEventArgs e)
-        {
-            bPasswordChanged = true;
-        }
-
         private void btClientMachineAuthentication_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
@@ -887,13 +884,6 @@ namespace ClientCenter
         {
             Mouse.OverrideCursor = Cursors.Wait;
             oAgent.Client.AgentActions.TimeoutLocationServicesTask();
-            Mouse.OverrideCursor = Cursors.Arrow;
-        }
-
-        private void btNAPaction_Click(object sender, RoutedEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            oAgent.Client.AgentActions.NAPIntervalEnforcement();
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
@@ -1044,13 +1034,6 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
-        private void btDCMPolicyAction_Click(object sender, RoutedEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            oAgent.Client.AgentActions.DCMPolicy();
-            Mouse.OverrideCursor = Cursors.Arrow;
-        }
-
         private void btATMStatusCheckPolicy_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
@@ -1096,22 +1079,6 @@ namespace ClientCenter
             Common.Hostname = ((AutoCompleteBox)sender).Text;
         }
 
-        private void tb_TargetComputer2_KeyUp(object sender, KeyEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            if (e.Key == Key.Enter)
-            {
-                tb_TargetComputer2.Text = tb_TargetComputer2.Text.Trim();
-                tb_TargetComputer.Text = tb_TargetComputer2.Text;
-                bt_Connect_Click(sender, null);
-            }
-
-            Common.Hostname = ((AutoCompleteBox)sender).Text;
-
-            Mouse.OverrideCursor = Cursors.Arrow;
-
-        }
-
         private void tb_TargetComputer2_Populating(object sender, PopulatingEventArgs e)
         {
             try
@@ -1122,21 +1089,6 @@ namespace ClientCenter
                 oSender.PopulateComplete();
             }
             catch { }
-        }
-
-        private void tb_TargetComputer_KeyUp(object sender, KeyEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            if (e.Key == Key.Enter)
-            {
-                tb_TargetComputer.Text = tb_TargetComputer.Text.Trim();
-                tb_TargetComputer2.Text = tb_TargetComputer.Text;
-                bt_Connect_Click(sender, null);
-            }
-
-            Common.Hostname = ((AutoCompleteBox)sender).Text;
-
-            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void bt_Ping_Click(object sender, RoutedEventArgs e)
@@ -1284,6 +1236,15 @@ namespace ClientCenter
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
+
+        private void Tb_TargetComputer2_KeyUp(object sender, KeyEventArgs e)
+        {
+            
+            if (e.Key == Key.Enter)
+                bt_Connect_Click(sender, new RoutedEventArgs());
+
+            e.Handled = true;
+        }
     }
 
     public class MyTraceListener : TraceListener, INotifyPropertyChanged
@@ -1409,20 +1370,30 @@ namespace ClientCenter
                 string sUIPath = rAdminUI.GetValue("UI Installation Directory", "").ToString();
                 if (Directory.Exists(sUIPath))
                 {
-                    Directory.CreateDirectory(sUIPath + @"\XmlStorage\Extensions\Actions\3fd01cd1-9e01-461e-92cd-94866b8d1f39");
-                    TextWriter tw1 = new StreamWriter(sUIPath + @"\XmlStorage\Extensions\Actions\3fd01cd1-9e01-461e-92cd-94866b8d1f39\sccmclictr.xml");
-                    tw1.WriteLine(string.Format(Properties.Resources.ConsoleExtension, System.Reflection.Assembly.GetExecutingAssembly().Location));
-                    tw1.Close();
+                    foreach (string sGUID in Properties.Settings.Default.ConsoleExtensionGUIDs)
+                    {
+                        Directory.CreateDirectory(sUIPath + @"\XmlStorage\Extensions\Actions\" + sGUID);
+                        TextWriter tw1 = new StreamWriter(sUIPath + @"\XmlStorage\Extensions\Actions\" + sGUID + "\\sccmclictr.xml");
+                        tw1.WriteLine(string.Format(Properties.Resources.ConsoleExtension, System.Reflection.Assembly.GetExecutingAssembly().Location));
+                        tw1.Close();
+                    }
 
-                    Directory.CreateDirectory(sUIPath + @"\XmlStorage\Extensions\Actions\ed9dee86-eadd-4ac8-82a1-7234a4646e62");
-                    tw1 = new StreamWriter(sUIPath + @"\XmlStorage\Extensions\Actions\ed9dee86-eadd-4ac8-82a1-7234a4646e62\sccmclictr.xml");
-                    tw1.WriteLine(string.Format(Properties.Resources.ConsoleExtension, System.Reflection.Assembly.GetExecutingAssembly().Location));
-                    tw1.Close();
+                    //Directory.CreateDirectory(sUIPath + @"\XmlStorage\Extensions\Actions\3fd01cd1-9e01-461e-92cd-94866b8d1f39");
+                    //TextWriter tw1 = new StreamWriter(sUIPath + @"\XmlStorage\Extensions\Actions\3fd01cd1-9e01-461e-92cd-94866b8d1f39\sccmclictr.xml");
+                    //tw1.WriteLine(string.Format(Properties.Resources.ConsoleExtension, System.Reflection.Assembly.GetExecutingAssembly().Location));
+                    //tw1.Close();
 
-                    Directory.CreateDirectory(sUIPath + @"\XmlStorage\Extensions\Actions\0770186d-ea57-4276-a46b-7344ae081b58");
-                    tw1 = new StreamWriter(sUIPath + @"\XmlStorage\Extensions\Actions\0770186d-ea57-4276-a46b-7344ae081b58\sccmclictr.xml");
-                    tw1.WriteLine(string.Format(Properties.Resources.ConsoleExtension, System.Reflection.Assembly.GetExecutingAssembly().Location));
-                    tw1.Close();
+                    //Directory.CreateDirectory(sUIPath + @"\XmlStorage\Extensions\Actions\ed9dee86-eadd-4ac8-82a1-7234a4646e62");
+                    //tw1 = new StreamWriter(sUIPath + @"\XmlStorage\Extensions\Actions\ed9dee86-eadd-4ac8-82a1-7234a4646e62\sccmclictr.xml");
+                    //tw1.WriteLine(string.Format(Properties.Resources.ConsoleExtension, System.Reflection.Assembly.GetExecutingAssembly().Location));
+                    //tw1.Close();
+
+
+
+                    //Directory.CreateDirectory(sUIPath + @"\XmlStorage\Extensions\Actions\0770186d-ea57-4276-a46b-7344ae081b58");
+                    //tw1 = new StreamWriter(sUIPath + @"\XmlStorage\Extensions\Actions\0770186d-ea57-4276-a46b-7344ae081b58\sccmclictr.xml");
+                    //tw1.WriteLine(string.Format(Properties.Resources.ConsoleExtension, System.Reflection.Assembly.GetExecutingAssembly().Location));
+                    //tw1.Close();
                 }
             }
             else
@@ -1457,33 +1428,17 @@ namespace ClientCenter
             {
                 string sUIPath = rAdminUI.GetValue("UI Installation Directory", "").ToString();
 
-                if (File.Exists(sUIPath + @"\XmlStorage\Extensions\Actions\3fd01cd1-9e01-461e-92cd-94866b8d1f39\sccmclictr.xml"))
+                foreach (string sGUID in Properties.Settings.Default.ConsoleExtensionGUIDs)
                 {
-                    try
+                    if (File.Exists(sUIPath + @"\XmlStorage\Extensions\Actions\" + sGUID + "\\sccmclictr.xml"))
                     {
-                        File.Delete(sUIPath + @"\XmlStorage\Extensions\Actions\3fd01cd1-9e01-461e-92cd-94866b8d1f39\sccmclictr.xml");
+                        try
+                        {
+                            File.Delete(sUIPath + @"\XmlStorage\Extensions\Actions\" + sGUID + "\\sccmclictr.xml");
+                        }
+                        catch { }
                     }
-                    catch { }
                 }
-
-                if (File.Exists(sUIPath + @"\XmlStorage\Extensions\Actions\ed9dee86-eadd-4ac8-82a1-7234a4646e62\sccmclictr.xml"))
-                {
-                    try
-                    {
-                        File.Delete(sUIPath + @"\XmlStorage\Extensions\Actions\ed9dee86-eadd-4ac8-82a1-7234a4646e62\sccmclictr.xml");
-                    }
-                    catch { }
-                }
-
-                if (File.Exists(sUIPath + @"\XmlStorage\Extensions\Actions\0770186d-ea57-4276-a46b-7344ae081b58\sccmclictr.xml"))
-                {
-                    try
-                    {
-                        File.Delete(sUIPath + @"\XmlStorage\Extensions\Actions\0770186d-ea57-4276-a46b-7344ae081b58\sccmclictr.xml");
-                    }
-                    catch { }
-                }
-
             }
             else
             {

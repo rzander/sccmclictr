@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using sccmclictr.automation;
 using sccmclictr.automation.functions;
+using System.Globalization;
 
 namespace ClientCenter
 {
@@ -31,7 +32,7 @@ namespace ClientCenter
         {
             InitializeComponent();
         }
-                
+
         public SCCMAgent SCCMAgentConnection
         {
             get
@@ -117,7 +118,7 @@ namespace ClientCenter
                 dataGrid1.ItemsSource = iUpdates;
                 dataGrid1.EndInit();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Listener.WriteError(ex.Message);
             }
@@ -147,11 +148,11 @@ namespace ClientCenter
                 Explorer.StartInfo.FileName = "Explorer.exe";
 
                 //Connect IPC$ if not already connected (not needed with integrated authentication)
-                if (!oAgent.ConnectIPC)
-                    oAgent.ConnectIPC = true;
+                if (!oAgent.ConnectIPC_)
+                    oAgent.ConnectIPC_ = true;
 
                 string LogPath = oAgent.Client.AgentProperties.LocalSCCMAgentLogPath.Replace(':', '$');
-                Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + "\\" + LogPath + "\\" + "UpdatesHandler.log";
+                Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + "\\" + LogPath + "\\" + "UpdatesDeployment.log";
 
                 Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
                 Explorer.Start();
@@ -161,6 +162,44 @@ namespace ClientCenter
                 Listener.WriteError(ex.Message);
             }
             Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void Bt_OpenWUALog_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                Process Explorer = new Process();
+                Explorer.StartInfo.FileName = "Explorer.exe";
+
+                //Connect IPC$ if not already connected (not needed with integrated authentication)
+                if (!oAgent.ConnectIPC_)
+                    oAgent.ConnectIPC_ = true;
+
+                string LogPath = oAgent.Client.AgentProperties.LocalSCCMAgentLogPath.Replace(':', '$');
+                Explorer.StartInfo.Arguments = @"\\" + oAgent.TargetHostname + "\\" + LogPath + "\\" + "WUAHandler.log";
+
+                Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
+                Explorer.Start();
+            }
+            catch (Exception ex)
+            {
+                Listener.WriteError(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+    }
+
+    public class RemoveCIJobStateConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value.ToString().Replace("ciJobState", "");
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return "ciJobState" + value.ToString();
         }
     }
 }
