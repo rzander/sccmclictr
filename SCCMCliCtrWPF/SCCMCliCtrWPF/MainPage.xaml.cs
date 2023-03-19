@@ -28,6 +28,7 @@ namespace ClientCenter
         public SCCMAgent oAgent;
         public MyTraceListener myTrace;
         delegate void AnonymousDelegate();
+        private DateTime lastTryConnect;
 
         public MainPage()
         {
@@ -448,6 +449,7 @@ namespace ClientCenter
 
         private void bt_Connect_Click(object sender, RoutedEventArgs e)
         {
+            lastTryConnect = DateTime.MaxValue;
             sender.ToString();
             AnonymousDelegate dUpdate = delegate ()
             {
@@ -601,11 +603,10 @@ namespace ClientCenter
                 }
 
                 Mouse.OverrideCursor = Cursors.Arrow;
+
+                lastTryConnect = DateTime.Now;
             };
             Dispatcher.Invoke(dUpdate);
-
-
-
         }
 
         private void TreeViewItem_Selected(object sender, RoutedEventArgs e)
@@ -1239,11 +1240,12 @@ namespace ClientCenter
 
         private void Tb_TargetComputer2_KeyUp(object sender, KeyEventArgs e)
         {
-            
-            if (e.Key == Key.Enter)
-                bt_Connect_Click(sender, new RoutedEventArgs());
 
-            e.Handled = true;
+            if (e.Key == Key.Enter && lastTryConnect < DateTime.Now.AddMilliseconds(-100))
+            {
+                bt_Connect_Click(sender, new RoutedEventArgs());
+                e.Handled = true;
+            }
         }
     }
 
