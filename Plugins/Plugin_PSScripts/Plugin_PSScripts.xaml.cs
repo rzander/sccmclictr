@@ -1,11 +1,12 @@
-﻿using System;
-using System.Text;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-
-using sccmclictr.automation;
+﻿using sccmclictr.automation;
+using System;
 using System.IO;
+using System.Text;
+using System.Threading;
+using System.Windows.Controls;
 using System.Windows.Controls.Ribbon;
+using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace AgentActionTools
 {
@@ -107,6 +108,24 @@ namespace AgentActionTools
 
         void PSItem_Click(object sender, EventArgs e)
         {
+            btRunPS.IsDropDownOpen = false;
+            Mouse.OverrideCursor = Cursors.Wait;
+
+            RibbonButton btn = (RibbonButton)sender;
+            object parent = btn.Parent;
+
+            while (parent != null && parent.GetType() == typeof(RibbonMenuButton))
+            {
+                ((RibbonMenuButton)parent).IsDropDownOpen = false;
+                parent = ((RibbonMenuButton)parent).Parent;
+            }
+
+            for (var i = 0; i < 100; i++)
+            {
+                System.Windows.Forms.Application.DoEvents();
+                Thread.Sleep(10);
+            }
+
             try
             {
                 //Get PS from File
@@ -129,6 +148,7 @@ namespace AgentActionTools
 
             }
             catch { }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void btRunPS_Click(object sender, System.Windows.RoutedEventArgs e)
