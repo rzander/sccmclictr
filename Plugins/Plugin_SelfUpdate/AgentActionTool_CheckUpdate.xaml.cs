@@ -51,11 +51,11 @@ namespace AgentActionTools
                         {
 
                             //Delete an old RZUpdate.exe
-                            if (File.Exists(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "RZUpdate.exe")))
+                            if (File.Exists(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "RZGet.exe")))
                             {
                                 try
                                 {
-                                    File.Delete(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "RZUpdate.exe"));
+                                    File.Delete(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "RZGet.exe"));
                                 }
                                 catch { }
                             }
@@ -63,13 +63,13 @@ namespace AgentActionTools
                             if (oUpdate != null)
                             {
                                 //Console.WriteLine("New Version: " + oUpdate.SW.ProductVersion);
-                                ExtractSaveResource("AgentActionTools.RZUpdate.exe", Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "RZUpdate.exe"));
+                                ExtractSaveResource("AgentActionTools.RZGet.exe", Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "RZGet.exe"));
 
                                 if (System.Windows.MessageBox.Show("Do you want to install Version: " + oUpdate.SW.ProductVersion, "Update available", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                                 {
                                     try
                                     {
-                                        Process.Start(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "RZUpdate.exe"), "\"Client Center for Configuration Manager\" \"" + sVersion + "\" \"Zander Tools\"");
+                                        Process.Start(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "RZGet.exe"), "install \"SCCMCliCtr\"");
                                         Process.GetCurrentProcess().Kill();
                                     }
                                     catch
@@ -140,7 +140,7 @@ namespace AgentActionTools
                         if (oUpdate != null)
                         {
                             //Console.WriteLine("New Version: " + oUpdate.SW.ProductVersion);
-                            ExtractSaveResource("AgentActionTools.RZUpdate.exe", Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "RZUpdate.exe"));
+                            ExtractSaveResource("AgentActionTools.RZUpdate.exe", Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "RZGet.exe"));
 
                             if (System.Windows.MessageBox.Show("Do you want to install Version: " + oUpdate.SW.ProductVersion, "Update available", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                             {
@@ -159,7 +159,7 @@ namespace AgentActionTools
                                     }
                                 }).Start();*/
 
-                                Process.Start(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "RZUpdate.exe"), "SCCMCliCtr");
+                                Process.Start(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "RZGet.exe"), "SCCMCliCtr");
                                 Process.GetCurrentProcess().Kill();
                             }
 
