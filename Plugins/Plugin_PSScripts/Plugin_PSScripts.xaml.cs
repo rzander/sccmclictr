@@ -116,6 +116,7 @@ namespace AgentActionTools
                 Mouse.OverrideCursor = Cursors.Wait;
 
                 _rgPS.IsDropDownOpen = false;
+                Application.DoEvents();
                 btRunPS.IsDropDownOpen = false;
                 Application.DoEvents();
 
@@ -132,6 +133,7 @@ namespace AgentActionTools
                 System.Reflection.PropertyInfo pInfo = t.GetProperty("Agent");
                 oAgent = (SCCMAgent)pInfo.GetValue(null, null);
 
+                Application.DoEvents();
                 Thread.Sleep(200);
                 Application.DoEvents();
 
