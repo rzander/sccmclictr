@@ -78,17 +78,17 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Customization, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Customization, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Customization\bin\Debug\Customization.dll</HintPath>
+      <HintPath>..\..\..\..\Users\RogerZander\OneDrive\Dokumente\Visual Studio 2010\Project_ClientCenter\SCCMCliCtr_WPF\Customization\bin\Release\Customization.dll</HintPath>
     </Reference>
     <Reference Include="NavigationPane, Version=1.0.5988.20744, Culture=neutral, PublicKeyToken=b239f36db07135c1, processorArchitecture=MSIL">
       <HintPath>..\packages\NavigationPane.2.1.0.0\lib\net40\NavigationPane.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
-    <Reference Include="sccmclictr.automation, Version=1.0.0.36, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\sccmclictrlib.1.0.0.36\lib\net47\sccmclictr.automation.dll</HintPath>
+    <Reference Include="sccmclictr.automation, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sccmclictrlib.1.0.1\lib\net48\sccmclictr.automation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -364,6 +364,7 @@
     <Content Include="Plugin_EnablePSRemoting.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Plugin_Explorer.dll" />
     <Content Include="Plugin_FEP.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -391,7 +392,7 @@
     <Content Include="Plugin_StatusMessageViewer.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Plugin_Explorer*.config">
+    <Content Include="Plugin_Explorer.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Images\On.ico" />
@@ -512,16 +513,6 @@
     <Resource Include="Images\Add.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PublishFile Include="Customization">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
     <PublishFile Include="Microsoft.Management.Infrastructure">
       <Visible>False</Visible>
       <Group>
@@ -639,7 +630,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if "$(ConfigurationName)"=="Debug" GOTO  end
- "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\Bin\SignTool.exe" sign /i "Sectigo RSA Code Signing CA" /n "Zander - Tools" /t "http://timestamp.comodoca.com/authenticode" /q "$(TargetPath)" 
+ "C:\tools\signtool.exe" sign /i "Sectigo RSA Code Signing CA" /n "Zander - Tools" /t "http://timestamp.comodoca.com/authenticode" /q "$(TargetPath)" 
 rd es /s /q
 rd fr /s /q
 rd it /s /q
