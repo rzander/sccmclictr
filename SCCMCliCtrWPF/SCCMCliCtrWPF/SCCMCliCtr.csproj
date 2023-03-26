@@ -587,12 +587,6 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Plugins\Plugin_Explorer\Plugin_Explorer.csproj">
-      <Project>{32500cfb-9311-4590-aa83-fb5a1f4dbcf3}</Project>
-      <Name>Plugin_Explorer</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
   </PropertyGroup>
   <PropertyGroup>

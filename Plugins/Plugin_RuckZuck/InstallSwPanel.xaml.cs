@@ -48,7 +48,7 @@ namespace AgentActionTools
             {
                 RZScan oSCAN = new RZScan(false, false);
                 
-                Task.Run(() => oSCAN.GetSWRepository()).Wait();
+                Task.Run(() => oSCAN.GetSWRepositoryAsync(new CancellationTokenSource(15000).Token)).Wait();
 
                 lAllSoftware = oSCAN.SoftwareRepository;
 
@@ -344,7 +344,7 @@ namespace AgentActionTools
                                             //Check if installed
                                             if ((bool)oAgent.Client.GetObjectsFromPS(DT.PSDetection, true, new TimeSpan(0, 0, 0))[0].BaseObject)
                                             {
-                                                RZRestAPIv2.Feedback(DT.ProductName, DT.ProductVersion, DT.Manufacturer, DT.Architecture, "true", "SCCMCliCtr", "Ok...").ConfigureAwait(false);
+                                                RZRestAPIv2.FeedbackAsync(DT.ProductName, DT.ProductVersion, DT.Manufacturer, DT.Architecture, "true", "SCCMCliCtr", "Ok...").ConfigureAwait(false);
                                                 MessageBox.Show("Software installed successfully.", "Installation Status:", MessageBoxButton.OK, MessageBoxImage.Information);
                                                 bInstalled = true;
                                                 continue;
