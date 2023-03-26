@@ -28,7 +28,7 @@ namespace AgentActionTools
         public AgentActionTool_AppV46()
         {
             InitializeComponent();
-            btAppV46.IsEnabled = SCCMCliCtr.Customization.CheckLicense();
+            //btAppV46.IsEnabled = SCCMCliCtr.Customization.CheckLicense();
         }
 
         private void btAppV46_Click(object sender, RoutedEventArgs e)
