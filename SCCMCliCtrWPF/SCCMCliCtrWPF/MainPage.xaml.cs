@@ -28,6 +28,7 @@ namespace ClientCenter
         public SCCMAgent oAgent;
         public MyTraceListener myTrace;
         delegate void AnonymousDelegate();
+        private DateTime lastTryConnect;
 
         public MainPage()
         {
@@ -37,7 +38,7 @@ namespace ClientCenter
             InitializeComponent();
 
             ribbon1.ContextMenu = null;
-            
+
             //Disbale SSL/TLS Errors
             System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
             //Disable CRL Check
@@ -48,7 +49,7 @@ namespace ClientCenter
             try
             {
                 this.Title = SCCMCliCtr.Customization.Title;
-                rStatus.AppendText("Client Center for Configuration Manager (c) 2022 by Roger Zander\n");
+                rStatus.AppendText("Client Center for Configuration Manager (c) 2023 by Roger Zander\n");
                 rStatus.AppendText("Project-Page: https://github.com/rzander/sccmclictr\n");
                 rStatus.AppendText("Current Version: " + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n");
                 rStatus.AppendText("Assembly Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString() + "\n");
@@ -95,7 +96,7 @@ namespace ClientCenter
                                     if (t.Name.StartsWith("AgentActionTool_"))
                                     {
                                         //Make Tool Group visible
-                                        AnonymousDelegate dEnable = delegate()
+                                        AnonymousDelegate dEnable = delegate ()
                                         {
                                             rgTools.Visibility = System.Windows.Visibility.Visible;
                                             rgTools.IsEnabled = true;
@@ -108,7 +109,7 @@ namespace ClientCenter
                                             Thread.CurrentThread.IsBackground = true;
                                             try
                                             {
-                                                AnonymousDelegate dUpdate = delegate()
+                                                AnonymousDelegate dUpdate = delegate ()
                                                 {
                                                     var obj = Activator.CreateInstance(t);
                                                     btTools.Items.Add(obj);
@@ -127,7 +128,7 @@ namespace ClientCenter
                                             Thread.CurrentThread.IsBackground = true;
                                             try
                                             {
-                                                AnonymousDelegate dUpdate = delegate()
+                                                AnonymousDelegate dUpdate = delegate ()
                                                 {
                                                     var obj = Activator.CreateInstance(t);
                                                     var item = ((System.Windows.Controls.ContentControl)(obj)).Content;
@@ -182,7 +183,7 @@ namespace ClientCenter
                                             catch { }
 
                                         }).Start();
-                                    } 
+                                    }
                                 }
                                 catch { }
                             }
@@ -440,7 +441,7 @@ namespace ClientCenter
             catch { }
             try
             {
-                if(oAgent != null && oAgent.isConnected)
+                if (oAgent != null && oAgent.isConnected)
                     oAgent.disconnect();
             }
             catch { }
@@ -448,6 +449,7 @@ namespace ClientCenter
 
         private void bt_Connect_Click(object sender, RoutedEventArgs e)
         {
+            lastTryConnect = DateTime.MaxValue;
             sender.ToString();
             AnonymousDelegate dUpdate = delegate ()
             {
@@ -473,7 +475,7 @@ namespace ClientCenter
                     PageReset();
 
                 }
-                
+
                 tb_TargetComputer.Text = tb_TargetComputer.Text.Trim();
                 tb_TargetComputer2.Text = tb_TargetComputer2.Text.Trim();
 
@@ -597,15 +599,14 @@ namespace ClientCenter
                     ribAgentActions.IsEnabled = false;
                     ConnectionDock.Visibility = System.Windows.Visibility.Visible;
                     bt_Ping.Visibility = System.Windows.Visibility.Visible;
-                    MessageBox.Show(Application.Current.MainWindow,ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(Application.Current.MainWindow, ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
                 Mouse.OverrideCursor = Cursors.Arrow;
+
+                lastTryConnect = DateTime.Now;
             };
             Dispatcher.Invoke(dUpdate);
-
-
-
         }
 
         private void TreeViewItem_Selected(object sender, RoutedEventArgs e)
@@ -812,12 +813,12 @@ namespace ClientCenter
                     File.WriteAllText(filename, serializedCred);
                     string creds = "(Import-Clixml " + filename + ")";
                     //creds += "; rm " + filename;
-                    
+
                     Explorer.StartInfo.Arguments += " -Credential " + creds;
                 }
 
                 Explorer.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
-                
+
                 Explorer.Start();
             }
             catch (Exception ex)
@@ -1225,7 +1226,7 @@ namespace ClientCenter
             Mouse.OverrideCursor = Cursors.Wait;
             try
             {
-                foreach(var oBGC in oAgent.Client.LocationServices.BoundaryGroupCacheList)
+                foreach (var oBGC in oAgent.Client.LocationServices.BoundaryGroupCacheList)
                 {
                     oBGC.Delete();
                 }
@@ -1239,11 +1240,12 @@ namespace ClientCenter
 
         private void Tb_TargetComputer2_KeyUp(object sender, KeyEventArgs e)
         {
-            
-            if (e.Key == Key.Enter)
-                bt_Connect_Click(sender, new RoutedEventArgs());
 
-            e.Handled = true;
+            if (e.Key == Key.Enter && lastTryConnect < DateTime.Now.AddMilliseconds(-100))
+            {
+                bt_Connect_Click(sender, new RoutedEventArgs());
+                e.Handled = true;
+            }
         }
     }
 
