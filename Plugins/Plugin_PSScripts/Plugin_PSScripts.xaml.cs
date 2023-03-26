@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Text;
-using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-
 using sccmclictr.automation;
 using System.IO;
 using System.Windows.Controls.Ribbon;
+using System.Threading;
+using System.Windows.Forms;
+using System.Windows.Input;
+using Cursors = System.Windows.Input.Cursors;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace AgentActionTools
 {
@@ -16,6 +19,7 @@ namespace AgentActionTools
     {
         internal SCCMAgent oAgent;
         internal string scriptdir = "";
+        delegate void AnonymousDelegate();
 
         public MainMenu_PSScripts()
         {
@@ -57,7 +61,7 @@ namespace AgentActionTools
                     PSItem.SmallImageSource = new BitmapImage(new Uri("/Plugin_PSScripts;component/Images/PS.ico", UriKind.Relative));
                     PSItem.ToolTip = sFile;
                     PSItem.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-                    PSItem.Click  += PSItem_Click;
+                    PSItem.Click += PSItem_Click;
                     
                     Menu.Items.Add(PSItem);
                 }
@@ -109,6 +113,12 @@ namespace AgentActionTools
         {
             try
             {
+                Mouse.OverrideCursor = Cursors.Wait;
+
+                _rgPS.IsDropDownOpen = false;
+                btRunPS.IsDropDownOpen = false;
+                Application.DoEvents();
+
                 //Get PS from File
                 string sFile = ((RibbonButton)sender).Tag.ToString();
 
@@ -116,19 +126,23 @@ namespace AgentActionTools
                 string text = streamReader.ReadToEnd();
                 streamReader.Close();
 
-
                 Type t = System.Reflection.Assembly.GetEntryAssembly().GetType("ClientCenter.Common", false, true);
 
                 //Get Agent
                 System.Reflection.PropertyInfo pInfo = t.GetProperty("Agent");
                 oAgent = (SCCMAgent)pInfo.GetValue(null, null);
 
-                //Run PS and trace result...
-                string sRes = oAgent.Client.GetStringFromPS(text);
-                oAgent.PSCode.TraceInformation(sRes);
+                Thread.Sleep(200);
+                Application.DoEvents();
 
+                string sRet = oAgent.Client.GetStringFromPS(text);
+                oAgent.PSCode.TraceInformation(sRet);
             }
-            catch { }
+            finally
+            {
+                btRunPS.IsDropDownOpen = false;
+                Mouse.OverrideCursor = Cursors.Arrow;
+            }
         }
 
         private void btRunPS_Click(object sender, System.Windows.RoutedEventArgs e)
