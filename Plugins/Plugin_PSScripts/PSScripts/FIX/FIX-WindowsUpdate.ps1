@@ -116,7 +116,7 @@ netsh winhttp reset proxy
 Write-Host "9) Delete all BITS jobs..." 
 import-module bitstransfer
 Get-BitsTransfer -AllUsers | Where-Object { $_.JobState -like 'TransientError' } | Remove-BitsTransfer
-Set-Item -Path WSMan:\localhost\Client\TrustedHosts -Value '*' -force
+#Set-Item -Path WSMan:\localhost\Client\TrustedHosts -Value '*' -force
 Get-BitsTransfer -AllUsers | Where-Object { $_.JobState -like 'SUSPENDED' } | Resume-BitsTransfer
 
 netsh branchcache reset 
